@@ -11,7 +11,7 @@
 | 1 | Mineração | minerador-de-ofertas | ✅ | 2026-11-26 | Contagens via AdManage; conferir na Biblioteca |
 | 2 | Dossiê + briefing | analista-de-oferta | ✅ | 2026-11-26 | `dossie.md` e `briefing.md` preenchidos; itens "não verificado" listados no fim do briefing |
 | P1 | Aprovação da oferta | dono | ✅ | 2026-11-26 | Dono escolheu NeuroKids |
-| 3 | Produto | criador-de-produto | ⬜ | | |
+| 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Caderno-amostra (13 atividades, 18 págs) em `produto/amostra/`, aguardando aprovação do dono |
 | 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
 | 5 | Copy da página | copywriter-de-pagina | ⬜ | | |
 | 6 | Página | construtor-de-pagina | ⬜ | | |
@@ -36,3 +36,5 @@ Legenda: ⬜ a fazer · 🟡 em andamento · ✅ feito · ❌ reprovado/voltou
 - 2026-11-26 (Etapa 2): preço proposto R$ 37,00, sem "de/por" (CDC art. 37); âncora = R$ 1,23/dia e R$ 0,31/atividade. Motivo: concorrência BR de R$ 8 a R$ 30; lucro vem dos bumps. Decisão final do dono.
 - 2026-11-26 (Etapa 2): 7 bumps (R$ 9,90 a R$ 27,00) + pós-compra "Coleção Ano Inteiro" R$ 47,00; ticket estimado ≈ R$ 64,70 (taxas de aceite hipotéticas). Sem assinatura mensal (mais reembolso/chargeback).
 - 2026-11-26 (Etapa 2): Biblioteca da Meta e páginas `admanage.ai/ad/<id>` deram 403; datas e textos do Top 5 vêm da AdScan (mesmos IDs), status ativo não verificado.
+- 2026-11-26: dono aprovou nome **Dez Minutinhos** e preço **R$ 37,00**.
+- 2026-11-26: ordem da esteira alterada para esta oferta (aprovado pelo dono): caderno-amostra do produto ANTES da página de vendas, para a página usar mockups e GIFs do material real.

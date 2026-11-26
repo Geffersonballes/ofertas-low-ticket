@@ -23,5 +23,8 @@ Regras:
 - Nenhum portão é pulado. Reprovação volta para a etapa indicada; no máximo 2 voltas por
   etapa, depois a oferta é descartada com o motivo registrado.
 - Depois do Portão 1, as etapas 3, 4 e 6 (roteiros) podem rodar em paralelo.
+- Produto visual (cadernos, planilhas, kits): faça primeiro um **caderno-amostra** (10–15 páginas, uma de
+  cada tipo) e aprove com o dono antes da página — a página e os criativos usam as páginas reais.
+  O gerador fica em `ofertas/<pasta>/produto/gerador/` (código + `python3 gerar_amostra.py && node render.cjs`).
 - Meta operacional: 1 a 3 ofertas novas por dia.
 - Arquivos pesados (vídeos, .zip, GIFs) ficam fora do git: registre o link no `status.md`.
