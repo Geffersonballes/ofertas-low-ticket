@@ -11,10 +11,10 @@
 | 1 | Mineração | minerador-de-ofertas | ✅ | 2026-11-26 | Contagens via AdManage; conferir na Biblioteca |
 | 2 | Dossiê + briefing | analista-de-oferta | ✅ | 2026-11-26 | `dossie.md` e `briefing.md` preenchidos; itens "não verificado" listados no fim do briefing |
 | P1 | Aprovação da oferta | dono | ✅ | 2026-11-26 | Dono escolheu NeuroKids |
-| 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Caderno-amostra (13 atividades, 18 págs) em `produto/amostra/`, aguardando aprovação do dono |
+| 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Amostra (13 atividades) **aprovada pelo dono**; falta produzir o caderno completo (120 atividades, plano de 30 dias, bônus) |
 | 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
-| 5 | Copy da página | copywriter-de-pagina | ⬜ | | |
-| 6 | Página | construtor-de-pagina | ⬜ | | |
+| 5 | Copy da página | copywriter-de-pagina | ✅ | 2026-11-26 | `pagina/copy.md`; título 1 usado na página (dono pode trocar) |
+| 6 | Página | construtor-de-pagina | 🟡 | 2026-11-26 | `pagina/index.html` + privacidade/termos, conferida em 390 px e 1280 px; mídias só com páginas reais. Faltam: link do checkout, e-mail de suporte, nome/CPF-CNPJ. Não publicada |
 | 7 | Criativos | roteirista-de-criativos | ⬜ | | |
 | P2 | Conformidade | revisor-de-conformidade | ⬜ | | |
 | P3 | Aprovação de página/produto/criativos | dono | ⬜ | | |
@@ -37,4 +37,5 @@ Legenda: ⬜ a fazer · 🟡 em andamento · ✅ feito · ❌ reprovado/voltou
 - 2026-11-26 (Etapa 2): 7 bumps (R$ 9,90 a R$ 27,00) + pós-compra "Coleção Ano Inteiro" R$ 47,00; ticket estimado ≈ R$ 64,70 (taxas de aceite hipotéticas). Sem assinatura mensal (mais reembolso/chargeback).
 - 2026-11-26 (Etapa 2): Biblioteca da Meta e páginas `admanage.ai/ad/<id>` deram 403; datas e textos do Top 5 vêm da AdScan (mesmos IDs), status ativo não verificado.
 - 2026-11-26: dono aprovou nome **Dez Minutinhos** e preço **R$ 37,00**.
+- 2026-11-26 (copy): página segue a ordem da referência adaptada; depoimentos trocados por "Veja 6 páginas por dentro" + amostras; âncora só por custo (R$ 1,23/dia, R$ 0,31/atividade); sem "de/por", sem urgência, sem palavras de saúde/efeito. Motivo: regras 3 e 4 do CLAUDE.md e falhas 1–6 do dossiê. Pendente do dono: título, nº de parcelas, licença (uso familiar x professoras).
 - 2026-11-26: ordem da esteira alterada para esta oferta (aprovado pelo dono): caderno-amostra do produto ANTES da página de vendas, para a página usar mockups e GIFs do material real.

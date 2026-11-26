@@ -8,3 +8,8 @@ node_modules/
 *.mov
 *.wav
 *.zip
+# exceção: vídeos leves das páginas de venda precisam ir para o servidor
+!ofertas/*/pagina/img/*.mp4
+!publicado/**/*.mp4
+# cenas intermediárias das mídias (regeneráveis)
+ofertas/*/pagina/midia/cenas/

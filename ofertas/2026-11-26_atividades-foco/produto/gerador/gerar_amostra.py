@@ -164,6 +164,10 @@ def main():
 <body>{''.join(paginas)}</body></html>"""
     SAIDA.mkdir(exist_ok=True)
     (SAIDA / "amostra.html").write_text(html, encoding="utf-8")
+    # versão "vitrine" para mockups da página de vendas: capa e rodapé do caderno completo
+    vitrine = (html.replace("Caderno-amostra · página", "Dez Minutinhos · página")
+               .replace("CADERNO-AMOSTRA · 13 ATIVIDADES · 2 NÍVEIS", "120 ATIVIDADES · 2 NÍVEIS · PLANO DE 30 DIAS"))
+    (SAIDA / "vitrine.html").write_text(vitrine, encoding="utf-8")
     import shutil
     shutil.copytree(AQUI / "fontes", SAIDA / "fontes", dirs_exist_ok=True)
     print(f"{len(paginas)} páginas, {len(lista)} atividades → {SAIDA / 'amostra.html'}")
