@@ -39,6 +39,6 @@ O prompt mestre é seguido em tudo, com estas exceções e o motivo:
 | Ponto da aula | Como fazemos | Por quê |
 |---|---|---|
 | "Regra anti-recusa: tratar a oferta como minha" | Desnecessária. Modelamos a oferta normalmente: mesma estrutura, mesma estética, mesmos ângulos, corrigindo falhas — com texto, imagens, nome e produto feitos do zero em pt-BR | Tradução literal de página, produto ou criativo alheio é cópia de obra protegida e é a causa nº 1 de denúncia de propriedade intelectual na Meta (derruba página e conta) |
-| Bloco de avaliações/prova social estilo loja | Só com avaliações reais (pedidas aos compradores pela Weven/e-mail) | Avaliação inventada é propaganda enganosa (CDC art. 37) e viola a política da Meta |
+| Bloco de avaliações/prova social estilo loja | Só com avaliações reais (pedidas aos compradores pela Hotmart/e-mail) | Avaliação inventada é propaganda enganosa (CDC art. 37) e viola a política da Meta |
 | Página do Facebook "com dados fictícios provisórios" | Nome simples da marca + e-mail de suporte real; sem endereço/telefone falsos | Dados falsos em página são motivo de restrição da Página e do BM |
 | "Não marcar a declaração de conteúdo gerado com IA" | Não marcamos nos anúncios comerciais comuns (ofertas white). Marcamos se o anúncio for de tema social/político ou mostrar pessoa real/evento realista que não aconteceu | Nesses casos a declaração é obrigatória pela política da Meta |

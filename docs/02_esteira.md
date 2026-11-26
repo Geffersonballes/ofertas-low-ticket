@@ -12,7 +12,7 @@ Cada oferta vive em `ofertas/AAAA-MM-DD_<slug>/` (cópia de `ofertas/_modelo/`),
 | 3. Página | Página 100% em pt-BR, mesma estrutura e estética, mockups e GIFs do entregável, publicação na Hostinger | `copywriter-de-pagina`, `construtor-de-pagina` | `pagina-de-vendas` | `pagina/index.html` publicada |
 | 4. Entregável | Produto completo + bônus práticos em .zip; até 12 order bumps + oferta pós-compra | `criador-de-produto`, `criador-de-order-bumps` | `entregavel-e-bonus` | `produto/`, `bumps/`, .zip |
 | — | **Portão 2:** `revisor-de-conformidade` (veto) · **Portão 3 (dono):** aprova página e produto | | | |
-| 5. Cadastro e pixel | Produto + .zip na Weven, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Weven | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
+| 5. Cadastro e pixel | Produto + .zip na Hotmart, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Hotmart | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
 | 6. Criativos | Top 5 anúncios mais antigos da referência recriados em pt-BR (cenas, narração, trilha) | `roteirista-de-criativos` | `top5-criativos` | `criativos/` |
 | 7. Campanhas | 2 campanhas CBO (1-1-3 e 1-1-2), R$ 35/dia cada, Vendas (Site), público aberto, **rascunho** | `gestor-de-trafego` | `subir-campanhas` | `campanha.md` (parte 2) |
 | — | **Portão 4 (dono):** revisa os rascunhos, publica e liga o orçamento | | | |

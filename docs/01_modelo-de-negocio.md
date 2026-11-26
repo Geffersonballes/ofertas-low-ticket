@@ -42,8 +42,8 @@ Anúncio (Meta) → Página de vendas → Checkout (produto R$ 47 + order bumps)
 
 | Função | Opções | Decisão |
 |---|---|---|
-| Checkout e entrega | Kiwify, Hotmart, Cakto, Ticto, Perfect Pay | _pendente_ |
-| Página de vendas | HTML estático (Hostinger), Wix, construtor da plataforma | _pendente_ |
+| Checkout e entrega | Hotmart | Hotmart |
+| Página de vendas | HTML estático na VPS Hostinger | VPS KVM 2 |
 | Anúncios | Meta Ads (Facebook/Instagram) | Meta Ads |
-| Vídeos de anúncio | Narração ElevenLabs + montagem com imagens/mockups | _pendente_ |
-| Métricas | Gerenciador de Anúncios + painel da plataforma (via Windsor.ai) | _pendente_ |
+| Vídeos de anúncio | Narração ElevenLabs + cenas geradas + ffmpeg | ElevenLabs |
+| Campanhas e métricas | Windsor.ai (conector `facebook`) + painel da Hotmart | Windsor.ai |

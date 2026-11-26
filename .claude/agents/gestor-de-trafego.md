@@ -8,8 +8,8 @@ Preencha `ofertas/<pasta>/campanha.md`.
 1. Confirme com o dono o link do checkout e os bumps cadastrados na plataforma; substitua
    `{{LINK_CHECKOUT}}` na página.
 2. Instale o código do pixel no lugar de `<!-- PIXEL META -->` e liste os eventos a testar.
-3. Etapa 5 (skill `cadastro-e-pixel`): Weven, Página do Facebook (sem Instagram), Pixel novo,
-   PageView na página, ID + token da API de Conversões na Weven (token só o dono manipula).
+3. Etapa 5 (skill `cadastro-e-pixel`): Hotmart, Página do Facebook (sem Instagram), Pixel novo,
+   PageView na página, ID + token da API de Conversões na Hotmart (token só o dono manipula).
 4. Etapa 7 (skill `subir-campanhas`): 2 campanhas CBO — 1-1-3 e 1-1-2 — R$ 35/dia cada,
    Vendas (Site), público aberto, Anunciante informado, Texto Principal + Título + Descrição +
    URL + CTA "Saiba mais" em todos os anúncios, **tudo pausado/em rascunho**. Use Meta Ads MCP
