@@ -12,7 +12,7 @@ dados = json.loads((AQUI / "dados.json").read_text(encoding="utf-8"))
 DEST = RAIZ / "publicado" / dados["slug"]
 
 PAGINAS = ["index.html", "privacidade.html", "termos.html"]
-IMAGENS = ["mockup-capa.webp", "mockup-pacote.webp", "mockup-pacote.png", "folheando.mp4", "folheando-poster.jpg",
+IMAGENS = ["heroi.webp", "mockup-capa.webp", "mockup-pacote.webp", "mockup-pacote.png", "folheando.mp4", "folheando-poster.jpg",
            "amostra-nivel1.jpg", "amostra-nivel2.jpg"] + [f"dentro-{i}.jpg" for i in range(1, 7)]
 FONTES = ["Baloo2.woff2", "Nunito.woff2", "LICENCA.md"]
 

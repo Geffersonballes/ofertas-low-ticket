@@ -7,206 +7,440 @@
 <meta name="description" content="Caderno em PDF com 120 atividades para imprimir em casa, em 2 níveis (4 a 6 e 7 a 10 anos), com plano de 30 dias e gabarito.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Dez Minutinhos · 120 atividades para imprimir">
-<meta property="og:description" content="Dez minutinhos por dia, longe da tela. PDF para imprimir em casa, 2 níveis, plano de 30 dias.">
+<meta property="og:description" content="Pediu o tablet? Entregue um labirinto. PDF para imprimir em casa, 2 níveis, plano de 30 dias.">
 <meta property="og:image" content="img/mockup-pacote.png">
 <meta name="theme-color" content="#ff7a45">
 <link rel="preload" href="fontes/Baloo2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fontes/Nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/heroi.webp" as="image" type="image/webp">
 <!-- PIXEL META -->
 <style>
 @font-face{font-family:'Baloo 2';font-weight:400 800;font-display:swap;src:url('fontes/Baloo2.woff2') format('woff2')}
 @font-face{font-family:'Nunito';font-weight:200 1000;font-display:swap;src:url('fontes/Nunito.woff2') format('woff2')}
-:root{--laranja:#ff7a45;--laranja-esc:#e85d24;--tinta:#1d1d1f;--cinza:#5f5f66;--creme:#fff7f1;--pessego:#ffe6d6;--azul:#eaf1ff;--borda:#ece4dd;--r:18px}
+:root{--lar:#ff7a45;--lar-esc:#cf4a12;--lar-txt:#b93f0c;--tinta:#1d1d1f;--cinza:#5a5a62;--creme:#fff7f1;--pes:#ffe6d6;--azul:#dde9ff;--menta:#dff5e6;--ama:#ffc93c;--borda:#ece4dd;--r:20px;
+--sombra:0 1px 2px rgba(60,30,10,.08),0 6px 14px rgba(60,30,10,.08),0 22px 40px rgba(60,30,10,.12)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Nunito',system-ui,sans-serif;color:var(--tinta);background:#fff;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--tinta);background:#fff;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.com-barra{padding-bottom:78px}
 img,video{max-width:100%;height:auto;display:block}
-.cont{max-width:1080px;margin:0 auto;padding:0 16px}
-.estreito{max-width:760px}
-.grade>*,.dois>*,.caixa>*,.niveis>*,.quem>*{min-width:0}
-h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif;line-height:1.08;letter-spacing:-.2px}
-h1{font-size:clamp(32px,6.2vw,52px);font-weight:800}
-h2{font-size:clamp(27px,4.6vw,40px);font-weight:800;margin-bottom:14px}
+.cont{max-width:1100px;margin:0 auto;padding:0 18px}
+.estreito{max-width:780px}
+h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif;line-height:1.05;letter-spacing:-.3px}
+h2{font-size:clamp(29px,6.4vw,44px);font-weight:800;margin-bottom:14px}
 h3{font-size:21px;font-weight:800}
 p+p{margin-top:10px}
-section{padding:56px 0}
-.faixa{background:var(--tinta);color:#fff;font-size:13.5px;font-weight:700;padding:8px 12px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 0}
-.faixa span{white-space:nowrap}
-.faixa i{font-style:normal;color:var(--laranja);margin:0 8px}
-@media(max-width:520px){.faixa i{display:none}.faixa span{width:100%;text-align:center}}
-.topo-marca{display:flex;align-items:center;justify-content:center;padding:16px 0 0;font-family:'Baloo 2';font-weight:800;font-size:22px}
-.topo-marca b{color:var(--laranja)}
-/* hero */
-.hero{padding-top:18px;background:linear-gradient(var(--creme),#fff)}
-.hero .grade{display:grid;gap:28px;align-items:center}
-@media(min-width:880px){.hero .grade{grid-template-columns:1.05fr 1fr}}
-.galeria{position:relative}
-.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r);background:#fff7f1}
-.trilho::-webkit-scrollbar{display:none}
-.trilho figure{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;padding:10px}
-.trilho img,.trilho video{max-height:100%;width:auto;object-fit:contain;border-radius:10px}
-.miniaturas{display:flex;gap:8px;margin-top:10px;justify-content:center}
-.miniaturas button{width:56px;height:56px;border-radius:10px;border:2px solid var(--borda);background:#fff center/cover no-repeat;cursor:pointer;padding:0}
-.miniaturas button[aria-current="true"]{border-color:var(--laranja)}
-.sub{font-size:19px;color:#333;margin-top:12px;font-weight:600}
-.lista-check{list-style:none;margin:18px 0 0}
-.lista-check li{position:relative;padding-left:32px;margin:8px 0;font-weight:700}
-.lista-check li::before{content:"";position:absolute;left:0;top:3px;width:21px;height:21px;border-radius:50%;background:var(--laranja) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat}
-.preco{margin-top:22px}
-.preco .valor{font-family:'Baloo 2';font-weight:800;font-size:46px;line-height:1}
-.preco .valor small{font-size:22px;margin-right:4px}
-.preco .cond{color:var(--cinza);font-weight:700;font-size:15px}
-.botao{display:block;width:100%;max-width:460px;text-align:center;background:var(--laranja);color:#fff;text-decoration:none;font-family:'Baloo 2';font-weight:800;font-size:22px;padding:15px 20px 13px;border-radius:14px;margin-top:16px;box-shadow:0 6px 0 var(--laranja-esc);transition:transform .08s,box-shadow .08s}
-.botao:hover{transform:translateY(2px);box-shadow:0 4px 0 var(--laranja-esc)}
-.botao:active{transform:translateY(6px);box-shadow:none}
-.centro{text-align:center}.centro .botao{margin-left:auto;margin-right:auto}
+section{padding:60px 0;position:relative}
+.centro{text-align:center}
+.sobre{display:inline-block;font-weight:900;font-size:13px;letter-spacing:.8px;text-transform:uppercase;color:var(--lar-txt);margin-bottom:8px}
+.creme{background:var(--creme)}
+/* botões */
+.botao{display:block;width:100%;max-width:440px;text-align:center;background:var(--lar-esc);color:#fff;text-decoration:none;font-family:'Baloo 2';font-weight:800;font-size:clamp(18.5px,4.9vw,22px);line-height:1.2;padding:15px 12px 13px;border-radius:16px;margin-top:18px;box-shadow:0 6px 0 #8f2f06,0 14px 24px rgba(143,47,6,.28);transition:transform .1s,box-shadow .1s}
+.botao::after{content:" →"}
+.botao:active{transform:translateY(5px);box-shadow:0 1px 0 #8f2f06}
+.botao.esc{background:var(--tinta);box-shadow:0 6px 0 #000,0 14px 26px rgba(80,25,0,.35)}
+.botao.esc:active{box-shadow:0 1px 0 #000}
+.centro .botao{margin-left:auto;margin-right:auto}
 .nota{font-size:14px;color:var(--cinza);font-weight:700;margin-top:12px}
 .nota span{white-space:nowrap}
-/* oferta */
-.caixa{border:2px solid var(--tinta);border-radius:22px;padding:24px;display:grid;gap:18px;background:#fff;box-shadow:8px 8px 0 var(--pessego)}
-@media(min-width:760px){.caixa{grid-template-columns:300px 1fr;align-items:center;padding:32px}}
-.selos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-.selo{background:var(--creme);border-radius:14px;padding:12px;text-align:center;font-size:13.5px;font-weight:700;color:var(--cinza)}
-.selo b{display:block;color:var(--tinta);font-size:15px}
-/* rotina */
-.creme{background:var(--creme)}
+.check{list-style:none}
+.check li{position:relative;padding-left:32px;margin:9px 0;font-weight:700}
+.check li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--tinta) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat}
+/* faixa */
+.faixa{background:var(--tinta);color:#fff;font-size:12.5px;font-weight:800;padding:7px 8px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.faixa i{font-style:normal;color:var(--lar);margin:0 6px}
+/* topo */
+.hero{background:var(--lar);padding:12px 0 34px;overflow:hidden}
+.marca{display:inline-flex;background:#fff;border-radius:99px;padding:3px 14px 1px;font-family:'Baloo 2';font-weight:800;font-size:18px;box-shadow:0 3px 0 rgba(120,40,0,.25)}
+.marca b{color:var(--lar-txt);margin-left:5px}
+.hgrade{display:grid;gap:0 44px;grid-template-areas:"marca" "sobre" "h1" "sub" "gal" "compra" "lista";align-items:start}
+.hgrade>*{min-width:0}
+.hero .marca{grid-area:marca;justify-self:start;margin-bottom:12px}
+.hero .sobre{grid-area:sobre;color:var(--tinta);font-size:14px;letter-spacing:0;text-transform:none;margin:0 0 4px}
+.hero h1{grid-area:h1;font-size:clamp(33px,8.6vw,60px);font-weight:800}
+.hero .sub{grid-area:sub;font-size:16.5px;font-weight:700;margin-top:8px;line-height:1.45}
+.galeria{grid-area:gal;margin:10px -18px 0;position:relative}
+.compra{grid-area:compra}
+.hero .check{grid-area:lista;margin-top:22px;background:rgba(255,255,255,.92);border-radius:var(--r);padding:12px 16px;box-shadow:0 10px 30px rgba(120,40,0,.18)}
+.hero .check li{font-size:15.5px}
+.hero .check li::before{background-color:var(--lar-esc)}
+@media(min-width:900px){
+ .hero{padding:22px 0 64px}
+ .hgrade{grid-template-columns:1.1fr 1fr;grid-template-areas:"gal marca" "gal sobre" "gal h1" "gal sub" "gal lista" "gal compra" "gal ."}
+ .galeria{margin:0}
+ .hero .check{margin-top:16px}
+ .hero .sub{font-size:19px}
+ .galeria{align-self:center}
+}
+.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.trilho::-webkit-scrollbar{display:none}
+.trilho>figure{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:4/3;max-height:300px;display:flex;align-items:center;justify-content:center;position:relative;perspective:900px}
+@media(min-width:900px){.trilho>figure{max-height:none}}
+.trilho .pag{max-height:88%;width:auto;border-radius:6px;box-shadow:0 22px 40px rgba(110,35,0,.35);cursor:zoom-in}
+.trilho video{max-height:92%;width:auto;border-radius:14px;box-shadow:0 22px 40px rgba(110,35,0,.3)}
+.tilt{width:100%;height:100%;transform:rotateX(var(--rx,6deg)) rotateY(var(--ry,-10deg));transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.tilt img{width:100%;height:100%;object-fit:contain;animation:flutua 5s ease-in-out infinite}
+@keyframes flutua{50%{transform:translateY(-6px)}}
+.adesivo{position:absolute;z-index:2;font-family:'Baloo 2';font-weight:800;line-height:1.05;text-align:center;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 rgba(0,0,0,.15),0 10px 18px rgba(80,25,0,.3)}
+.ad-pdf{left:12px;top:8px;width:96px;height:96px;background:#fff;font-size:14px;transform:rotate(-10deg);border:3px dashed var(--lar)}
+.ad-120{right:12px;bottom:10px;width:84px;height:84px;background:var(--ama);font-size:13px;transform:rotate(9deg)}
+.ad-120 b{display:block;font-size:30px;line-height:.9}
+.pontos{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.pontos button{width:28px;height:28px;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pontos button::after{content:"";width:9px;height:9px;border-radius:9px;background:rgba(29,29,31,.35);transition:width .2s}
+.pontos button[aria-current=true]::after{width:24px;background:var(--tinta)}
+.preco-linha{display:flex;align-items:flex-end;gap:12px;margin-top:10px;flex-wrap:wrap}
+.valor{font-family:'Baloo 2';font-weight:800;font-size:50px;line-height:.9}
+.valor small{font-size:24px;margin-right:3px}
+.cond{font-weight:800;font-size:14.5px;line-height:1.25;padding-bottom:4px}
+.hero .botao{margin-top:12px}
+.hero .nota{color:var(--tinta);margin-top:10px}
+/* situações */
 .situacoes{display:grid;gap:12px;margin:22px 0}
 @media(min-width:760px){.situacoes{grid-template-columns:1fr 1fr}}
-.situacoes p{background:#fff;border-radius:var(--r);padding:16px 18px;border:1px solid var(--borda);margin:0;font-weight:600}
-.destaque{font-size:19px;font-weight:700}
-/* como funciona */
-.dois{display:grid;gap:28px;align-items:center}
-@media(min-width:880px){.dois{grid-template-columns:1fr 1fr}}
-.video-moldura{border-radius:var(--r);overflow:hidden;background:var(--creme)}
+.situacoes p{background:#fff;border-radius:var(--r);padding:16px 18px 16px 58px;margin:0;font-weight:700;position:relative;box-shadow:var(--sombra)}
+.situacoes p::before{content:attr(data-i);position:absolute;left:14px;top:14px;width:32px;height:32px;border-radius:10px;background:var(--pes);display:flex;align-items:center;justify-content:center;font-size:18px}
+.destaque{font-family:'Baloo 2';font-size:25px;font-weight:800;line-height:1.15}
+/* como funciona / semana */
+.dois{display:grid;gap:30px;align-items:center}
+.dois>*{min-width:0}
+@media(min-width:900px){.dois{grid-template-columns:1fr 1fr;gap:50px}}
+.semana{position:relative;height:230px;margin:0 auto;max-width:480px;--esp:33px;--w:100px}
+@media(min-width:900px){.semana{height:330px;--esp:62px;--w:160px}}
+.semana .f{position:absolute;bottom:26px;left:50%;width:var(--w);margin-left:calc(var(--w) / -2);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .5s;transform:translateY(40px);opacity:0}
+.semana .f img{border-radius:4px;box-shadow:4px 4px 0 #fff,4px 4px 0 1px #d8cfc6,0 14px 24px rgba(60,30,10,.2);background:#fff}
+.semana .f span{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--tinta);color:#fff;font-weight:900;font-size:12px;border-radius:99px;padding:1px 9px}
+.semana.ver .f{opacity:1;transform:translateX(calc((var(--i) - 3) * var(--esp))) translateY(calc(var(--d) * 1px)) rotate(calc((var(--i) - 3) * 4deg))}
+.semana .f:nth-child(1){--i:0;--d:18;z-index:1}.semana .f:nth-child(2){--i:1;--d:8;z-index:2}.semana .f:nth-child(3){--i:2;--d:2;z-index:3}.semana .f:nth-child(4){--i:3;--d:0;z-index:4}.semana .f:nth-child(5){--i:4;--d:2;z-index:3}.semana .f:nth-child(6){--i:5;--d:8;z-index:2}.semana .f:nth-child(7){--i:6;--d:18;z-index:1}
+.semana .f:nth-child(-n+3) span{left:2px;transform:none}.semana .f:nth-child(n+5) span{left:auto;right:2px;transform:none}
+.gaveta{position:absolute;left:4%;right:4%;bottom:0;height:62px;border-radius:12px 12px 18px 18px;background:linear-gradient(#ffb48f,#ff9a66);box-shadow:inset 0 6px 0 rgba(255,255,255,.35),0 14px 24px rgba(160,60,10,.25);z-index:5}
+.gaveta::after{content:"";position:absolute;left:50%;top:22px;width:70px;height:10px;margin-left:-35px;border-radius:9px;background:rgba(120,40,0,.35)}
 .passos{list-style:none;counter-reset:p}
-.passos li{counter-increment:p;position:relative;padding-left:48px;margin:16px 0}
-.passos li::before{content:counter(p);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--tinta);color:#fff;font-family:'Baloo 2';font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;padding-top:2px}
+.passos li{counter-increment:p;position:relative;padding-left:52px;margin:16px 0}
+.passos li::before{content:counter(p);position:absolute;left:0;top:-2px;width:38px;height:38px;border-radius:12px;background:var(--lar);color:var(--tinta);font-family:'Baloo 2';font-weight:800;font-size:21px;display:flex;align-items:center;justify-content:center;padding-top:2px;box-shadow:0 3px 0 var(--lar-esc)}
 .passos b{display:block;font-size:18px}
-/* tabela */
-.tabela-wrap{overflow-x:auto;margin-top:18px;border-radius:var(--r);border:1px solid var(--borda)}
-table{border-collapse:collapse;width:100%;font-size:15.5px}
-@media(max-width:620px){thead{display:none}table,tbody,tr,th,td{display:block}tr{padding:12px 14px;border-bottom:1px solid var(--borda)}
-tbody th{padding:0 0 6px;border:0;font-family:'Baloo 2';font-size:17px}
-td{border:0;padding:4px 8px;display:flex;justify-content:space-between;gap:12px;border-radius:8px}
-td::before{content:attr(data-l);color:var(--cinza);font-weight:700}td.nosso::before{color:var(--tinta)}}
-th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--borda);vertical-align:top}
-thead th{background:#fafafa;font-family:'Baloo 2';font-size:17px}
-tbody th{font-weight:700;color:#333}
-td.nosso,th.nosso{background:var(--pessego);font-weight:800}
-tr:last-child td,tr:last-child th{border-bottom:0}
-/* páginas por dentro */
-.paginas{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
-@media(min-width:760px){.paginas{grid-template-columns:repeat(3,1fr);gap:20px}}
-.paginas a{display:block;text-decoration:none;color:var(--tinta)}
-.paginas img{border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.08),0 10px 24px rgba(60,30,10,.12);background:#fff}
-.paginas span{display:block;font-weight:800;font-size:14.5px;margin-top:8px;text-align:center}
-.niveis{display:grid;gap:26px;margin-top:40px}
+.obs{color:var(--cinza);background:var(--creme);border-radius:14px;padding:12px 14px;font-size:15.5px}
+.video{margin-top:26px;border-radius:var(--r);overflow:hidden;background:var(--creme);box-shadow:var(--sombra)}
+/* comparativo */
+.escuro{background:var(--tinta);color:#fff}
+.escuro .sobre{color:var(--lar)}
+.comp{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;margin-top:20px;border-radius:var(--r);overflow:hidden;background:#2b2b2e;font-size:14px;font-weight:800;text-align:center}
+.comp>div{padding:12px 6px;border-bottom:1px solid #3a3a3e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0}
+.comp .r{text-align:left;align-items:flex-start;padding-left:14px;font-size:14.5px}
+.comp .cab{font-family:'Baloo 2';font-size:14.5px;line-height:1.1;color:#d6d6d6}
+.comp .nos{background:var(--lar);color:var(--tinta)}
+.comp .cab.nos{border-radius:14px 14px 0 0;font-size:15.5px}
+.comp>div:nth-last-child(-n+4){border-bottom:0}
+.si,.no,.av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1}
+.si{background:#fff;color:#14803c}.nos .si{background:var(--tinta);color:#fff}
+.no{background:#4a4a4f;color:#ff9b9b}
+.av{background:#4a4a4f;color:#ffd77a;font-size:13px}
+.comp small{font-size:12px;font-weight:700;line-height:1.15}
+.comp .nos small{font-weight:900}
+@media(min-width:760px){.comp{font-size:16px}.comp .r{padding-left:22px;font-size:16px}.comp .cab{font-size:17px}}
+/* por dentro */
+.azul{background:var(--azul)}
+.lab{display:grid;gap:14px 30px;align-items:center;background:#fff;border-radius:24px;padding:20px;box-shadow:var(--sombra);margin:22px auto 0;max-width:720px}
+@media(min-width:760px){.lab{grid-template-columns:280px 1fr;padding:28px}}
+.lab svg{width:100%;max-width:250px;margin:0 auto;display:block}
+.lab p{font-size:15.5px;margin-top:4px}
+.lab .sol{stroke-dasharray:1;stroke-dashoffset:1;opacity:.85}
+.lab.ver .sol{transition:stroke-dashoffset 3.2s ease-in-out .3s;stroke-dashoffset:0}
+.ver-gab{font:800 16px 'Nunito';background:var(--pes);border:2px solid var(--tinta);border-radius:99px;padding:8px 16px;margin-top:12px;cursor:pointer;color:var(--tinta)}
+.carrossel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 18px 18px;margin:0 -18px;scrollbar-width:none;perspective:1200px}
+.carrossel::-webkit-scrollbar{display:none}
+.carrossel a{flex:0 0 80%;scroll-snap-align:center;text-decoration:none;color:var(--tinta)}
+.carrossel img{border-radius:8px;background:#fff;box-shadow:var(--sombra)}
+.carrossel span{display:block;font-weight:900;font-size:15px;margin-top:10px;text-align:center}
+@media(min-width:760px){.carrossel{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;overflow:visible;margin:0 auto;padding:26px 0 0;max-width:900px}}
+.dica{font-size:13.5px;font-weight:800;color:var(--cinza);text-align:center}
+@media(min-width:760px){.dica{display:none}}
+.niveis{display:grid;gap:26px;margin-top:34px}
 @media(min-width:760px){.niveis{grid-template-columns:1fr 1fr}}
-.niveis img{border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.08),0 14px 30px rgba(60,30,10,.14);margin-bottom:14px}
-.tag{display:inline-block;font-weight:800;font-size:13px;border-radius:99px;padding:3px 12px;margin-bottom:6px}
-.tag.n1{background:var(--pessego)}.tag.n2{background:var(--azul)}
+.niveis img{border-radius:8px;box-shadow:var(--sombra);margin-bottom:14px;cursor:zoom-in;background:#fff}
+.tag{display:inline-block;font-weight:900;font-size:13.5px;border-radius:99px;padding:3px 12px;margin-bottom:6px;background:var(--tinta);color:#fff}
 /* recebe */
-.tipos{display:grid;gap:10px;margin:14px 0}
-@media(min-width:620px){.tipos{grid-template-columns:1fr 1fr}}
-.tipos div{background:#fff;border-radius:14px;padding:12px 14px;font-size:15.5px}
-.tipos b{display:block;font-family:'Baloo 2';font-size:18px}
-.bloco+.bloco{margin-top:18px}
-.bonus{display:grid;gap:14px;margin-top:18px}
-@media(min-width:760px){.bonus{grid-template-columns:repeat(3,1fr)}}
-.bonus div{border:2px dashed var(--laranja);border-radius:var(--r);padding:18px;background:#fff}
-.bonus .rot{font-weight:800;color:var(--laranja-esc);font-size:13px;text-transform:uppercase;letter-spacing:.6px}
+.cento{font-family:'Baloo 2';font-weight:800;font-size:clamp(120px,36vw,210px);line-height:.8;color:var(--lar);text-shadow:1px 1px 0 var(--lar-esc),2px 2px 0 var(--lar-esc),3px 3px 0 var(--lar-esc),4px 4px 0 var(--lar-esc),5px 5px 0 var(--lar-esc),6px 6px 0 var(--lar-esc),8px 14px 24px rgba(160,50,0,.3);letter-spacing:-4px}
+.cento-l{font-family:'Baloo 2';font-weight:800;font-size:22px;line-height:1.1;margin-top:10px}
+.pacote{position:relative}
+.pacote .cento{position:absolute;left:0;top:-24px;z-index:1}
+.pacote img{position:relative;z-index:2;margin-top:70px}
+.cartoes{display:grid;gap:12px;margin-top:6px}
+@media(min-width:620px){.cartoes{grid-template-columns:1fr 1fr}}
+.cartoes div{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:var(--sombra)}
+.cartoes h3{font-size:19px;margin-bottom:2px}
+.cartoes p{font-size:15.5px}
+.tipos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+@media(min-width:760px){.tipos{grid-template-columns:repeat(3,1fr)}}
+.tipos div{border-radius:16px;padding:14px;font-size:14.5px;font-weight:600;line-height:1.35}
+.tipos b{display:block;font-family:'Baloo 2';font-size:19px;line-height:1.1;margin-bottom:3px}
+.tipos div:nth-child(1){background:var(--pes)}.tipos div:nth-child(2){background:var(--azul)}.tipos div:nth-child(3){background:var(--menta)}.tipos div:nth-child(4){background:#fff1c2}.tipos div:nth-child(5){background:#f1e4ff}.tipos div:nth-child(6){background:#ffe0e8}
+/* bônus */
+.bonus{display:grid;gap:18px;margin-top:22px}
+@media(min-width:800px){.bonus{grid-template-columns:repeat(3,1fr)}}
+.bonus>div{position:relative;background:#fff;border-radius:22px;padding:22px 20px 20px;box-shadow:var(--sombra);border-top:10px solid var(--c)}
+.bonus .n{position:absolute;right:16px;top:-26px;width:54px;height:54px;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;font-family:'Baloo 2';font-weight:800;font-size:28px;box-shadow:0 4px 0 rgba(0,0,0,.12);transform:rotate(8deg)}
+.bonus .rot{font-weight:900;color:var(--cinza);font-size:12.5px;text-transform:uppercase;letter-spacing:.8px}
+.bonus h3{margin:4px 0 8px}
+.bonus p{font-size:15.5px}
+.incluso{display:inline-block;background:var(--menta);color:#14532d;font-weight:900;font-size:12.5px;border-radius:99px;padding:2px 10px;margin-top:12px}
 /* para quem */
 .quem{display:grid;gap:18px}
 @media(min-width:760px){.quem{grid-template-columns:1fr 1fr}}
-.quem>div{border-radius:var(--r);padding:22px}
-.quem .sim{background:#effaf1}.quem .nao{background:#f6f6f6}
-.quem h3{margin-bottom:10px}
+.quem>div{border-radius:var(--r);padding:22px;box-shadow:var(--sombra)}
+.quem .sim{background:#fff;border-top:8px solid #2fb36b}.quem .nao{background:#fff;border-top:8px solid #bdbdbd}
+.quem h3{margin-bottom:8px}
 .quem ul{padding-left:20px}.quem li{margin:7px 0}
-/* preço */
-.ancora{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
-.ancora div{background:#fff;border:2px solid var(--tinta);border-radius:14px;padding:10px 16px;font-weight:700}
-.ancora b{font-family:'Baloo 2';font-size:26px;display:block;line-height:1.1}
-.cartoes{display:grid;gap:14px}
-@media(min-width:760px){.cartoes{grid-template-columns:repeat(4,1fr)}}
-.cartoes div{background:#fff;border-radius:var(--r);padding:18px}
-.cartoes h3{font-size:19px;margin-bottom:6px}
-.garantia{display:grid;gap:20px;align-items:center;border-radius:22px;background:var(--azul);padding:26px}
-@media(min-width:760px){.garantia{grid-template-columns:150px 1fr;padding:32px}}
-.selo-g{width:140px;height:140px;margin:0 auto}
+/* oferta */
+.oferta-sec{background:linear-gradient(var(--pes),var(--creme))}
+.oferta{background:#fff;border:3px solid var(--tinta);border-radius:28px;padding:22px 20px 24px;box-shadow:10px 10px 0 var(--lar);display:grid;gap:8px 30px;max-width:860px;margin:22px auto 0}
+.oferta>*{min-width:0}
+@media(min-width:800px){.oferta{grid-template-columns:300px 1fr;padding:34px;align-items:center}}
+.oferta .capa{perspective:900px;max-width:240px;margin:0 auto}@media(min-width:800px){.oferta .capa{max-width:300px}}
+.oferta h3{font-size:22px;margin-bottom:6px}
+.oferta .check li{font-size:16px;margin:7px 0}
+.ancora{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+.ancora div{flex:1 1 0;min-width:0;background:var(--creme);border:2px dashed var(--lar-esc);border-radius:14px;padding:8px 14px;font-weight:700;font-size:14.5px;line-height:1.2}
+.ancora b{font-family:'Baloo 2';font-size:25px;display:block}
+.oferta .frase{font-size:15.5px;margin-top:10px}
+.selos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:860px;margin:22px auto 0}
+.selo{background:#fff;border:2px solid var(--borda);border-radius:16px;padding:12px 8px;text-align:center;font-size:13.5px;font-weight:700;color:var(--cinza);line-height:1.3}
+.selo svg{width:30px;height:30px;margin:0 auto 4px;display:block}
+.selo b{display:block;color:var(--tinta);font-size:15px;line-height:1.15;margin-bottom:2px}
+/* garantia */
+.garantia{display:grid;gap:18px;align-items:center;border-radius:26px;background:var(--menta);padding:26px}
+@media(min-width:760px){.garantia{grid-template-columns:160px 1fr;padding:34px}}
+.selo-g{width:150px;height:150px;margin:0 auto;filter:drop-shadow(0 10px 14px rgba(20,80,40,.2))}
 /* faq */
-details{border-bottom:1px solid var(--borda);padding:4px 0}
-summary{cursor:pointer;list-style:none;font-weight:800;font-size:17.5px;padding:14px 34px 14px 0;position:relative}
+details{background:#fff;border-radius:14px;margin:8px 0;box-shadow:0 1px 2px rgba(60,30,10,.06)}
+summary{cursor:pointer;list-style:none;font-weight:800;font-size:17px;padding:15px 46px 15px 16px;position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:4px;top:8px;font-family:'Baloo 2';font-size:28px;color:var(--laranja)}
+summary::after{content:"+";position:absolute;right:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--pes);font-family:'Baloo 2';font-size:22px;line-height:28px;text-align:center;color:var(--lar-txt)}
 details[open] summary::after{content:"–"}
-details>div{padding:0 0 16px;color:#333}
-details ul{padding-left:20px;margin-top:6px}
+details>div{padding:0 16px 16px;color:#333}
+details ul{padding-left:20px;margin:6px 0}
 /* final */
-.final{background:var(--tinta);color:#fff}
-.final .nota{color:#c9c9c9}
-.final img{max-width:420px;margin:0 auto 10px;width:100%}
-footer{padding:30px 0 90px;font-size:14px;color:var(--cinza);text-align:center}
+.final{background:var(--lar);overflow:hidden}
+.final h2{font-size:clamp(31px,7vw,50px)}
+.final .linha{font-weight:800;font-size:19px}
+.final .nota{color:var(--tinta)}
+footer{padding:30px 0 34px;font-size:14px;color:var(--cinza);text-align:center}
 footer a{color:var(--cinza)}
 footer p{margin:6px 0}
-/* barra fixa no celular */
-.barra{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--borda);padding:10px 16px;display:flex;align-items:center;gap:12px;z-index:9;transform:translateY(110%);transition:transform .25s}
+/* barra */
+.barra{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--borda);box-shadow:0 -8px 24px rgba(0,0,0,.1);padding:9px 14px calc(9px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;z-index:9;transform:translateY(110%);transition:transform .25s}
 .barra.ver{transform:none}
-.barra .v{font-family:'Baloo 2';font-weight:800;font-size:24px;line-height:1;white-space:nowrap}
-.barra .botao{margin:0;padding:11px 12px 9px;font-size:18px;box-shadow:0 4px 0 var(--laranja-esc)}
-@media(min-width:880px){.barra{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.botao,.barra{transition:none}}
+.barra .v{font-family:'Baloo 2';font-weight:800;font-size:25px;line-height:1;white-space:nowrap}
+.barra .v small{display:block;font-family:'Nunito';font-size:11.5px;font-weight:800;color:var(--cinza);margin-top:2px}
+.barra .botao{margin:0;padding:12px 10px 10px;font-size:19px;box-shadow:0 4px 0 #8f2f06;flex:1}
+@media(min-width:900px){.barra{display:none}body.com-barra{padding-bottom:0}}
+/* zoom */
+#zoom{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%;margin:0}
+#zoom::backdrop{background:rgba(20,14,10,.88)}
+#zoom[open]{display:flex;align-items:center;justify-content:center}
+#zoom img{max-width:94vw;max-height:88vh;width:auto;border-radius:6px;background:#fff}
+#zoom button{position:fixed;top:12px;right:12px;font:900 16px 'Nunito';background:#fff;border:0;border-radius:99px;padding:10px 16px;cursor:pointer}
+/* entradas */
+.js .rev{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .abre{opacity:0;transform:rotateY(-70deg);transform-origin:0 50%;transition:opacity .6s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rev.ver,.js .abre.ver{opacity:1;transform:none}
+.carrossel a:nth-child(2){transition-delay:.12s}.carrossel a:nth-child(3){transition-delay:.24s}.carrossel a:nth-child(5){transition-delay:.12s}.carrossel a:nth-child(6){transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}
+.js .rev,.js .abre,.semana .f{opacity:1!important;transform:none}.semana.ver .f,.semana .f{transform:translateX(calc((var(--i) - 3) * var(--esp))) translateY(calc(var(--d) * 1px)) rotate(calc((var(--i) - 3) * 4deg))}.tilt{transform:none!important}.lab .sol{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
+<script>document.documentElement.className='js'</script>
 
-<div class="faixa"><span>PDF para imprimir em casa</span><i>•</i><span>Chega no seu e-mail logo após o pagamento</span><i>•</i><span>Garantia de 7 dias</span></div>
+<div class="faixa">PDF para imprimir em casa<i>·</i>Acesso na hora, pelo e-mail</div>
 
 <header class="hero">
-  <div class="topo-marca">Dez&nbsp;<b>Minutinhos</b></div>
-  <div class="cont grade" style="padding-top:18px">
+  <div class="cont hgrade">
+    <div class="marca">Dez<b>Minutinhos</b></div>
+    <p class="sobre">Caderno de atividades para imprimir · 4 a 10 anos</p>
+    <h1>Pediu o tablet? Entregue um labirinto.</h1>
+    <p class="sub">120 atividades prontas para imprimir. Duas folhas por dia, uns 10 minutinhos de papel e lápis, sem nada para preparar.</p>
     <div class="galeria">
       <div class="trilho" id="trilho">
-        <figure><img src="img/mockup-capa.webp" width="1000" height="860" alt="Capa do caderno Dez Minutinhos" fetchpriority="high"></figure>
-        <figure><video src="img/folheando.mp4" poster="img/folheando-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="O caderno Dez Minutinhos sendo folheado"></video></figure>
-        <figure><img src="img/amostra-nivel1.jpg" width="900" height="1274" alt="Página de atividade do Nível 1, para 4 a 6 anos" loading="lazy"></figure>
-        <figure><img src="img/amostra-nivel2.jpg" width="900" height="1274" alt="Página de atividade do Nível 2, para 7 a 10 anos" loading="lazy"></figure>
-        <figure><img src="img/mockup-pacote.webp" width="1200" height="900" alt="Folhas do caderno Dez Minutinhos espalhadas sobre a mesa" loading="lazy"></figure>
+        <figure>
+          <div class="tilt" id="tilt"><img src="img/heroi.webp" width="960" height="720" alt="Caderno Dez Minutinhos impresso, com uma folha de labirinto e uma de código secreto" fetchpriority="high"></div>
+          <div class="adesivo ad-pdf">Você recebe em PDF para imprimir</div>
+          <div class="adesivo ad-120"><span><b>120</b>atividades</span></div>
+        </figure>
+        <figure><video muted loop playsinline preload="none" poster="img/folheando-poster.jpg" aria-label="O caderno Dez Minutinhos sendo folheado"><source src="img/folheando.mp4" type="video/mp4"></video></figure>
+        <figure><img class="pag" data-zoom src="img/amostra-nivel2.jpg" width="900" height="1274" alt="Página de atividade do Nível 2, para 7 a 10 anos" loading="lazy"></figure>
       </div>
-      <div class="miniaturas" id="miniaturas">
-        <button aria-label="Capa" aria-current="true" style="background-image:url(img/mockup-capa.webp)"></button>
-        <button aria-label="Caderno sendo folheado" style="background-image:url(img/folheando-poster.jpg)"></button>
-        <button aria-label="Página do Nível 1" style="background-image:url(img/amostra-nivel1.jpg)"></button>
-        <button aria-label="Página do Nível 2" style="background-image:url(img/amostra-nivel2.jpg)"></button>
-        <button aria-label="Folhas espalhadas" style="background-image:url(img/mockup-pacote.webp)"></button>
-      </div>
+      <div class="pontos" id="pontos"><button aria-label="Caderno" aria-current="true"></button><button aria-label="Caderno sendo folheado"></button><button aria-label="Página do Nível 2"></button></div>
     </div>
-    <div>
-      <h1>120 atividades prontas para imprimir. Dez minutinhos por dia, longe da tela.</h1>
-      <p class="sub">Um caderno em PDF para imprimir em casa, com 2 níveis (4 a 6 e 7 a 10 anos), plano de 30 dias e gabarito. Funciona em impressora preto e branco.</p>
-      <ul class="lista-check">
-        <li>Labirinto, ligue os pontos, jogo dos 7 erros, sudoku, código secreto e mais.</li>
-        <li>Duas folhas por dia, mais ou menos 10 minutos.</li>
-        <li>Nada para preparar: imprimiu, entregou.</li>
-        <li>Nível certo para cada idade: com e sem leitura.</li>
-        <li>Gabarito no fim, para você conferir em segundos.</li>
-      </ul>
-      <div class="preco" id="preco-topo">
-        <div class="valor"><small>R$</small>37,00</div>
-        <div class="cond">à vista ou parcelado no cartão</div>
-      </div>
-      <a class="botao" href="#preco">Quero o Dez Minutinhos</a>
-      <p class="nota"><span>Garantia de 7 dias</span> · <span>Arquivo digital, nada é enviado pelo correio</span></p>
+    <div class="compra" id="compra-topo">
+      <div class="preco-linha"><div class="valor"><small>R$</small>37,00</div><div class="cond">à vista ou<br>parcelado no cartão</div></div>
+      <a class="botao esc" href="#preco">Quero as 120 atividades</a>
+      <p class="nota"><span>Garantia de 7 dias</span> · <span>Pagamento seguro pela Hotmart</span></p>
     </div>
+    <ul class="check">
+      <li>Labirinto, ligue os pontos, jogo dos 7 erros, sudoku, código secreto e mais</li>
+      <li>2 níveis: 4 a 6 anos (não precisa ler) e 7 a 10 anos</li>
+      <li>Plano de 30 dias: cada dia já diz quais folhas imprimir</li>
+      <li>Imprime em preto e branco, papel A4 comum</li>
+      <li>Gabarito no fim, para conferir em segundos</li>
+    </ul>
   </div>
 </header>
 
-<section>
+<section class="creme">
   <div class="cont estreito">
-    <div class="caixa">
-      <img src="img/mockup-capa.webp" width="1000" height="860" alt="Capa do caderno Dez Minutinhos" loading="lazy">
+    <h2 class="rev">Sabe aquela hora em que você só precisa de 10 minutos?</h2>
+    <div class="situacoes">
+      <p class="rev" data-i="🍳">Cinco da tarde. Jantar no fogo. E lá vem: “posso ver o tablet?”</p>
+      <p class="rev" data-i="☀️">Férias. A tarde é comprida e as ideias acabaram na terça.</p>
+      <p class="rev" data-i="🔎">Você procura folhinha na internet. Meia hora depois, achou três: uma fácil demais, uma que pede leitura e uma que não imprime direito.</p>
+      <p class="rev" data-i="⏳">Reunião de trabalho em casa, sala de espera, tarde na casa da avó. Precisa de algo pronto, agora.</p>
+    </div>
+    <p class="destaque rev">O Dez Minutinhos foi feito para essas horas.</p>
+    <p>Nada para planejar, comprar ou inventar. Abre no dia do plano, imprime duas folhas, entrega com um lápis.</p>
+  </div>
+</section>
+
+<section>
+  <div class="cont dois">
+    <div>
+      <div class="semana" id="semana" aria-hidden="true">
+        <div class="f"><span>Seg</span><img src="img/dentro-1.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Ter</span><img src="img/dentro-2.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Qua</span><img src="img/dentro-3.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Qui</span><img src="img/dentro-4.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Sex</span><img src="img/dentro-5.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Sáb</span><img src="img/dentro-6.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="f"><span>Dom</span><img src="img/dentro-1.jpg" width="600" height="849" alt="" loading="lazy"></div>
+        <div class="gaveta"></div>
+      </div>
+    </div>
+    <div>
+      <span class="sobre">Como funciona</span>
+      <h2>Imprime na segunda. A semana fica pronta na gaveta.</h2>
+      <ol class="passos">
+        <li><b>Escolha o nível.</b>Nível 1 (4 a 6 anos): sem leitura, você lê a instrução em voz alta. Nível 2 (7 a 10 anos): leitura inicial e desafios maiores.</li>
+        <li><b>Siga o plano.</b>Cada dia junta dois tipos diferentes, como um labirinto e um jogo de memória. Uns 10 minutos, sem repetir.</li>
+        <li><b>Imprima a semana de uma vez.</b>São 14 folhas. Na hora que precisar, é só abrir a gaveta.</li>
+        <li><b>Confira no gabarito.</b>As respostas estão no fim do arquivo.</li>
+        <li><b>Marque no quadro de conquistas.</b>Um carimbo ou adesivo por dia. No fim, certificado.</li>
+      </ol>
+      <p class="obs">Não tem relógio nem nota. Tem criança que termina em 5 minutos, tem criança que fica 20. Os 10 minutos são só o tamanho médio.</p>
+      <a class="botao" href="#preco">Quero o plano de 30 dias</a>
+    </div>
+  </div>
+</section>
+
+<section class="escuro">
+  <div class="cont estreito">
+    <h2 class="centro">Folhinha solta, app ou caderno pronto?</h2>
+    <div class="comp rev" role="table" aria-label="Comparação entre Dez Minutinhos, folhinhas soltas da internet e app educativo">
+      <div class="cab" role="columnheader"></div><div class="cab nos" role="columnheader">Dez Minutinhos</div><div class="cab" role="columnheader">Folhinhas da internet</div><div class="cab" role="columnheader">App “educativo”</div>
+      <div class="r" role="rowheader">Fica longe da tela</div><div class="nos"><i class="si" aria-label="Sim">✓</i></div><div><i class="si" aria-label="Sim">✓</i></div><div><i class="no" aria-label="Não">✕</i></div>
+      <div class="r" role="rowheader">Separado por idade</div><div class="nos"><i class="si" aria-label="Sim">✓</i><small>2 níveis</small></div><div><i class="av" aria-hidden="true">~</i><small>às vezes</small></div><div><i class="av" aria-hidden="true">~</i><small>às vezes</small></div>
+      <div class="r" role="rowheader">Ordem para seguir</div><div class="nos"><i class="si" aria-label="Sim">✓</i><small>plano de 30 dias</small></div><div><i class="no" aria-label="Não">✕</i></div><div><i class="av" aria-hidden="true">~</i><small>depende do app</small></div>
+      <div class="r" role="rowheader">Gabarito</div><div class="nos"><i class="si" aria-label="Sim">✓</i><small>completo</small></div><div><i class="av" aria-hidden="true">~</i><small>às vezes</small></div><div><small>não precisa</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="azul" id="dentro">
+  <div class="cont">
+    <h2 class="centro">Antes de comprar, veja por dentro</h2>
+    <p class="centro">Páginas de verdade do caderno, do jeito que saem na impressora. Toque para ampliar.</p>
+    <div class="lab rev" id="lab">
+      <svg viewBox="14 0 154 222" role="img" aria-label="Labirinto do Nível 1 com o caminho do gabarito"><path class="sol" d="M31.7,23L31.7,34.9 L71.2,34.9 L71.2,54.7 L31.7,54.7 L31.7,94.2 L51.4,94.2 L51.4,133.8 L71.2,133.8 L71.2,114 L91,114 L91,153.6 L71.2,153.6 L71.2,173.3 L31.7,173.3 L31.7,193.1 L110.8,193.1 L110.8,173.3 L150.3,173.3 L150.3,206" pathLength="1" fill="none" stroke="#ff7a45" stroke-width="6.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M21.8 25L21.8 44.8M21.8 44.8L41.6 44.8M21.8 44.8L21.8 64.6M21.8 64.6L21.8 84.3M21.8 84.3L21.8 104.1M21.8 104.1L41.6 104.1M21.8 104.1L21.8 123.9M21.8 123.9L21.8 143.7M21.8 143.7L21.8 163.4M21.8 163.4L21.8 183.2M21.8 183.2L21.8 203M21.8 203L41.6 203M41.6 25L61.3 25M41.6 44.8L61.3 44.8M41.6 64.6L61.3 64.6M41.6 64.6L41.6 84.3M41.6 84.3L61.3 84.3M41.6 104.1L41.6 123.9M41.6 123.9L41.6 143.7M41.6 143.7L61.3 143.7M41.6 163.4L61.3 163.4M41.6 183.2L61.3 183.2M41.6 203L61.3 203M61.3 25L81.1 25M61.3 64.6L81.1 64.6M61.3 84.3L61.3 104.1M61.3 104.1L81.1 104.1M61.3 104.1L61.3 123.9M61.3 143.7L81.1 143.7M61.3 143.7L61.3 163.4M61.3 183.2L81.1 183.2M61.3 203L81.1 203M81.1 25L100.9 25M81.1 25L81.1 44.8M81.1 44.8L81.1 64.6M81.1 64.6L81.1 84.3M81.1 104.1L100.9 104.1M81.1 123.9L81.1 143.7M81.1 163.4L100.9 163.4M81.1 163.4L81.1 183.2M81.1 183.2L100.9 183.2M81.1 203L100.9 203M100.9 25L120.7 25M100.9 25L100.9 44.8M100.9 44.8L100.9 64.6M100.9 84.3L120.7 84.3M100.9 104.1L100.9 123.9M100.9 123.9L100.9 143.7M100.9 143.7L100.9 163.4M100.9 163.4L120.7 163.4M100.9 203L120.7 203M120.7 25L140.4 25M120.7 44.8L140.4 44.8M120.7 44.8L120.7 64.6M120.7 64.6L120.7 84.3M120.7 84.3L140.4 84.3M120.7 104.1L140.4 104.1M120.7 104.1L120.7 123.9M120.7 123.9L120.7 143.7M120.7 143.7L120.7 163.4M120.7 163.4L140.4 163.4M120.7 183.2L140.4 183.2M120.7 183.2L120.7 203M120.7 203L140.4 203M140.4 25L160.2 25M160.2 25L160.2 44.8M160.2 44.8L160.2 64.6M140.4 64.6L160.2 64.6M160.2 64.6L160.2 84.3M140.4 84.3L140.4 104.1M160.2 84.3L160.2 104.1M160.2 104.1L160.2 123.9M140.4 123.9L140.4 143.7M160.2 123.9L160.2 143.7M140.4 143.7L160.2 143.7M160.2 143.7L160.2 163.4M160.2 163.4L160.2 183.2M160.2 183.2L160.2 203" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"/><g transform="translate(20.67,2.00) scale(0.22)" fill="#fff" stroke="#1d1d1f" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"><polygon points="22,52 4,40 8,64"/><ellipse cx="44" cy="56" rx="28" ry="20"/><circle cx="70" cy="40" r="15"/><polygon points="83,36 97,41 83,46" fill="#d9d9d9"/><circle cx="73" cy="37" r="3" fill="#1d1d1f"/><path d="M28 54 Q 44 40 58 54 Q 44 64 28 54 Z" fill="#d9d9d9"/><path d="M40 76 L 38 90 M 52 76 L 54 90" fill="none"/></g><g transform="translate(139.33,204.00) scale(0.22)" fill="#fff" stroke="#1d1d1f" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"><rect x="42" y="58" width="16" height="36"/><circle cx="50" cy="40" r="32"/></g></svg>
       <div>
-        <h3 style="font-size:24px">Dez Minutinhos: caderno de atividades para imprimir</h3>
-        <ul class="lista-check">
+        <span class="tag">Labirinto · Nível 1</span>
+        <h3>Gabarito</h3>
+        <p>As respostas estão no fim do arquivo.</p>
+        <button class="ver-gab" id="ver-gab" type="button">Ver o caminho de novo</button>
+      </div>
+    </div>
+    <div class="carrossel">
+      <a class="abre" href="img/dentro-1.jpg" data-zoom><img src="img/dentro-1.jpg" width="600" height="849" alt="Página de labirinto do Nível 1" loading="lazy"><span>Labirinto · Nível 1</span></a>
+      <a class="abre" href="img/dentro-2.jpg" data-zoom><img src="img/dentro-2.jpg" width="600" height="849" alt="Página Qual é diferente do Nível 1" loading="lazy"><span>Qual é diferente? · Nível 1</span></a>
+      <a class="abre" href="img/dentro-3.jpg" data-zoom><img src="img/dentro-3.jpg" width="600" height="849" alt="Página Ligue os pontos do Nível 1" loading="lazy"><span>Ligue os pontos · Nível 1</span></a>
+      <a class="abre" href="img/dentro-4.jpg" data-zoom><img src="img/dentro-4.jpg" width="600" height="849" alt="Página de sudoku 6x6 do Nível 2" loading="lazy"><span>Sudoku 6x6 · Nível 2</span></a>
+      <a class="abre" href="img/dentro-5.jpg" data-zoom><img src="img/dentro-5.jpg" width="600" height="849" alt="Página de caça-palavras do Nível 2" loading="lazy"><span>Caça-palavras · Nível 2</span></a>
+      <a class="abre" href="img/dentro-6.jpg" data-zoom><img src="img/dentro-6.jpg" width="600" height="849" alt="Página do jogo dos 7 erros do Nível 2" loading="lazy"><span>Jogo dos 7 erros · Nível 2</span></a>
+    </div>
+    <p class="dica">← arraste para ver as 6 páginas →</p>
+    <div class="niveis">
+      <div class="rev"><img data-zoom src="img/amostra-nivel1.jpg" width="900" height="1274" alt="Página inteira de uma atividade do Nível 1" loading="lazy">
+        <span class="tag">Nível 1 · 4 a 6 anos</span><p><b>Sem leitura.</b> Desenho grande, traço limpo, instrução em uma linha para o adulto ler.</p></div>
+      <div class="rev"><img data-zoom src="img/amostra-nivel2.jpg" width="900" height="1274" alt="Página inteira de uma atividade do Nível 2" loading="lazy">
+        <span class="tag">Nível 2 · 7 a 10 anos</span><p><b>Leitura inicial.</b> Desafios maiores, como sudoku 6x6, caça-palavras e código secreto com palavras.</p></div>
+    </div>
+    <div class="centro"><a class="botao" href="#preco">Quero o caderno completo</a></div>
+  </div>
+</section>
+
+<section class="creme">
+  <div class="cont dois">
+    <div class="pacote rev">
+      <div class="cento" aria-hidden="true">120</div>
+      <img src="img/mockup-pacote.webp" width="1200" height="900" alt="Folhas do caderno Dez Minutinhos impressas" loading="lazy">
+    </div>
+    <div>
+      <span class="sobre">O que você recebe</span>
+      <h2>120 atividades, 6 tipos, 2 níveis. Num PDF só.</h2>
+      <div class="cartoes">
+        <div class="rev"><h3>Um caderno em PDF, tamanho A4</h3><p>Traço pensado para impressora preto e branco. Não gasta tinta à toa.</p></div>
+        <div class="rev"><h3>120 atividades em 2 níveis</h3><p>Nível 1 (4 a 6 anos, sem leitura): 60 atividades. Nível 2 (7 a 10 anos, leitura inicial): 60 atividades.</p></div>
+        <div class="rev"><h3>Plano de 30 dias</h3><p>Duas folhas por dia, já separadas. Você não precisa escolher nada.</p></div>
+        <div class="rev"><h3>Gabarito completo</h3><p>Todas as respostas no fim do arquivo.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cont">
+    <h3 style="margin-top:36px">Seis tipos de atividade, misturados no plano</h3>
+    <div class="tipos">
+      <div class="rev"><b>Atenção</b>qual é diferente, conte e circule, ache as diferenças (5 no Nível 1, jogo dos 7 erros no Nível 2)</div>
+      <div class="rev"><b>Memória</b>olhe a figura, dobre a folha na linha e responda</div>
+      <div class="rev"><b>Padrões</b>sequências para completar e continuar</div>
+      <div class="rev"><b>Lógica</b>labirintos, sudoku (de figuras no Nível 1, 6x6 no Nível 2) e grades lógicas (Nível 2)</div>
+      <div class="rev"><b>Traçado</b>ligue os pontos e caminhos para seguir com o lápis</div>
+      <div class="rev"><b>Cores e códigos</b>pinte pelo código, código secreto e caça-palavras</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="cont">
+    <h2 class="centro">E mais 3 bônus, já incluídos</h2>
+    <div class="bonus">
+      <div class="rev" style="--c:var(--ama)"><span class="n">1</span><span class="rot">Bônus 1</span><h3>Quadro de conquistas + 6 certificados</h3><p>Um quadro para marcar cada dia do plano com carimbo ou adesivo. E 6 certificados para imprimir quando a criança fechar uma etapa.</p><span class="incluso">Incluído</span></div>
+      <div class="rev" style="--c:#8fd3a8"><span class="n">2</span><span class="rot">Bônus 2</span><h3>30 ideias longe da tela sem imprimir nada</h3><p>Para o dia em que a impressora não colaborar. Brincadeiras com o que já tem em casa, uma por dia.</p><span class="incluso">Incluído</span></div>
+      <div class="rev" style="--c:#a9c4ff"><span class="n">3</span><span class="rot">Bônus 3</span><h3>Guia do adulto (2 páginas)</h3><p>Como apresentar a atividade, quando parar e como saber se é hora de passar do Nível 1 para o 2. Direto ao ponto.</p><span class="incluso">Incluído</span></div>
+    </div>
+    <p class="centro nota" style="margin-top:18px">Sem prazo e sem pegadinha: os bônus vêm sempre junto.</p>
+  </div>
+</section>
+
+<section class="creme">
+  <div class="cont quem">
+    <div class="sim rev"><h3>É para você se…</h3><ul>
+      <li>tem criança de 4 a 10 anos em casa e quer uma atividade pronta para as horas sem plano;</li>
+      <li>prefere papel e lápis a mais um app;</li>
+      <li>tem impressora em casa, no trabalho, ou uma papelaria perto;</li>
+      <li>quer tudo num arquivo só, com ordem para seguir.</li></ul></div>
+    <div class="nao rev"><h3>Não é para você se…</h3><ul>
+      <li>quer um livro impresso entregue em casa (o Dez Minutinhos é um arquivo digital);</li>
+      <li>procura conteúdo da escola, como matéria de português ou matemática da série;</li>
+      <li>quer atividades para menores de 4 ou maiores de 10 anos;</li>
+      <li>espera tratamento ou acompanhamento profissional: é um caderno de atividades, só isso.</li></ul></div>
+  </div>
+</section>
+
+<section class="oferta-sec" id="preco">
+  <div class="cont">
+    <h2 class="centro">R$&nbsp;37,00, uma vez só. Dá R$&nbsp;1,23 por&nbsp;dia.</h2>
+    <div class="oferta rev">
+      <div class="capa"><img class="abre" src="img/mockup-capa.webp" width="1000" height="860" alt="Capa do caderno Dez Minutinhos" loading="lazy"></div>
+      <div>
+        <h3>Dez Minutinhos: caderno de atividades para imprimir</h3>
+        <ul class="check">
           <li>120 atividades em 2 níveis (60 para 4 a 6 anos, 60 para 7 a 10 anos)</li>
           <li>Plano de 30 dias: 2 folhas por dia</li>
           <li>Gabarito completo</li>
@@ -214,177 +448,33 @@ footer p{margin:6px 0}
           <li>Bônus: 30 ideias longe da tela sem imprimir nada</li>
           <li>Bônus: guia do adulto de 2 páginas</li>
         </ul>
-        <div class="preco"><div class="valor"><small>R$</small>37,00</div><div class="cond">à vista ou parcelado no cartão</div></div>
+        <div class="preco-linha"><div class="valor"><small>R$</small>37,00</div><div class="cond">à vista ou<br>parcelado no cartão</div></div>
+        <div class="ancora"><div><b>R$ 1,23</b>por dia no plano de 30 dias</div><div><b>R$ 0,31</b>por atividade</div></div>
+        <p class="frase">Sem mensalidade. O arquivo é seu: imprime de novo para repetir o plano ou para o irmão. E acabou a dúvida de “o que eu dou hoje?”.</p>
         <a class="botao" href="#preco">Quero o Dez Minutinhos</a>
       </div>
     </div>
     <div class="selos">
-      <div class="selo"><b>Acesso na hora</b>chega no seu e-mail</div>
-      <div class="selo"><b>PDF A4</b>imprime em casa, até em preto e branco</div>
-      <div class="selo"><b>Garantia de 7 dias</b>não gostou, devolvemos o valor</div>
-    </div>
-  </div>
-</section>
-
-<section class="creme">
-  <div class="cont estreito">
-    <h2>Sabe aquela hora em que você só precisa de 10 minutos?</h2>
-    <div class="situacoes">
-      <p>São cinco da tarde. O jantar está no fogo. E vem a pergunta: “posso ver o tablet?”</p>
-      <p>Férias. A tarde é comprida e as ideias acabaram na terça.</p>
-      <p>Você até procura folhinha na internet. Meia hora depois, achou três. Uma é fácil demais, outra pede para ler e a terceira não imprime direito.</p>
-      <p>Reunião de trabalho em casa, sala de espera, tarde na casa da avó. Precisa de algo pronto, agora.</p>
-    </div>
-    <p class="destaque">O Dez Minutinhos foi feito para essas horas.</p>
-    <p>Você não precisa planejar nada, comprar material nem inventar brincadeira. Abre o caderno no dia certo, imprime duas folhas e entrega com um lápis.</p>
-  </div>
-</section>
-
-<section>
-  <div class="cont dois">
-    <div class="video-moldura"><video src="img/folheando.mp4" poster="img/folheando-poster.jpg" autoplay muted loop playsinline preload="none" aria-label="O caderno Dez Minutinhos sendo folheado"></video></div>
-    <div>
-      <h2>Como funciona: 2 folhas por dia, 30 dias</h2>
-      <ol class="passos">
-        <li><b>Escolha o nível.</b>Nível 1 para 4 a 6 anos, sem leitura: a instrução vem numa linha para você ler em voz alta. Nível 2 para 7 a 10 anos, com leitura inicial e desafios maiores.</li>
-        <li><b>Siga o plano.</b>Cada dia junta duas atividades de tipos diferentes. Um labirinto e um jogo de memória, por exemplo. Dá mais ou menos 10 minutos e não fica repetitivo.</li>
-        <li><b>Imprima a semana de uma vez.</b>Na segunda, imprime 14 folhas e guarda na gaveta. Na hora que precisar, é só pegar.</li>
-        <li><b>Confira no gabarito.</b>As respostas estão no fim do arquivo. Você confere em segundos.</li>
-        <li><b>Marque no quadro de conquistas.</b>Um carimbo ou adesivo por dia feito. No fim, tem certificado para imprimir.</li>
-      </ol>
-      <p style="color:var(--cinza)">Não tem relógio nem nota. Tem criança que faz em 5 minutos, tem criança que fica 20. Os 10 minutos são só uma ideia do tamanho.</p>
-      <a class="botao" href="#preco">Quero o Dez Minutinhos</a>
-    </div>
-  </div>
-</section>
-
-<section class="creme">
-  <div class="cont">
-    <h2 class="centro">Três jeitos de arrumar uma atividade para agora</h2>
-    <div class="tabela-wrap">
-      <table>
-        <thead><tr><th></th><th class="nosso">Dez Minutinhos</th><th>Folhinhas soltas da internet</th><th>App “educativo”</th></tr></thead>
-        <tbody>
-          <tr><th>Fica longe da tela</th><td class="nosso" data-l="Dez Minutinhos">Sim</td><td data-l="Folhinhas da internet">Sim</td><td data-l="App “educativo”">Não</td></tr>
-          <tr><th>Separado por idade</th><td class="nosso" data-l="Dez Minutinhos">Sim, 2 níveis</td><td data-l="Folhinhas da internet">Às vezes</td><td data-l="App “educativo”">Às vezes</td></tr>
-          <tr><th>Ordem para seguir</th><td class="nosso" data-l="Dez Minutinhos">Plano de 30 dias</td><td data-l="Folhinhas da internet">Não</td><td data-l="App “educativo”">Depende do app</td></tr>
-          <tr><th>Gabarito</th><td class="nosso" data-l="Dez Minutinhos">Sim, completo</td><td data-l="Folhinhas da internet">Às vezes</td><td data-l="App “educativo”">Não precisa</td></tr>
-          <tr><th>Tempo para achar e preparar</th><td class="nosso" data-l="Dez Minutinhos">Nenhum: abre e imprime</td><td data-l="Folhinhas da internet">Você procura uma por uma</td><td data-l="App “educativo”">Nenhum</td></tr>
-          <tr><th>Pode imprimir de novo</th><td class="nosso" data-l="Dez Minutinhos">Sim, quantas vezes quiser</td><td data-l="Folhinhas da internet">Sim</td><td data-l="App “educativo”">Não se aplica</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="cont">
-    <h2 class="centro">Veja 6 páginas por dentro</h2>
-    <p class="centro" style="color:var(--cinza)">São páginas de verdade do caderno, do jeito que saem na impressora. Toque para ampliar.</p>
-    <div class="paginas">
-      <a href="img/dentro-1.jpg" target="_blank"><img src="img/dentro-1.jpg" width="600" height="849" alt="Página de labirinto do Nível 1" loading="lazy"><span>Labirinto · Nível 1</span></a>
-      <a href="img/dentro-2.jpg" target="_blank"><img src="img/dentro-2.jpg" width="600" height="849" alt="Página Qual é diferente do Nível 1" loading="lazy"><span>Qual é diferente? · Nível 1</span></a>
-      <a href="img/dentro-3.jpg" target="_blank"><img src="img/dentro-3.jpg" width="600" height="849" alt="Página Ligue os pontos do Nível 1" loading="lazy"><span>Ligue os pontos · Nível 1</span></a>
-      <a href="img/dentro-4.jpg" target="_blank"><img src="img/dentro-4.jpg" width="600" height="849" alt="Página de sudoku 6x6 do Nível 2" loading="lazy"><span>Sudoku 6x6 · Nível 2</span></a>
-      <a href="img/dentro-5.jpg" target="_blank"><img src="img/dentro-5.jpg" width="600" height="849" alt="Página de caça-palavras do Nível 2" loading="lazy"><span>Caça-palavras · Nível 2</span></a>
-      <a href="img/dentro-6.jpg" target="_blank"><img src="img/dentro-6.jpg" width="600" height="849" alt="Página do jogo dos 7 erros do Nível 2" loading="lazy"><span>Jogo dos 7 erros · Nível 2</span></a>
-    </div>
-    <div class="niveis">
-      <div><img src="img/amostra-nivel1.jpg" width="900" height="1274" alt="Página inteira de uma atividade do Nível 1" loading="lazy">
-        <span class="tag n1">Nível 1 · 4 a 6 anos</span><p><b>Sem leitura.</b> Desenho grande, traço limpo, instrução em uma linha para o adulto ler.</p></div>
-      <div><img src="img/amostra-nivel2.jpg" width="900" height="1274" alt="Página inteira de uma atividade do Nível 2" loading="lazy">
-        <span class="tag n2">Nível 2 · 7 a 10 anos</span><p><b>Leitura inicial.</b> Desafios maiores, como sudoku 6x6, caça-palavras e código secreto com palavras.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="creme">
-  <div class="cont dois">
-    <img src="img/mockup-pacote.webp" width="1200" height="900" alt="Folhas do caderno Dez Minutinhos espalhadas sobre a mesa" loading="lazy">
-    <div>
-      <h2>O que você recebe</h2>
-      <div class="bloco"><h3>Um caderno em PDF, tamanho A4</h3><p>Para imprimir em casa. Traço pensado para impressora preto e branco. Não gasta tinta à toa.</p></div>
-      <div class="bloco"><h3>120 atividades em 2 níveis</h3><p>Nível 1 (4 a 6 anos, sem leitura): 60 atividades.<br>Nível 2 (7 a 10 anos, leitura inicial): 60 atividades.</p></div>
-      <div class="bloco"><h3>Plano de 30 dias</h3><p>Duas folhas por dia, já separadas. Você não precisa escolher nada.</p></div>
-      <div class="bloco"><h3>Gabarito completo</h3><p>Todas as respostas no fim do arquivo.</p></div>
-    </div>
-  </div>
-  <div class="cont">
-    <h3 style="margin-top:34px">Seis tipos de atividade, misturados no plano</h3>
-    <div class="tipos">
-      <div><b>Atenção</b>qual é diferente, conte e circule, jogo dos 7 erros</div>
-      <div><b>Memória</b>olhe a figura, vire a folha e responda</div>
-      <div><b>Padrões</b>sequências para completar e continuar</div>
-      <div><b>Lógica</b>labirintos, sudoku e grades lógicas</div>
-      <div><b>Traçado</b>ligue os pontos e caminhos para seguir com o lápis</div>
-      <div><b>Cores e códigos</b>pinte pelo código, código secreto e caça-palavras</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="cont">
-    <h2 class="centro">E vem junto, no mesmo arquivo</h2>
-    <div class="bonus">
-      <div><span class="rot">Bônus 1</span><h3>Quadro de conquistas + 6 certificados</h3><p>Um quadro para marcar cada dia do plano com carimbo ou adesivo. E 6 certificados para imprimir quando a criança fechar uma etapa.</p></div>
-      <div><span class="rot">Bônus 2</span><h3>30 ideias longe da tela sem imprimir nada</h3><p>Para o dia em que a impressora não colaborar. Brincadeiras com o que já tem em casa, uma por dia.</p></div>
-      <div><span class="rot">Bônus 3</span><h3>Guia do adulto (2 páginas)</h3><p>Como apresentar a atividade, quando parar e como saber se é hora de passar do Nível 1 para o 2. Direto ao ponto.</p></div>
-    </div>
-    <p class="centro nota" style="margin-top:16px">Os bônus fazem parte do caderno. Não é promoção com prazo: estão sempre incluídos.</p>
-  </div>
-</section>
-
-<section class="creme">
-  <div class="cont quem">
-    <div class="sim"><h3>É para você se…</h3><ul>
-      <li>tem criança de 4 a 10 anos em casa e quer uma atividade pronta para as horas sem plano;</li>
-      <li>prefere papel e lápis a mais um app;</li>
-      <li>tem impressora em casa, no trabalho, ou uma papelaria perto;</li>
-      <li>gosta de ter tudo organizado em um arquivo só, com ordem para seguir.</li></ul></div>
-    <div class="nao"><h3>Não é para você se…</h3><ul>
-      <li>quer um livro impresso entregue em casa (o Dez Minutinhos é um arquivo digital);</li>
-      <li>procura conteúdo da escola, como matéria de português ou matemática da série;</li>
-      <li>quer atividades para menores de 4 ou maiores de 10 anos;</li>
-      <li>espera um tratamento ou acompanhamento: é um caderno de atividades para fazer em casa.</li></ul></div>
-  </div>
-</section>
-
-<section id="preco">
-  <div class="cont estreito centro">
-    <h2>Quanto custa</h2>
-    <div class="preco"><div class="valor" style="font-size:60px"><small>R$</small>37,00</div><div class="cond">à vista ou parcelado no cartão</div></div>
-    <div class="ancora"><div><b>R$ 1,23</b>por dia no plano de 30 dias</div><div><b>R$ 0,31</b>por atividade</div></div>
-    <p style="margin-top:14px">E o arquivo é seu: imprime de novo quando quiser, para repetir o plano ou para o irmão.</p>
-    <a class="botao" href="#preco">Quero o Dez Minutinhos</a>
-    <p class="nota"><span>Pagamento seguro pela Hotmart</span> · <span>Garantia de 7 dias</span></p>
-  </div>
-</section>
-
-<section class="creme">
-  <div class="cont">
-    <h2 class="centro">Por que escolher o Dez Minutinhos</h2>
-    <div class="cartoes">
-      <div><h3>Pronto para usar</h3><p>Nada para recortar, montar ou planejar. Abre, imprime, entrega.</p></div>
-      <div><h3>Na medida da idade</h3><p>Dois níveis: sem leitura para os pequenos, com leitura para os maiores.</p></div>
-      <div><h3>Com ordem</h3><p>Plano de 30 dias com 2 folhas por dia. Acabou a dúvida de “o que eu dou hoje?”.</p></div>
-      <div><h3>Barato de imprimir</h3><p>A4, traço limpo, funciona em preto e branco.</p></div>
+      <div class="selo"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#ffe6d6" stroke="#1d1d1f" stroke-width="2.4"/><path d="M16 9v7l5 3" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round"/></svg><b>Acesso na hora</b>o link chega no seu e-mail</div>
+      <div class="selo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="4" width="14" height="8" fill="#fff" stroke="#1d1d1f" stroke-width="2.4"/><rect x="4" y="12" width="24" height="11" rx="3" fill="#ffe6d6" stroke="#1d1d1f" stroke-width="2.4"/><rect x="9" y="19" width="14" height="9" fill="#fff" stroke="#1d1d1f" stroke-width="2.4"/></svg><b>Preto e branco serve</b>papel A4 comum</div>
+      <div class="selo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z" fill="#dff5e6" stroke="#1d1d1f" stroke-width="2.4" stroke-linejoin="round"/><path d="M11 16l4 4 7-8" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><b>7 dias de garantia</b>não gostou, o dinheiro volta</div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="cont estreito">
-    <div class="garantia">
-      <svg class="selo-g" viewBox="0 0 140 140" role="img" aria-label="Garantia de 7 dias">
+    <div class="garantia rev">
+      <svg class="selo-g" viewBox="0 0 140 140" role="img" aria-label="7 dias de garantia">
         <circle cx="70" cy="70" r="66" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
-        <circle cx="70" cy="70" r="56" fill="none" stroke="#ff7a45" stroke-width="2" stroke-dasharray="4 4"/>
+        <circle cx="70" cy="70" r="56" fill="none" stroke="#2fb36b" stroke-width="2.4" stroke-dasharray="4 4"/>
         <text x="70" y="62" text-anchor="middle" font-family="Baloo 2" font-weight="800" font-size="46" fill="#1d1d1f">7</text>
         <text x="70" y="86" text-anchor="middle" font-family="Baloo 2" font-weight="800" font-size="18" fill="#1d1d1f">DIAS DE</text>
-        <text x="70" y="104" text-anchor="middle" font-family="Baloo 2" font-weight="800" font-size="16" fill="#ff7a45">GARANTIA</text>
+        <text x="70" y="104" text-anchor="middle" font-family="Baloo 2" font-weight="800" font-size="16" fill="#14803c">GARANTIA</text>
       </svg>
       <div>
-        <h2>Garantia de 7 dias</h2>
-        <p>Compre, baixe e imprima algumas folhas. Se não gostar, peça o reembolso em até 7 dias da compra e receba o valor de volta. Não precisa explicar o motivo.</p>
+        <h2>Teste por 7 dias. Não gostou, o dinheiro volta.</h2>
+        <p>Compre, baixe e imprima algumas folhas. Se não gostar, peça o reembolso em até 7 dias da compra. Não precisa explicar o motivo.</p>
         <p>Como pedir: pela própria Hotmart (no e-mail de compra tem o link) ou escrevendo para <b>acessos@ballestech.com.br</b>.</p>
       </div>
     </div>
@@ -394,17 +484,15 @@ footer p{margin:6px 0}
 <section class="creme">
   <div class="cont estreito">
     <h2 class="centro">Perguntas frequentes</h2>
-    <details><summary>Como eu recebo?</summary><div>Logo depois que o pagamento é aprovado, chega no seu e-mail o link para baixar o arquivo, pela Hotmart. Confira também a caixa de spam e a aba Promoções.</div></details>
-    <details><summary>É um produto físico? Vai chegar pelo correio?</summary><div>Não. É um arquivo digital em PDF. Você imprime em casa, no trabalho ou numa papelaria.</div></details>
-    <details><summary>Preciso de impressora colorida?</summary><div>Não. O caderno foi feito para imprimir em preto e branco. As atividades de cores usam o lápis de cor da criança, não a tinta da impressora.</div></details>
-    <details><summary>Qual tamanho de papel?</summary><div>A4, o papel comum de impressora.</div></details>
-    <details><summary>Quanto tempo leva por dia?</summary><div>As duas folhas do dia levam mais ou menos 10 minutos. Mas não tem relógio: pode ser menos, pode ser mais, e dá para fazer só uma folha.</div></details>
-    <details><summary>Serve para o meu filho de X anos?</summary><div>O caderno é para crianças de 4 a 10 anos, em dois níveis:<ul><li>Nível 1, de 4 a 6 anos: não precisa saber ler. A instrução vem numa linha para o adulto ler.</li><li>Nível 2, de 7 a 10 anos: para quem já lê palavras e frases curtas.</li></ul>Na dúvida, imprima uma folha de cada nível e veja qual cai melhor. O guia do adulto ajuda a decidir quando passar do 1 para o 2.</div></details>
+    <details><summary>Como eu recebo?</summary><div>Logo depois que o pagamento é aprovado, chega no seu e-mail o link para baixar o arquivo, pela Hotmart. Confira também a caixa de spam e a aba Promoções. Não é produto físico: nada vai pelo correio.</div></details>
+    <details><summary>Não tenho impressora. E agora?</summary><div>Dá para imprimir na papelaria ou no trabalho: imprima a semana de uma vez (14 folhas). E o bônus “30 ideias longe da tela” não precisa de impressão nenhuma.</div></details>
+    <details><summary>Preciso de impressora colorida?</summary><div>Não. Funciona em preto e branco, em papel A4 comum. As atividades de cores usam o lápis de cor da criança, não a tinta da impressora.</div></details>
+    <details><summary>Serve para qual idade?</summary><div>De 4 a 10 anos, em dois níveis:<ul><li>Nível 1, de 4 a 6 anos: não precisa saber ler. A instrução vem numa linha para o adulto ler.</li><li>Nível 2, de 7 a 10 anos: para quem já lê palavras e frases curtas.</li></ul>Na dúvida, imprima uma folha de cada nível e veja qual cai melhor. O guia do adulto ajuda a decidir quando passar do 1 para o 2.</div></details>
     <details><summary>Tenho dois filhos de idades diferentes. Serve?</summary><div>Serve. Cada um usa o seu nível, do mesmo arquivo.</div></details>
-    <details><summary>Posso imprimir várias vezes? Para os irmãos?</summary><div>Pode. Imprima quantas vezes quiser, para as crianças da sua família. Só não pode revender nem repassar o arquivo.</div></details>
+    <details><summary>Posso imprimir várias vezes?</summary><div>Pode. Imprima quantas vezes quiser, para as crianças da sua família. Só não pode revender nem repassar o arquivo.</div></details>
+    <details><summary>Quanto tempo leva por dia?</summary><div>As duas folhas do dia levam mais ou menos 10 minutos. Mas não tem relógio: pode ser menos, pode ser mais, e dá para fazer só uma folha.</div></details>
     <details><summary>Preciso preparar alguma coisa ou saber ensinar?</summary><div>Não. Cada folha já diz o que fazer. Você só imprime e entrega. O gabarito está no fim.</div></details>
     <details><summary>Funciona no celular?</summary><div>Você pode comprar, baixar e abrir o PDF no celular, e mandar imprimir direto de lá ou levar o arquivo à papelaria. As atividades são feitas no papel, com lápis. O caderno não foi feito para usar na tela.</div></details>
-    <details><summary>Não tenho impressora. E agora?</summary><div>Dá para imprimir na papelaria ou no trabalho: imprima a semana de uma vez (14 folhas). E o bônus “30 ideias longe da tela” não precisa de impressão nenhuma.</div></details>
     <details><summary>Quais as formas de pagamento?</summary><div>O pagamento é feito no checkout seguro da Hotmart, com as formas que ela oferece na hora da compra (cartão, Pix e outras). À vista sai por R$ 37,00, ou parcelado no cartão.</div></details>
     <details><summary>E se eu não gostar?</summary><div>Você tem 7 dias de garantia. Peça o reembolso pela Hotmart ou pelo e-mail acessos@ballestech.com.br e receba o valor de volta, sem precisar explicar o motivo.</div></details>
     <details><summary>Por quanto tempo tenho acesso?</summary><div>O arquivo é seu. Baixe e guarde no computador ou no celular para imprimir quando quiser.</div></details>
@@ -412,14 +500,12 @@ footer p{margin:6px 0}
   </div>
 </section>
 
-<section class="final centro">
+<section class="final centro" id="final">
   <div class="cont estreito">
-    <img src="img/mockup-capa.webp" width="1000" height="860" alt="Capa do caderno Dez Minutinhos" loading="lazy">
-    <h2>Dez minutinhos por dia. Já impresso, já pronto.</h2>
-    <p>120 atividades, 2 níveis, plano de 30 dias, gabarito e 3 bônus. Num arquivo só, para imprimir em casa.</p>
-    <div class="preco"><div class="valor"><small>R$</small>37,00</div><div class="cond" style="color:#c9c9c9">à vista ou parcelado no cartão</div></div>
-    <a class="botao" href="#preco">Quero o Dez Minutinhos</a>
-    <p class="nota"><span>Garantia de 7 dias</span> · <span>Acesso pelo e-mail logo após o pagamento</span></p>
+    <h2 class="rev">Da próxima vez que pedirem o tablet, a folha já está na gaveta.</h2>
+    <p class="linha">120 atividades e 3 bônus, por R$&nbsp;37,00.</p>
+    <a class="botao esc" href="#preco">Quero imprimir a primeira semana</a>
+    <p class="nota"><span>Garantia de 7 dias</span> · <span>Acesso na hora, pelo e-mail</span></p>
   </div>
 </section>
 
@@ -428,19 +514,51 @@ footer p{margin:6px 0}
     <p>Dez Minutinhos é um caderno de atividades para imprimir, para crianças de 4 a 10 anos.</p>
     <p><a href="privacidade.html">Política de privacidade</a> · <a href="termos.html">Termos de uso</a> · Contato: acessos@ballestech.com.br</p>
     <p>Pagamento processado pela Hotmart.</p>
-    <p>© 2026 Dez Minutinhos · {{NOME_OU_RAZAO_SOCIAL}} · CPF 051.056.441-07</p>
+    <p>© 2026 Dez Minutinhos · Gefferson Balles · CPF 051.056.441-07</p>
   </div>
 </footer>
 
-<div class="barra" id="barra"><div class="v">R$ 37,00</div><a class="botao" href="#preco">Quero o Dez Minutinhos</a></div>
+<div class="barra" id="barra"><div class="v">R$ 37,00<small>120 atividades + 3 bônus</small></div><a class="botao" href="#preco">Quero o caderno</a></div>
+
+<dialog id="zoom" aria-label="Página ampliada"><img alt=""><button type="button">Fechar ✕</button></dialog>
 
 <script>
 (function(){
-  var t=document.getElementById('trilho'),bs=document.querySelectorAll('#miniaturas button');
-  bs.forEach(function(b,i){b.addEventListener('click',function(){t.scrollTo({left:t.clientWidth*i,behavior:'smooth'})})});
-  t.addEventListener('scroll',function(){var i=Math.round(t.scrollLeft/t.clientWidth);bs.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false')})},{passive:true});
-  var barra=document.getElementById('barra'),alvo=document.getElementById('preco-topo');
-  if('IntersectionObserver' in window&&alvo){new IntersectionObserver(function(e){barra.classList.toggle('ver',!e[0].isIntersecting&&e[0].boundingClientRect.top<0)}).observe(alvo)}
+  var d=document,w=window,IO='IntersectionObserver' in w,calma=w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function obs(els,fn,opt){if(!IO){[].forEach.call(els,function(e){fn(e,true)});return}var o=new IntersectionObserver(function(es){es.forEach(function(e){fn(e.target,e.isIntersecting,e)})},opt||{threshold:.15});[].forEach.call(els,function(e){o.observe(e)})}
+  /* entradas: aparecem uma vez */
+  obs(d.querySelectorAll('.rev,.abre,#semana,#lab'),function(el,vis){if(vis)el.classList.add('ver')});
+  /* galeria do topo */
+  var t=d.getElementById('trilho'),pts=d.querySelectorAll('#pontos button'),vid=t.querySelector('video'),atual=0;
+  pts.forEach(function(b,i){b.addEventListener('click',function(){t.scrollTo({left:t.clientWidth*i,behavior:calma?'auto':'smooth'})})});
+  t.addEventListener('scroll',function(){var i=Math.round(t.scrollLeft/t.clientWidth);if(i===atual)return;atual=i;pts.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false')});if(vid){if(i===1){vid.preload='auto';vid.play().catch(function(){})}else vid.pause()}},{passive:true});
+  /* inclinação 3D do caderno: entra girado, acompanha a rolagem e o ponteiro */
+  var tl=d.getElementById('tilt');
+  if(tl&&!calma){
+    var px=0,pend=false;
+    function aplica(){pend=false;var p=Math.min(1,w.scrollY/500);tl.style.setProperty('--ry',(-4+px*10+p*16).toFixed(1)+'deg');tl.style.setProperty('--rx',(3+p*14).toFixed(1)+'deg')}
+    function pede(){if(!pend){pend=true;requestAnimationFrame(aplica)}}
+    tl.style.setProperty('--ry','-22deg');tl.style.setProperty('--rx','14deg');
+    setTimeout(aplica,120);
+    w.addEventListener('scroll',pede,{passive:true});
+    t.addEventListener('pointermove',function(e){var r=t.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;pede()});
+    t.addEventListener('pointerleave',function(){px=0;pede()});
+  }
+  /* labirinto: refaz o caminho */
+  var lab=d.getElementById('lab');
+  d.getElementById('ver-gab').addEventListener('click',function(){lab.classList.remove('ver');void lab.offsetWidth;lab.classList.add('ver')});
+  /* vídeo só toca quando aparece */
+  /* zoom na mesma página */
+  var z=d.getElementById('zoom'),zi=z.querySelector('img');
+  if(z.showModal){
+    d.querySelectorAll('[data-zoom]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();var im=el.tagName==='IMG'?el:el.querySelector('img');zi.src=el.getAttribute('href')||im.src;zi.alt=im.alt;z.showModal()})});
+    z.addEventListener('click',function(){z.close()});
+  }
+  /* barra fixa: some quando o preço do topo, a oferta ou o fecho estão na tela */
+  var barra=d.getElementById('barra'),vis={},passou=false;
+  function barraUpd(){var on=passou&&!vis.preco&&!vis.final;barra.classList.toggle('ver',on);d.body.classList.toggle('com-barra',on)}
+  obs([d.getElementById('compra-topo')],function(el,v,e){passou=!v&&e&&e.boundingClientRect.top<0;barraUpd()},{threshold:0});
+  obs([d.getElementById('preco'),d.getElementById('final')],function(el,v){vis[el.id]=v;barraUpd()},{threshold:0});
 })();
 </script>
 </body>
