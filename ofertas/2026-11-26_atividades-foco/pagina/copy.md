@@ -4,6 +4,9 @@ Etapa 5 (copy) · 2026-11-26 · base: `briefing.md`, `dossie.md` (ordem da pági
 adaptada) e a lista de entregáveis passada pelo supervisor (mesma do `criador-de-produto`).
 Endereço: `ofertas.ballestech.com.br/dez-minutinhos/` · Preço: **R$ 37,00** · Garantia: 7 dias.
 
+**Ajuste 2026-11-26 (coordenador, aplicado pelo diretor de arte):** seção 6, tipos Atenção, Memória e Lógica
+reescritos para bater com o caderno completo (`produto/sumario.md`).
+
 **Versão: rodada 1 de revisão (2026-11-26, editor-de-copy).** O ANTES → DEPOIS de cada trecho, com
 o motivo, está em `revisoes/2026-11-26_copy.md`. O HTML ainda tem a versão anterior até o diretor de
 arte aplicar.
@@ -222,10 +225,10 @@ Duas folhas por dia, já separadas. Você não precisa escolher nada.
 Todas as respostas no fim do arquivo.
 
 **Seis tipos de atividade, misturados no plano**
-- **Atenção:** qual é diferente, conte e circule, jogo dos 7 erros
-- **Memória:** olhe a figura, vire a folha e responda
+- **Atenção:** qual é diferente, conte e circule, ache as diferenças (5 no Nível 1, jogo dos 7 erros no Nível 2)
+- **Memória:** olhe a figura, dobre a folha na linha e responda
 - **Padrões:** sequências para completar e continuar
-- **Lógica:** labirintos, sudoku e grades lógicas
+- **Lógica:** labirintos, sudoku (de figuras no Nível 1, 6x6 no Nível 2) e grades lógicas (Nível 2)
 - **Traçado:** ligue os pontos e caminhos para seguir com o lápis
 - **Cores e códigos:** pinte pelo código, código secreto e caça-palavras
 
