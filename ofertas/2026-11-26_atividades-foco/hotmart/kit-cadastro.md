@@ -357,3 +357,12 @@ conferir no Gerenciador de Eventos. Registrar PageView / InitiateCheckout / Purc
   Ferramentas" ([360019967392](https://help.hotmart.com/pt-br/article/360019967392/)) e em "menu de
   9 pontos > Ferramentas > Ver todas" ([115003134331](https://help.hotmart.com/pt-br/article/115003134331/)).
   Usar a busca do menu Ferramentas.
+
+---
+
+## Decisões do dono (2026-11-26)
+- **Parcelamento do principal:** até **5x, com juros pagos pelo cliente** (a página já diz isso). Bumps: à vista (parcela mínima R$ 7).
+- **Marketplace da Hotmart:** **ligado** (deixar o produto visível no Marketplace).
+- **Endereço do comprador no checkout:** não pedir (produto digital).
+- **Vendedor identificado na página:** Balles Tech Energia Ltda · CNPJ 57.165.092/0001-87 · Rua do Cara, 1379SW, Qd 26, Lt 05, Sala 01, Cidezal I, Sapezal/MT, CEP 78365-038. Autor do conteúdo na capa: Gefferson Balles.
+  ⚠️ Conferir se a conta de produtor da Hotmart está no CNPJ (o recebedor deve ser o mesmo que aparece na página).

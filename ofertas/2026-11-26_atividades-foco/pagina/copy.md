@@ -100,7 +100,7 @@ nada para preparar.
 - Gabarito no fim, para conferir em segundos
 
 **R$ 37,00**
-à vista ou parcelado no cartão
+à vista ou em até 5x no cartão (com juros)
 
 [BOTÃO] **Quero as 120 atividades**
 
@@ -290,7 +290,7 @@ Sem prazo e sem pegadinha: os bônus vêm sempre junto.
 - Bônus: guia do adulto de 2 páginas
 
 **R$ 37,00**
-à vista ou parcelado no cartão
+à vista ou em até 5x no cartão (com juros)
 
 **R$ 1,23** por dia no plano de 30 dias · **R$ 0,31** por atividade
 
@@ -369,7 +369,7 @@ na tela.
 
 **Quais as formas de pagamento?**
 O pagamento é feito no checkout seguro da Hotmart, com as formas que ela oferece na hora da compra
-(cartão, Pix e outras). À vista sai por R$ 37,00, ou parcelado no cartão.
+(cartão, Pix e outras). À vista sai por R$ 37,00, ou em até 5x no cartão, com os juros da Hotmart mostrados no checkout antes de você confirmar.
 
 **E se eu não gostar?**
 Você tem 7 dias de garantia. Peça o reembolso pela Hotmart ou pelo e-mail {{EMAIL_SUPORTE}} e
