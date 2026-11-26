@@ -14,7 +14,7 @@ para a Hotmart fica ao lado e é ignorado pelo git). Gerador: `produto/gerador/b
 | 6 | Jogos de mesa | Jogos de mesa para imprimir: bingo, dominó, memória, trilha e jogo da velha | Cinco jogos com figuras para a família jogar junto, com as regras numa página só. | R$ 19,90 | 12 | `produto/bumps/6_jogos-de-mesa/jogos-de-mesa.pdf` | ✅ |
 | 7 | Volume 2 | Volume 2: mais 120 atividades novas | Mesmas categorias e níveis do caderno, nenhuma repetida, com outro plano de 30 dias. | R$ 27,00 | 140 | `produto/bumps/7_volume-2/volume-2.pdf` | ✅ |
 
-Todas as capas têm "Bônus extra do Dez Minutinhos" e "por Gefferson Balles" (exigência da Hotmart para eBook).
+Todas as capas têm "Complemento do Dez Minutinhos" ("Continuação" no Volume 2) e "por Gefferson Balles" (exigência da Hotmart para eBook).
 Rodapé de cada página: "Dez Minutinhos · <nome do bump> · página N".
 
 ## O que tem em cada um

@@ -16,7 +16,7 @@
 | 5 | Copy da página | copywriter-de-pagina | ✅ | 2026-11-26 | `pagina/copy.md`; título 1 usado na página (dono pode trocar) |
 | 6 | Página | construtor-de-pagina + diretor-de-arte-web | 🟡 | 2026-11-26 | Rodada 1 de revisão aplicada (crítico 6,5 → redesign + copy nova) e publicada na prévia; falta só o link do checkout |
 | 7 | Criativos | roteirista-de-criativos | 🟡 | 2026-11-26 | 5 roteiros em `criativos/roteiros.md` (4 vídeos 22–25 s + 1 estático); falta conformidade e produção |
-| P2 | Conformidade | revisor-de-conformidade | ⬜ | | |
+| P2 | Conformidade | revisor-de-conformidade | 🟡 | 2026-11-26 | **APROVADO COM AJUSTES** (`revisoes/2026-11-26_conformidade.md`). Produto: aprovado. Página, bumps, criativos e kit Hotmart: 12 ajustes obrigatórios antes do P4 (link do checkout; nº de parcelas/juros; "acesso na hora" x boleto; endereço físico do fornecedor — Decreto 7.962; prazo de guarda/base legal na privacidade; "Bônus extra" nas capas dos bumps pagos; descrição do criativo 1; kit: bônus 2 é lista, bump 3 sem "sentimentos/terapia", bump 6 com 5 jogos, bump 4 "fichas", status desatualizado). Nenhuma etapa volta |
 | P3 | Aprovação de página/produto/criativos | dono | ⬜ | | |
 | 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | ⬜ | | |
 | P4 | Publicação e orçamento | dono | ⬜ | | |
@@ -41,3 +41,5 @@ Legenda: ⬜ a fazer · 🟡 em andamento · ✅ feito · ❌ reprovado/voltou
 - 2026-11-26: ordem da esteira alterada para esta oferta (aprovado pelo dono): caderno-amostra do produto ANTES da página de vendas, para a página usar mockups e GIFs do material real.
 - 2026-11-26: dono confirmou venda única na Hotmart (sem mensalidade) e os dados do rodapé: Gefferson Balles · CPF · acessos@ballestech.com.br.
 - 2026-11-26: kit de cadastro da Hotmart pronto (`hotmart/kit-cadastro.md` + `hotmart/imagem-produto.png`). Capa do caderno ganhou "por Gefferson Balles" (exigência da Hotmart para eBook). Formato recomendado: eBook com upload direto do PDF (não aceita ZIP); DRM Social desligado (bloqueia impressão).
+- 2026-11-26 (P2): conformidade **aprovada com ajustes**. Motivo: nenhuma violação de política da Meta, prova social inventada ou cópia da referência; os ajustes são de informação ao consumidor (parcelas, prazo de acesso, endereço do fornecedor, LGPD) e de fidelidade dos textos da Hotmart/bumps ao conteúdo real dos PDFs. Pendentes de decisão do dono: nº de parcelas/juros, boleto ligado ou não, endereço físico a publicar (sugestão: MEI com endereço comercial). Lista exata em `revisoes/2026-11-26_conformidade.md`.
+- 2026-11-26: aplicados 9 dos 12 ajustes do Portão 2 (acesso "após o pagamento", LGPD na privacidade, capas dos bumps "Complemento/Continuação", textos do kit Hotmart, imagens dos bumps). Pendentes do dono: link do checkout, nº de parcelas/juros, endereço físico do fornecedor.

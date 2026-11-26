@@ -84,7 +84,7 @@ a curiosidade vem do próprio produto aparecendo.
 
   PDF em A4, funciona em preto e branco. R$ 37,00, uma vez só. Garantia de 7 dias.
 - **Título:** 120 atividades prontas para imprimir
-- **Descrição:** O PDF chega no seu e-mail na hora
+- **Descrição:** O PDF chega no seu e-mail após o pagamento
 - **CTA:** Saiba mais
 - **Arquivo final:** (link)
 

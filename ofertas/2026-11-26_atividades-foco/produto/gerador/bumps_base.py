@@ -89,7 +89,7 @@ class Bump:
         return f"""<section class="pagina capa"><div class="faixa"></div>
   <div class="miolo">
     <div class="marca" style="font-size:13pt">Dez <b>Minutinhos</b></div>
-    <div class="bump">BÔNUS EXTRA DO DEZ MINUTINHOS</div>
+    <div class="bump">{"CONTINUAÇÃO" if self.slug == "volume-2" else "COMPLEMENTO"} DO DEZ MINUTINHOS</div>
     <div class="titulo">{self.nome}</div>
     <p class="autor">por Gefferson Balles</p>
     <p class="sub">{subtitulo}</p>

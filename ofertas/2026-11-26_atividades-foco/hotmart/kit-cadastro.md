@@ -68,11 +68,7 @@ O `.zip` de entrega (`produto/final/dez-minutinhos-entrega.zip`, 4,7 MB) tem **u
 - ⚠️ **DRM Social: NÃO ativar.** A proteção de PDF da Hotmart inclui bloqueio de impressão e senha
   ([215827938](https://help.hotmart.com/pt-br/article/215827938/)), e o produto existe para ser impresso.
 
-**Pendência antes de subir (bloqueia aprovação):** a regra do eBook pede **nome do autor na capa**
-([215828518](https://help.hotmart.com/pt-br/article/215828518/)). A capa atual do PDF tem título e
-subtítulo, mas **não tem "Gefferson Balles"**. Pedir ao `criador-de-produto` para pôr
-"por Gefferson Balles" na capa e gerar o PDF de novo (não mexi em `produto/`). O mesmo vale para a
-capa de cada bump.
+**✅ Resolvido (2026-11-26):** a capa do PDF principal e as capas dos 7 bumps já trazem "por Gefferson Balles" (regra do eBook, [215828518](https://help.hotmart.com/pt-br/article/215828518/)).
 
 ---
 
@@ -107,7 +103,7 @@ As atividades vêm em dois níveis. Nível 1 (4 a 6 anos): sem leitura, com a in
 
 Cada nível tem um plano de 30 dias com duas folhas por dia, de tipos diferentes, que levam uns 10 minutos. No fim do arquivo há gabarito completo para o adulto conferir.
 
-O arquivo é um PDF em tamanho A4, com 149 páginas e traço pensado para impressora preto e branco. No mesmo arquivo vêm 3 bônus: quadro de conquistas com 6 certificados, um calendário com 30 ideias de brincadeiras que não precisam de impressão e um guia de 2 páginas para o adulto.
+O arquivo é um PDF em tamanho A4, com 149 páginas e traço pensado para impressora preto e branco. No mesmo arquivo vêm 3 bônus: quadro de conquistas com 6 certificados, uma lista com 30 ideias de brincadeiras que não precisam de impressão e um guia de 2 páginas para o adulto.
 
 Pode imprimir quantas vezes quiser para as crianças da sua família. Não é permitido revender nem repassar o arquivo. Produto digital: nada é enviado pelo correio. O acesso é liberado depois da confirmação do pagamento. Garantia de 7 dias.
 ```
@@ -143,7 +139,7 @@ Conta de referência: taxa Hotmart em R$ 37,00 = 9,9% (R$ 3,66) + R$ 2,49 = **R$
 ≈ R$ 30,85 antes de impostos e de taxa de parcelamento ([208298448](https://help.hotmart.com/pt-br/article/208298448/)).
 
 ### Passo 4 — Painel do produto > aba Conteúdo
-1. Subir `produto/final/dez-minutinhos.pdf` (depois da correção do nome do autor na capa).
+1. Subir `produto/final/dez-minutinhos.pdf` (capa já com o nome do autor).
 2. Nome do autor: `Gefferson Balles`.
 3. **Não** ativar Proteção para ebooks (DRM Social).
 
@@ -202,10 +198,7 @@ Ferramentas > Ver todas > **Aparência da Página de Pagamento** > produto > tem
 Cada bump é **um produto eBook próprio**, cadastrado com os mesmos passos 1 a 5 e 9 (sem página
 externa e com Marketplace desligado). Ordem do checkout: do mais barato/óbvio ao mais caro.
 
-**Situação dos arquivos em 2026-11-26 (fim do dia):** só existe `produto/bumps/7_volume-2/volume-2.pdf`
-(outro agente está produzindo agora). Os bumps 1 a 6 **ainda não têm PDF** → não dá para subir
-conteúdo nem pedir aprovação deles. **Imagens dos bumps: pendentes** — gerar a partir da capa de
-cada PDF final, no mesmo padrão de `imagem-produto.png`. Não criei imagem antes do arquivo existir.
+**Situação dos arquivos (2026-11-26, atualizado):** os 7 bumps têm PDF final em `produto/bumps/` e imagem 1200×1200 em `hotmart/imagem-bump-N.png`; quantidades conferidas com os PDFs (bolsa 30 atividades/20 págs, recortar 40/47, cartas 48/10, matemática 60/70, letras 60/69, jogos 5 jogos/12, volume 2 120/140). Capas com "Complemento do Dez Minutinhos" ("Continuação" no Volume 2) e "por Gefferson Balles".
 
 ⚠️ Antes de colar, **conferir as quantidades** (30, 40, 48, 60, 5 jogos, 120) com o PDF final de
 cada bump. Se o número mudar no PDF, mudar aqui também. Todo PDF precisa de capa com "Gefferson
@@ -225,7 +218,7 @@ Bump 1 (R$ 9,90) é microtransação (≤ R$ 10): taxa de 20% = R$ 1,98
   ```
   Complemento do caderno Dez Minutinhos. São 30 atividades de papel e lápis em meia folha (tamanho A5), para levar dobradas na bolsa e usar no restaurante, na viagem ou na sala de espera. Nos dois níveis: 4 a 6 anos e 7 a 10 anos. PDF para imprimir, com gabarito.
   ```
-- Arquivo: ⬜ pendente · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/1_para-levar-na-bolsa/para-levar-na-bolsa.pdf` · Imagem: ✅ `hotmart/imagem-bump-1.png`
 
 ### Bump 2 — R$ 12,90
 - **Nome do produto:** `Dez Minutinhos – Recortar e Colar`
@@ -235,27 +228,27 @@ Bump 1 (R$ 9,90) é microtransação (≤ R$ 10): taxa de 20% = R$ 1,98
   ```
   Complemento do caderno Dez Minutinhos. São 40 atividades de recortar e colar para imprimir, pensadas para tesoura sem ponta e cola branca, com a supervisão de um adulto. Divididas em dois níveis: 4 a 6 anos e 7 a 10 anos. PDF em A4, funciona em preto e branco.
   ```
-- Arquivo: ⬜ pendente · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/2_recortar-e-colar/recortar-e-colar.pdf` · Imagem: ✅ `hotmart/imagem-bump-2.png`
 
 ### Bump 3 — R$ 14,90
 - **Nome do produto:** `Dez Minutinhos – Cartas de Conversa`
-- **Título no checkout:** `Hora do jantar com assunto: 48 cartas de conversa para recortar`
-- **Descrição no checkout:** `Perguntas simples sobre o dia a dia e o que a criança sente. Para o jantar ou antes de dormir.`
+- **Título no checkout:** `Cartas de conversa: 48 perguntas para a família`
+- **Descrição no checkout:** `Para recortar e usar no jantar, no carro ou antes de dormir. Perguntas leves sobre o dia, imaginação e preferidos, sem lição.`
 - **Descrição do produto:**
   ```
-  Complemento do caderno Dez Minutinhos. São 48 cartas com perguntas simples sobre o dia a dia, gostos e sentimentos, para imprimir, recortar e usar na mesa do jantar, no carro ou antes de dormir. Não é lição nem terapia: é um jeito leve de puxar conversa. PDF em A4 para imprimir.
+  Complemento do caderno Dez Minutinhos. São 48 cartas em 4 temas (meu dia, imaginação, "e se…?" e preferidos), para imprimir, recortar e usar na mesa do jantar, no carro ou antes de dormir. Não é lição: é um jeito leve de puxar conversa. PDF em A4 para imprimir.
   ```
-- Arquivo: ⬜ pendente · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/3_cartas-de-conversa/cartas-de-conversa.pdf` · Imagem: ✅ `hotmart/imagem-bump-3.png`
 
 ### Bump 4 — R$ 17,90
 - **Nome do produto:** `Dez Minutinhos – Matemática Brincando`
 - **Título no checkout:** `Matemática brincando: 60 atividades de contas e mercadinho`
-- **Descrição no checkout:** `Contar, somar, subtrair e brincar de lojinha com dinheirinho de papel. Nos dois níveis.`
+- **Descrição no checkout:** `Contar, somar, subtrair e brincar de mercadinho com fichas de brincar. Nos dois níveis.`
 - **Descrição do produto:**
   ```
-  Complemento do caderno Dez Minutinhos. São 60 atividades para imprimir com números: contar, somar, subtrair e brincar de mercadinho com dinheirinho de brincar desenhado por nós (não imita cédulas reais). Divididas em dois níveis, 4 a 6 anos e 7 a 10 anos, com gabarito. PDF em A4.
+  Complemento do caderno Dez Minutinhos. São 60 atividades para imprimir com números: contar, somar, subtrair e brincar de mercadinho com fichas de brincar (não são dinheiro de verdade nem imitam cédulas). Divididas em dois níveis, 4 a 6 anos e 7 a 10 anos, com gabarito. PDF em A4.
   ```
-- Arquivo: ⬜ pendente · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/4_matematica-brincando/matematica-brincando.pdf` · Imagem: ✅ `hotmart/imagem-bump-4.png`
 
 ### Bump 5 — R$ 17,90
 - **Nome do produto:** `Dez Minutinhos – Letras e Palavras`
@@ -265,17 +258,17 @@ Bump 1 (R$ 9,90) é microtransação (≤ R$ 10): taxa de 20% = R$ 1,98
   ```
   Complemento do caderno Dez Minutinhos. São 60 atividades para imprimir com letras e palavras: alfabeto, sílabas, caça-palavras e frases curtas. Nível 1 (4 a 6 anos) com letras e sons; Nível 2 (7 a 10 anos) com palavras e frases. Com gabarito. PDF em A4, funciona em preto e branco.
   ```
-- Arquivo: ⬜ pendente · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/5_letras-e-palavras/letras-e-palavras.pdf` · Imagem: ✅ `hotmart/imagem-bump-5.png`
 
 ### Bump 6 — R$ 19,90
 - **Nome do produto:** `Dez Minutinhos – Jogos de Mesa para Imprimir`
-- **Título no checkout:** `Jogos de mesa para imprimir: bingo, dominó, memória e trilha`
+- **Título no checkout:** `5 jogos para imprimir: bingo, dominó, memória, trilha e jogo da velha`
 - **Descrição no checkout:** `Cinco jogos para a família jogar junto. Regras de cada um em 1 página.`
 - **Descrição do produto:**
   ```
-  Complemento do caderno Dez Minutinhos. São 5 jogos de mesa para imprimir e montar em casa, entre eles bingo, dominó, jogo da memória e trilha, com as regras de cada um em uma página. Para jogar em família com crianças de 4 a 10 anos. PDF em A4 para imprimir.
+  Complemento do caderno Dez Minutinhos. São 5 jogos de mesa para imprimir e montar em casa, bingo, dominó, jogo da memória, trilha e jogo da velha, com as regras de cada um em uma página. Para jogar em família com crianças de 4 a 10 anos. PDF em A4 para imprimir.
   ```
-- Arquivo: ⬜ pendente (conferir qual é o 5º jogo) · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/6_jogos-de-mesa/jogos-de-mesa.pdf` · Imagem: ✅ `hotmart/imagem-bump-6.png`
 
 ### Bump 7 — R$ 27,00
 - **Nome do produto:** `Dez Minutinhos – Volume 2`
@@ -285,8 +278,7 @@ Bump 1 (R$ 9,90) é microtransação (≤ R$ 10): taxa de 20% = R$ 1,98
   ```
   Continuação do caderno Dez Minutinhos. São mais 120 atividades novas para imprimir, nas mesmas categorias (atenção, memória, padrões, lógica, traçado, cores e códigos) e nos mesmos dois níveis, 4 a 6 e 7 a 10 anos, sem repetir nenhuma do Volume 1. Com plano de 30 dias por nível e gabarito. PDF em A4.
   ```
-- Arquivo: 🟡 `produto/bumps/7_volume-2/volume-2.pdf` existe (conferir se está final e se a capa
-  tem o autor) · Imagem: ⬜ pendente
+- Arquivo: ✅ `produto/bumps/7_volume-2/volume-2.pdf` · Imagem: ✅ `hotmart/imagem-bump-7.png`
 
 ### Montar os bumps no checkout (depois de os 7 produtos estarem aprovados)
 Ferramentas > **Aparência da Página de Pagamento** > produto Dez Minutinhos > Editar > **Order Bump**

@@ -72,7 +72,7 @@ rodapé ↔ 19. "Para quem é" é do nosso modelo.
 
 ## 0. Faixa de aviso (fixa no topo, sem rolar)
 
-PDF para imprimir em casa · Acesso na hora, pelo e-mail
+PDF para imprimir em casa · Acesso pelo e-mail após o pagamento
 
 ---
 
@@ -300,7 +300,7 @@ dúvida de "o que eu dou hoje?".
 [BOTÃO] **Quero o Dez Minutinhos**
 
 Ícones de confiança (3, lado a lado):
-- **Acesso na hora** — o link chega no seu e-mail
+- **Acesso por e-mail** — logo após o pagamento aprovado
 - **Preto e branco serve** — papel A4 comum
 - **7 dias de garantia** — não gostou, o dinheiro volta
 
@@ -392,7 +392,7 @@ usado na compra que a gente resolve.
 
 [BOTÃO] **Quero imprimir a primeira semana**
 
-Garantia de 7 dias · Acesso na hora, pelo e-mail
+Garantia de 7 dias · Acesso pelo e-mail após o pagamento
 
 ---
 

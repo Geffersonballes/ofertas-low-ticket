@@ -94,7 +94,7 @@ def capa_e_uso():
     from icones import icone
     figs += "".join(icone(n, 8 + i * 30, 10, 20) for i, n in enumerate(["carro", "barco", "balao", "estrela"]))
     capa = f"""<div class="meia capa-meia"><div class="marca">Dez <b>Minutinhos</b></div>
-  <div class="bump" style="font-family:'Baloo 2';font-weight:800;font-size:9pt;color:var(--laranja);margin-top:2mm">BÔNUS EXTRA DO DEZ MINUTINHOS</div>
+  <div class="bump" style="font-family:'Baloo 2';font-weight:800;font-size:9pt;color:var(--laranja);margin-top:2mm">COMPLEMENTO DO DEZ MINUTINHOS</div>
   <div class="titulo">Para levar<br><span>na bolsa</span></div>
   <p class="autor" style="font-size:9pt">por Gefferson Balles</p>
   <p class="sub">30 atividades rápidas em meia folha, para restaurante, viagem e sala de espera.</p>
