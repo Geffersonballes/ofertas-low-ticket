@@ -12,6 +12,6 @@ Entrada: pasta da oferta, `[TEMA escuro/claro]`, `[DOMINIO ou subdomínio]`.
 3. `construtor-de-pagina` → `pagina/index.html`. Bloco de avaliações só com avaliações reais
    (ver `CLAUDE.md`).
 4. Publicação: copie a página aprovada (index.html + img/) para `publicado/<slug>/` e faça
-   push no ramo `main`. Em até 60 s ela está em `https://ballestech.shop/<slug>/` (ver `infra/README.md`).
+   push no ramo `main`. Em até 60 s ela está em `https://ofertas.ballestech.com.br/<slug>/` (ver `infra/README.md`).
    **Antes de publicar, mostre a página ao dono** e confira a URL depois do push.
 5. Registre a URL final no `status.md`.

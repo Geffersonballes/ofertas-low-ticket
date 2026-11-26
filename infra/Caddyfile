@@ -3,7 +3,7 @@
 #   docker compose -f /opt/ofertas-low-ticket/infra/docker-compose.yml exec web caddy reload --config /etc/caddy/Caddyfile
 
 # --- Ofertas low ticket: uma pasta por oferta em publicado/<slug>/ → https://DOMINIO/<slug>/
-{$DOMINIO_OFERTAS}, www.{$DOMINIO_OFERTAS} {
+{$DOMINIO_OFERTAS} {
 	root * /repo/publicado
 	encode zstd gzip
 	file_server

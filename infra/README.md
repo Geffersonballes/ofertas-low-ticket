@@ -2,11 +2,12 @@
 
 - **Servidor:** VPS Hostinger KVM 2 (Ubuntu 24.04, IP 189.24.15.6).
 - **Servidor web:** um único Caddy (`infra/docker-compose.yml`) com HTTPS automático, servindo:
-  - as ofertas: `publicado/<slug>/index.html` → `https://ballestech.shop/<slug>/`
+  - as ofertas: `publicado/<slug>/index.html` → `https://ofertas.ballestech.com.br/<slug>/`
   - o site que já existia na VPS (landing do robô de promoções), sem mudança para quem acessa.
 - **Publicar:** o Claude copia a página aprovada para `publicado/<slug>/` e faz push no ramo
   `main`. O contêiner `sync` baixa o repositório a cada 60 s; não precisa reiniciar nada.
-- **DNS:** `ballestech.shop` e `www` com registro A → 189.24.15.6.
+- **DNS:** `ofertas.ballestech.com.br` com registro A → 189.24.15.6 (zona na Hostinger, criado em 2026-11-26).
+  A raiz `ballestech.com.br` é o site da Balles Tech (HostGator) e o e-mail é da Hostinger: não mexer.
 
 Uma URL por oferta no mesmo domínio (`/slug/`) evita criar DNS e certificado a cada oferta.
 Se uma oferta precisar de domínio próprio, acrescente um bloco no `Caddyfile`.

@@ -22,7 +22,7 @@ fi
 cd /opt/ofertas-low-ticket/infra
 ACHADINHOS=$(sed -n 's/^DOMINIO=//p' /opt/tutoriais/robo-promocoes/landing/.env 2>/dev/null || true)
 cat > .env <<ENV
-DOMINIO_OFERTAS=ballestech.shop
+DOMINIO_OFERTAS=ofertas.ballestech.com.br
 DOMINIO_ACHADINHOS=${ACHADINHOS:-achadinhosdalay.ballestech.com.br}
 RAMO=$RAMO
 ENV
@@ -30,4 +30,4 @@ ENV
 docker compose -f /opt/tutoriais/robo-promocoes/landing/docker-compose.yml stop || true
 docker compose up -d
 sleep 5 && docker compose ps
-echo "Pronto. Teste: https://${ACHADINHOS:-achadinhosdalay.ballestech.com.br} e https://ballestech.shop/"
+echo "Pronto. Teste: https://${ACHADINHOS:-achadinhosdalay.ballestech.com.br} e https://ofertas.ballestech.com.br/"
