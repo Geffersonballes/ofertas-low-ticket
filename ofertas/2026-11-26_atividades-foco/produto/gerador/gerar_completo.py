@@ -207,6 +207,9 @@ def pag_atividade(at, num, dia):
 
 def capa():
     html = GA.capa().replace("CADERNO-AMOSTRA · 13 ATIVIDADES · 2 NÍVEIS", "120 ATIVIDADES · 2 NÍVEIS · PLANO DE 30 DIAS")
+    # a Hotmart exige o nome do autor na capa de eBook
+    html = html.replace('<div><span class="tag">', '<p style="font-weight:800;font-size:13pt;margin-top:5mm">por Gefferson Balles</p>\n    <div><span class="tag">', 1)
+    assert "por Gefferson Balles" in html
     assert "120 ATIVIDADES" in html
     return html
 

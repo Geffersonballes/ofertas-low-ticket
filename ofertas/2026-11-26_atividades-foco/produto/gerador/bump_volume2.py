@@ -15,8 +15,8 @@ BUMP = Bump("Volume 2", "volume-2", "MAIS 120 ATIVIDADES · 2 NÍVEIS · PLANO D
 NOVAS_CENAS = {
     "jardim": [("sol", 146, 2, 26), ("nuvem", 6, 6, 30), ("nuvem", 88, 4, 22), ("passaro", 54, 22, 16), ("arvore", 4, 44, 58),
                ("flor", 68, 86, 18), ("flor", 88, 88, 14), ("flor", 104, 86, 18), ("casa", 120, 48, 54), ("pato", 66, 58, 20)],
-    "cidade": [("casa", 4, 48, 52), ("casa", 58, 52, 48), ("arvore", 108, 46, 50), ("carro", 12, 84, 26), ("carro", 146, 84, 26),
-               ("sol", 6, 2, 24), ("nuvem", 60, 6, 26), ("nuvem", 122, 2, 20), ("passaro", 100, 20, 16), ("bola", 96, 90, 12)],
+    "cidade": [("casa", 2, 50, 46), ("carro", 50, 84, 24), ("casa", 76, 50, 46), ("arvore", 124, 46, 50), ("bola", 160, 92, 12),
+               ("sol", 6, 2, 24), ("nuvem", 40, 6, 26), ("nuvem", 112, 2, 20), ("passaro", 80, 22, 16), ("pipa", 150, 4, 20)],
     "piquenique": [("arvore", 2, 40, 60), ("sol", 150, 2, 26), ("nuvem", 70, 4, 26), ("uva", 80, 82, 18), ("banana", 102, 84, 18),
                    ("maca", 124, 86, 16), ("sorvete", 146, 78, 22), ("passaro", 110, 22, 16), ("flor", 62, 88, 14), ("bola", 42, 88, 14)],
     "rio": [("barco", 10, 44, 34), ("barco", 112, 50, 28), ("peixe", 20, 86, 18), ("peixe", 70, 90, 16), ("peixe", 140, 86, 18),
@@ -84,7 +84,7 @@ def _registrar():
         def arte(nome):
             if nome == "arco-iris":
                 g = [[0] * 12 for _ in range(12)]
-                faixas = [(5.6, 6.6, 1), (4.6, 5.6, 6), (3.6, 4.6, 2), (2.6, 3.6, 3), (1.6, 2.6, 4)]
+                faixas = [(5.4, 6.6, 1), (4.2, 5.4, 6), (3.0, 4.2, 2), (1.8, 3.0, 3)]
                 for l in range(12):
                     for c in range(12):
                         d = math.hypot(c + .5 - 6, l + .5 - 10)
@@ -102,6 +102,30 @@ def _registrar():
         def cena(objs, nome, mods):
             return cena_v1(objs, "praia" if nome == "rio" else nome, mods)
         B._arte, B._desenha_cena, B._arte_v2 = arte, cena, True
+
+
+NOMES_INI = {"passaro": "o passarinho", "barco": "o barco", "peixe": "o peixe", "carro": "o carro", "balao": "o balão",
+             "pato": "o patinho", "gato": "o gato", "pipa": "a pipa"}
+NOMES_FIM = {"arvore": "a árvore", "casa": "a casa", "nuvem": "a nuvem", "flor": "a flor", "estrela": "a estrela",
+             "ilha": "a ilha", "sol": "o sol", "barco": "o barco"}
+
+
+def labirinto(nivel, rng, cols, lins, ini, fim):
+    """Igual ao do volume 1, com nomes para os ícones novos."""
+    from atividades import _gera_labirinto, _desenha_labirinto, W as W_, H as H_
+    from icones import icone
+    cel = min((W_ - 10) / cols, (H_ - 52) / lins)
+    x0, y0 = (W_ - cols * cel) / 2, 25
+    paredes, cam = _gera_labirinto(cols, lins, rng)
+    esp = 1.8 if cel > 18 else (1.4 if cel > 12 else 1.0)
+    base = (_desenha_labirinto(paredes, cols, lins, x0, y0, cel, esp)
+            + icone(ini, x0 + cel / 2 - 11, y0 - 23, 22)
+            + icone(fim, x0 + (cols - 0.5) * cel - 11, y0 + lins * cel + 1, 22))
+    pts = " ".join(f"{x0 + (c + .5) * cel:.1f},{y0 + (l + .5) * cel:.1f}" for c, l in cam)
+    sol = f'<polyline points="{pts}" fill="none" stroke="{B.LAR}" stroke-width="{cel * .35:.1f}" stroke-linejoin="round" stroke-linecap="round" opacity=".8"/>'
+    instr = (f"Leve {NOMES_INI[ini]} até {NOMES_FIM[fim]} sem atravessar as paredes." if nivel == 1
+             else f"Leve {NOMES_INI[ini]} até {NOMES_FIM[fim]}. Use o dedo primeiro e depois o lápis.")
+    return B._at("Labirinto", instr, nivel, "Lógica", "labirinto", base, sol + base)
 
 
 def nivel1(rng):
@@ -131,7 +155,7 @@ def nivel1(rng):
     pares_lab = [("pato", "flor"), ("gato", "casa"), ("carro", "arvore"), ("barco", "ilha"), ("balao", "sol"),
                  ("passaro", "nuvem"), ("peixe", "barco"), ("pipa", "estrela")]
     for (c, l), (a, b) in zip([(5, 6), (5, 7), (6, 7), (6, 8), (7, 8), (7, 9), (8, 10), (8, 11)], pares_lab):
-        cat["Lógica"].append(("lab", lambda c=c, l=l, a=a, b=b: B.labirinto(1, rng, c, l, a, b)))
+        cat["Lógica"].append(("lab", lambda c=c, l=l, a=a, b=b: labirinto(1, rng, c, l, a, b)))
     for d in [11, 10, 9, 8]:
         cat["Lógica"].append(("sud", lambda d=d: B.sudoku_figuras(rng, d)))
     cat["Lógica"] = [cat["Lógica"][i] for i in [0, 1, 8, 2, 3, 9, 4, 5, 10, 6, 7, 11]]
@@ -189,12 +213,12 @@ def nivel2(rng):
     cat["Padrões"] = pad
     labs = [(11, 13, "pato", "ilha"), (12, 15, "pipa", "nuvem"), (14, 17, "gato", "casa"), (15, 19, "carro", "arvore")]
     t = NOVOS_TEMAS_LOGICA
-    cat["Lógica"] = [("sud", lambda: B.sudoku6(rng, 20)), ("lab", lambda: B.labirinto(2, rng, *labs[0])),
+    cat["Lógica"] = [("sud", lambda: B.sudoku6(rng, 20)), ("lab", lambda: labirinto(2, rng, *labs[0])),
                      ("gl", lambda: B.grade_logica(rng, t[0])), ("sud", lambda: B.sudoku6(rng, 18)),
-                     ("lab", lambda: B.labirinto(2, rng, *labs[1])), ("gl", lambda: B.grade_logica(rng, t[1])),
-                     ("sud", lambda: B.sudoku6(rng, 17)), ("lab", lambda: B.labirinto(2, rng, *labs[2])),
+                     ("lab", lambda: labirinto(2, rng, *labs[1])), ("gl", lambda: B.grade_logica(rng, t[1])),
+                     ("sud", lambda: B.sudoku6(rng, 17)), ("lab", lambda: labirinto(2, rng, *labs[2])),
                      ("sud", lambda: B.sudoku6(rng, 16)), ("gl", lambda: B.grade_logica(rng, t[2])),
-                     ("lab", lambda: B.labirinto(2, rng, *labs[3])), ("sud", lambda: B.sudoku6(rng, 15))]
+                     ("lab", lambda: labirinto(2, rng, *labs[3])), ("sud", lambda: B.sudoku6(rng, 15))]
     tr = []
     for (des, alvo), seg in zip([("sorvete", 24), ("castelo", 28), ("pinheiro", 32), ("guarda-chuva", 34), ("borboleta", 40)],
                                 [8, 10, 12, 14, 16]):

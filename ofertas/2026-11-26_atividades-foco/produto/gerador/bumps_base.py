@@ -47,6 +47,7 @@ for _k, _f in EXTRAS.items():
 # ------------------------------------------------------------------ CSS
 CSS_BUMP = """
 .capa .titulo { font-size: 50pt; }
+.autor { font-family: 'Nunito'; font-weight: 700; font-size: 11pt; color: var(--cinza); margin-top: 2mm; }
 .capa .bump { font-family: 'Baloo 2'; font-weight: 800; font-size: 13pt; color: var(--laranja); letter-spacing: .6pt; margin-top: 2mm; }
 .corte-v { border-left: .35mm dashed #999; position: absolute; top: 8mm; bottom: 8mm; left: 50%; }
 .aviso-adulto { display: inline-flex; gap: 2mm; align-items: center; font-weight: 800; font-size: 9.5pt; background: #fff1e8;
@@ -89,6 +90,7 @@ class Bump:
     <div class="marca" style="font-size:13pt">Dez <b>Minutinhos</b></div>
     <div class="bump">BÔNUS EXTRA DO DEZ MINUTINHOS</div>
     <div class="titulo">{self.nome}</div>
+    <p class="autor">por Gefferson Balles</p>
     <p class="sub">{subtitulo}</p>
     <div><span class="tag">{self.tag}</span></div>
     <div class="figuras">{GA.svg(fig, 182, 112)}</div>
