@@ -790,7 +790,7 @@ def pinte_codigo(rng, nivel, arte, contas=False):
 
 TEMAS_PALAVRAS = {
     "frutas": ["UVA", "MANGA", "PERA", "BANANA", "CAJU", "GOIABA", "AMORA", "MELANCIA"],
-    "brinquedos": ["BOLA", "PIPA", "BONECA", "PETECA", "DADO", "PATINETE", "CARRINHO", "QUEBRA"],
+    "brinquedos": ["BOLA", "PIPA", "BONECA", "PETECA", "DADO", "PATINETE", "CARRINHO", "TAMBOR"],
     "cozinha": ["PANELA", "GARFO", "COLHER", "PRATO", "COPO", "FACA", "TIGELA", "CANECA"],
     "cores": ["AZUL", "VERDE", "ROXO", "ROSA", "PRETO", "BRANCO", "CINZA", "VERMELHO"],
     "bichos": ["GATO", "CAVALO", "MACACO", "TATU", "PATO", "ZEBRA", "COELHO", "TUCANO"],
