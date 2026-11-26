@@ -18,7 +18,7 @@
 | 7 | Criativos | roteirista-de-criativos | 🟡 | 2026-11-26 | 5 roteiros em `criativos/roteiros.md` (4 vídeos 22–25 s + 1 estático); falta conformidade e produção |
 | P2 | Conformidade | revisor-de-conformidade | 🟡 | 2026-11-26 | **APROVADO COM AJUSTES** (`revisoes/2026-11-26_conformidade.md`). Produto: aprovado. Página, bumps, criativos e kit Hotmart: 12 ajustes obrigatórios antes do P4 (link do checkout; nº de parcelas/juros; "acesso na hora" x boleto; endereço físico do fornecedor — Decreto 7.962; prazo de guarda/base legal na privacidade; "Bônus extra" nas capas dos bumps pagos; descrição do criativo 1; kit: bônus 2 é lista, bump 3 sem "sentimentos/terapia", bump 6 com 5 jogos, bump 4 "fichas", status desatualizado). Nenhuma etapa volta |
 | P3 | Aprovação de página/produto/criativos | dono | ⬜ | | |
-| 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | ⬜ | | |
+| 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | 🟡 | 2026-11-27 | Produto principal cadastrado na Hotmart; link de pagamento https://pay.hotmart.com/I108674571O?off=6huqjuso nos botões da página (checkout ainda dá erro 005 — aguardando aprovação/finalização). Faltam bumps, pixel e campanhas |
 | P4 | Publicação e orçamento | dono | ⬜ | | |
 | 10 | Leitura de resultado | analista-de-metricas | ⬜ | | |
 
