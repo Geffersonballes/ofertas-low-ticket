@@ -14,8 +14,9 @@ SAIDA = AQUI / "saida"
 SEMENTE = 30112026
 
 CSS_EXTRA = """
-.plano { width: 100%; border-collapse: collapse; font-size: 9.6pt; margin-top: 3mm; }
-.plano th, .plano td { border: .25mm solid #bbb; padding: 1.15mm 2mm; text-align: left; }
+.rodape { margin-top: auto; }
+.plano { width: 100%; border-collapse: collapse; font-size: 9.4pt; margin-top: 2mm; }
+.plano th, .plano td { border: .25mm solid #bbb; padding: .75mm 2mm; text-align: left; white-space: nowrap; }
 .plano th { background: #f4f4f4; font-family: 'Baloo 2'; font-weight: 800; }
 .plano td.dia { font-family: 'Baloo 2'; font-weight: 800; text-align: center; width: 13mm; }
 .plano td.ok { width: 12mm; text-align: center; }
@@ -46,12 +47,14 @@ CSS_EXTRA = """
 .cert .rodcert { margin-top: auto; display: flex; justify-content: space-between; width: 100%; font-size: 10.5pt; font-weight: 700; }
 .cert svg { position: absolute; width: 22mm; height: 22mm; }
 .corte { text-align: center; font-size: 8pt; color: var(--cinza); border-top: .3mm dashed #999; padding-top: 1mm; }
-.ideias { counter-reset: i var(--ini); list-style: none; margin-top: 4mm; font-size: 11.2pt; line-height: 1.4; }
-.ideias li { counter-increment: i; position: relative; padding-left: 10mm; margin: 2.3mm 0; }
+.ideias { counter-reset: i var(--ini); list-style: none; margin-top: 5mm; font-size: 12.6pt; line-height: 1.42; }
+.ideias li { counter-increment: i; position: relative; padding-left: 10mm; margin: 3.4mm 0; }
 .ideias li::before { content: counter(i); position: absolute; left: 0; top: 0; width: 7mm; height: 7mm; border-radius: 50%; background: var(--laranja);
   color: #fff; font-family: 'Baloo 2'; font-weight: 800; font-size: 10pt; text-align: center; line-height: 7.4mm; }
 .ideias b { font-family: 'Baloo 2'; font-weight: 800; }
 .texto p { margin: 2mm 0; }
+.guia { font-size: 12.6pt; line-height: 1.55; }
+.guia h2 { margin-top: 7mm; }
 """
 
 
@@ -110,7 +113,7 @@ def nivel1(rng):
 def nivel2(rng):
     cat = {k: [] for k in ["Atenção", "Memória", "Padrões", "Lógica", "Traçado", "Cores e códigos"]}
     var = B.VARIANTES[:]
-    gradesubs = [[("peixe", dict(variante="semboca")), ("estrela", dict(variante="6pontas")), ("maca", dict(variante="semfolha"))],
+    gradesubs = [[("peixe", dict(espelhar=True)), ("estrela", dict(variante="6pontas")), ("maca", dict(variante="semfolha"))],
                  [("sol", dict(variante="poucosraios")), ("passaro", dict(espelhar=True)), ("flor", dict(variante="4petalas"))],
                  [("casa", dict(variante="semjanela")), ("lua", dict(espelhar=True)), ("carro", dict(espelhar=True))],
                  [("casa", dict(variante="semporta")), ("banana", dict(espelhar=True)), ("barco", dict(espelhar=True))]]
@@ -137,7 +140,7 @@ def nivel2(rng):
             lambda: [(f, 0, False) for f in rng.sample(B.FIG_PADRAO, 4)],
             lambda: [("banana", 0, False), ("banana", 90, False), ("banana", 180, False)],
         ]
-        return [rng.choice(tipos)() for _ in range(5)]
+        return [f() for f in rng.sample(tipos, 5)]
     pad = []
     for k, f in enumerate([1, None, 1, 2, None, 2, 3, None, 3, None]):
         if f is None:
@@ -253,8 +256,8 @@ def abertura(nivel, num):
 def plano(nivel, dias, num, pag_de):
     linhas = ""
     for d, (a, b) in enumerate(dias, 1):
-        linhas += (f'<tr><td class="dia">{d}</td><td>{a["titulo"]} <span class="pg">· {a["categoria"]} · pág. {pag_de[id(a)]}</span></td>'
-                   f'<td>{b["titulo"]} <span class="pg">· {b["categoria"]} · pág. {pag_de[id(b)]}</span></td><td class="ok"><span class="caixa"></span></td></tr>')
+        linhas += (f'<tr><td class="dia">{d}</td><td>{a["titulo"]} <span class="pg">· pág. {pag_de[id(a)]}</span></td>'
+                   f'<td>{b["titulo"]} <span class="pg">· pág. {pag_de[id(b)]}</span></td><td class="ok"><span class="caixa"></span></td></tr>')
     return f"""<section class="pagina">{topo(GA.selo(nivel))}<h1>Plano de 30 dias</h1>
   <p class="instrucao" style="min-height:0">2 folhas por dia. Imprima a semana de uma vez (14 folhas) e marque cada dia feito.</p>
   <table class="plano"><tr><th>Dia</th><th>Folha 1</th><th>Folha 2</th><th>Feito</th></tr>{linhas}</table>{rodape(num)}</section>"""
@@ -331,7 +334,7 @@ IDEIAS = [
     ("Corrida da colher", "Leve uma bolinha de papel numa colher de uma ponta à outra da sala sem deixar cair."),
     ("Nuvens", "Deitados no chão do quintal ou olhando pela janela: com o que cada nuvem se parece?"),
     ("Massinha sem fogo", "Misture farinha, um pouco de sal e água até virar massinha. É só não colocar na boca."),
-    ("Rádio da família", "Gravem no celular um “programa de rádio”: notícia do dia, previsão do tempo e uma música cantada."),
+    ("Show de talentos", "Cada pessoa da casa apresenta alguma coisa: uma música, uma piada, uma mágica. Os outros aplaudem de pé."),
 ]
 
 
@@ -339,7 +342,7 @@ def ideias(num_ini):
     assert len(IDEIAS) == 30
     pags = []
     for parte, ini in [(IDEIAS[:15], 0), (IDEIAS[15:], 15)]:
-        li = "".join(f"<li><b>{t}.</b> {d}</li>" for t, d in parte)
+        li = "".join(f"<li><b>{t}{'' if t[-1] in '?!' else '.'}</b> {d}</li>" for t, d in parte)
         cab = "<h1>30 ideias longe da tela</h1><p class='instrucao' style='min-height:0'>Para os dias em que a impressora não colaborar. Nada aqui precisa ser impresso.</p>" if ini == 0 else "<h1>30 ideias longe da tela <span style='color:var(--cinza);font-size:16pt'>(continuação)</span></h1>"
         pags.append(f"""<section class="pagina">{topo('<span class="selo">Bônus 2</span>')}{cab}
   <ol class="ideias" style="--ini:{ini}">{li}</ol>{rodape(num_ini + len(pags))}</section>""")
@@ -347,7 +350,7 @@ def ideias(num_ini):
 
 
 def guia(num_ini):
-    p1 = f"""<section class="pagina">{topo('<span class="selo">Bônus 3</span>')}<h1>Guia do adulto</h1><div class="texto">
+    p1 = f"""<section class="pagina">{topo('<span class="selo">Bônus 3</span>')}<h1>Guia do adulto</h1><div class="texto guia">
   <h2>Como apresentar</h2>
   <p>Escolha um momento tranquilo e um lugar com mesa e boa luz. Leia a instrução em voz alta, mesmo no Nível 2: ajuda a criança a começar.
   Deixe que ela tente sozinha antes de ajudar. Se pedir ajuda, dê uma pista pequena (“olha esta parte aqui”) em vez da resposta.</p>
@@ -361,7 +364,7 @@ def guia(num_ini):
   <p>Use o gabarito para você conferir, não para corrigir em vermelho. Se algo saiu diferente, pergunte como ela pensou. Muitas vezes o caminho
   dela também faz sentido, e uma conversa vale mais do que a resposta certa.</p>
   </div>{rodape(num_ini)}</section>"""
-    p2 = f"""<section class="pagina">{topo('<span class="selo">Bônus 3</span>')}<h1>Guia do adulto <span style="color:var(--cinza);font-size:16pt">(continuação)</span></h1><div class="texto">
+    p2 = f"""<section class="pagina">{topo('<span class="selo">Bônus 3</span>')}<h1>Guia do adulto <span style="color:var(--cinza);font-size:16pt">(continuação)</span></h1><div class="texto guia">
   <h2>Nível 1 ou Nível 2?</h2>
   <p>A idade é só um ponto de partida. Alguns sinais de que é hora de passar do Nível 1 para o Nível 2:</p>
   <ul style="padding-left:6mm"><li>as atividades do Nível 1 terminam rápido demais e sem nenhuma dúvida;</li>

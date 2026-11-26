@@ -343,7 +343,7 @@ def diferente_grade(rng, blocos):
         for j in range(14):
             c, l = j % 7, j // 7
             x, y = 6 + c * 25, y0 + 6 + l * 32
-            g = rng.choice([0, 0, -8, 8]) if nome not in ("triangulo", "coracao") else 0
+            g = 0
             if j == k:
                 s.append(icone(nome, x, y, 21, **mud))
                 gab.append(_circ(x + 10.5, y + 10.5, 13))
@@ -472,7 +472,7 @@ def diferencas(rng, nivel, cena, n):
         if marcar:
             for i in m:
                 o = objs[i]
-                g += _circ(o["x"] + o["t"] / 2, o["y"] + 1 + o["t"] / 2, o["t"] * .62 + 3, 1.3)
+                g += _circ(o["x"] + o["t"] / 2, o["y"] + 1 + o["t"] / 2, min(o["t"] * .62 + 3, 17), 1.3)
         return g + "</g>"
 
     base = painel(0, {}) + painel(114, mods)
@@ -600,15 +600,39 @@ def _pontos_de(nome):
 
 def ligue_pontos(rng, nivel, desenho, alvo):
     cantos = _pontos_de(desenho)
-    total = sum(math.dist(a, b) for a, b in zip(cantos, cantos[1:]))
-    passo = total / alvo
-    pts = []
-    for (ax, ay), (bx, by) in zip(cantos, cantos[1:]):
-        n = max(1, round(math.dist((ax, ay), (bx, by)) / passo))
-        for t in range(n):
-            pts.append((ax + (bx - ax) * t / n, ay + (by - ay) * t / n))
-    if math.dist(cantos[0], cantos[-1]) > 1:
-        pts.append(cantos[-1])
+    if desenho == "coração":
+        densa = []
+        for (ax, ay), (bx, by) in zip(cantos, cantos[1:]):
+            for t in range(20):
+                densa.append((ax + (bx - ax) * t / 20, ay + (by - ay) * t / 20))
+        comp = [0.0]
+        for a, b in zip(densa, densa[1:]):
+            comp.append(comp[-1] + math.dist(a, b))
+        tot = comp[-1] + math.dist(densa[-1], densa[0])
+        pts, j = [], 0
+        for k in range(alvo):
+            alvo_d = tot * k / alvo
+            while j < len(comp) - 1 and comp[j + 1] < alvo_d:
+                j += 1
+            pts.append(densa[j])
+    else:
+        total = sum(math.dist(a, b) for a, b in zip(cantos, cantos[1:]))
+        passo = total / alvo
+        pts = []
+        for (ax, ay), (bx, by) in zip(cantos, cantos[1:]):
+            n = max(1, round(math.dist((ax, ay), (bx, by)) / passo))
+            for t in range(n):
+                pts.append((ax + (bx - ax) * t / n, ay + (by - ay) * t / n))
+        if math.dist(cantos[0], cantos[-1]) > 1:
+            pts.append(cantos[-1])
+    limpos = []
+    for p in pts:
+        if not limpos or math.dist(p, limpos[-1]) >= 9:
+            limpos.append(p)
+    if len(limpos) > 2 and math.dist(limpos[-1], limpos[0]) < 9:
+        limpos.pop()
+    pts = limpos
+    assert all(math.dist(a, b) >= 9 for a, b in zip(pts, pts[1:])), desenho
     # escala para a área (o desenho cabe em 0..200 x 0..200)
     e = 0.9
     pts = [(x * e, 8 + y * e) for x, y in pts]
@@ -763,11 +787,11 @@ def pinte_codigo(rng, nivel, arte, contas=False):
     x0, y0 = (W - 12 * cel) / 2, 34
     s, gab = [], []
     for k, v in enumerate(usados):
-        x = (W - len(usados) * 40) / 2 + k * 40
-        s.append(f'<rect x="{x}" y="4" width="36" height="20" rx="3" fill="#fff" stroke="{TRACO}" stroke-width=".6"/>')
-        s.append(_txt(x + 7, 14, str(v), 9, 800, fonte="Baloo 2"))
-        s.append(f'<rect x="{x + 14}" y="8" width="8" height="12" rx="1.5" fill="{CORES[v][1]}" stroke="{TRACO}" stroke-width=".4"/>')
-        s.append(_txt(x + 29, 14, CORES[v][0], 3.6, 800))
+        x = (W - len(usados) * 34) / 2 + k * 34 + 2
+        s.append(f'<rect x="{x}" y="2" width="30" height="17" rx="3" fill="#fff" stroke="{TRACO}" stroke-width=".6"/>')
+        s.append(_txt(x + 8, 10.5, str(v), 9, 800, fonte="Baloo 2"))
+        s.append(f'<rect x="{x + 15}" y="5" width="10" height="11" rx="1.5" fill="{CORES[v][1]}" stroke="{TRACO}" stroke-width=".4"/>')
+        s.append(_txt(x + 15, 24, CORES[v][0], 4.6, 800))
     for l in range(12):
         for c in range(12):
             v = g[l][c]
