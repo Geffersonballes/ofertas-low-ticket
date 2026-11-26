@@ -4,6 +4,14 @@ Este repositório é a operação de ofertas low ticket descrita no `README.md`.
 A metodologia de referência é `docs/00_prompt-mestre.md` (aula LowTicket com IA).
 Leia `docs/02_esteira.md` antes de produzir qualquer oferta e siga a ordem das 7 etapas.
 
+## Quem faz o quê
+
+Duas pessoas trabalham neste repositório (ver `docs/07_divisao-do-trabalho.md`):
+- **Minerador:** etapas 1–2. Entrega um *pacote de oferta* por pull request (skill `pacote-de-oferta`). Não faz merge, não publica, não cadastra nada.
+- **Operador (dono):** aceita o pacote (merge = Portão 1) e toca as etapas 3–7 e a leitura de métricas.
+
+Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
+
 ## Regras que nunca mudam
 
 1. **Dinheiro só com aprovação humana.** Campanhas, conjuntos e anúncios são criados sempre

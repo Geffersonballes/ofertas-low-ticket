@@ -13,6 +13,11 @@ sem aparecer em vídeo.
 | 3. Lucro no volume e nos order bumps | 1 a 3 ofertas testadas por dia com orçamento baixo; bumps levam o ticket de R$ 47 para R$ 90+ | [docs/04_order-bumps.md](docs/04_order-bumps.md), [docs/05_metricas-e-decisao.md](docs/05_metricas-e-decisao.md) |
 | 4. Esteira automatizada com IA | Página, produto, bônus, vídeos de anúncio, pixel e campanha em rascunho feitos por agentes | [docs/02_esteira.md](docs/02_esteira.md) |
 
+## Divisão do trabalho
+
+Minerador (etapas 1–2, entrega pacote por pull request) e operador (etapas 3–7). Ver
+[docs/07_divisao-do-trabalho.md](docs/07_divisao-do-trabalho.md).
+
 ## Como usar
 
 1. **Minerar:** peça ao Claude "minere ofertas" → o agente `minerador-de-ofertas` preenche
