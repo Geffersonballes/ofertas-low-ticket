@@ -310,7 +310,7 @@ html,body{width:540px;height:960px;overflow:hidden;background:#fff7f1;font-famil
 .num{position:absolute;left:20px;right:20px;text-align:center;font-family:'Baloo 2';font-weight:800;color:#1d1d1f;opacity:0}
 .num.l0{top:470px;font-size:58px;line-height:1}.num.l1{top:540px;font-size:44px;line-height:1.05;color:#d9481a}
 .tx{position:absolute;left:20px;right:20px;text-align:center;font-family:'Baloo 2';font-weight:800;color:#fff;opacity:0}
-.tx.l0{top:330px;font-size:64px;line-height:1}.tx.l1{top:410px;font-size:64px;line-height:1;color:#ff7a45}
+.tx.l0{top:330px;font-size:54px;line-height:1;white-space:nowrap}.tx.l1{top:400px;font-size:54px;line-height:1;color:#ff7a45;white-space:nowrap}
 .rs{position:absolute;left:0;right:0;top:330px;text-align:center;font-family:'Baloo 2';font-weight:800;font-size:66px;color:#fff;line-height:1}
 .riscado{position:relative;display:inline-block}
 .linha{position:absolute;left:-4px;top:52%%;height:9px;background:#ff7a45;border-radius:5px;width:0}
@@ -346,8 +346,8 @@ const A = {
     const dy = c.entrada === 'baixo' ? (1 - ease(dt / 0.5)) * 520 : (1 - e) * 30;
     card.style.transformOrigin = c.foco ? `${c.foco[0]}% ${c.foco[1]}%` : '50% 50%';
     card.style.transform = `translateY(${dy}px) scale(${(0.95 + 0.05 * e) * z})`;
-    card.style.opacity = c.entrada === 'baixo' ? 1 : e;
-    if (c.revelar === false) return;
+    card.style.opacity = 1;
+    if (c.revelar === false) { const o = card.querySelector('.ov'); if (o) o.style.opacity = 0; return; }
     const q = ease(cl((p - 0.12) / 0.7)), modo = card.dataset.modo;
     if (modo === 'traco') card.querySelectorAll('.traco').forEach(t => t.setAttribute('stroke-dashoffset', 1 - q));
     else if (modo === 'fade') card.querySelector('.ov').style.opacity = q;
@@ -357,11 +357,11 @@ const A = {
     const z = lerp(c.zoom[0], c.zoom[1], ease(cl(p * 1.15)));
     card.style.transformOrigin = `${c.foco[0]}% ${c.foco[1]}%`;
     card.style.transform = `translateY(${(1 - e) * 30}px) scale(${(0.95 + 0.05 * e) * z})`;
-    card.style.opacity = e;
+    card.style.opacity = 1;
   },
   duas(el, c, p, dt) {
     el.querySelectorAll('.mini').forEach((m, i) => { const e = ease((dt - i * 0.1) / 0.2);
-      m.style.opacity = e; m.style.transform = `translateY(${(1 - e) * 60}px) rotate(${i ? 2 : -2}deg)`; });
+      m.style.opacity = i ? cl((dt - 0.1) / 0.07) : 1; m.style.transform = `translateY(${(1 - e) * 60}px) rotate(${i ? 2 : -2}deg)`; });
   },
   carimbo(el, c, p, dt) {
     const card = el.querySelector('.card'), s = el.querySelector('.carimbo');
@@ -372,12 +372,12 @@ const A = {
   },
   imagem(el, c, p, dt) {
     const f = el.querySelector('.foto'), e = ease(dt / 0.3);
-    f.style.opacity = e; f.style.transform = `scale(${1 + 0.06 * p}) translateY(${(1 - e) * 30}px)`;
+    f.style.opacity = 1; f.style.transform = `scale(${1 + 0.06 * p}) translateY(${(1 - e) * 30}px)`;
     const l = el.querySelector('.lapis');
     if (l) { const u = ease(cl((p - 0.15) / 0.4)); l.style.transform = `translateX(${(1 - u) * 420}px) rotate(-14deg)`; }
   },
   numeros(el, c, p, dt) {
-    const m = el.querySelector('.fundo-mock'); m.style.opacity = ease(dt / 0.3);
+    const m = el.querySelector('.fundo-mock'); m.style.opacity = 1;
     m.style.transform = `translateY(${Math.sin(dt * 2) * 5}px) scale(${1 + 0.04 * p})`;
     el.querySelectorAll('.num').forEach((n, i) => { const k = ease(cl((p - 0.05 - i * 0.3) / 0.15));
       n.style.opacity = k; n.style.transform = `scale(${0.6 + 0.4 * k})`; });
@@ -396,7 +396,7 @@ const A = {
   folheando(el, c, p, dt) {
     const cv = el.querySelector('canvas'), ctx = cv.getContext('2d');
     const i = Math.min(NFOLH - 1, Math.floor(((c.off || 0) + dt) * 30) % NFOLH);
-    ctx.drawImage(folh[i], 0, 0, 720, 551); cv.style.opacity = ease(dt / 0.25);
+    ctx.drawImage(folh[i], 0, 0, 720, 551); cv.style.opacity = 1;
   },
   final(el, c, p, dt) {
     const parts = ['.fmock', '.fnome', '.fsub', '.fpreco', '.fbot'];
@@ -417,7 +417,7 @@ window.render = function (t) {
     if (c.tipo === 'final') final = true;
   }
   if (tit && !final) { tituloEl.style.display = 'block'; tituloSp.textContent = tit;
-    const k = ease((t - titT0) / 0.25); tituloSp.style.transform = `scale(${0.85 + 0.15 * k})`; tituloEl.style.opacity = k; }
+    const k = ease((t - titT0) / 0.25); tituloSp.style.transform = `scale(${0.85 + 0.15 * k})`; tituloEl.style.opacity = 1; }
   else tituloEl.style.display = 'none';
   const b = LEG.find(x => t >= x.t0 && t < x.t1);
   if (b) { legEl.style.display = 'flex'; legSp.textContent = b.txt; } else legEl.style.display = 'none';
@@ -479,7 +479,7 @@ def montar(n, voz):
     VIDEOS.mkdir(exist_ok=True)
     saida = VIDEOS / f"{nome}.mp4"
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-framerate", str(FPS), "-i", str(quadros / "%05d.jpg"),
-                    "-i", str(mp3), "-filter_complex", "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,apad[a]",
+                    "-i", str(mp3), "-filter_complex", "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.84:level=disabled,apad[a]",
                     "-map", "0:v", "-map", "[a]", "-frames:v", str(nq), "-c:v", "libx264", "-preset", "medium", "-crf", "20",
                     "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart",
                     str(saida)], check=True)

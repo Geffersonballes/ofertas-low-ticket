@@ -1,0 +1,45 @@
+# Vídeos dos anúncios — Dez Minutinhos
+
+Montados em 2026-11-27 por `criativos/montador/` (o código vai para o git; os .mp4 não).
+Formato: 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz, áudio normalizado (−16 LUFS, pico ≤ −1,4 dB).
+Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 6 palavras, sincronizada
+pelas pausas reais da fala. Só mídia real do produto: atividades do caderno completo (com o gabarito
+animado), páginas do PDF, mockups e o vídeo do caderno folheando. Sem pessoas, sem rosto de criança.
+
+| Arquivo | Roteiro | Voz | Duração | Fronteiras de frase em pausas reais |
+|---|---|---|---|---|
+| `anuncio-1-laynner.mp4` | 1 | Laynner | 22.6 s | 8/8 |
+| `anuncio-1-amandinha.mp4` | 1 | Amandinha | 22.1 s | 8/8 |
+| `anuncio-2-laynner.mp4` | 2 | Laynner | 23.1 s | 8/8 |
+| `anuncio-2-amandinha.mp4` | 2 | Amandinha | 21.6 s | 8/8 |
+| `anuncio-3-laynner.mp4` | 3 | Laynner | 24.0 s | 6/6 |
+| `anuncio-3-amandinha.mp4` | 3 | Amandinha | 22.9 s | 6/6 |
+| `anuncio-4-laynner.mp4` | 4 | Laynner | 24.2 s | 8/8 |
+| `anuncio-4-amandinha.mp4` | 4 | Amandinha | 22.5 s | 8/8 |
+
+## O que cada roteiro mostra
+- **Anúncio 1:** Labirinto N1 (p. 7) com o caminho do gabarito se desenhando → cortes com a resposta aparecendo: labirinto N2 (p. 75), memória (p. 11), sudoku de figuras (p. 18), código secreto (p. 78) → caderno sendo folheado → plano de 30 dias (p. 5) com zoom no Dia 1 → folhas do Dia 1 (p. 6 e 7) → cartão final.
+- **Anúncio 2:** Página "Qual é diferente?" (p. 6) subindo + carimbo PRONTO → plano (p. 5) e folhas do Dia 1 → folhas espalhadas + lápis → gabarito (p. 128) → "120 atividades · R$ 37,00" → "R$ 1,23 por dia no plano de 30 dias" → caderno folheando → cartão final.
+- **Anúncio 3:** Tipografia em fundo escuro: "App educativo" com "educativo" riscado → "= tela"; "Vídeo de desenho também." → labirinto N2 (p. 75) subindo → cortes com resposta: labirinto, sudoku 6x6 (p. 69), sequência (p. 8), 7 erros (p. 68) → dois níveis lado a lado (p. 6 e p. 78) → cartão final.
+- **Anúncio 4:** "10 min de tela" em fundo escuro → corte para "O que vem depois?" (p. 8) → padrões com a resposta → memória (p. 11, zoom do quadro de cima para a página toda) → labirinto (p. 13) e sudoku (p. 18) → ligue os pontos (p. 15) se ligando → caderno folheando → plano (p. 5), quadro de conquistas (p. 142), certificado (p. 143) → cartão final.
+
+Fecho de todos: capa do caderno + "Dez Minutinhos · 120 atividades para imprimir · 4 a 10 anos ·
+R$ 37,00 · Toque em Saiba mais", fundo laranja.
+
+Quadros de referência: `quadro-anuncio-1.jpg` … `quadro-anuncio-4.jpg`.
+
+## Conferido (controle de qualidade)
+- ffprobe: 1080×1920, 30 fps, h264 + aac, duração = fala + ~1 s.
+- volumedetect: pico entre −1,4 e −1,5 dB em todos.
+- 10–11 quadros por vídeo (início, meio de cada frase, fecho): sem tela preta, sem texto cortado ou
+  sobreposto, título abaixo dos 200 px do topo, legenda acima dos 250 px da base, legenda igual à fala.
+
+## Refazer
+```
+cd criativos/montador
+node paginas2x.cjs 5 6 7 8 78 128 142 143
+ffmpeg -i ../../pagina/img/folheando.mp4 -vf fps=30 -q:v 3 cache/folheando/%04d.jpg
+python3 montador.py            # os 8 (≈ 7 min)
+python3 qc.py anuncio-1-laynner
+```
+⚠️ Laynner é voz clonada de pessoa real: só publicar com autorização dela.
