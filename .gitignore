@@ -1,0 +1,10 @@
+.env
+.env.*
+*.local.json
+node_modules/
+.DS_Store
+# arquivos pesados de produção (guarde no OneDrive/Drive, não no git)
+*.mp4
+*.mov
+*.wav
+*.zip
