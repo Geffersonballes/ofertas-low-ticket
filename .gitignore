@@ -13,3 +13,9 @@ node_modules/
 !publicado/**/*.mp4
 # cenas intermediárias das mídias (regeneráveis)
 ofertas/*/pagina/midia/cenas/
+# quadros e temporários dos montadores de vídeo (regeneráveis)
+tutorial/montador/quadros/
+tutorial/montador/tmp/
+tutorial/montador/telas.html
+ofertas/*/criativos/montador/quadros/
+ofertas/*/criativos/montador/tmp/

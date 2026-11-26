@@ -132,9 +132,9 @@ def duracao(arq):
     return float(out)
 
 
-def silencios(arq, dur):
+def silencios(arq, dur, db=-38):
     log = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(arq), "-af",
-                          "silencedetect=noise=-38dB:d=0.15", "-f", "null", "-"], capture_output=True, text=True).stderr
+                          f"silencedetect=noise={db}dB:d=0.15", "-f", "null", "-"], capture_output=True, text=True).stderr
     ini = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", log)]
     fim = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
     if len(fim) < len(ini):
@@ -143,17 +143,28 @@ def silencios(arq, dur):
 
 
 def alinhar(arq, frases):
-    """Devolve (dur, [(início, fim)] por frase). As fronteiras entre frases caem no meio das pausas da fala,
-    escolhidas por programação dinâmica perto do ponto esperado pela proporção de caracteres."""
+    """Devolve (dur, [(início, fim)] por frase, âncoras). As fronteiras entre frases caem no meio das pausas da
+    fala, escolhidas por programação dinâmica perto do ponto esperado pela proporção de caracteres. Testa três
+    limites de silêncio (vozes clonadas têm ruído de fundo nas pausas) e fica com o que ancora mais fronteiras."""
     dur = duracao(arq)
-    sil = silencios(arq, dur)
+    melhor = None
+    for db in (-38, -34, -30, -28):
+        r = _alinhar(dur, silencios(arq, dur, db), frases)
+        chave = sum(r[2])  # do mais rigoroso ao mais solto: só troca se ancorar MAIS fronteiras
+        if melhor is None or chave > melhor[0]:
+            melhor = (chave, r)
+    front_ok = melhor[1]
+    return dur, front_ok[1], front_ok[2]
+
+
+def _alinhar(dur, sil, frases):
     vs = sil[0][1] if sil and sil[0][0] < 0.05 else 0.0
     ve = sil[-1][0] if sil and sil[-1][1] >= dur - 0.05 else dur
     meios = [(a + b) / 2 for a, b in sil if a > vs + 0.05 and b < ve - 0.05]
     pesos = [len(f) + 8 for f in frases]
     tot = sum(pesos)
     ideal = [vs + (ve - vs) * sum(pesos[:k + 1]) / tot for k in range(len(frases) - 1)]
-    B, M, PEN = len(ideal), len(meios), 0.9
+    B, M, PEN = len(ideal), len(meios), 1.6
     INF = float("inf")
     # dp[m+1] = (custo, escolhas) com o último meio usado = m (−1 = nenhum)
     dp = {-1: (0.0, [])}
@@ -174,7 +185,8 @@ def alinhar(arq, frases):
         front.append(max(t, front[-1] + 0.3) if front else t)
     inicios = [vs] + front
     fins = front + [ve]
-    return dur, list(zip(inicios, fins)), [j is not None for j in esc]
+    custo = min(dp.values(), key=lambda x: x[0])[0]
+    return dur, list(zip(inicios, fins)), [j is not None for j in esc], custo
 
 
 def blocos_legenda(texto, t0, t1, maxp=6):
