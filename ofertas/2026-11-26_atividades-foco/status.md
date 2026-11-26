@@ -14,8 +14,8 @@
 | 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Caderno completo pronto: `produto/final/dez-minutinhos.pdf` (149 págs, 120 atividades, plano 30 dias por nível, gabarito, 3 bônus) + `.zip` de entrega; aguardando aprovação do dono |
 | 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
 | 5 | Copy da página | copywriter-de-pagina | ✅ | 2026-11-26 | `pagina/copy.md`; título 1 usado na página (dono pode trocar) |
-| 6 | Página | construtor-de-pagina | 🟡 | 2026-11-26 | `pagina/index.html` + privacidade/termos, conferida em 390 px e 1280 px; mídias só com páginas reais. Faltam: link do checkout, e-mail de suporte, nome/CPF-CNPJ. Não publicada |
-| 7 | Criativos | roteirista-de-criativos | ⬜ | | |
+| 6 | Página | construtor-de-pagina + diretor-de-arte-web | 🟡 | 2026-11-26 | Rodada 1 de revisão aplicada (crítico 6,5 → redesign + copy nova) e publicada na prévia; falta só o link do checkout |
+| 7 | Criativos | roteirista-de-criativos | 🟡 | 2026-11-26 | 5 roteiros em `criativos/roteiros.md` (4 vídeos 22–25 s + 1 estático); falta conformidade e produção |
 | P2 | Conformidade | revisor-de-conformidade | ⬜ | | |
 | P3 | Aprovação de página/produto/criativos | dono | ⬜ | | |
 | 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | ⬜ | | |
