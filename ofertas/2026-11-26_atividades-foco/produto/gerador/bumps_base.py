@@ -55,7 +55,8 @@ CSS_BUMP = """
 .cartas { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); flex: 1; margin-top: 4mm; border: .35mm dashed #999; }
 .carta { border: .35mm dashed #999; padding: 6mm 7mm; display: flex; flex-direction: column; position: relative; }
 .carta .cat { font-family: 'Baloo 2'; font-weight: 800; font-size: 10pt; letter-spacing: .6pt; color: var(--laranja); }
-.carta .q { font-family: 'Baloo 2'; font-weight: 700; font-size: 17pt; line-height: 1.15; margin-top: 4mm; }
+.carta .q { font-family: 'Baloo 2'; font-weight: 700; font-size: 21pt; line-height: 1.12; flex: 1; display: flex; align-items: center; position: relative; z-index: 1; padding-bottom: 6mm; }
+.carta .fundo { position: absolute; right: 2mm; bottom: 5mm; width: 24mm; height: 24mm; opacity: .09; top: auto; }
 .carta .num { position: absolute; right: 5mm; bottom: 3mm; font-size: 8pt; color: var(--cinza); }
 .carta svg { position: absolute; right: 5mm; top: 4mm; width: 12mm; height: 12mm; }
 .regras { font-size: 12pt; line-height: 1.5; }

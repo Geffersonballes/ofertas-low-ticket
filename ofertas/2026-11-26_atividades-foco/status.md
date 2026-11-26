@@ -12,7 +12,7 @@
 | 2 | Dossiê + briefing | analista-de-oferta | ✅ | 2026-11-26 | `dossie.md` e `briefing.md` preenchidos; itens "não verificado" listados no fim do briefing |
 | P1 | Aprovação da oferta | dono | ✅ | 2026-11-26 | Dono escolheu NeuroKids |
 | 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Caderno completo pronto: `produto/final/dez-minutinhos.pdf` (149 págs, 120 atividades, plano 30 dias por nível, gabarito, 3 bônus) + `.zip` de entrega; aguardando aprovação do dono |
-| 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
+| 4 | Order bumps | criador-de-order-bumps | ✅ | 2026-11-26 | 7 bumps prontos em `produto/bumps/` (PDF + zip, gabaritos, "por Gefferson Balles" na capa); tabela em `bumps/bumps.md`. Pós-compra (Coleção Ano Inteiro) ainda não produzido |
 | 5 | Copy da página | copywriter-de-pagina | ✅ | 2026-11-26 | `pagina/copy.md`; título 1 usado na página (dono pode trocar) |
 | 6 | Página | construtor-de-pagina + diretor-de-arte-web | 🟡 | 2026-11-26 | Rodada 1 de revisão aplicada (crítico 6,5 → redesign + copy nova) e publicada na prévia; falta só o link do checkout |
 | 7 | Criativos | roteirista-de-criativos | 🟡 | 2026-11-26 | 5 roteiros em `criativos/roteiros.md` (4 vídeos 22–25 s + 1 estático); falta conformidade e produção |
