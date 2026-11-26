@@ -22,7 +22,7 @@ def _hexagono():
 
 def _sol(raios=8):
     s = '<circle cx="50" cy="50" r="20"/>'
-    for i in range(raios):
+    for i in range(raios):  # com raios < 8 fica faltando raio (usado no jogo dos erros)
         a = i * 2 * math.pi / 8
         s += f'<line x1="{50 + 28 * math.cos(a):.1f}" y1="{50 + 28 * math.sin(a):.1f}" x2="{50 + 43 * math.cos(a):.1f}" y2="{50 + 43 * math.sin(a):.1f}"/>'
     return s
@@ -44,14 +44,14 @@ DESENHOS = {
     "coracao": lambda v: '<path d="M50 88 C 18 66, 4 46, 14 28 C 24 10, 44 13, 50 30 C 56 13, 76 10, 86 28 C 96 46, 82 66, 50 88 Z"/>',
     "losango": lambda v: '<polygon points="50,6 90,50 50,94 10,50"/>',
     "hexagono": lambda v: _hexagono(),
-    "sol": lambda v: _sol(),
+    "sol": lambda v: _sol(6 if v == "poucosraios" else 8),
     "lua": lambda v: '<path d="M62 8 A42 42 0 1 0 62 92 A32 32 0 1 1 62 8 Z"/>',
     "nuvem": lambda v: '<path d="M24 74 C 8 74, 6 52, 22 50 C 20 32, 44 26, 52 40 C 58 26, 82 28, 80 48 C 96 48, 96 74, 80 74 Z"/>',
     "peixe": lambda v: '<ellipse cx="44" cy="50" rx="32" ry="20"/><polygon points="74,50 94,32 94,68"/><circle cx="28" cy="45" r="4" fill="#1d1d1f"/>'
     + ('' if v == "semboca" else '<path d="M14 54 Q 18 57 22 54" fill="none"/>'),
     "casa": lambda v: '<polygon points="8,46 50,10 92,46"/><rect x="18" y="46" width="64" height="46"/>'
     + ('' if v == "semporta" else '<rect x="42" y="64" width="16" height="28"/>')
-    + '<rect x="24" y="54" width="12" height="12"/>',
+    + ('' if v == "semjanela" else '<rect x="24" y="54" width="12" height="12"/>'),
     "maca": lambda v: '<path d="M50 30 C 30 14, 6 30, 14 58 C 20 82, 38 92, 50 84 C 62 92, 80 82, 86 58 C 94 30, 70 14, 50 30 Z"/><path d="M50 30 L 54 10" fill="none"/>'
     + ('' if v == "semfolha" else '<path d="M54 18 C 64 6, 78 10, 80 14 C 72 22, 60 22, 54 18 Z" fill="#d9d9d9"/>'),
     "flor": lambda v: _flor(4 if v == "4petalas" else 5),
