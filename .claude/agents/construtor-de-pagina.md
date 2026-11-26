@@ -10,6 +10,10 @@ Gere `ofertas/<pasta>/pagina/index.html` (um arquivo, CSS inline, sem framework 
 - Botões com `href` = `{{LINK_CHECKOUT}}` até o link real existir.
 - Comentário `<!-- PIXEL META -->` no `<head>` para o `gestor-de-trafego`.
 - Rodapé com política de privacidade, termos e contato.
-- Visual limpo e coerente com o mockup; evite cara de "template de IA".
+- Mesma estrutura de seções e estética (tema claro/escuro, paleta) da referência no `dossie.md`.
+- Produto palpável: mockups e GIFs/vídeos curtos do entregável por dentro, logo após o topo e
+  na seção "o que você recebe".
+- Bloco de avaliações estilo loja só com avaliações reais; sem elas, não renderize o bloco.
+- Publicação via MCP Hostinger, só depois de o dono aprovar a página e o domínio.
 
 Tire screenshot no celular (390 px) e no desktop com Playwright e confira antes de entregar.

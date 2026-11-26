@@ -16,13 +16,15 @@ semanas** (sinal de que dão lucro) e trazer o modelo para o Brasil.
 
 ## Critérios de corte (todos obrigatórios)
 
-1. **≥ 10 anúncios ativos** da mesma oferta/página (ideal 20+).
-2. **Anúncio mais antigo ativo há ≥ 14 dias.**
+1. **Volume alto de anúncios ativos** da mesma oferta/página. Referência da aula: 48 a 112+.
+   Mínimo para entrar na lista: 20.
+2. **Pelo menos 1 criativo rodando há ≥ 14 dias seguidos.**
 3. Produto **digital, entregável por download**, sem depender de expert ou comunidade.
 4. Preço original até ~US$ 47.
 5. Promessa traduzível para a realidade brasileira (moeda, leis, hábitos, sazonalidade).
 6. Não envolve tema proibido/sensível em anúncio (cura de doença, ganho financeiro garantido,
    perda de peso extrema, conteúdo adulto, armas).
+7. **White:** sem promessa agressiva que gere bloqueio.
 
 ## Pontuação (0–5 cada, total 30)
 
@@ -34,6 +36,16 @@ semanas** (sinal de que dão lucro) e trazer o modelo para o Brasil.
 | Facilidade de produção | Dá para a IA gerar um produto bom em poucas horas? |
 | Potencial de bumps | Existem 3+ complementos naturais? |
 | Encaixe Brasil | Existe demanda equivalente aqui (busca no Google/TikTok BR)? |
+
+## Dica da aula para a Biblioteca de Anúncios
+
+Se o link abrir vazio ou pedir login/filtro: copie o nome exato da página anunciante e busque em
+**"Mundo todo" + "Todos os anúncios"** para ver as datas reais de início.
+
+## Saída obrigatória por candidata
+
+Nome da oferta · resumo do produto · estimativa de anúncios ativos · link da página de vendas ·
+link da Biblioteca de Anúncios.
 
 Candidata boa: **≥ 22 pontos**. Registre tudo em `mineracao/AAAA-MM-DD.md` usando
 `mineracao/_modelo.md`.

@@ -4,11 +4,14 @@ Order bump = oferta extra com caixinha de marcar dentro do checkout. É onde est
 
 ## Regras
 
-- **3 a 5 bumps** por oferta. Cada um complementa o produto principal (não repete).
+- **3 a 12 bumps** por oferta (a aula usa até 12) + pacote extra no pós-compra. Comece com
+  5–6 e acrescente conforme os dados de aceite. Cada um complementa o principal (não repete).
 - Preço do bump: **R$ 9,90 a R$ 27**. Soma de bumps pensada para levar o ticket a R$ 90+.
 - Título do bump em uma linha, começando pelo benefício. Descrição em até 2 frases.
 - Ordem: o bump mais barato e mais óbvio primeiro (maior taxa de aceite).
-- Upsell pós-compra (1 clique) opcional: R$ 37 a R$ 97, versão "completa/avançada".
+- Pacote extra pós-compra (upsell 1 clique): R$ 37 a R$ 97, versão "completa/avançada".
+- Bônus que vão **dentro** do .zip (calculadora, scripts, guia de compras, calendário) são
+  diferentes dos bumps: bônus aumentam conversão, bumps aumentam ticket.
 
 ## Tipos que funcionam
 

@@ -5,7 +5,9 @@ tools: WebSearch, WebFetch, Read, Write
 ---
 Leia a candidata em `mineracao/` e a página de vendas/anúncios de referência.
 
-Preencha `ofertas/<pasta>/briefing.md`:
+Primeiro gere `ofertas/<pasta>/dossie.md` (modelo em `ofertas/_modelo/dossie.md`): promessa,
+mecanismo, público, estrutura da página, criativos e Top 5 anúncios mais antigos, objeções,
+falhas a corrigir. Depois preencha `ofertas/<pasta>/briefing.md`:
 - Separe o que é **estrutura** (modelamos) do que é **conteúdo** (nunca copiamos).
 - Adapte a promessa à realidade brasileira: moeda, leis, hábitos, datas, linguagem.
 - Defina preço (R$ 19,90–67; padrão R$ 47) e âncora coerente.

@@ -1,6 +1,7 @@
 # 05 — Métricas e regras de decisão
 
-Orçamento de teste de referência: **R$ 70/dia por oferta**. As regras abaixo são o ponto de
+Estrutura de teste padrão (aula): **2 campanhas CBO** — 1-1-3 e 1-1-2 — com **R$ 35/dia cada**
+(R$ 70/dia por oferta), objetivo Vendas (Site), público 100% aberto. Variações: 1-1-1, 1-1-10. As regras abaixo são o ponto de
 partida e devem ser ajustadas com os dados reais (registre a mudança e o motivo aqui).
 
 ## Números que importam
@@ -16,6 +17,18 @@ partida e devem ser ajustadas com os dados reais (registre a mudança e o motivo
 | CPM | custo por mil impressões | referência, não decisão |
 
 "Líquido" = depois das taxas da plataforma de checkout (registre a taxa em `campanha.md`).
+
+## Diagnóstico de página/checkout (aula)
+
+Muitos cliques e Initiate Checkout, poucas compras → auditar a página: listar objeções não
+respondidas, deixar a primeira dobra mais direta (gancho/transformação/antes e depois),
+reforçar os GIFs do entregável na página e nos anúncios, conferir o checkout e os bumps.
+
+## Ofertas com expert/Instagram (não é o padrão)
+
+Sem público aberto: campanha CBO com 4 conjuntos — seguidores do IG; engajamento IG 7d +
+PageView 180d; Initiate Checkout 7/15/30d; Direct 7d + PageView 180d. Grupos de 3 anúncios
+(A, B, C) e duplicação trocando só os criativos (C, D, E).
 
 ## Regras de corte e escala
 

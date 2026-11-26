@@ -28,8 +28,9 @@ sem aparecer em vídeo.
 
 ```
 .claude/agents/     agentes da esteira (um por etapa)
-docs/               modelo de negócio, esteira, critérios e regras de decisão
+docs/               prompt mestre (00), modelo, esteira, critérios, métricas e stack
 mineracao/          radares de mineração (um arquivo por dia)
+.claude/skills/     uma skill por etapa (os templates da aula)
 ofertas/_modelo/    modelo de pasta de uma oferta — copie para cada nova oferta
 ofertas/<data_slug> uma pasta por oferta em produção ou no ar
 resultados/         painel consolidado das ofertas testadas

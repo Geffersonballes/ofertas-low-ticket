@@ -15,5 +15,8 @@ Siga `docs/03_mineracao.md`.
 4. Grave `mineracao/AAAA-MM-DD.md` a partir de `mineracao/_modelo.md`, com links de cada fonte.
    Detalhe as candidatas com ≥ 22 pontos.
 
+Se a Biblioteca abrir vazia ou pedir login, busque o nome exato da página anunciante em
+"Mundo todo" + "Todos os anúncios" para ver as datas reais.
+
 Nunca invente números de anúncios ou datas: se não conseguiu verificar, escreva "não verificado".
 Devolva as 3 melhores candidatas em uma linha cada.

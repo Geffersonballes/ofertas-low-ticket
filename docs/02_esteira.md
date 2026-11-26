@@ -1,28 +1,27 @@
-# 02 — Esteira de produção de uma oferta
+# 02 — Esteira de produção de uma oferta (7 etapas da aula)
 
-Responsável pela orquestração: agente `supervisor-de-ofertas`.
+Referência: `docs/00_prompt-mestre.md`. Orquestração: agente `supervisor-de-ofertas`.
 Cada oferta vive em `ofertas/AAAA-MM-DD_<slug>/` (cópia de `ofertas/_modelo/`), e cada etapa
-é marcada no `status.md` da pasta.
+é marcada no `status.md`. Ferramentas e conexões de cada etapa: `docs/06_stack-e-conexoes.md`.
 
-| # | Etapa | Agente | Saída |
-|---|---|---|---|
-| 1 | Mineração | `minerador-de-ofertas` | `mineracao/AAAA-MM-DD.md` com candidatas pontuadas |
-| 2 | Análise e escolha | `analista-de-oferta` | `briefing.md` (promessa, público, ângulo, preço) |
-| — | **Portão 1 (humano)** | dono | aprova qual candidata vira oferta |
-| 3 | Produto | `criador-de-produto` | `produto/` — sumário, conteúdo completo, mockup |
-| 4 | Order bumps e upsell | `criador-de-order-bumps` | `bumps/bumps.md` + conteúdo de cada bump |
-| 5 | Copy da página | `copywriter-de-pagina` | `pagina/copy.md` |
-| 6 | Construção da página | `construtor-de-pagina` | `pagina/index.html` responsiva, pronta para publicar |
-| 7 | Criativos | `roteirista-de-criativos` | `criativos/` — 3 a 5 roteiros + textos dos anúncios |
-| 8 | Conformidade | `revisor-de-conformidade` | parecer no `status.md` (**Portão 2**, tem veto) |
-| — | **Portão 3 (humano)** | dono | aprova página, produto e criativos |
-| 9 | Checkout, pixel e campanha | `gestor-de-trafego` | `campanha.md` + campanha **em rascunho** |
-| — | **Portão 4 (humano)** | dono | publica a campanha e liga o orçamento |
-| 10 | Leitura de resultado | `analista-de-metricas` | decisão em `resultados/painel.md` |
+| Etapa | O que acontece | Agente(s) | Skill de uso diário | Saída |
+|---|---|---|---|---|
+| 1. Mineração | Ofertas em inglês, white, low ticket, 48–112+ anúncios, 14+ dias | `minerador-de-ofertas` | `minerar-ofertas` | `mineracao/AAAA-MM-DD.md` |
+| — | **Portão 1 (dono):** escolhe a candidata | | | |
+| 2. Dossiê | Engenharia reversa: promessa, mecanismo, público, estrutura da página, criativos, objeções | `analista-de-oferta` | `dossie-oferta` | `dossie.md` + `briefing.md` |
+| 3. Página | Página 100% em pt-BR, mesma estrutura e estética, mockups e GIFs do entregável, publicação na Hostinger | `copywriter-de-pagina`, `construtor-de-pagina` | `pagina-de-vendas` | `pagina/index.html` publicada |
+| 4. Entregável | Produto completo + bônus práticos em .zip; até 12 order bumps + oferta pós-compra | `criador-de-produto`, `criador-de-order-bumps` | `entregavel-e-bonus` | `produto/`, `bumps/`, .zip |
+| — | **Portão 2:** `revisor-de-conformidade` (veto) · **Portão 3 (dono):** aprova página e produto | | | |
+| 5. Cadastro e pixel | Produto + .zip na Weven, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Weven | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
+| 6. Criativos | Top 5 anúncios mais antigos da referência recriados em pt-BR (cenas, narração, trilha) | `roteirista-de-criativos` | `top5-criativos` | `criativos/` |
+| 7. Campanhas | 2 campanhas CBO (1-1-3 e 1-1-2), R$ 35/dia cada, Vendas (Site), público aberto, **rascunho** | `gestor-de-trafego` | `subir-campanhas` | `campanha.md` (parte 2) |
+| — | **Portão 4 (dono):** revisa os rascunhos, publica e liga o orçamento | | | |
+| Fase 2. Otimização | Leitura diária, diagnóstico de página/checkout, corte e escala | `analista-de-metricas` | — | `resultados/painel.md` |
 
 Regras:
 
-- Nenhum portão é pulado. Se um portão reprova, a oferta volta para a etapa indicada.
-- Máximo de 2 voltas por etapa; depois disso, a oferta é descartada e o motivo registrado.
-- As etapas 3, 4 e 5 podem rodar em paralelo depois do Portão 1.
-- Arquivos pesados (vídeos, zips) ficam fora do git — registre o link no `status.md`.
+- Nenhum portão é pulado. Reprovação volta para a etapa indicada; no máximo 2 voltas por
+  etapa, depois a oferta é descartada com o motivo registrado.
+- Depois do Portão 1, as etapas 3, 4 e 6 (roteiros) podem rodar em paralelo.
+- Meta operacional: 1 a 3 ofertas novas por dia.
+- Arquivos pesados (vídeos, .zip, GIFs) ficam fora do git: registre o link no `status.md`.
