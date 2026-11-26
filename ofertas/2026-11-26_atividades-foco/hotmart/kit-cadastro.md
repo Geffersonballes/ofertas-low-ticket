@@ -129,7 +129,7 @@ Clique em **Próximo**.
 | Moeda | Real (BRL) |
 | Valor | **R$ 37,00** |
 | Garantia | **7 dias** |
-| Forma de pagamento | ⚠️ **decisão do dono** (não dá para trocar depois de criar a oferta). Sugestão: **Parcelado com taxas para o cliente, até 5x** (R$ 37 ÷ 5 = R$ 7,40, acima da parcela mínima de R$ 7). A copy já diz "à vista ou parcelado no cartão" |
+| Forma de pagamento | **Parcelado com taxas para o cliente, até 5x** (decidido pelo dono; R$ 37 ÷ 5 = R$ 7,40, acima da parcela mínima de R$ 7). A página diz "à vista ou em até 5x no cartão (com juros)" |
 | Projeto Hotmart One | decisão do dono (doa parte das vendas; sugestão: não, por ora) |
 | Conversão de moeda | Não (venda só no Brasil) |
 
@@ -157,8 +157,7 @@ e nos botões da página (quem republica é o `construtor-de-pagina`; não mexi 
 ### Passo 6 — Página do produto
 1. **Sua página externa > Configurar página**: `https://ofertas.ballestech.com.br/dez-minutinhos/`
    ([360017889651](https://help.hotmart.com/pt-br/article/360017889651/)).
-2. **Marketplace:** sugestão **desligar** por enquanto (tráfego é nosso; a vitrine da Hotmart
-   pediria texto e vitrine próprios). Decisão do dono.
+2. **Marketplace: LIGADO** (decidido pelo dono em 2026-11-26).
 
 ### Passo 7 — Configurações de pagamento (checkout)
 Ferramentas > Ver todas > **Configurações de pagamento** > produto
@@ -167,7 +166,7 @@ Ferramentas > Ver todas > **Configurações de pagamento** > produto
 | Campo | Valor |
 |---|---|
 | E-mail de suporte | `acessos@ballestech.com.br` |
-| Dados solicitados | Nome, e-mail, CPF/CNPJ (obrigatório), celular. Endereço: recomendado pela Hotmart para nota fiscal — decisão do dono (pode baixar a conversão) |
+| Dados solicitados | Nome, e-mail, CPF/CNPJ (obrigatório), celular. **Endereço: não pedir** (decidido pelo dono) |
 | Formas de pagamento | Cartão, Pix, boleto (deixar as padrão) |
 | Nome que aparece na fatura (máx. 22) | `DEZ MINUTINHOS` (14 caracteres) |
 | Notificações de "outras pessoas compraram" | **Desligado** (seria prova social; regra 3) |
@@ -186,7 +185,7 @@ Ferramentas > Ver todas > **Aparência da Página de Pagamento** > produto > tem
 - É nesta tela que entram os order bumps (seção 4). Atenção: duplicar a página **não** duplica os bumps.
 
 ### Passo 9 — Dados pessoais e Finalizar cadastro
-1. Conferir aba **Dados pessoais** completa (pessoa física, Gefferson Balles).
+1. Conferir aba **Dados pessoais** completa. A conta de produtor deve estar no **CNPJ da Balles Tech Energia Ltda** (o mesmo da página).
 2. **Painel > Finalizar cadastro** (aceita o Termo de Tratamento de Dados Pessoais).
 3. Esperar a verificação (≈ 15 min, até 1 dia útil). Se vier "Ajustes pendentes", ler no painel
    ([31594947721485](https://help.hotmart.com/pt-br/article/31594947721485/)).
@@ -331,12 +330,12 @@ conferir no Gerenciador de Eventos. Registrar PageView / InitiateCheckout / Purc
 
 ## 5. Checklist de amanhã
 
-- [ ] PDF principal com "Gefferson Balles" na capa (criador-de-produto) — **bloqueia o passo 4**
-- [ ] Dono decide: forma de pagamento/parcelas, Hotmart One, Marketplace, pedir endereço no checkout
+- [x] PDF principal com "Gefferson Balles" na capa
+- [x] Decisões do dono: até 5x com juros, Marketplace ligado, sem endereço no checkout (Hotmart One: não, por ora)
 - [ ] Produto principal: passos 1 a 9 → aguardar aprovação
 - [ ] Link de pagamento → `pagina/dados.json` (`LINK_CHECKOUT`) → republicar página (construtor-de-pagina)
-- [ ] PDFs dos bumps 1–6 prontos e conferidos; Volume 2 conferido; capas com autor
-- [ ] Imagens dos 7 bumps (a partir das capas reais)
+- [x] PDFs dos 7 bumps prontos e conferidos; capas com autor
+- [x] Imagens dos 7 bumps (a partir das capas reais)
 - [ ] 7 produtos de bump cadastrados e aprovados
 - [ ] 7 bumps inseridos no checkout, na ordem, e publicados
 - [ ] Pixel no principal + nos 7 bumps (ID pelo Claude; token pelo dono)
