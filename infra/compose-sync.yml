@@ -1,0 +1,27 @@
+# Projeto "ofertas-sync" na VPS (criado via API da Hostinger).
+# Sincronizador do repositório ofertas-low-ticket (ramo main) para /opt/ofertas-low-ticket.
+# Na primeira vez gera a chave de leitura em /opt/ofertas-chave e a mostra no log até ser cadastrada no GitHub.
+services:
+  sync:
+    image: alpine/git:2.47.2
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        CHAVE=/chave/deploy_ofertas
+        command -v ssh-keygen >/dev/null || apk add --no-cache -q openssh-keygen
+        [ -f $$CHAVE ] || ssh-keygen -q -t ed25519 -N "" -f $$CHAVE -C vps-ofertas-leitura
+        export GIT_SSH_COMMAND="ssh -i $$CHAVE -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/chave/known_hosts"
+        git config --global --add safe.directory /repo
+        while true; do
+          if [ ! -d /repo/.git ]; then
+            echo "CHAVE PUBLICA para cadastrar em GitHub > Deploy keys:"; cat $$CHAVE.pub
+            git clone -q --branch main git@github.com:Geffersonballes/ofertas-low-ticket.git /repo && echo "REPOSITORIO CLONADO"
+          else
+            git -C /repo fetch -q origin main && git -C /repo reset -q --hard origin/main
+          fi
+          sleep 60
+        done
+    volumes:
+      - /opt/ofertas-low-ticket:/repo
+      - /opt/ofertas-chave:/chave

@@ -1,0 +1,25 @@
+# Projeto "ofertas-web" na VPS (criado via API da Hostinger). Caddy único nas portas 80/443.
+# Lê o Caddyfile do repositório sincronizado em /opt/ofertas-low-ticket.
+services:
+  web:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMINIO_OFERTAS: ofertas.ballestech.com.br
+      DOMINIO_ACHADINHOS: achadinhosdalay.ballestech.com.br
+    volumes:
+      - /opt/ofertas-low-ticket/infra/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/ofertas-low-ticket:/repo:ro
+      - /opt/tutoriais/robo-promocoes/landing:/site-achadinhos:ro
+      - certificados:/data
+      - config:/config
+volumes:
+  # reaproveita os certificados já emitidos pelo projeto antigo "landing"
+  certificados:
+    external: true
+    name: landing_caddy_dados
+  config:

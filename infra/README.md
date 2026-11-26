@@ -12,15 +12,24 @@
 Uma URL por oferta no mesmo domínio (`/slug/`) evita criar DNS e certificado a cada oferta.
 Se uma oferta precisar de domínio próprio, acrescente um bloco no `Caddyfile`.
 
-## Instalação (uma vez só)
+## Como está instalado (feito pelo Claude via API da Hostinger, sem terminal)
 
-No hPanel: VPS → Terminal (navegador), como root:
+Dois projetos Docker na VPS, criados com a operação `vps_docker_create` do MCP Hostinger:
 
-```bash
-curl -fsSL -o instalar.sh "<link raw do infra/instalar-vps.sh>"   # ou cole o conteúdo
-bash instalar.sh     # parte 1: mostra a chave para cadastrar no GitHub (Deploy keys, só leitura)
-bash instalar.sh     # parte 2: clona, sobe o Caddy + sincronizador e testa
-```
+| Projeto | O que faz | Compose |
+|---|---|---|
+| `ofertas-sync` | Gera a chave de leitura em `/opt/ofertas-chave/`, clona o repositório em `/opt/ofertas-low-ticket` e faz `fetch` + `reset` do ramo `main` a cada 60 s | `infra/compose-sync.yml` |
+| `ofertas-web` | Caddy único nas portas 80/443 servindo as ofertas e a landing dos achadinhos | `infra/compose-web.yml` |
 
-Para voltar ao estado anterior: `docker compose -f /opt/ofertas-low-ticket/infra/docker-compose.yml down`
-e `docker compose -f /opt/tutoriais/robo-promocoes/landing/docker-compose.yml start`.
+A chave pública está cadastrada em GitHub → Settings → Deploy keys ("VPS", só leitura).
+O projeto antigo `landing` (em `/opt/tutoriais/robo-promocoes/landing`) fica **parado, não apagado**.
+
+Mudou o `Caddyfile`? Depois do push e da sincronização, reinicie o projeto `ofertas-web`
+(`vps_docker_restart`).
+
+## Voltar ao estado anterior
+
+1. `vps_docker_stop` em `ofertas-web`
+2. `vps_docker_start` em `landing`
+
+(`infra/instalar-vps.sh` + `infra/docker-compose.yml` ficam como alternativa manual por terminal.)
