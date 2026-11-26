@@ -8,13 +8,9 @@ animado), páginas do PDF, mockups e o vídeo do caderno folheando. Sem pessoas,
 
 | Arquivo | Roteiro | Voz | Duração | Fronteiras de frase em pausas reais |
 |---|---|---|---|---|
-| `anuncio-1-laynner.mp4` | 1 | Laynner | 22.6 s | 8/8 |
 | `anuncio-1-amandinha.mp4` | 1 | Amandinha | 22.1 s | 8/8 |
-| `anuncio-2-laynner.mp4` | 2 | Laynner | 23.1 s | 8/8 |
 | `anuncio-2-amandinha.mp4` | 2 | Amandinha | 21.6 s | 8/8 |
-| `anuncio-3-laynner.mp4` | 3 | Laynner | 24.0 s | 6/6 |
 | `anuncio-3-amandinha.mp4` | 3 | Amandinha | 22.9 s | 6/6 |
-| `anuncio-4-laynner.mp4` | 4 | Laynner | 24.2 s | 8/8 |
 | `anuncio-4-amandinha.mp4` | 4 | Amandinha | 22.5 s | 8/8 |
 
 ## O que cada roteiro mostra
@@ -40,6 +36,8 @@ cd criativos/montador
 node paginas2x.cjs 5 6 7 8 78 128 142 143
 ffmpeg -i ../../pagina/img/folheando.mp4 -vf fps=30 -q:v 3 cache/folheando/%04d.jpg
 python3 montador.py            # os 8 (≈ 7 min)
-python3 qc.py anuncio-1-laynner
+python3 qc.py anuncio-1-amandinha
 ```
-⚠️ Laynner é voz clonada de pessoa real: só publicar com autorização dela.
+
+
+Decisão do dono (2026-11-27): só a voz Amandinha; os vídeos com a Laynner foram retirados.
