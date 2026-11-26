@@ -1,0 +1,27 @@
+# Servidor web único da VPS (Caddy): HTTPS automático (Let's Encrypt) para todos os sites.
+# Mudanças neste arquivo: git push → o sincronizador baixa → recarregar com
+#   docker compose -f /opt/ofertas-low-ticket/infra/docker-compose.yml exec web caddy reload --config /etc/caddy/Caddyfile
+
+# --- Ofertas low ticket: uma pasta por oferta em publicado/<slug>/ → https://DOMINIO/<slug>/
+{$DOMINIO_OFERTAS}, www.{$DOMINIO_OFERTAS} {
+	root * /repo/publicado
+	encode zstd gzip
+	file_server
+	@html path *.html */
+	header @html Cache-Control "no-cache"
+	@estaticos path *.webp *.png *.jpg *.jpeg *.gif *.mp4 *.webm *.svg *.woff2
+	header @estaticos Cache-Control "public, max-age=604800"
+}
+
+# --- Site já existente: landing do robô de promoções (copiado de robo-promocoes/landing/Caddyfile)
+{$DOMINIO_ACHADINHOS} {
+	root * /site-achadinhos
+	encode zstd gzip
+	file_server
+	@config path /config.js
+	header @config Cache-Control "no-cache"
+	@estaticos path *.webp *.png *.jpg
+	header @estaticos Cache-Control "public, max-age=604800"
+	@privado path /Caddyfile /docker-compose.yml /README.md /PLANO-LANDING.md /.env
+	respond @privado 404
+}

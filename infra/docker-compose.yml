@@ -1,0 +1,42 @@
+# Servidor web da VPS + sincronizador do repositório.
+# Substitui o projeto "landing" (que ocupava as portas 80/443) e continua servindo o site dele.
+services:
+  web:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMINIO_OFERTAS: ${DOMINIO_OFERTAS:?defina no .env}
+      DOMINIO_ACHADINHOS: ${DOMINIO_ACHADINHOS:?defina no .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/ofertas-low-ticket:/repo:ro
+      - /opt/tutoriais/robo-promocoes/landing:/site-achadinhos:ro
+      - caddy_dados:/data
+      - caddy_config:/config
+
+  # Puxa o repositório a cada 60 s: publicar uma oferta = git push na pasta publicado/.
+  sync:
+    image: alpine/git:2.47.2
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        git config --global --add safe.directory /repo
+        while true; do
+          git -C /repo fetch -q origin "$$RAMO" && git -C /repo reset -q --hard "origin/$$RAMO"
+          sleep 60
+        done
+    environment:
+      RAMO: ${RAMO:-main}
+      GIT_SSH_COMMAND: ssh -i /chave/deploy_ofertas -o StrictHostKeyChecking=accept-new
+    volumes:
+      - /opt/ofertas-low-ticket:/repo
+      - /root/.ssh/deploy_ofertas:/chave/deploy_ofertas:ro
+
+volumes:
+  caddy_dados:
+  caddy_config:

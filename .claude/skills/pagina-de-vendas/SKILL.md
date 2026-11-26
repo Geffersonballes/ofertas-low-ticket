@@ -11,7 +11,7 @@ Entrada: pasta da oferta, `[TEMA escuro/claro]`, `[DOMINIO ou subdomínio]`.
    Para GIF do material real, prefira capturar as páginas verdadeiras do produto e animar com ffmpeg.
 3. `construtor-de-pagina` → `pagina/index.html`. Bloco de avaliações só com avaliações reais
    (ver `CLAUDE.md`).
-4. Publicação: na VPS Hostinger (KVM 2), em `/var/www/<subdominio>/` servido pelo nginx, com
-   registro DNS A do subdomínio apontando para o IP da VPS (MCP Hostinger) e HTTPS (certbot).
-   **Antes de publicar, mostre a página ao dono e confirme o domínio** — publicar sobrescreve o site.
+4. Publicação: copie a página aprovada (index.html + img/) para `publicado/<slug>/` e faça
+   push no ramo `main`. Em até 60 s ela está em `https://ballestech.shop/<slug>/` (ver `infra/README.md`).
+   **Antes de publicar, mostre a página ao dono** e confira a URL depois do push.
 5. Registre a URL final no `status.md`.

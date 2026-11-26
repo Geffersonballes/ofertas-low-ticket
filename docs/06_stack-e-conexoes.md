@@ -7,7 +7,7 @@ Situação levantada em 2026-11-26 nesta conta (diagnóstico respondido pelo don
 | Mineração 24/7 | ChatGPT Dot / Grok Bot / ChatGPT Work | Agente externo manda links | ⬜ a definir | Agente `minerador-de-ofertas` sob demanda (busca na web) |
 | Cérebro | Claude (Max / Claude Code) | — | ✅ Claude Code | — |
 | Navegador | Extensão do Claude para Chrome | Abas logadas (Hotmart, Facebook, Gerenciador de Eventos) | ✅ decidido: computador do dono ligado ao Claude (Remote Control) | Passo a passo manual |
-| Hospedagem | Hostinger | MCP Hostinger | ✅ conectado · plano **VPS KVM 2** (Ubuntu 24.04) + domínios ballestech.com.br, ballestech.shop, balleseballes.com.br/.online, engajadamente.cloud | Páginas estáticas servidas na VPS (nginx), um subdomínio por oferta |
+| Hospedagem | Hostinger | MCP Hostinger | ✅ conectado · plano **VPS KVM 2** (Ubuntu 24.04) + domínios ballestech.com.br, ballestech.shop, balleseballes.com.br/.online, engajadamente.cloud | Caddy único na VPS (`infra/`), uma pasta por oferta: `ballestech.shop/<slug>/` |
 | Checkout | Weven (aula) | Aba no Chrome | ✅ decidido: **Hotmart** | — |
 | Imagens, mockups, GIFs | Higgsfield | Plugin | ⬜ não conectado | ElevenLabs (imagem/vídeo), Picsart, Canva — conectados |
 | Narração | ElevenLabs | Plugin/MCP | ✅ conectado | — |
@@ -21,8 +21,8 @@ Situação levantada em 2026-11-26 nesta conta (diagnóstico respondido pelo don
    planilha/pasta que o Claude lê.
 2. **Dossiê:** acesso à página de referência (web). Vídeos dos anúncios: baixar e transcrever
    (ElevenLabs transcreve áudio).
-3. **Página:** VPS da Hostinger (nginx servindo HTML estático por subdomínio) + DNS do domínio
-   apontado para o IP da VPS (MCP Hostinger gerencia o DNS). Mockups/GIFs: gerador de imagem
+3. **Página:** VPS da Hostinger com Caddy + sincronizador do git (`infra/README.md`);
+   DNS do ballestech.shop apontado para o IP da VPS. Mockups/GIFs: gerador de imagem
    e vídeo.
 4. **Entregável:** nada externo (Python gera PDF, planilhas e .zip). Imagens: gerador de imagem.
 5. **Cadastro e pixel:** Hotmart e Facebook só têm interface web → computador do dono ligado
