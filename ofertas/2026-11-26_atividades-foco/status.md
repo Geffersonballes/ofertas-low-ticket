@@ -11,7 +11,7 @@
 | 1 | Mineração | minerador-de-ofertas | ✅ | 2026-11-26 | Contagens via AdManage; conferir na Biblioteca |
 | 2 | Dossiê + briefing | analista-de-oferta | ✅ | 2026-11-26 | `dossie.md` e `briefing.md` preenchidos; itens "não verificado" listados no fim do briefing |
 | P1 | Aprovação da oferta | dono | ✅ | 2026-11-26 | Dono escolheu NeuroKids |
-| 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Amostra (13 atividades) **aprovada pelo dono**; falta produzir o caderno completo (120 atividades, plano de 30 dias, bônus) |
+| 3 | Produto | criador-de-produto | 🟡 | 2026-11-26 | Caderno completo pronto: `produto/final/dez-minutinhos.pdf` (149 págs, 120 atividades, plano 30 dias por nível, gabarito, 3 bônus) + `.zip` de entrega; aguardando aprovação do dono |
 | 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
 | 5 | Copy da página | copywriter-de-pagina | ✅ | 2026-11-26 | `pagina/copy.md`; título 1 usado na página (dono pode trocar) |
 | 6 | Página | construtor-de-pagina | 🟡 | 2026-11-26 | `pagina/index.html` + privacidade/termos, conferida em 390 px e 1280 px; mídias só com páginas reais. Faltam: link do checkout, e-mail de suporte, nome/CPF-CNPJ. Não publicada |
