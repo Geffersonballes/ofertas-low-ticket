@@ -2,13 +2,14 @@
 
 - Pasta: `ofertas/2026-11-26_atividades-foco/`
 - Origem (mineração): `mineracao/2026-11-26.md`, candidata #1 (NeuroKids, 27/30)
-- Preço: R$ __ (a definir no briefing) · Plataforma de checkout: Hotmart
-- Página: `https://ofertas.ballestech.com.br/<slug>/` (slug a definir)
+- Nome proposto: **Dez Minutinhos** (alternativas: Cabeça Ligada · Desafio no Papel) — aguarda dono
+- Preço: R$ 37,00 (proposto no briefing; teste de R$ 47,00 depois de ~50 vendas) · Plataforma de checkout: Hotmart
+- Página: `https://ofertas.ballestech.com.br/dez-minutinhos/` (slug proposto)
 
 | # | Etapa | Responsável | Situação | Data | Observação |
 |---|---|---|---|---|---|
 | 1 | Mineração | minerador-de-ofertas | ✅ | 2026-11-26 | Contagens via AdManage; conferir na Biblioteca |
-| 2 | Dossiê + briefing | analista-de-oferta | 🟡 | 2026-11-26 | |
+| 2 | Dossiê + briefing | analista-de-oferta | ✅ | 2026-11-26 | `dossie.md` e `briefing.md` preenchidos; itens "não verificado" listados no fim do briefing |
 | P1 | Aprovação da oferta | dono | ✅ | 2026-11-26 | Dono escolheu NeuroKids |
 | 3 | Produto | criador-de-produto | ⬜ | | |
 | 4 | Order bumps | criador-de-order-bumps | ⬜ | | |
@@ -30,3 +31,8 @@ Legenda: ⬜ a fazer · 🟡 em andamento · ✅ feito · ❌ reprovado/voltou
 ## Decisões e motivos
 - 2026-11-26: dono escolheu a candidata #1 (NeuroKids) entre as 4 da primeira mineração.
 - Proibido trazer da referência: TDAH/diagnóstico, "resultado em 3–7 dias", "estimula as 5 áreas do cérebro", depoimentos.
+- 2026-11-26 (Etapa 2): veredito "se sustenta no Brasil, com ressalvas" (concorrência barata e fichas grátis; diferencial = 2 níveis, plano de 30 dias, gabarito, acabamento).
+- 2026-11-26 (Etapa 2): faixa 4–10 anos em dois níveis (4–6 sem leitura; 7–10 com leitura inicial), 120 atividades, PDF A4 próprio para P&B. Motivo: um material único para 3–14 anos (como a referência) não serve às duas pontas.
+- 2026-11-26 (Etapa 2): preço proposto R$ 37,00, sem "de/por" (CDC art. 37); âncora = R$ 1,23/dia e R$ 0,31/atividade. Motivo: concorrência BR de R$ 8 a R$ 30; lucro vem dos bumps. Decisão final do dono.
+- 2026-11-26 (Etapa 2): 7 bumps (R$ 9,90 a R$ 27,00) + pós-compra "Coleção Ano Inteiro" R$ 47,00; ticket estimado ≈ R$ 64,70 (taxas de aceite hipotéticas). Sem assinatura mensal (mais reembolso/chargeback).
+- 2026-11-26 (Etapa 2): Biblioteca da Meta e páginas `admanage.ai/ad/<id>` deram 403; datas e textos do Top 5 vêm da AdScan (mesmos IDs), status ativo não verificado.
