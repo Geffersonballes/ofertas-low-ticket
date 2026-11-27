@@ -189,4 +189,32 @@ Implícitas (respondidas pela página, não pelo FAQ): "é complicado/restritivo
    (e testar no LibreOffice).
 
 ## Inteligência de anúncios
-(preenchida pelo pesquisador-de-anuncios)
+
+Feita pelo `pesquisador-de-anuncios` em 2026-11-27. Pesquisa completa, com fontes e limites:
+`pesquisas/2026-11-27_planilhas-financas.md`. Padrões gravados em `aprendizados/padroes-externos.md`.
+Nenhum padrão chegou a **forte**: quase toda a evidência é de 1 anunciante (Smart Women Society, via
+AdManage). O espelho só mostra o **texto** dos anúncios; duração, primeiros 3 s e se a planilha aparece
+por dentro precisam ser vistos à mão na Biblioteca.
+
+### Padrões a usar (do mais forte ao mais fraco)
+| # | Padrão | Evidência | Grau |
+|---|---|---|---|
+| 1 | Vender o que tem dentro da planilha (cálculos automáticos, gráficos que se montam sozinhos, nº de abas, previsto × real), não resultado financeiro | SWS: orçamento 53 anúncios · travel 97 · career 36, todos 217 d | médio |
+| 2 | Abrir com a pergunta do dia a dia "Para onde foi o dinheiro deste mês?" — sobre o mês, nunca sobre a pessoa | SWS "Tired of wondering where your money goes each month?" · 53 anúncios · 217 d | médio |
+| 3 | Vídeo como formato principal (tela da planilha + narração/legenda) | SWS 88% vídeo (173 ativos) · 217 d; Savor Life Planner 100% vídeo · 1.185 d | médio |
+| 4 | Poucos ângulos, muitas variações do que vence | SWS: 5 ângulos para 196 anúncios; lotes de 40–50 novos em abr, jul, set e nov/2026 | médio |
+| 5 | Combo planilha + guia como oferta de maior valor (bump/upsell) | SWS Money Makeover Combo · 4 anúncios · 213 d | médio |
+
+Fraco, fora do top 5: ano no nome do produto ("edição 2027") para dezembro/janeiro.
+
+### Padrões a evitar
+| # | Padrão | Por quê |
+|---|---|---|
+| 1 | Depoimento com nome + 5 estrelas na primeira linha (gancho de 4 dos 5 ângulos da SWS) | Eles têm 233 avaliações reais; nós não. Prova inventada (CLAUDE.md regra 3, CDC art. 37) |
+| 2 | Promessa de resultado financeiro e número de comunidade ("become debt-free", "50,000+ women") | Política da Meta (ganho/resultado) e atributo pessoal ("você que está endividada") |
+| 3 | Sorteio em dinheiro e urgência de promoção ("$1,000 cash giveaway", "DON'T MISS OUT") | Urgência falsa (regra 4); os anúncios de Black Friday têm só 10 d e são sazonais |
+
+### O que conferir à mão
+Ver a seção 6 da pesquisa: nº de ativos e data do mais antigo da SWS; 2–3 vídeos da copy "best
+budgeting tool" (duração, 3 primeiros segundos, se mostra a planilha); inativos do Spreadsheets
+Crafter (o que morreu em menos de 7 dias); anunciantes brasileiros de "planilha financeira".

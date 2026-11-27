@@ -171,16 +171,16 @@ Origem: `mineracao/2026-11-26.md`, candidata #2 (números atualizados em 2026-11
   ~5 semanas.
 - **Concorrência muito alta e barata:** dezenas de planilhas na Hotmart (ex.: "Gestão Financeira PRO",
   "Kit de planilhas de controle financeiro 2026", "Planilha controle financeiro pessoal CLT") e no
-  Mercado Livre de ~R$ 2 a ~R$ 80, além de modelos grátis do Excel/Google e de bancos. Ganhamos só
+  Mercado Livre de ~R$ 2 a ~R$ 80, além dos modelos grátis do Excel e do Google Planilhas. Ganhamos só
   com: cartão/parcelas bem feitos, 13º/VR/IR, exemplo preenchido, acabamento visual e anúncio em vídeo
   de tela (a referência mostra que é isso que escala).
 - **A oferta se sustenta no Brasil? Sim, com condição de prazo.** Vale fazer se a página e os
   anúncios (em rascunho para o dono) estiverem prontos até ~2026-12-15, para pegar o 13º (2ª parcela
   até 20/12) e o pico de janeiro. Se não der para entrar no ar até a primeira semana de janeiro,
-  recomendo **adiar para a próxima virada** em vez de lançar em fevereiro com a procura de busca já
-  caindo. Depois de fevereiro, a oferta vive de ângulos de ocasião (IR, férias de julho, Black Friday).
+  recomendo **adiar para a próxima virada** em vez de lançar em fevereiro com as buscas já em queda.
+  Depois de fevereiro, a oferta vive de ângulos de ocasião (IR, férias de julho, Black Friday).
 
-## Nota da mineração (revista em 2026-11-27): 25/30
+## Nota da mineração (revista em 2026-11-27): 24/30
 
 | Critério | Nota | Por quê |
 |---|---|---|
@@ -189,7 +189,7 @@ Origem: `mineracao/2026-11-26.md`, candidata #2 (números atualizados em 2026-11
 | Dor | 4 | Problema diário e concreto (não saber para onde vai o dinheiro, cartão e parcelas). Não é 5 porque não é urgente: dá para adiar a compra |
 | Facilidade de produção | 4 | Planilha com fórmulas e gráficos sai por código (openpyxl) e guia em HTML → PDF. Não é 5 porque a versão Google Planilhas e os gráficos precisam de teste manual em 3 programas |
 | Potencial de bumps | 5 | 7 complementos naturais e um upsell, todos produzíveis por código e já validados pela própria marca (combo, viagem, dívidas, desafios) |
-| Encaixe Brasil | 3 | Demanda clara e recorrente, mas sazonal (pico em janeiro, Trends caindo ao longo do ano) e concorrência muito alta e barata. Pela regra estrita ("caindo = 0–2") seria 2 e o total 24; dei 3 porque a queda é da sazonalidade e o próximo pico está a 5 semanas |
+| Encaixe Brasil | 2 | Demanda clara e recorrente, mas sazonal (pico em janeiro, Trends caindo ao longo do ano: 1º trimestre ~60 → último ~30 em "planilha controle financeiro") e concorrência muito alta e barata. Regra estrita do docs/03: caindo = 0–2. O analista sugeriu 3 (queda sazonal, pico a 5 semanas); o minerador manteve 2 para não arredondar a favor |
 
 ## Riscos (política de anúncio, mercado e produto)
 
