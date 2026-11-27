@@ -19,7 +19,10 @@ Dois projetos Docker na VPS, criados com a operação `vps_docker_create` do MCP
 | Projeto | O que faz | Compose |
 |---|---|---|
 | `ofertas-sync` | Gera a chave de leitura em `/opt/ofertas-chave/`, clona o repositório em `/opt/ofertas-low-ticket` e faz `fetch` + `reset` do ramo `main` a cada 60 s | `infra/compose-sync.yml` |
-| `ofertas-web` | Caddy único nas portas 80/443 servindo as ofertas e a landing dos achadinhos | `infra/compose-web.yml` |
+| `ofertas-web` | Caddy único nas portas 80/443: ofertas, landing dos achadinhos e o **painel** (`painel.ballestech.com.br`, com senha; o hash da senha fica só na VPS) | `infra/compose-web.yml` |
+
+Para conferir a sincronização: os logs do `ofertas-sync` (`vps_docker_logs`) mostram
+"sincronizado em <commit>" a cada atualização, ou "ERRO no fetch".
 
 A chave pública está cadastrada em GitHub → Settings → Deploy keys ("VPS", só leitura).
 O projeto antigo `landing` (em `/opt/tutoriais/robo-promocoes/landing`) fica **parado, não apagado**.

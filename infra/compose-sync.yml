@@ -1,5 +1,6 @@
 # Projeto "ofertas-sync" na VPS (criado via API da Hostinger).
 # Sincronizador do repositório ofertas-low-ticket (ramo main) para /opt/ofertas-low-ticket.
+# Registra no log cada commit novo baixado e qualquer erro de fetch.
 # Na primeira vez gera a chave de leitura em /opt/ofertas-chave e a mostra no log até ser cadastrada no GitHub.
 services:
   sync:
@@ -13,12 +14,20 @@ services:
         [ -f $$CHAVE ] || ssh-keygen -q -t ed25519 -N "" -f $$CHAVE -C vps-ofertas-leitura
         export GIT_SSH_COMMAND="ssh -i $$CHAVE -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/chave/known_hosts"
         git config --global --add safe.directory /repo
+        ULTIMO=""
         while true; do
           if [ ! -d /repo/.git ]; then
             echo "CHAVE PUBLICA para cadastrar em GitHub > Deploy keys:"; cat $$CHAVE.pub
             git clone -q --branch main git@github.com:Geffersonballes/ofertas-low-ticket.git /repo && echo "REPOSITORIO CLONADO"
           else
-            git -C /repo fetch -q origin main && git -C /repo reset -q --hard origin/main
+            # --force + refspec com "+" aceitam histórico reescrito (limpeza de 2026-11-27)
+            if git -C /repo fetch -q --force origin +refs/heads/main:refs/remotes/origin/main 2>/tmp/erro; then
+              git -C /repo reset -q --hard origin/main
+              ATUAL=$$(git -C /repo rev-parse --short HEAD)
+              [ "$$ATUAL" != "$$ULTIMO" ] && echo "$$(date -u +%FT%TZ) sincronizado em $$ATUAL: $$(git -C /repo log -1 --format=%s)" && ULTIMO=$$ATUAL
+            else
+              echo "$$(date -u +%FT%TZ) ERRO no fetch: $$(cat /tmp/erro)"
+            fi
           fi
           sleep 60
         done
