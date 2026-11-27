@@ -30,6 +30,13 @@ E tudo o que se aprende vira arquivo no repositório, para o minerador e o opera
   `resultados/painel.md` — números e conclusões, sem acesso a dinheiro.
 - **Gefferson decide** tudo o que gasta dinheiro. Os agentes só recomendam.
 
+## Painel online
+
+**https://painel.ballestech.com.br** (uma senha, para Gefferson e Marcos). Lê `painel/site/dados.json`,
+que o `analista-de-metricas` atualiza: números da oferta, o que fazer hoje (alertas com a regra),
+funil por anúncio em verde/amarelo/vermelho contra as metas, bumps, gasto × faturamento por dia e
+aprendizados. Senha e hash ficam só na VPS (projeto `ofertas-web`), nunca no git.
+
 ## Camada 1 — sinais externos (Biblioteca de Anúncios)
 
 O sinal mais confiável e grátis: **anúncio que fica no ar por semanas dá lucro** (ninguém paga

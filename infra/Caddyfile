@@ -25,3 +25,16 @@
 	@privado path /Caddyfile /docker-compose.yml /README.md /PLANO-LANDING.md /.env
 	respond @privado 404
 }
+
+# --- Painel de métricas (login com uma senha). Usuário e hash bcrypt vêm do ambiente do projeto
+#     ofertas-web na VPS (nunca no git). Dados: painel/site/dados.json, escrito pelo analista-de-metricas.
+{$DOMINIO_PAINEL} {
+	basic_auth {
+		{$PAINEL_USUARIO} {$PAINEL_HASH}
+	}
+	root * /repo/painel/site
+	encode zstd gzip
+	file_server
+	header Cache-Control "no-store"
+	header X-Robots-Tag "noindex, nofollow"
+}

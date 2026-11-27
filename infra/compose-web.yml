@@ -11,6 +11,10 @@ services:
     environment:
       DOMINIO_OFERTAS: ofertas.ballestech.com.br
       DOMINIO_ACHADINHOS: achadinhosdalay.ballestech.com.br
+      DOMINIO_PAINEL: painel.ballestech.com.br
+      PAINEL_USUARIO: balles
+      # hash bcrypt da senha do painel: só na VPS (cada $ escrito como $$). NUNCA no git.
+      PAINEL_HASH: "<hash-bcrypt-somente-na-vps>"
     volumes:
       - /opt/ofertas-low-ticket/infra/Caddyfile:/etc/caddy/Caddyfile:ro
       - /opt/ofertas-low-ticket:/repo:ro
