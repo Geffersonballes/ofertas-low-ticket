@@ -17,6 +17,10 @@ e formatos que já venderam para nós; evite o que já falhou).
    anotar o nº de anúncios ativos e a data de início do mais antigo ainda ativo, e salvar 3–5 prints.
    Se ele usa a extensão do Claude para Chrome, você pode operar a aba e tirar os prints.
    Reprovou no corte (< 20 ativos ou nada ativo há 14+ dias)? Volte ao passo 3.
+4b. **Google Trends (obrigatório):** monte 3 termos em pt-BR (como o comprador buscaria) e o link
+   de comparação no Trends (Brasil, 12 meses). Peça ao minerador para abrir, anotar tendência,
+   picos e interesse médio e salvar o print como `referencia/trends-1.png` (com a extensão do
+   Chrome, você pode fazer isso). Caindo forte nos 12 meses = alerta no relatório; reavalie a nota.
 5. **Pasta:** `cp -r ofertas/_modelo ofertas/AAAA-MM-DD_<slug>`; prints em `referencia/`.
 6. **Dossiê e briefing:** chame o agente `analista-de-oferta` com os links e os números conferidos.
    Em seguida chame o `pesquisador-de-anuncios` para o nicho e a oferta escolhida: ele preenche a

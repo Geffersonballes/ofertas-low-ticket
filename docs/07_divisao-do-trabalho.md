@@ -49,6 +49,8 @@ Tudo dentro de `ofertas/AAAA-MM-DD_<slug>/` (copiado de `ofertas/_modelo/`):
 - [ ] `briefing.md` completo: nome em pt-BR (3 opções), promessa sem saúde/dinheiro garantido, formato
       e entregáveis que a IA consegue produzir com qualidade, preço e âncora honesta, 2–4 bônus,
       5–8 bumps com preço e ticket médio estimado, 5 ângulos de anúncio, slug, riscos
+- [ ] **Google Trends Brasil (12 meses)**: 3 termos em pt-BR, tendência, sazonalidade, link e print
+      (`referencia/trends-1.png`). Interesse relativo, não volume.
 - [ ] Encaixe Brasil verificado: buscas em português (Hotmart, Kiwify, Mercado Livre, Google) com links
 - [ ] Seção "Inteligência de anúncios" no `dossie.md` (5 padrões a usar, 3 a evitar, com evidência)
 - [ ] Nota ≥ 22/30 e nenhum critério de corte reprovado (`docs/03_mineracao.md`)

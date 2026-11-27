@@ -35,7 +35,7 @@ semanas** (sinal de que dão lucro) e trazer o modelo para o Brasil.
 | Dor | Quão urgente e específico é o problema resolvido |
 | Facilidade de produção | Dá para a IA gerar um produto bom em poucas horas? |
 | Potencial de bumps | Existem 3+ complementos naturais? |
-| Encaixe Brasil | Existe demanda equivalente aqui (busca no Google/TikTok BR)? |
+| Encaixe Brasil | Existe demanda aqui? **Google Trends Brasil, 12 meses** (subindo = 5, estável = 3–4, caindo = 0–2; sazonalidade anotada) + concorrentes na Hotmart/Kiwify/Mercado Livre |
 
 ## Dica da aula para a Biblioteca de Anúncios
 

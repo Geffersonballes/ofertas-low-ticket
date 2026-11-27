@@ -44,6 +44,16 @@ Nada de "não verificado" sem dizer por quê. Sem fonte = não entra.
 - 
 
 ## 5. Encaixe no Brasil
+### 5.1 Google Trends (Brasil, últimos 12 meses)
+Interesse relativo (0–100), não volume. Compare 3 termos em pt-BR do jeito que a mãe/pai buscaria.
+| Termo (pt-BR) | Tendência 12 meses (subindo/estável/caindo) | Sazonalidade (picos) | Interesse médio | Print |
+|---|---|---|---|---|
+| | | | | referencia/trends-1.png |
+- **Link da comparação no Trends:** 
+- **Termo em inglês da referência nos EUA (mesmo período):** tendência ____ (para comparar o momento)
+- **Leitura:** (ex.: "estável o ano todo, pico em janeiro/julho = férias → lançar antes das férias")
+
+### 5.2 Concorrência no Brasil
 | Busca/concorrente | Link | O que mostra |
 |---|---|---|
 
@@ -52,7 +62,8 @@ Gancho ≥ 25% · Retenção ≥ 15% · CTR no link ≥ 1% · Checkout ≥ 8% da
 
 ## 7. Checklist
 - [ ] status.md com etapas 1 e 2 ✅
-- [ ] 3 a 5 prints em referencia/
+- [ ] 3 a 5 prints da Biblioteca em referencia/
+- [ ] print do Google Trends em referencia/trends-1.png
 - [ ] dossie.md completo, incluindo "Inteligência de anúncios"
 - [ ] briefing.md completo (3 nomes, preço, bônus, 5–8 bumps, 5 ângulos, riscos)
 - [ ] nada de saúde/TDAH/dinheiro garantido; nada copiado ao pé da letra

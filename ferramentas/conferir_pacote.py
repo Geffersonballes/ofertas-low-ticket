@@ -14,7 +14,7 @@ def main(pasta):
     for arq in ["status.md", "dossie.md", "briefing.md", "relatorio-pacote.md"]:
         if not (p / arq).exists():
             faltas.append(f"falta o arquivo {arq}")
-    prints = list((p / "referencia").glob("*.png")) + list((p / "referencia").glob("*.jpg")) if (p / "referencia").exists() else []
+    prints = [f for f in list((p / "referencia").glob("*.png")) + list((p / "referencia").glob("*.jpg")) if not f.name.startswith("trends")] if (p / "referencia").exists() else []
     if len(prints) < 3:
         faltas.append(f"referencia/ tem {len(prints)} prints (mínimo 3)")
     if (p / "relatorio-pacote.md").exists():
@@ -50,6 +50,21 @@ def main(pasta):
             faltas.append("relatorio seção 6: CPA máximo desta oferta não calculado")
         if "- [ ]" in r.split("## 7.")[-1]:
             faltas.append("relatorio seção 7: checklist com itens não marcados")
+    trends = list((p / "referencia").glob("trends*.png")) + list((p / "referencia").glob("trends*.jpg")) if (p / "referencia").exists() else []
+    if not trends:
+        faltas.append("falta o print do Google Trends (referencia/trends-1.png)")
+    if (p / "relatorio-pacote.md").exists():
+        r = (p / "relatorio-pacote.md").read_text(encoding="utf-8")
+        if "### 5.1" not in r:
+            faltas.append("relatorio: falta a seção 5.1 (Google Trends)")
+        if "### 5.1" in r:
+            bloco = r.split("### 5.1")[1].split("### 5.2")[0]
+            linhas = [l for l in bloco.splitlines() if l.startswith("|") and "---" not in l][1:]
+            ok = [l for l in linhas if len(l.split("|")) > 3 and l.split("|")[1].strip() and l.split("|")[2].strip()]
+            if len(ok) < 3:
+                faltas.append(f"relatorio 5.1 (Google Trends): {len(ok)} termos com tendência (precisa de 3)")
+            if re.search(r"Link da comparação no Trends:\*\*\s*$", bloco, re.M):
+                faltas.append("relatorio 5.1: falta o link da comparação no Google Trends")
     if (p / "dossie.md").exists() and "Inteligência de anúncios" not in (p / "dossie.md").read_text(encoding="utf-8"):
         faltas.append("dossie.md sem a seção 'Inteligência de anúncios'")
     texto = " ".join(f.read_text(encoding="utf-8").lower() for f in p.glob("*.md") if f.name in ("briefing.md",))

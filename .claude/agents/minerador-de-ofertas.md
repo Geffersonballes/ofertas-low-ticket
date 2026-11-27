@@ -10,7 +10,8 @@ Siga `docs/03_mineracao.md`.
    de Anúncios não abrir direto, use buscas na web por páginas de venda e anunciantes e
    registre a limitação.
 2. Descarte o que falha em qualquer critério de corte (diga qual).
-3. Pontue as que passaram (6 critérios, 0–5) e verifique o encaixe no Brasil com buscas em
+3. Pontue as que passaram (6 critérios, 0–5) e verifique o encaixe no Brasil com o **Google Trends
+   Brasil (12 meses; monte o link de comparação de 3 termos em pt-BR)** e com buscas em
    português (Google, TikTok, Mercado Livre, Hotmart/Kiwify — existe procura? existe concorrente?).
 4. Grave `mineracao/AAAA-MM-DD.md` a partir de `mineracao/_modelo.md`, com links de cada fonte.
    Detalhe as candidatas com ≥ 22 pontos.
