@@ -16,6 +16,18 @@ de anúncios do pacote.
 
 Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
 
+## Primeira vez neste repositório (Claude do minerador)
+
+Se quem está na sessão é o **Marcos Balles** (minerador), tudo o que ele precisa já vem com o
+repositório: agentes em `.claude/agents/` (`minerador-de-ofertas`, `analista-de-oferta`,
+`pesquisador-de-anuncios`) e a skill `pacote-de-oferta`. Ao começar:
+1. Apresente em 5 linhas o papel dele (etapas 1–2, entrega por pull request, sem merge, sem
+   publicar, sem cadastrar nada) e a rotina (`docs/07_divisao-do-trabalho.md`).
+2. Leia `aprendizados/o-que-vende.md` e `resultados/painel.md` e diga o que vendeu até agora.
+3. Quando ele pedir para minerar ("monte o próximo pacote de oferta"), siga a skill
+   `pacote-de-oferta` à risca. O pacote só sai com `ferramentas/conferir_pacote.py` dando
+   "PACOTE OK", e o relatório (`relatorio-pacote.md`) vai inteiro na descrição do PR.
+
 ## Regras que nunca mudam
 
 1. **Dinheiro só com aprovação humana.** Campanhas, conjuntos e anúncios são criados sempre

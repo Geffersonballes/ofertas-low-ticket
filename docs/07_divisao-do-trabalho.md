@@ -33,6 +33,11 @@ Ver `docs/08_inteligencia-de-anuncios.md`. Em resumo:
 
 ## O que é um "pacote de oferta" pronto
 
+Tudo resumido no **relatório do pacote** (`relatorio-pacote.md`, modelo em `ofertas/_modelo/`),
+que vai inteiro na descrição do PR. A conferência `python3 ferramentas/conferir_pacote.py
+ofertas/<pasta>` precisa dar "PACOTE OK" antes de abrir o PR.
+
+
 Tudo dentro de `ofertas/AAAA-MM-DD_<slug>/` (copiado de `ofertas/_modelo/`):
 
 - [ ] `status.md` com a origem (arquivo de mineração e nº da candidata) e etapas 1–2 ✅

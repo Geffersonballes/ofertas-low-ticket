@@ -24,10 +24,17 @@ e formatos que já venderam para nós; evite o que já falhou).
    conferir à mão) e acrescenta os padrões em `aprendizados/padroes-externos.md`.
    Revise você mesmo: nada de saúde/TDAH/dinheiro garantido, nada traduzido literal, entregáveis que
    dá para produzir com qualidade por código/IA.
-7. **status.md:** etapas 1 e 2 ✅ com data; P1 = "aguardando operador".
-8. **Entregar:** commit + push do ramo e abra um pull request `Pacote de oferta: <nome> (<data>)`
-   com este resumo na descrição: produto e promessa BR · preço · nº de anúncios e data conferidos ·
+7. **Relatório do pacote:** preencha `ofertas/<pasta>/relatorio-pacote.md` (modelo já copiado de
+   `_modelo/`) com TODOS os campos: números conferidos na Biblioteca, tabela dos anúncios que duram
+   (anunciante, ativos, dias no ar, variações, formato, duração, gancho de 3 s, produto por dentro,
+   CTA, preço, link), 5 padrões a usar e 3 a evitar com evidência e grau, táticas como opinião,
+   o que pesou de `aprendizados/o-que-vende.md`, encaixe no Brasil e o CPA máximo desta oferta.
+8. **status.md:** etapas 1 e 2 ✅ com data; P1 = "aguardando operador".
+9. **Conferência automática (obrigatória):** rode `python3 ferramentas/conferir_pacote.py ofertas/<pasta>`.
+   Só siga se sair "PACOTE OK". Se faltar algo, complete e rode de novo.
+10. **Entregar:** commit + push do ramo e abra um pull request `Pacote de oferta: <nome> (<data>)`
+   com o **relatório do pacote inteiro** na descrição (o modelo de PR já pede isso), incluindo: produto e promessa BR · preço · nº de anúncios e data conferidos ·
    nota · por que pode dar certo no Brasil · principal risco · **3 padrões de anúncio mais fortes
    (com evidência)** · o que de `aprendizados/o-que-vende.md` pesou na escolha · links (Biblioteca, página de referência,
    concorrentes BR). Não faça merge.
-9. Se o operador devolver, registre em `mineracao/descartadas.md` (data, oferta, motivo) e volte ao 2.
+11. Se o operador devolver, registre em `mineracao/descartadas.md` (data, oferta, motivo) e volte ao 2.
