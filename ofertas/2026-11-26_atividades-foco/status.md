@@ -18,7 +18,7 @@
 | 7 | Criativos | roteirista-de-criativos + montador | 🟡 | 2026-11-27 | 5 roteiros; narrações (Amandinha) em `criativos/audio/`; 4 vídeos 9:16 (22–24 s) em `criativos/videos/` (ver LEIA.md), conferidos quadro a quadro; falta o estático (anúncio 5) e a conformidade dos vídeos |
 | P2 | Conformidade | revisor-de-conformidade | 🟡 | 2026-11-26 | **APROVADO COM AJUSTES** (`revisoes/2026-11-26_conformidade.md`). Produto: aprovado. Página, bumps, criativos e kit Hotmart: 12 ajustes obrigatórios antes do P4 (link do checkout; nº de parcelas/juros; "acesso na hora" x boleto; endereço físico do fornecedor — Decreto 7.962; prazo de guarda/base legal na privacidade; "Bônus extra" nas capas dos bumps pagos; descrição do criativo 1; kit: bônus 2 é lista, bump 3 sem "sentimentos/terapia", bump 6 com 5 jogos, bump 4 "fichas", status desatualizado). Nenhuma etapa volta |
 | P3 | Aprovação de página/produto/criativos | dono | ⬜ | | |
-| 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | 🟡 | 2026-11-27 | Produto principal cadastrado na Hotmart; link de pagamento https://pay.hotmart.com/I108674571O?off=6huqjuso nos botões da página (checkout ainda dá erro 005 — aguardando aprovação/finalização). Faltam bumps, pixel e campanhas |
+| 9 | Checkout, pixel e campanha em rascunho | gestor-de-trafego | 🟡 | 2026-11-27 | Produto principal cadastrado na Hotmart; 2026-11-27: link dos botões trocado para https://pay.hotmart.com/I108674571O (sem ?off=6huqjuso), porque os 7 bumps só aparecem no link sem o código de oferta (verificado pela extensão). Bumps ativos. Faltam, pixel e campanhas |
 | P4 | Publicação e orçamento | dono | ⬜ | | |
 | 10 | Leitura de resultado | analista-de-metricas | ⬜ | | |
 
