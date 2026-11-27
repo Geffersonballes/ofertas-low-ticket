@@ -10,6 +10,10 @@ Duas pessoas trabalham neste repositório (ver `docs/07_divisao-do-trabalho.md`)
 - **Minerador:** etapas 1–2. Entrega um *pacote de oferta* por pull request (skill `pacote-de-oferta`). Não faz merge, não publica, não cadastra nada.
 - **Operador (dono):** aceita o pacote (merge = Portão 1) e toca as etapas 3–7 e a leitura de métricas.
 
+Os dois ficam ligados pelos arquivos de `aprendizados/` e `resultados/painel.md` (ver
+`docs/08_inteligencia-de-anuncios.md`): o minerador lê o que vendeu; o operador lê a inteligência
+de anúncios do pacote.
+
 Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
 
 ## Regras que nunca mudam

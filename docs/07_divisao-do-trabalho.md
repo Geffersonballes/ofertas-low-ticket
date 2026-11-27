@@ -10,6 +10,17 @@ Duas pessoas, cada uma com a própria conta do Claude, no mesmo repositório do 
 | Ramos no git | `mineracao/AAAA-MM-DD_<slug>` | `main` (e o ramo de trabalho da sessão) |
 | Decide | quais candidatas viram pacote | **Portão 1:** aceitar ou devolver o pacote · Portões 3 e 4 |
 
+## Como os dois ficam ligados
+
+Ver `docs/08_inteligencia-de-anuncios.md`. Em resumo:
+- **Marcos → Gefferson:** o pacote traz a seção "Inteligência de anúncios" (o que comprovadamente
+  vende no nicho). O operador usa isso para escrever os roteiros e montar os anúncios.
+- **Gefferson → Marcos:** o `analista-de-metricas` grava diariamente em `resultados/painel.md` e
+  `aprendizados/o-que-vende.md` o que vendeu e o que não vendeu. O minerador lê antes de minerar.
+- **Avisos rápidos:** grupo de WhatsApp "Ofertas Low Ticket · Balles" (pacote novo, anúncio vencedor,
+  oferta cortada). Decisões e números ficam sempre no repositório.
+- O minerador não acessa conta de anúncios nem Hotmart; vê os números pelo painel.
+
 ## Como o pacote chega
 
 1. O minerador abre um **pull request** chamado `Pacote de oferta: <nome> (<data>)`.
@@ -34,6 +45,7 @@ Tudo dentro de `ofertas/AAAA-MM-DD_<slug>/` (copiado de `ofertas/_modelo/`):
       e entregáveis que a IA consegue produzir com qualidade, preço e âncora honesta, 2–4 bônus,
       5–8 bumps com preço e ticket médio estimado, 5 ângulos de anúncio, slug, riscos
 - [ ] Encaixe Brasil verificado: buscas em português (Hotmart, Kiwify, Mercado Livre, Google) com links
+- [ ] Seção "Inteligência de anúncios" no `dossie.md` (5 padrões a usar, 3 a evitar, com evidência)
 - [ ] Nota ≥ 22/30 e nenhum critério de corte reprovado (`docs/03_mineracao.md`)
 
 ## O que o minerador NÃO faz

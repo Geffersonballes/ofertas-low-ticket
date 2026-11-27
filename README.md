@@ -38,5 +38,7 @@ mineracao/          radares de mineração (um arquivo por dia)
 .claude/skills/     uma skill por etapa (os templates da aula)
 ofertas/_modelo/    modelo de pasta de uma oferta — copie para cada nova oferta
 ofertas/<data_slug> uma pasta por oferta em produção ou no ar
-resultados/         painel consolidado das ofertas testadas
+resultados/         painel por oferta e por anúncio (funil)
+aprendizados/       o que vende (dados nossos + padrões da concorrência)
+pesquisas/          relatórios do pesquisador-de-anuncios
 ```

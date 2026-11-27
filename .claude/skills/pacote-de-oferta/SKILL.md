@@ -3,7 +3,9 @@ name: pacote-de-oferta
 description: Rotina do MINERADOR — minera ofertas low ticket em inglês, escolhe a melhor, faz a conferência manual na Biblioteca de Anúncios, monta dossiê e briefing e entrega um "pacote de oferta" num pull request para o operador. Use quando o minerador disser "minerar", "montar pacote", "próxima oferta" ou mandar links de ofertas para avaliar.
 ---
 Leia antes: `docs/07_divisao-do-trabalho.md` (o que é um pacote pronto), `docs/03_mineracao.md`
-(critérios), `CLAUDE.md` (regras) e `mineracao/descartadas.md` (não repetir o que já foi descartado).
+(critérios), `CLAUDE.md` (regras), `mineracao/descartadas.md` (não repetir o que já foi descartado),
+`docs/08_inteligencia-de-anuncios.md` e **`aprendizados/o-que-vende.md`** (priorize nichos, ângulos
+e formatos que já venderam para nós; evite o que já falhou).
 
 1. **Ramo:** crie `mineracao/AAAA-MM-DD_<slug-provisorio>` a partir do `main` atualizado.
 2. **Minerar:** se o minerador trouxe links, avalie esses; senão chame o agente `minerador-de-ofertas`
@@ -17,11 +19,15 @@ Leia antes: `docs/07_divisao-do-trabalho.md` (o que é um pacote pronto), `docs/
    Reprovou no corte (< 20 ativos ou nada ativo há 14+ dias)? Volte ao passo 3.
 5. **Pasta:** `cp -r ofertas/_modelo ofertas/AAAA-MM-DD_<slug>`; prints em `referencia/`.
 6. **Dossiê e briefing:** chame o agente `analista-de-oferta` com os links e os números conferidos.
+   Em seguida chame o `pesquisador-de-anuncios` para o nicho e a oferta escolhida: ele preenche a
+   seção **"Inteligência de anúncios"** do `dossie.md` (padrões fortes a usar, a evitar, o que
+   conferir à mão) e acrescenta os padrões em `aprendizados/padroes-externos.md`.
    Revise você mesmo: nada de saúde/TDAH/dinheiro garantido, nada traduzido literal, entregáveis que
    dá para produzir com qualidade por código/IA.
 7. **status.md:** etapas 1 e 2 ✅ com data; P1 = "aguardando operador".
 8. **Entregar:** commit + push do ramo e abra um pull request `Pacote de oferta: <nome> (<data>)`
    com este resumo na descrição: produto e promessa BR · preço · nº de anúncios e data conferidos ·
-   nota · por que pode dar certo no Brasil · principal risco · links (Biblioteca, página de referência,
+   nota · por que pode dar certo no Brasil · principal risco · **3 padrões de anúncio mais fortes
+   (com evidência)** · o que de `aprendizados/o-que-vende.md` pesou na escolha · links (Biblioteca, página de referência,
    concorrentes BR). Não faça merge.
 9. Se o operador devolver, registre em `mineracao/descartadas.md` (data, oferta, motivo) e volte ao 2.

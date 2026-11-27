@@ -30,3 +30,15 @@
 ## Objeções respondidas
 
 ## Falhas a corrigir na nossa versão
+
+## Inteligência de anúncios (pesquisador-de-anuncios)
+Ver `docs/08_inteligencia-de-anuncios.md`. Cada item com evidência e grau (forte/médio/fraco).
+
+### Usar no nosso anúncio (5 padrões mais fortes)
+1.
+
+### Evitar (3)
+1.
+
+### Conferir à mão na Biblioteca
+- 

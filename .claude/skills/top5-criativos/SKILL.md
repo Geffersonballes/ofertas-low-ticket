@@ -2,6 +2,8 @@
 name: top5-criativos
 description: Etapa 6 — recria em pt-BR os 5 anúncios da referência que estão ativos há mais tempo, com cenas geradas por IA, narração ElevenLabs e trilha livre de direitos. Use depois do Portão 3.
 ---
+0. Leia `aprendizados/o-que-vende.md` (ganchos e formatos que já venderam para nós) e a seção
+   "Inteligência de anúncios" do `dossie.md`. Se faltar, rode o `pesquisador-de-anuncios` antes.
 1. Pegue os Top 5 do `dossie.md` (ativos há mais tempo). Para cada um, anote gancho, estrutura
    de cenas, duração e chamada.
 2. `roteirista-de-criativos` → `criativos/roteiros.md`: mesmo ângulo e estrutura, texto e
