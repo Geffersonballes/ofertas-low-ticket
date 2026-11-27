@@ -1,7 +1,7 @@
 {
   "slug": "dez-minutinhos",
   "campos": {
-    "LINK_CHECKOUT": "https://pay.hotmart.com/I108674571O",
+    "LINK_CHECKOUT": "https://pay.hotmart.com/I108674571O?checkoutMode=10",
     "EMAIL_SUPORTE": "acessos@ballestech.com.br",
     "NOME_OU_RAZAO_SOCIAL": "Gefferson França Balles",
     "CPF_OU_CNPJ": "CPF 051.056.441-07",
