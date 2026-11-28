@@ -14,6 +14,7 @@
   "ofertas": [
     {
       "slug": "dez-minutinhos",
+      "pasta": "2026-11-26_atividades-foco",
       "nome": "Dez Minutinhos",
       "preco": 37.0,
       "no_ar_desde": null,
@@ -113,7 +114,131 @@
       "diario": [],
       "vendas_hotmart": 0,
       "reembolsos": 0,
-      "motivos_reembolso": []
+      "motivos_reembolso": [],
+      "etapas": [
+        {
+          "id": "1",
+          "nome": "Mineração",
+          "responsavel": "minerador-de-ofertas",
+          "situacao": "feito",
+          "data": "2026-11-26",
+          "obs": "Contagens via AdManage; conferir na Biblioteca",
+          "portao": false
+        },
+        {
+          "id": "2",
+          "nome": "Dossiê + briefing",
+          "responsavel": "analista-de-oferta",
+          "situacao": "feito",
+          "data": "2026-11-26",
+          "obs": "dossie.md e briefing.md preenchidos; itens \"não verificado\" listados no fim do briefing",
+          "portao": false
+        },
+        {
+          "id": "P1",
+          "nome": "Aprovação da oferta",
+          "responsavel": "dono",
+          "situacao": "feito",
+          "data": "2026-11-26",
+          "obs": "Dono escolheu NeuroKids",
+          "portao": true
+        },
+        {
+          "id": "3",
+          "nome": "Produto",
+          "responsavel": "criador-de-produto",
+          "situacao": "andamento",
+          "data": "2026-11-26",
+          "obs": "Caderno completo pronto: produto/final/dez-minutinhos.pdf (149 págs, 120 atividades, plano 30 dias por nível, gabarito, 3 bônus) + .zip de entrega; aguardando aprovação do dono",
+          "portao": false
+        },
+        {
+          "id": "4",
+          "nome": "Order bumps",
+          "responsavel": "criador-de-order-bumps",
+          "situacao": "feito",
+          "data": "2026-11-26",
+          "obs": "7 bumps prontos em produto/bumps/ (PDF + zip, gabaritos, \"por Gefferson Balles\" na capa); tabela em bumps/bumps.md. Pós-compra (Coleção Ano Inteiro) ainda não produzido",
+          "portao": false
+        },
+        {
+          "id": "5",
+          "nome": "Copy da página",
+          "responsavel": "copywriter-de-pagina",
+          "situacao": "feito",
+          "data": "2026-11-26",
+          "obs": "pagina/copy.md; título 1 usado na página (dono pode trocar)",
+          "portao": false
+        },
+        {
+          "id": "6",
+          "nome": "Página",
+          "responsavel": "construtor-de-pagina + diretor-de-arte-web",
+          "situacao": "andamento",
+          "data": "2026-11-26",
+          "obs": "Rodada 1 de revisão aplicada (crítico 6,5 → redesign + copy nova) e publicada na prévia; falta só o link do checkout",
+          "portao": false
+        },
+        {
+          "id": "7",
+          "nome": "Criativos",
+          "responsavel": "roteirista-de-criativos + montador",
+          "situacao": "andamento",
+          "data": "2026-11-27",
+          "obs": "5 roteiros; narrações (Amandinha) em criativos/audio/; 4 vídeos 9:16 (22–24 s) em criativos/videos/ (ver LEIA.md), conferidos quadro a quadro; falta o estático (anúncio 5) e a conformidade dos vídeos",
+          "portao": false
+        },
+        {
+          "id": "P2",
+          "nome": "Conformidade",
+          "responsavel": "revisor-de-conformidade",
+          "situacao": "andamento",
+          "data": "2026-11-26",
+          "obs": "APROVADO COM AJUSTES (revisoes/2026-11-26_conformidade.md). Produto: aprovado. Página, bumps, criativos e kit Hotmart: 12 ajustes obrigatórios antes do P4 (link do checkout; nº de parcelas/juros; \"acesso na hora\" x…",
+          "portao": true
+        },
+        {
+          "id": "P3",
+          "nome": "Aprovação de página/produto/criativos",
+          "responsavel": "dono",
+          "situacao": "pendente",
+          "data": null,
+          "obs": null,
+          "portao": true
+        },
+        {
+          "id": "9",
+          "nome": "Checkout, pixel e campanha em rascunho",
+          "responsavel": "gestor-de-trafego",
+          "situacao": "andamento",
+          "data": "2026-11-27",
+          "obs": "Produto principal cadastrado na Hotmart; 2026-11-27: link dos botões: https://pay.hotmart.com/I108674571O?checkoutMode=10 — só esse modo carrega a página \"Em Branco\" com os 7 bumps (conferido: bumps, R$ 37,00,…",
+          "portao": false
+        },
+        {
+          "id": "P4",
+          "nome": "Publicação e orçamento",
+          "responsavel": "dono",
+          "situacao": "pendente",
+          "data": null,
+          "obs": null,
+          "portao": true
+        },
+        {
+          "id": "10",
+          "nome": "Leitura de resultado",
+          "responsavel": "analista-de-metricas",
+          "situacao": "pendente",
+          "data": null,
+          "obs": null,
+          "portao": false
+        }
+      ],
+      "agora": {
+        "data": "2026-11-28",
+        "texto": "(Etapa 4b, correção da rodada 2) todos os cosméticos dos 4 relatórios rodada2-*.md corrigidos no gerador (caderno 5, bumps 13, Volume 2 5, promessa 1); os 2 aceitos pelo dono (\"Cores e códigos\" e…"
+      },
+      "etapas_em": "2026-11-28"
     }
   ],
   "alertas": [],

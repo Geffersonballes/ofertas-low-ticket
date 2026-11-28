@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#070d18">
-<title>Painel · Ofertas Low Ticket</title>
+<title>Balles Sales · Painel</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
 <style>
 @font-face{font-family:'Baloo 2';font-weight:400 800;font-display:swap;src:url('Baloo2.woff2') format('woff2')}
 @font-face{font-family:'Nunito';font-weight:200 1000;font-display:swap;src:url('Nunito.woff2') format('woff2')}
@@ -30,7 +31,7 @@ code{font-size:.92em;color:#bfe9ff}
 @media(min-width:1200px){
   body{padding-left:96px}
   .rail{display:flex;flex-direction:column;align-items:center;gap:6px;position:fixed;left:14px;top:14px;bottom:14px;width:66px;padding:12px 0;z-index:6;border-radius:20px;background:rgba(12,22,40,.7);border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  .rail .lg{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;margin-bottom:10px;font:800 15px 'Baloo 2';color:#04121c;background:linear-gradient(135deg,var(--cy),var(--vi));box-shadow:0 0 18px rgba(62,224,255,.45)}
+  .rail .lg{width:42px;height:42px;margin-bottom:10px;border-radius:12px;filter:drop-shadow(0 0 12px rgba(62,224,255,.4))}
   .rail a{display:flex;flex-direction:column;align-items:center;gap:2px;width:56px;padding:7px 0 5px;border-radius:12px;color:var(--muted);text-decoration:none;font-size:9.5px;font-weight:800;letter-spacing:.02em;transition:color .15s,background-color .15s}
   .rail a:hover,.rail a:focus-visible{color:var(--cy);background:rgba(62,224,255,.08);outline:none}
   .rail .ic{width:20px;height:20px}
@@ -40,8 +41,11 @@ code{font-size:.92em;color:#bfe9ff}
 /* topo fixo */
 .top{position:sticky;top:0;z-index:5;margin:0 -14px;padding:0 14px;background:linear-gradient(rgba(7,13,24,.92),rgba(7,13,24,.78));border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 16px;padding:14px 0 10px}
-h1{display:flex;flex-direction:column;font-family:'Nunito',system-ui,sans-serif;font-weight:200}
-h1 .t1{font-size:clamp(26px,7vw,40px);letter-spacing:.2em;text-transform:uppercase;line-height:1;background:linear-gradient(90deg,#fff,#bfefff 60%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{display:flex;align-items:center;gap:14px;font-family:'Nunito',system-ui,sans-serif;font-weight:200}
+h1 .mk{width:clamp(40px,9vw,54px);height:auto;flex:none;filter:drop-shadow(0 0 14px rgba(62,224,255,.35))}
+h1 .tx{display:flex;flex-direction:column;min-width:0}
+h1 .t1 b{font-weight:800}
+h1 .t1{font-size:clamp(22px,6vw,34px);letter-spacing:.14em;white-space:nowrap;text-transform:uppercase;line-height:1;background:linear-gradient(90deg,#fff,#bfefff 60%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
 h1 .t2{font-size:clamp(12px,3.2vw,15px);font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 header .sub{color:var(--muted);font-size:12.5px;margin-top:6px;display:flex;align-items:center;gap:6px}
 header .sub::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:0 0 8px var(--cy)}
@@ -214,12 +218,55 @@ td.hl,th.hl{background:rgba(62,224,255,.16)!important}
 @media(max-width:619px){
   html{scroll-padding-top:100px}
   header{flex-wrap:nowrap;align-items:center;padding:10px 0 8px}
-  h1 .t1{font-size:24px;letter-spacing:.16em}
+  h1 .t1{font-size:20px;letter-spacing:.1em}h1{gap:10px}h1 .mk{width:36px}
   h1 .t2{display:none}
   header .sub{font-size:11.5px;margin-top:3px}
   .osel{font-size:0;gap:0}
   select{padding:7px 10px;font-size:13.5px;max-width:48vw}
   .atalhos{padding-bottom:8px}.atalhos a{padding:4px 10px;font-size:12.5px}
+}
+/* coluna "Etapas da oferta": fixa à esquerda em tela larga, cartão que abre e fecha no resto */
+.esteira{padding:0}
+.esteira>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.esteira>summary::-webkit-details-marker{display:none}
+.esteira>summary h2{margin:0}
+.esteira>summary::after{content:"";margin-left:auto;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .15s}
+.esteira[open]>summary::after{transform:rotate(225deg)}
+.et-res{font-size:12.5px;color:var(--muted);flex-basis:100%;order:1}
+.esteira>summary::after{order:0}
+@media(min-width:1200px){.et-res .ag{display:none}}
+.et-in{padding:0 16px 14px}
+.et-prog{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 6px}
+.et-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--vi),var(--cy))}
+.et-agora{border:1px solid rgba(255,207,92,.3);background:rgba(255,207,92,.07);border-radius:12px;padding:9px 11px;margin:10px 0 12px;font-size:12.5px;color:#c4d3ea;overflow-wrap:anywhere}
+.et-agora b{display:block;color:var(--warn);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+ol.ck{list-style:none;margin:0;padding:0;position:relative}
+ol.ck li{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:6px 0 10px}
+ol.ck li:not(:last-child)::before{content:"";position:absolute;left:10px;top:28px;bottom:-4px;width:2px;background:var(--line)}
+ol.ck li.feito:not(:last-child)::before{background:rgba(63,240,168,.4)}
+.mk{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:800 12px 'Nunito',sans-serif;border:2px solid var(--line2);color:var(--muted);background:var(--bg);position:relative;z-index:1}
+li.portao .mk{border-radius:7px;transform:rotate(45deg)}li.portao .mk>span{transform:rotate(-45deg)}
+li.feito .mk{border-color:var(--ok);background:var(--ok);color:#06231a}
+li.andamento .mk{border-color:var(--warn);color:var(--warn);box-shadow:0 0 0 4px rgba(255,207,92,.12)}
+li.bloqueado .mk{border-color:var(--bad);color:var(--bad)}
+ol.ck .nm{font-size:13.5px;font-weight:700;line-height:1.3;color:var(--ink)}
+li.pendente .nm{color:var(--muted)}
+li.feito .nm{color:#c4d3ea}
+ol.ck small{display:block;font-size:11.5px;color:var(--muted);line-height:1.35;margin-top:1px}
+ol.ck .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--vi);margin-right:4px}
+.et-fonte{font-size:11px;color:var(--muted);margin-top:4px}
+@media(min-width:1200px){
+  body{padding-left:370px}
+  .esteira{position:fixed;left:92px;top:14px;bottom:14px;width:262px;margin:0;overflow:auto;z-index:6;scrollbar-width:thin}
+  .esteira>summary{cursor:default;padding-bottom:8px}.esteira>summary::after{display:none}
+  #t-anuncios th,#t-anuncios td{padding-left:7px;padding-right:7px}#t-anuncios thead th{white-space:normal}
+  #t-anuncios .cv{min-width:0}#t-anuncios td.rec{min-width:140px}
+}
+@media(min-width:900px){#s-anuncios{overflow-x:auto}}
+@media(min-width:1200px) and (max-width:1439px){
+  body{padding-left:350px}.esteira{width:244px}
+  #t-anuncios{font-size:13.5px}#t-anuncios th,#t-anuncios td{padding-left:5px;padding-right:5px}#t-anuncios td.rec{min-width:110px}
+  #t-anuncios .pill{padding:1px 7px}
 }
 footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywhere;padding-top:14px;border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.kpi:hover,.kpi:focus-visible{transform:none}}
@@ -230,7 +277,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
 <div class="wrap">
   <div class="top">
     <header>
-      <div><h1><span class="t1">Ofertas</span><span class="t2">Painel de métricas</span></h1><div class="sub" id="atualizado">carregando…</div></div>
+      <div><h1><img class="mk" src="logo.svg" alt="" width="54" height="54"><span class="tx"><span class="t1"><b>Balles</b> Sales</span><span class="t2">Ofertas low ticket</span></span></h1><div class="sub" id="atualizado">carregando…</div></div>
       <div class="osel"><span id="ofr">Oferta</span><div class="ofw" id="ofw"><select id="oferta" aria-labelledby="ofr"></select></div></div>
     </header>
     <nav class="atalhos" aria-label="Seções">
@@ -239,6 +286,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
   </div>
   <div id="banner"></div>
   <div id="filtro"></div>
+  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Etapas da oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in" id="etapas-of"></div></details>
   <div class="grid kpis" id="resumo"></div>
   <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
     <div class="etapas" id="etapas"></div></div>
@@ -289,7 +337,7 @@ const ICO={
  esp:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.8 14.3A5 5 0 0 1 21 19"/>',
  info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/>'};
 const ic=k=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+ICO[k]+'</svg>';
-$('rail').innerHTML='<div class="lg" aria-hidden="true">LT</div>'+[['resumo','Resumo'],['s-funil','Funil','funil'],['s-anuncios','Anúncios','anuncios'],['s-alertas','Fazer','alertas'],['s-grafico','Por dia','grafico'],['s-bumps','Bumps','bumps'],['s-esp','Leitura','esp'],['s-reembolsos','Reemb.','reembolso']].map(a=>'<a href="#'+a[0]+'" title="'+a[1]+'">'+ic(a[2]||a[0])+a[1]+'</a>').join('');
+$('rail').innerHTML='<img class="lg" src="logo.svg" alt="" aria-hidden="true">'+[['resumo','Resumo'],['s-funil','Funil','funil'],['s-anuncios','Anúncios','anuncios'],['s-alertas','Fazer','alertas'],['s-grafico','Por dia','grafico'],['s-bumps','Bumps','bumps'],['s-esp','Leitura','esp'],['s-reembolsos','Reemb.','reembolso']].map(a=>'<a href="#'+a[0]+'" title="'+a[1]+'">'+ic(a[2]||a[0])+a[1]+'</a>').join('');
 /* link entre números: data-go="#id" rola até lá; data-col="x" acende a coluna x dos anúncios */
 const lk=(txt,go,col)=>'<button type="button" class="lk" data-go="'+go+'"'+(col?' data-col-go="'+col+'"':'')+'>'+txt+'</button>';
 /* rolagem suave só nos nossos links (não no CSS), e nunca com movimento reduzido */
@@ -325,7 +373,7 @@ function render(){
   bumps(o,tot);
   const ap=(D.aprendizados||[]).filter(a=>!a.oferta||a.oferta===o.slug);
   $('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+H(a.texto)+' <span class="na">· '+H(a.confianca||'')+' · '+H(a.data||'')+'</span></li>').join('')+'</ul>':vazio('faturamento','Ainda sem conclusões com número.','Elas aparecem aqui conforme os anúncios rodam.');
-  diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
+  esteira(o);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
 }
 /* lista de ofertas estilizada: só com mouse; no toque fica o seletor do aparelho */
 function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
@@ -351,6 +399,23 @@ function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches
   l.onclick=e=>{const li=e.target.closest('li');if(li)escolhe(itens().indexOf(li))};
   document.addEventListener('mousedown',e=>{if(!l.hidden&&!w.contains(e.target))fecha(false)});
   ofSync()}
+/* checklist das etapas (dados.json -> ofertas[i].etapas, copiado do status.md por painel/etapas_do_status.py) */
+const LARGA=matchMedia('(min-width: 1200px)');
+function esteira(o){const el=$('etapas-of'),det=$('s-etapas'),es=o.etapas||[];
+  if(!es.length){$('et-res').textContent='sem etapas registradas';el.innerHTML=vazio('esp','Sem etapas para esta oferta.','Rode painel/etapas_do_status.py para copiar do status.md.');return}
+  const f=es.filter(e=>e.situacao==='feito').length,at=es.find(e=>e.situacao==='andamento'||e.situacao==='bloqueado');
+  const sm={feito:'✓',andamento:'•',bloqueado:'!',pendente:''},st={feito:'feito',andamento:'em andamento',bloqueado:'travado',pendente:'a fazer'};
+  const dt=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
+  $('et-res').innerHTML=f+' de '+es.length+' feitas'+(o.agora&&o.agora.texto?'<span class="ag"> · agora: '+H(o.agora.texto.slice(0,60))+(o.agora.texto.length>60?'…':'')+'</span>':'');
+  el.innerHTML='<div class="et-prog" aria-hidden="true"><i style="width:'+(100*f/es.length).toFixed(1)+'%"></i></div>'+
+    (o.agora&&o.agora.texto?'<div class="et-agora"><b>Agora'+(o.agora.data?' · '+H(dt(o.agora.data)):'')+'</b>'+H(o.agora.texto)+'</div>':'')+
+    '<ol class="ck">'+es.map(e=>'<li class="'+H(e.situacao)+(e.portao?' portao':'')+'"><span class="mk" aria-label="'+st[e.situacao]+'"><span>'+(sm[e.situacao]||'')+'</span></span><div>'+
+      '<span class="nm" data-ajuda="x-etapa" data-tt="'+H((e.portao?'Portão '+e.id.slice(1)+' · ':'Etapa '+e.id+' · ')+e.nome)+'" data-tx="'+H((st[e.situacao]||'')+(e.obs?' — '+e.obs:''))+'">'+(e.portao?'<span class="tag">Portão</span>':'')+H(e.nome)+'</span>'+
+      '<small>'+H(e.responsavel||'')+(e.data?' · '+H(dt(e.data)):'')+'</small></div></li>').join('')+'</ol>'+
+    '<div class="et-fonte">Copiado do status.md'+(o.etapas_em?' em '+H(dt(o.etapas_em)):'')+'.</div>';
+  if(!det.dataset.pronto){det.dataset.pronto=1;det.open=LARGA.matches;LARGA.addEventListener('change',()=>{det.open=LARGA.matches});
+    det.querySelector('summary').addEventListener('click',e=>{if(LARGA.matches)e.preventDefault()})}
+}
 const vazio=(i,t,s)=>'<div class="vazio">'+ic(i)+'<p>'+t+(s?'<br><span>'+s+'</span>':'')+'</p></div>';
 /* sparkline: linha + área em degradê, ponto no último valor */
 let SPN=0;
@@ -514,10 +579,11 @@ const AJUDA={
  's-bumps':['Order bumps','Ofertas extras do checkout e quanto cada uma vende.',m=>'O aceite é calculado sobre as vendas do produto principal.'],
  's-aprendizados':['O que vende','Conclusões com número que valem para as próximas ofertas.',m=>'Vêm de aprendizados/o-que-vende.md.'],
  's-esp':['Leitura dos especialistas','O que cada analista do time de dados concluiu: funil, criativos, financeiro e testes.',m=>'Confiança baixa = pouco dado ainda; não decida só com ela.'],
+ 's-etapas':['Etapas da oferta','Checklist da esteira da oferta escolhida: o que já foi feito, o que está em andamento e o que falta.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
  's-reembolsos':['Reembolsos','Pedidos de dinheiro de volta na Hotmart e o motivo de cada um.',m=>'Os motivos mostram onde a promessa e o produto não batem.']};
 const tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip);
 let tipDe=null,tipT=null,tipY=0;
-function abreTip(el){const a=AJUDA[el.dataset.ajuda];if(!a)return;clearTimeout(tipT);tipDe=el;tipY=scrollY;
+function abreTip(el){const a=AJUDA[el.dataset.ajuda]||(el.dataset.tt?[el.dataset.tt,el.dataset.tx||'Sem observação no status.md.',null]:null);if(!a)return;clearTimeout(tipT);tipDe=el;tipY=scrollY;
   const fm=a[2]&&D?a[2](D.metas):'';
   tip.innerHTML='<h4>'+H(a[0])+'</h4><p>'+H(a[1])+'</p>'+(fm?'<p class="fm">'+H(fm)+'</p>':'')+(a[3]?lk(a[3][0]+' →',a[3][1],a[3][2]):'');
   tip.classList.add('on');const r=el.getBoundingClientRect(),t=tip.getBoundingClientRect();
