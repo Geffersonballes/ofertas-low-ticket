@@ -18,6 +18,15 @@ Regra nova do dono ("nova regra", "padronize", "a partir de agora") → agente `
 registra em `docs/09_processos.md`, aplica onde precisa ser cumprida (CLAUDE.md, esteira, skills, agentes) e cria
 uma trava em `ferramentas/` quando der. Ele também audita os portões, mede tempo/custo/retrabalho e propõe melhorias.
 
+**PR do minerador (regra R13, decidida pelo dono em 2026-11-28):** nada que o minerador envie entra sem o dono. Antes de
+qualquer merge, o Claude do operador roda `python3 ferramentas/conferir_pr_minerador.py <ramo do PR>` e
+`ferramentas/conferir_pacote.py` e **informa o dono na conversa** (o que muda, o que está fora do escopo, se gasta
+crédito ou dinheiro). Só o dono autoriza o merge. O Claude nunca faz merge sozinho, nem aplica no `main` arquivo
+vindo do minerador, nem gasta crédito (ElevenLabs, anúncios, ferramentas pagas) por pedido do minerador.
+O minerador só adiciona: `mineracao/`, `pesquisas/` novos, linhas em `aprendizados/padroes-externos.md` e
+`mineracao/descartadas.md`, e uma pasta nova em `ofertas/`. Mudança em regra, agente, skill, ferramenta, painel,
+infra ou oferta existente vira proposta para o dono.
+
 Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
 
 ## Primeira vez neste repositório (Claude do minerador)

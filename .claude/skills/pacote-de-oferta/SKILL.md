@@ -42,3 +42,10 @@ e formatos que já venderam para nós; evite o que já falhou).
    (com evidência)** · o que de `aprendizados/o-que-vende.md` pesou na escolha · links (Biblioteca, página de referência,
    concorrentes BR). Não faça merge.
 11. Se o operador devolver, registre em `mineracao/descartadas.md` (data, oferta, motivo) e volte ao 2.
+
+## Escopo do pull request (regra R13)
+O PR só pode adicionar: `mineracao/AAAA-MM-DD.md`, linhas em `mineracao/descartadas.md` e em
+`aprendizados/padroes-externos.md` (sem apagar), `pesquisas/AAAA-MM-DD_*.md` novos e a pasta nova da oferta.
+Não altere CLAUDE.md, agentes, skills, ferramentas, docs, painel, infra nem ofertas existentes: se achar que algo
+deveria mudar, escreva a sugestão na descrição do PR. Antes de abrir, rode
+`python3 ferramentas/conferir_pr_minerador.py HEAD` → "PR DENTRO DO ESCOPO" e `conferir_pacote.py` → "PACOTE OK".

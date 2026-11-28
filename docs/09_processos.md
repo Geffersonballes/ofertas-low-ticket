@@ -18,6 +18,7 @@ trava que as confere), a auditoria, os indicadores do processo e as propostas de
 | R9 | **Criativos depois do material:** mesmo ciclo de revisão; dono aprova (Portão C); só então criativo sobe para a Meta e anúncio é criado/atualizado | 2026-11-28 | dono | CLAUDE.md 7, esteira, `revisar-criativos`, `subir-campanhas`, supervisor | `ferramentas/conferir_criativos.py` (exige R8 + hash de cada criativo) |
 | R10 | Aprender com cada oferta: erro ou atalho vira linha em `aprendizados/processo.md`, lido antes de cada etapa | 2026-11-28 | dono | CLAUDE.md 8, supervisor, skills | auditoria |
 | R12 | **Fechamento da revisão:** da 4ª rodada em diante, revisar só o que mudou (prova por pixel do resto); bloqueia/atrapalha é corrigido; cosmético novo vai para `melhorias-v1.1.md` e não segura o lançamento | 2026-11-28 | dono | CLAUDE.md 7, `revisar-material`, `revisar-criativos` | `cosmeticos_aceitos` no APROVACAO.md |
+| R13 | **PR do minerador não interfere na operação:** o Claude informa o dono (escopo, o que muda, gasto) antes de qualquer merge; só o dono autoriza; minerador só adiciona mineração, pesquisas, aprendizados (sem apagar) e pasta de oferta nova; nada de gastar crédito a pedido dele | 2026-11-28 | dono | CLAUDE.md, `pacote-de-oferta` | `ferramentas/conferir_pr_minerador.py` + verificação de hora em hora dos PRs (agendada) |
 | R11 | Toda regra nova é registrada aqui e aplicada onde precisa ser cumprida, com trava quando possível | 2026-11-28 | dono | `gestor-de-processos` | auditoria |
 
 ## Fluxo atual (resumo)
