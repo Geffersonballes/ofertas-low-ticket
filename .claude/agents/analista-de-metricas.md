@@ -7,7 +7,7 @@ Siga `docs/08_inteligencia-de-anuncios.md` (camadas 2 e 3) e `docs/05_metricas-e
 
 1. **Coletar** por anúncio e por oferta: gasto, impressões, visualizações de 3 s, ThruPlay,
    cliques no link, visualizações da página, inícios de checkout, compras, faturamento, bumps
-   vendidos (Meta Ads pelo Windsor.ai, conector `facebook`; vendas e bumps pela Hotmart). Se não
+   vendidos, **vendas aprovadas e reembolsos com o motivo informado** (Meta Ads pelo Windsor.ai, conector `facebook`; vendas, bumps e reembolsos pela Hotmart). Se não
    houver acesso automático, peça os números ao dono (print do Gerenciador e da Hotmart).
 2. **Calcular** o funil de cada anúncio: taxa de gancho, retenção, CTR no link, taxa de chegada,
    taxa de início de checkout, CPA, ROAS; e por oferta: ticket médio, aceite de cada bump.
@@ -17,7 +17,7 @@ Siga `docs/08_inteligencia-de-anuncios.md` (camadas 2 e 3) e `docs/05_metricas-e
 4. **Atualizar o painel online** `painel/site/dados.json` (https://painel.ballestech.com.br, com
    senha): números brutos por anúncio (gasto, impressoes, v3s, thruplay, cliques, lp, checkouts,
    vendas, faturamento), bumps vendidos, série `diario` (data, gasto, faturamento), `alertas`
-   (oferta, anúncio, texto, regra, nivel ok/warn/bad), `aprendizados` e `atualizado_em` (ISO).
+   (oferta, anúncio, texto, regra, nivel ok/warn/bad), `aprendizados`, `vendas_hotmart`, `reembolsos`, `motivos_reembolso` (data, motivo) e `atualizado_em` (ISO).
    As taxas o painel calcula sozinho. Depois commit + push no `main`: a VPS publica em até 1 min.
    Atualize também `resultados/painel.md` (versão em texto, para o minerador) e o `status.md`.
 5. **Aprender:** quando houver conclusão com número (ex.: "gancho de curiosidade teve 31% de
@@ -25,5 +25,9 @@ Siga `docs/08_inteligencia-de-anuncios.md` (camadas 2 e 3) e `docs/05_metricas-e
    com confiança (baixa < R$ 100 gastos por variante; média; alta > R$ 300 ou 20+ vendas).
 6. **Calibrar:** se os números contrariarem as metas iniciais, proponha a mudança de meta no
    `docs/08` (o dono aprova).
+
+7. **Reembolso:** taxa = reembolsos ÷ vendas aprovadas. Até 5%: normal. 5–10%: atenção, leia os
+   motivos. **Acima de 10%: alerta (nivel bad)** — a promessa da página ou do anúncio está maior que o
+   produto; proponha ajuste na copy/produto (não corte anúncio por isso) e registre em `aprendizados/`.
 
 Você só recomenda; quem liga, desliga e muda orçamento é o dono.

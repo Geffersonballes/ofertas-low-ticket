@@ -1,7 +1,16 @@
 {
   "atualizado_em": null,
   "fonte": "analista-de-metricas (Meta Ads via Windsor.ai + Hotmart)",
-  "metas": {"gancho": 25, "retencao": 15, "ctr": 1.0, "chegada": 75, "checkout": 8, "cpa_max": 45, "roas_min": 1.5},
+  "metas": {
+    "gancho": 25,
+    "retencao": 15,
+    "ctr": 1.0,
+    "chegada": 75,
+    "checkout": 8,
+    "cpa_max": 45,
+    "roas_min": 1.5,
+    "reembolso_max": 10
+  },
   "ofertas": [
     {
       "slug": "dez-minutinhos",
@@ -11,21 +20,100 @@
       "situacao": "preparando (Hotmart, pixel, campanhas)",
       "decisao": null,
       "anuncios": [
-        {"nome": "1 · Curiosidade", "gasto": 0, "impressoes": 0, "v3s": 0, "thruplay": 0, "cliques": 0, "lp": 0, "checkouts": 0, "vendas": 0, "faturamento": 0, "recomendacao": null},
-        {"nome": "2 · Zero preparo", "gasto": 0, "impressoes": 0, "v3s": 0, "thruplay": 0, "cliques": 0, "lp": 0, "checkouts": 0, "vendas": 0, "faturamento": 0, "recomendacao": null},
-        {"nome": "3 · App é tela", "gasto": 0, "impressoes": 0, "v3s": 0, "thruplay": 0, "cliques": 0, "lp": 0, "checkouts": 0, "vendas": 0, "faturamento": 0, "recomendacao": null},
-        {"nome": "4 · Troca de tela", "gasto": 0, "impressoes": 0, "v3s": 0, "thruplay": 0, "cliques": 0, "lp": 0, "checkouts": 0, "vendas": 0, "faturamento": 0, "recomendacao": null}
+        {
+          "nome": "1 · Curiosidade",
+          "gasto": 0,
+          "impressoes": 0,
+          "v3s": 0,
+          "thruplay": 0,
+          "cliques": 0,
+          "lp": 0,
+          "checkouts": 0,
+          "vendas": 0,
+          "faturamento": 0,
+          "recomendacao": null
+        },
+        {
+          "nome": "2 · Zero preparo",
+          "gasto": 0,
+          "impressoes": 0,
+          "v3s": 0,
+          "thruplay": 0,
+          "cliques": 0,
+          "lp": 0,
+          "checkouts": 0,
+          "vendas": 0,
+          "faturamento": 0,
+          "recomendacao": null
+        },
+        {
+          "nome": "3 · App é tela",
+          "gasto": 0,
+          "impressoes": 0,
+          "v3s": 0,
+          "thruplay": 0,
+          "cliques": 0,
+          "lp": 0,
+          "checkouts": 0,
+          "vendas": 0,
+          "faturamento": 0,
+          "recomendacao": null
+        },
+        {
+          "nome": "4 · Troca de tela",
+          "gasto": 0,
+          "impressoes": 0,
+          "v3s": 0,
+          "thruplay": 0,
+          "cliques": 0,
+          "lp": 0,
+          "checkouts": 0,
+          "vendas": 0,
+          "faturamento": 0,
+          "recomendacao": null
+        }
       ],
       "bumps": [
-        {"nome": "Para levar na bolsa", "preco": 9.9, "vendidos": 0},
-        {"nome": "Recortar e colar", "preco": 12.9, "vendidos": 0},
-        {"nome": "Cartas de conversa", "preco": 14.9, "vendidos": 0},
-        {"nome": "Matemática brincando", "preco": 17.9, "vendidos": 0},
-        {"nome": "Letras e palavras", "preco": 17.9, "vendidos": 0},
-        {"nome": "Jogos de mesa", "preco": 19.9, "vendidos": 0},
-        {"nome": "Volume 2", "preco": 27.0, "vendidos": 0}
+        {
+          "nome": "Para levar na bolsa",
+          "preco": 9.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Recortar e colar",
+          "preco": 12.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Cartas de conversa",
+          "preco": 14.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Matemática brincando",
+          "preco": 17.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Letras e palavras",
+          "preco": 17.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Jogos de mesa",
+          "preco": 19.9,
+          "vendidos": 0
+        },
+        {
+          "nome": "Volume 2",
+          "preco": 27.0,
+          "vendidos": 0
+        }
       ],
-      "diario": []
+      "diario": [],
+      "vendas_hotmart": 0,
+      "reembolsos": 0,
+      "motivos_reembolso": []
     }
   ],
   "alertas": [],

@@ -11,9 +11,9 @@ RAIZ = AQUI.parents[2]
 dados = json.loads((AQUI / "dados.json").read_text(encoding="utf-8"))
 DEST = RAIZ / "publicado" / dados["slug"]
 
-PAGINAS = ["index.html", "privacidade.html", "termos.html"]
+PAGINAS = ["index.html", "privacidade.html", "termos.html", "obrigado.html"]
 IMAGENS = ["heroi.webp", "mockup-capa.webp", "mockup-pacote.webp", "mockup-pacote.png", "folheando.mp4", "folheando-poster.jpg",
-           "amostra-nivel1.jpg", "amostra-nivel2.jpg"] + [f"dentro-{i}.jpg" for i in range(1, 7)]
+           "amostra-nivel1.jpg", "amostra-nivel2.jpg", "obrigado-plano.jpg", "obrigado-dia1a.jpg", "obrigado-dia1b.jpg"] + [f"dentro-{i}.jpg" for i in range(1, 7)]
 FONTES = ["Baloo2.woff2", "Nunito.woff2", "LICENCA.md"]
 
 (DEST / "img").mkdir(parents=True, exist_ok=True)

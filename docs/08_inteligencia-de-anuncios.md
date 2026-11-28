@@ -88,3 +88,11 @@ confiança. Regras:
 - só entra conclusão com número (nada de "acho que");
 - o minerador **lê antes de minerar** (prioriza nichos e ângulos que venderam);
 - o roteirista **lê antes de escrever** criativos (começa pelos ganchos vencedores).
+
+
+## Reembolso (decidido em 2026-11-28)
+
+A garantia de 7 dias é obrigatória (CDC art. 49 e regra da Hotmart). Para reduzir reembolso: página de
+obrigado com o primeiro passo (`pagina/obrigado.html`) e e-mail de boas-vindas (`hotmart/email-boas-vindas.md`).
+O painel mostra a taxa de reembolso por oferta: até 5% normal, 5–10% atenção, **acima de 10% = alerta**
+(promessa maior que o produto: ajustar copy ou produto antes de mexer nos anúncios).

@@ -67,6 +67,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px}
     <div class="card"><h2>Order bumps</h2><div class="tw"><table style="min-width:420px"><thead><tr><th>Bump</th><th>Preço</th><th>Vendidos</th><th>Aceite</th><th>Receita</th></tr></thead><tbody id="bumps"></tbody></table></div></div>
     <div class="card"><h2>O que vende (aprendizados)</h2><div id="aprendizados"></div></div>
   </div>
+  <div class="card" style="margin-top:14px"><h2>Reembolsos</h2><div id="reembolsos"></div></div>
   <footer>Números atualizados pelo agente <b>analista-de-metricas</b> (Meta Ads via Windsor.ai e Hotmart). Regras de corte e escala: <code>docs/08_inteligencia-de-anuncios.md</code>. Os agentes só recomendam; quem liga, desliga e muda orçamento é o Gefferson.</footer>
 </div>
 <script>
@@ -96,6 +97,12 @@ function render(i){
   document.getElementById('bumps').innerHTML=o.bumps.map(b=>{const ac=div(b.vendidos,vendas);return '<tr><td>'+b.nome+'</td><td>'+R(b.preco)+'</td><td>'+b.vendidos+'</td><td>'+P(ac&&ac*100)+'</td><td>'+R(b.vendidos*b.preco)+'</td></tr>'}).join('');
   const ap=D.aprendizados.filter(a=>!a.oferta||a.oferta===o.slug);
   document.getElementById('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+a.texto+' <span class="na">· '+(a.confianca||'')+' · '+(a.data||'')+'</span></li>').join('')+'</ul>':'<p class="empty">Ainda sem conclusões com número. Elas aparecem aqui conforme os anúncios rodam.</p>';
+  const vh=o.vendas_hotmart||vendas,rb=o.reembolsos||0,tx=div(rb,vh),mr=m.reembolso_max||10;
+  const nivel=tx==null?'':(tx*100>mr?'bad':tx*100>mr/2?'warn':'ok');
+  const mot=(o.motivos_reembolso||[]);
+  document.getElementById('reembolsos').innerHTML='<p>'+rb+' de '+vh+' vendas · '+pill(P(tx&&tx*100),nivel)+' <span class="na">(limite '+mr+'%)</span></p>'+
+    (tx!=null&&tx*100>mr?'<div class="alert bad"><b>Acima de '+mr+'%</b>A promessa da página pode estar maior que o produto. Leia os motivos abaixo antes de mexer nos anúncios.</div>':'')+
+    (mot.length?'<div class="tw"><table style="min-width:360px"><thead><tr><th>Data</th><th>Motivo informado</th></tr></thead><tbody>'+mot.map(x=>'<tr><td>'+(x.data||'')+'</td><td style="text-align:left;white-space:normal">'+x.motivo+'</td></tr>').join('')+'</tbody></table></div>':'<p class="empty">Nenhum reembolso registrado.</p>');
   grafico(o.diario);
 }
 function grafico(d){const el=document.getElementById('grafico');if(!d.length){el.innerHTML='<p class="empty">Sem dias com gasto ainda.</p>';return}
