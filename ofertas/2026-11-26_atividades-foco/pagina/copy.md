@@ -97,7 +97,7 @@ nada para preparar.
 - 2 níveis: 4 a 6 anos (não precisa ler) e 7 a 10 anos
 - Plano de 30 dias: cada dia já diz quais folhas imprimir
 - Imprime em preto e branco, papel A4 comum
-- Gabarito no fim, para conferir em segundos
+- Gabarito completo, para conferir em segundos
 
 **R$ 37,00**
 à vista ou em até 5x no cartão (com juros)
@@ -145,7 +145,7 @@ repetir.
 São 14 folhas. Na hora que precisar, é só abrir a gaveta.
 
 **4. Confira no gabarito.**
-As respostas estão no fim do arquivo.
+As respostas estão no gabarito, logo depois das atividades.
 
 **5. Marque no quadro de conquistas.**
 Um carimbo ou adesivo por dia. No fim, certificado.
@@ -191,7 +191,7 @@ Legendas, na ordem da página atual:]
 [Cada legenda tem de corresponder à página mostrada.]
 
 [MÍDIA: `img/amostra-nivel1.jpg` — alt: "Página inteira de uma atividade do Nível 1".]
-**Nível 1 · 4 a 6 anos.** Sem leitura. Desenho grande, traço limpo, instrução em uma linha para o
+**Nível 1 · 4 a 6 anos.** Sem leitura. Desenho grande, traço limpo, instrução curta para o
 adulto ler.
 
 [MÍDIA: `img/amostra-nivel2.jpg` — alt: "Página inteira de uma atividade do Nível 2".]
@@ -222,7 +222,7 @@ Nível 1 (4 a 6 anos, sem leitura): 60 atividades. Nível 2 (7 a 10 anos, leitur
 Duas folhas por dia, já separadas. Você não precisa escolher nada.
 
 **Gabarito completo**
-Todas as respostas no fim do arquivo.
+Todas as respostas, logo depois das atividades.
 
 **Seis tipos de atividade, misturados no plano**
 - **Atenção:** qual é diferente, conte e circule, ache as diferenças (5 no Nível 1, jogo dos 7 erros no Nível 2)
@@ -343,7 +343,7 @@ criança, não a tinta da impressora.
 
 **Serve para qual idade?**
 De 4 a 10 anos, em dois níveis:
-- Nível 1, de 4 a 6 anos: não precisa saber ler. A instrução vem numa linha para o adulto ler.
+- Nível 1, de 4 a 6 anos: não precisa saber ler. A instrução é curta, para o adulto ler em voz alta.
 - Nível 2, de 7 a 10 anos: para quem já lê palavras e frases curtas.
 Na dúvida, imprima uma folha de cada nível e veja qual cai melhor. O guia do adulto ajuda a decidir
 quando passar do 1 para o 2.
@@ -360,7 +360,7 @@ As duas folhas do dia levam mais ou menos 10 minutos. Mas não tem relógio: pod
 mais, e dá para fazer só uma folha.
 
 **Preciso preparar alguma coisa ou saber ensinar?**
-Não. Cada folha já diz o que fazer. Você só imprime e entrega. O gabarito está no fim.
+Não. Cada folha já diz o que fazer. Você só imprime e entrega. O gabarito vem logo depois das atividades.
 
 **Funciona no celular?**
 Você pode comprar, baixar e abrir o PDF no celular, e mandar imprimir direto de lá ou levar o

@@ -179,3 +179,9 @@ As correções do gerador comum (itens 1, 2, 3, 4 e 10) valem também para o Vol
 `python3 ferramentas/conferir_material.py ofertas/2026-11-26_atividades-foco` dá "MATERIAL NÃO APROVADO"
 porque ainda falta o `APROVACAO.md`. Pela regra 7 do CLAUDE.md, falta uma nova revisão do documento
 inteiro sair limpa e o dono aprovar (Portão M), além de decidir os 4 cosméticos acima.
+
+## Decisão do dono sobre os cosméticos (2026-11-28)
+1. Etiqueta "Cores e códigos" nos caça-palavras — **mantida** (aceita pelo dono).
+2. Estrela da p. 24 levemente quadrada — **mantida** (aceita pelo dono).
+3. "Instrução em uma linha" — **página ajustada**: "instrução curta para o adulto ler" (index.html e copy.md, seção dos níveis e FAQ).
+4. "Gabarito no fim" — **página ajustada**: "Gabarito completo" / "logo depois das atividades" (index.html e copy.md, 4 trechos).
