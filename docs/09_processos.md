@@ -17,6 +17,7 @@ trava que as confere), a auditoria, os indicadores do processo e as propostas de
 | R8 | **Material primeiro e completo:** revisar o documento inteiro, corrigir tudo (inclusive cosmético), revisar inteiro de novo até sair limpo, dono aprova (Portão M); só então Hotmart, criativos e campanhas | 2026-11-28 | dono | CLAUDE.md 7, esteira, `revisar-material`, `cadastro-e-pixel`, `top5-criativos`, `subir-campanhas`, supervisor | `ferramentas/conferir_material.py` (hash de cada PDF) |
 | R9 | **Criativos depois do material:** mesmo ciclo de revisão; dono aprova (Portão C); só então criativo sobe para a Meta e anúncio é criado/atualizado | 2026-11-28 | dono | CLAUDE.md 7, esteira, `revisar-criativos`, `subir-campanhas`, supervisor | `ferramentas/conferir_criativos.py` (exige R8 + hash de cada criativo) |
 | R10 | Aprender com cada oferta: erro ou atalho vira linha em `aprendizados/processo.md`, lido antes de cada etapa | 2026-11-28 | dono | CLAUDE.md 8, supervisor, skills | auditoria |
+| R12 | **Fechamento da revisão:** da 4ª rodada em diante, revisar só o que mudou (prova por pixel do resto); bloqueia/atrapalha é corrigido; cosmético novo vai para `melhorias-v1.1.md` e não segura o lançamento | 2026-11-28 | dono | CLAUDE.md 7, `revisar-material`, `revisar-criativos` | `cosmeticos_aceitos` no APROVACAO.md |
 | R11 | Toda regra nova é registrada aqui e aplicada onde precisa ser cumprida, com trava quando possível | 2026-11-28 | dono | `gestor-de-processos` | auditoria |
 
 ## Fluxo atual (resumo)

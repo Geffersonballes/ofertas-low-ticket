@@ -30,7 +30,8 @@ Criativo | Momento/trecho | Gravidade (bloqueia / atrapalha / cosmético) | Prob
 ## 2. Correção
 Corrija **tudo** (inclusive cosmético; só fica de fora o que o dono aceitar por escrito) no montador
 (`criativos/montador/`) ou no texto, gere de novo, e **revise de novo todos os criativos que mudaram**.
-Repita até a rodada sair limpa (máximo 3 rodadas; depois leve ao dono). Registre em `correcoes.md`.
+Repita até a rodada sair limpa. Fechamento igual ao do material (`revisar-material`, seção 2): da 4ª rodada em
+diante só o que mudou; cosmético novo vai para `revisoes/melhorias-v1.1.md` e não segura o lançamento. Registre em `correcoes.md`.
 
 ## 3. Portão C (dono)
 Mostre ao dono cada criativo (vídeo/imagem + texto do anúncio) e o resumo das correções. **Só com o

@@ -55,7 +55,8 @@ repositório: agentes em `.claude/agents/` (`minerador-de-ofertas`, `analista-de
 7. **Material primeiro, e completo.** Nenhum passo seguinte começa (Hotmart, criativos, anúncios, campanhas)
    antes de: (a) o documento inteiro ser revisado, (b) **todas** as correções serem feitas — inclusive as
    cosméticas, salvo as que o dono aceitar por escrito —, (c) uma nova revisão do documento inteiro sair
-   limpa e (d) o dono aprovar o material (skill `revisar-material`, Portão M). Confira sempre com
+   limpa (da 4ª rodada em diante, só as páginas que mudaram; cosmético novo vai para a versão 1.1 e não
+   segura o lançamento) e (d) o dono aprovar o material (skill `revisar-material`, Portão M). Confira sempre com
    `python3 ferramentas/conferir_material.py ofertas/<pasta>` → "MATERIAL APROVADO".
    Depois do material, os **criativos** passam pelo mesmo ciclo (skill `revisar-criativos`, Portão C):
    nenhum criativo sobe para a Meta e nenhum anúncio é criado ou atualizado antes de

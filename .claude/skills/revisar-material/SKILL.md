@@ -35,7 +35,12 @@ Página | Gravidade (**bloqueia** / **atrapalha** / cosmético) | Problema | Sug
   escrito (anote em `APROVACAO.md`, em `cosmeticos_aceitos:`).
 - Depois das correções, rode a **revisão do documento inteiro de novo** (todos os PDFs que mudaram, todas
   as páginas, não só as corrigidas): uma correção pode estragar outra página (paginação, plano, gabarito).
-  Repita corrigir → revisar inteiro até a rodada sair **limpa** (0 pendências). Passou de 3 rodadas, leve ao dono.
+  Repita corrigir → revisar inteiro até a rodada sair **limpa** (0 pendências).
+- **Fechamento (decidido pelo dono em 2026-11-28):** da 4ª rodada em diante, a revisão é só das **páginas que
+  mudaram**, com prova por pixel de que as outras ficaram idênticas. Nessa rodada final, o que for **bloqueia
+  ou atrapalha** é corrigido; detalhe **cosmético novo** (gosto, variedade) **não segura o lançamento**: vai
+  para `revisoes/melhorias-v1.1.md` e é corrigido depois, com o produto vendendo. O dono aceita essa lista ao
+  aprovar (fica em `cosmeticos_aceitos:` do `APROVACAO.md`).
 - Promessa que não confere: corrija o produto **ou** a página — os dois precisam dizer a mesma coisa.
 - Registre em `revisoes/material-AAAA-MM-DD/correcoes.md` o que foi corrigido e onde.
 
