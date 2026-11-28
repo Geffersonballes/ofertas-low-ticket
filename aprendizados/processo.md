@@ -57,7 +57,9 @@ O que **vende** fica em `o-que-vende.md`; aqui fica **como trabalhar** com menos
 - 2026-11-27 · Order bumps colocados só como bloco na página de pagamento "Em Branco" aparecem apenas
   com `?checkoutMode=10` **e** depois de "Alterar país"; a ferramenta `/cross-sell/order-bump` ficou vazia
   → configurar os bumps pela ferramenta Order Bump e testar o checkout em aba anônima no celular antes de
-  seguir. (Chamado aberto no suporte; registrar aqui a solução quando vier.)
+  seguir. **Solução (2026-11-28):** o dono configurou os bumps na ferramenta de Order Bump da Hotmart ("set" dos
+  order bumps) e eles passaram a aparecer no checkout no celular, sem trocar o país. Na próxima oferta: configurar os bumps
+  por essa ferramenta desde o início e conferir no celular, em aba anônima, a partir da página de vendas.
 - 2026-11-27 · Recuperação de pagamento "Pix + cartão" não funciona com order bump → deixar desligada.
 - 2026-11-27 · A extensão do Chrome trunca prompts longos → mandar prompts em partes curtas, uma tarefa
   por vez, e pedir "não mude nada, só me traga" quando for só leitura.
