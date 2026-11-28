@@ -42,3 +42,16 @@ PageView 180d; Initiate Checkout 7/15/30d; Direct 7d + PageView 180d. Grupos de 
 5. **ROAS < 1 por 3 dias depois de ajustes:** matar e registrar o aprendizado.
 
 Toda decisão é **sugerida** pelo `analista-de-metricas` e **executada pelo dono**.
+
+
+## Time de dados (2026-11-28)
+
+| Especialista | Pergunta que responde |
+|---|---|
+| `analista-de-metricas` | coordena: coleta (Windsor + Hotmart), chama os outros, atualiza o painel |
+| `analista-de-funil` | em que ponto do funil o dinheiro vaza e qual o conserto |
+| `analista-de-criativos` | qual ângulo/gancho/formato para, assiste e vende |
+| `analista-financeiro` | lucro real por venda, CPA máximo, quanto escalar |
+| `analista-de-testes` | a diferença é real ou acaso? quanto dado falta? |
+
+A leitura deles aparece no painel (`diagnosticos` em `painel/site/dados.json`).
