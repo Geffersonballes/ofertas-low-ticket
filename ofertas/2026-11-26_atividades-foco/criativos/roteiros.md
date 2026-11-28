@@ -40,7 +40,7 @@ Resumo:
 | # | Ângulo | Modela | Gancho (0–3 s) | Fala | Vídeo |
 |---|---|---|---|---|---|
 | 1 | Curiosidade | 1534227 | "Isto é o que cabe em dez minutinhos de papel e lápis." | 58 palavras · 21,1 s gravados | 22,1 s |
-| 2 | Objeção: preparo e preço | 1534245 | "Imprimiu, entregou, pronto. Zero preparo." | 57 palavras · 20,6 s gravados | 21,6 s |
+| 2 | Objeção: preparo e preço | 1534245 | "Imprimiu, entregou, pronto. Zero preparo." | 59 palavras · 20,6 s gravados | 21,6 s |
 | 3 | Objeção: tela | 1534248 | "App educativo continua sendo tela." | 53 palavras · 21,9 s gravados | 22,9 s |
 | 4 | Desejo: troca | 1534234 | "Troque dez minutos de tela por dez minutos disto." | 53 palavras · 21,5 s gravados | 22,5 s |
 | 5 | Ocasião: férias (estático) | 1599489 | "Férias. O que tem para fazer hoje?" (escrito) | — | — |
@@ -130,7 +130,7 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 > trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. E imprime de novo
 > quando quiser. Toque em saiba mais.
 
-57 palavras · 20,6 s de fala gravada.
+59 palavras · 20,6 s de fala gravada.
 
 **Anúncio**
 - **Texto principal:**

@@ -122,7 +122,7 @@ ROTEIROS = {
         # rodada 2); a legenda segue o áudio, como no "imprime e entrega" do A2
         F("O plano de trinta dias | já vem pronto, | com o quadro de conquistas.",
           "O plano de 30 dias | já vem pronto, | com o quadro de conquistas.",
-          {"tipo": "partes", "titulo": "Plano pronto · quadro de conquistas", "partes": [
+          {"tipo": "partes", "titulo": "Plano pronto\nquadro de conquistas", "partes": [
               {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.3], "foco": [50, 20], "janela": True},
               # zoom pequeno no centro: a página inteira termina acima da legenda (y < 704)
               {"tipo": "pagina", "pag": 142, "zoom": [1.0, 1.04], "foco": [50, 50]},
