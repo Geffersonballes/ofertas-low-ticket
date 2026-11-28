@@ -40,14 +40,17 @@ code{font-size:.92em;color:#bfe9ff}
 .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 /* topo fixo */
 .top{position:sticky;top:0;z-index:5;margin:0 -14px;padding:0 14px;background:linear-gradient(rgba(7,13,24,.92),rgba(7,13,24,.78));border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 16px;padding:14px 0 10px}
+header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:'mk tx sel' 'sub sub sub';align-items:center;gap:4px 14px;padding:14px 0 10px}
+header>.mk{grid-area:mk}header>h1{grid-area:tx;min-width:0}header>.sub{grid-area:sub}header>.osel{grid-area:sel;justify-self:end}
+@media(min-width:900px){header{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-areas:'mk tx sel' 'sub tx sel';gap:2px 20px}
+  header>.mk{align-self:end;justify-self:start}header>.sub{align-self:start}header>h1{justify-self:center;text-align:center}h1 .tx{align-items:center}}
 h1{display:flex;align-items:center;gap:14px;font-family:'Nunito',system-ui,sans-serif;font-weight:200}
-h1 .mk{width:clamp(40px,9vw,54px);height:auto;flex:none;filter:drop-shadow(0 0 14px rgba(62,224,255,.35))}
+header .mk{width:clamp(40px,9vw,54px);height:auto;flex:none;filter:drop-shadow(0 0 14px rgba(62,224,255,.35))}
 h1 .tx{display:flex;flex-direction:column;min-width:0}
 h1 .t1 b{font-weight:800}
 h1 .t1{font-size:clamp(22px,6vw,34px);letter-spacing:.14em;white-space:nowrap;text-transform:uppercase;line-height:1;background:linear-gradient(90deg,#fff,#bfefff 60%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
 h1 .t2{font-size:clamp(12px,3.2vw,15px);font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-top:4px}
-header .sub{color:var(--muted);font-size:12.5px;margin-top:6px;display:flex;align-items:center;gap:6px}
+header .sub{color:var(--muted);font-size:12.5px;margin-top:4px;display:flex;align-items:center;gap:6px}
 header .sub::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:0 0 8px var(--cy)}
 .osel{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 select{font:700 14px 'Nunito',system-ui,sans-serif;letter-spacing:0;text-transform:none;padding:8px 12px;border-radius:12px;border:1px solid var(--line2);background:rgba(20,34,58,.85);color:var(--ink);max-width:100%;box-shadow:0 0 0 1px rgba(62,224,255,.05),0 8px 20px rgba(0,0,0,.3)}
@@ -218,8 +221,8 @@ td.hl,th.hl{background:rgba(62,224,255,.16)!important}
 @media(max-width:619px){
   html{scroll-padding-top:100px}
   header{flex-wrap:nowrap;align-items:center;padding:10px 0 8px}
-  h1 .t1{font-size:20px;letter-spacing:.1em}h1{gap:10px}h1 .mk{width:36px}
-  h1 .t2{display:none}
+  h1 .t1{font-size:clamp(15px,4.6vw,20px);letter-spacing:.07em}header .ofb{max-width:40vw;text-align:left;line-height:1.2}header{column-gap:10px}header .mk{width:36px}
+  h1 .t2{font-size:clamp(8.5px,2.6vw,11px);letter-spacing:clamp(.1em,.6vw,.22em);margin-top:3px;white-space:nowrap}
   header .sub{font-size:11.5px;margin-top:3px}
   .osel{font-size:0;gap:0}
   select{padding:7px 10px;font-size:13.5px;max-width:48vw}
@@ -236,6 +239,14 @@ td.hl,th.hl{background:rgba(62,224,255,.16)!important}
 .esteira>summary::after{order:0}
 @media(min-width:1200px){.et-res .ag{display:none}}
 .et-in{padding:0 16px 14px}
+.et-sel{display:flex;flex-direction:column;align-items:stretch;gap:5px;margin:0 0 10px}
+.et-sel label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.et-sel .ofw{flex:1;min-width:0}
+#et-of{width:100%;max-width:100%;padding:6px 10px;font-size:13px;border-radius:10px}
+.et-sel .ofb{width:100%;justify-content:space-between;padding:6px 10px 6px 12px;font-size:13px;border-radius:10px}
+.et-sel .ofb>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.et-sel .ofl{left:0;right:0;min-width:0;max-width:none;font-size:13px}
+.et-sel .ofl li{white-space:normal}
 .et-prog{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 6px}
 .et-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--vi),var(--cy))}
 .et-agora{border:1px solid rgba(255,207,92,.3);background:rgba(255,207,92,.07);border-radius:12px;padding:9px 11px;margin:10px 0 12px;font-size:12.5px;color:#c4d3ea;overflow-wrap:anywhere}
@@ -277,7 +288,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
 <div class="wrap">
   <div class="top">
     <header>
-      <div><h1><img class="mk" src="logo.svg" alt="" width="54" height="54"><span class="tx"><span class="t1"><b>Balles</b> Sales</span><span class="t2">Ofertas low ticket</span></span></h1><div class="sub" id="atualizado">carregando…</div></div>
+      <img class="mk" src="logo.svg" alt="" width="54" height="54"><h1><span class="tx"><span class="t1"><b>Balles</b> Sales</span><span class="t2">Ofertas low ticket</span></span></h1><div class="sub" id="atualizado">carregando…</div>
       <div class="osel"><span id="ofr">Oferta</span><div class="ofw" id="ofw"><select id="oferta" aria-labelledby="ofr"></select></div></div>
     </header>
     <nav class="atalhos" aria-label="Seções">
@@ -286,7 +297,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
   </div>
   <div id="banner"></div>
   <div id="filtro"></div>
-  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in" id="etapas-of"></div></details>
+  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in"><div class="et-sel"><label for="et-of" id="etr">Acompanhar</label><div class="ofw" id="etw"><select id="et-of" aria-labelledby="etr"></select></div></div><div id="etapas-of"></div></div></details>
   <div class="grid kpis" id="resumo"></div>
   <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
     <div class="etapas" id="etapas"></div></div>
@@ -351,12 +362,12 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b
   const tr=e.target.closest('tr.ad');if(tr){selecionar(+tr.dataset.i)}});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr.ad')){e.preventDefault();selecionar(+e.target.dataset.i)}});
 
-let D,OI=0,SEL=null;
+let D,OI=0,SEL=null,ESI=0;
 const CAMPOS=['gasto','impressoes','v3s','thruplay','cliques','lp','checkouts','vendas','faturamento'];
 function soma(lista){const t={};CAMPOS.forEach(k=>t[k]=lista.reduce((a,x)=>a+(x[k]||0),0));return t}
 fetch('dados.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const s=$('oferta');
   d.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
-  s.onchange=()=>{OI=+s.value;SEL=null;render();if(window.ofSync)ofSync()};seletor(s);render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
+  const sy=seletor(s,$('ofw'),'ofr','of');s.onchange=()=>{OI=+s.value;SEL=null;render();sy()};esteiraSel();render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
 function selecionar(i){SEL=SEL===i?null:i;render();$('filtro').scrollIntoView({block:'start'})}
 function render(){
   const o=D.ofertas[OI],m=D.metas,ads=o.anuncios||[];
@@ -373,20 +384,20 @@ function render(){
   bumps(o,tot);
   const ap=(D.aprendizados||[]).filter(a=>!a.oferta||a.oferta===o.slug);
   $('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+H(a.texto)+' <span class="na">· '+H(a.confianca||'')+' · '+H(a.data||'')+'</span></li>').join('')+'</ul>':vazio('faturamento','Ainda sem conclusões com número.','Elas aparecem aqui conforme os anúncios rodam.');
-  esteira(o);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
+  esteira(D.ofertas[ESI]);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
 }
 /* lista de ofertas estilizada: só com mouse; no toque fica o seletor do aparelho */
-function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
-  const w=$('ofw');w.classList.add('custom');
-  const b=document.createElement('button');b.type='button';b.className='ofb';b.setAttribute('aria-haspopup','listbox');b.setAttribute('aria-expanded','false');b.setAttribute('aria-labelledby','ofr ofbt');
-  b.innerHTML='<span id="ofbt"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
-  const l=document.createElement('ul');l.className='ofl';l.id='ofl';l.setAttribute('role','listbox');l.setAttribute('aria-labelledby','ofr');l.hidden=true;l.tabIndex=-1;
+function seletor(s,w,rot,px){const nada=()=>{};if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return nada;
+  w.classList.add('custom');
+  const b=document.createElement('button');b.type='button';b.className='ofb';b.setAttribute('aria-haspopup','listbox');b.setAttribute('aria-expanded','false');b.setAttribute('aria-labelledby',rot+' '+px+'bt');
+  b.innerHTML='<span id="'+px+'bt"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+  const l=document.createElement('ul');l.className='ofl';l.id=px+'l';l.setAttribute('role','listbox');l.setAttribute('aria-labelledby',rot);l.hidden=true;l.tabIndex=-1;
   w.appendChild(b);w.appendChild(l);let at=0;
   const itens=()=>[...l.children];
   const marca=i=>{at=i;itens().forEach((li,j)=>li.classList.toggle('at',j===i));const li=itens()[i];if(li){l.setAttribute('aria-activedescendant',li.id);li.scrollIntoView({block:'nearest'})}};
-  window.ofSync=()=>{$('ofbt').textContent=s.options[s.selectedIndex]?s.options[s.selectedIndex].text:'';
-    l.innerHTML=[...s.options].map((o,i)=>'<li role="option" id="ofo'+i+'" data-v="'+H(o.value)+'" aria-selected="'+(i===s.selectedIndex)+'">'+H(o.text)+'</li>').join('')};
-  const abre=()=>{ofSync();l.hidden=false;b.setAttribute('aria-expanded','true');marca(Math.max(0,s.selectedIndex));l.focus()};
+  const sync=()=>{$(px+'bt').textContent=s.options[s.selectedIndex]?s.options[s.selectedIndex].text:'';
+    l.innerHTML=[...s.options].map((o,i)=>'<li role="option" id="'+px+'o'+i+'" data-v="'+H(o.value)+'" aria-selected="'+(i===s.selectedIndex)+'">'+H(o.text)+'</li>').join('')};
+  const abre=()=>{sync();l.hidden=false;b.setAttribute('aria-expanded','true');marca(Math.max(0,s.selectedIndex));l.focus()};
   const fecha=foco=>{l.hidden=true;b.setAttribute('aria-expanded','false');if(foco)b.focus()};
   const escolhe=i=>{if(i!==s.selectedIndex){s.selectedIndex=i;s.dispatchEvent(new Event('change'))}fecha(true)};
   b.onclick=()=>l.hidden?abre():fecha(true);
@@ -398,9 +409,14 @@ function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches
   l.onmousemove=e=>{const li=e.target.closest('li');if(li)marca(itens().indexOf(li))};
   l.onclick=e=>{const li=e.target.closest('li');if(li)escolhe(itens().indexOf(li))};
   document.addEventListener('mousedown',e=>{if(!l.hidden&&!w.contains(e.target))fecha(false)});
-  ofSync()}
+  sync();return sync}
 /* checklist das etapas (dados.json -> ofertas[i].etapas, copiado do status.md por painel/etapas_do_status.py) */
 const LARGA=matchMedia('(min-width: 1200px)');
+/* escolha da oferta acompanhada na coluna de status (independe do seletor do topo; lembrada no navegador) */
+function esteiraSel(){const s=$('et-of');let g=null;try{g=localStorage.getItem('painel.esteira')}catch(e){}
+  D.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
+  const k=D.ofertas.findIndex(o=>(o.slug||o.nome)===g);ESI=k>=0?k:OI;s.value=ESI;
+  const sy=seletor(s,$('etw'),'etr','et');s.onchange=()=>{ESI=+s.value;try{localStorage.setItem('painel.esteira',D.ofertas[ESI].slug||D.ofertas[ESI].nome)}catch(e){}esteira(D.ofertas[ESI]);sy()}}
 function esteira(o){const el=$('etapas-of'),det=$('s-etapas'),es=o.etapas||[];
   if(!es.length){$('et-res').textContent='sem etapas registradas';el.innerHTML=vazio('esp','Sem etapas para esta oferta.','Rode painel/etapas_do_status.py para copiar do status.md.');return}
   const f=es.filter(e=>e.situacao==='feito').length,at=es.find(e=>e.situacao==='andamento'||e.situacao==='bloqueado');
@@ -579,7 +595,7 @@ const AJUDA={
  's-bumps':['Order bumps','Ofertas extras do checkout e quanto cada uma vende.',m=>'O aceite é calculado sobre as vendas do produto principal.'],
  's-aprendizados':['O que vende','Conclusões com número que valem para as próximas ofertas.',m=>'Vêm de aprendizados/o-que-vende.md.'],
  's-esp':['Leitura dos especialistas','O que cada analista do time de dados concluiu: funil, criativos, financeiro e testes.',m=>'Confiança baixa = pouco dado ainda; não decida só com ela.'],
- 's-etapas':['Status da Próxima Oferta','Checklist da esteira da oferta escolhida: o que já foi feito, o que está em andamento e o que falta.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
+ 's-etapas':['Status da Próxima Oferta','Checklist da esteira da oferta escolhida em "Acompanhar": o que já foi feito, o que está em andamento e o que falta. A escolha fica salva neste navegador.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
  's-reembolsos':['Reembolsos','Pedidos de dinheiro de volta na Hotmart e o motivo de cada um.',m=>'Os motivos mostram onde a promessa e o produto não batem.']};
 const tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip);
 let tipDe=null,tipT=null,tipY=0;
