@@ -46,7 +46,7 @@ CATEGORIAS = [
         "E se todos os carros virassem bicicletas gigantes?",
         "E se você acordasse dentro do seu desenho animado preferido?",
         "E se toda segunda-feira fosse dia de festa?",
-        "E se você pudesse escolher um jantar? O que seria?",
+        "E se o jantar caísse do céu como chuva? O que você queria que caísse?",
         "E se você ganhasse um robô ajudante? O que ele faria primeiro?",
     ]),
     ("PREFERIDOS", "coracao", [
@@ -88,7 +88,7 @@ def gerar():
   <ul>
     <li><b>Meu dia:</b> sobre o que aconteceu hoje e lembranças boas.</li>
     <li><b>Imaginação:</b> para inventar coisas.</li>
-    <li><b>E se…?</b> situações malucas para pensar junto.</li>
+    <li><b>E se…?</b> situações malucas para pensar juntos.</li>
     <li><b>Preferidos:</b> do que cada um gosta.</li>
   </ul>
   <h2>Dicas</h2>

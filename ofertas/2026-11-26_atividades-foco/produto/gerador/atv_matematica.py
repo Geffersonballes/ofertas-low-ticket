@@ -1,5 +1,6 @@
 """Atividades do bump "Matemática brincando" (área 182x228 mm). Tudo que tem resposta é calculado e
 conferido com assert. Dinheiro só como "fichas" de desenho próprio (nada de cédula ou moeda do Real)."""
+import random
 import math
 
 from atividades import W, H, _txt
@@ -174,6 +175,9 @@ def mercadinho1(rng):
 
 
 # ======================================================================= NÍVEL 2
+CONTAS_USADAS = set()  # nenhuma conta repete entre as folhas de contas do bump
+
+
 def contas(rng, op, maxi):
     s, g = [], []
     vistos = set()
@@ -183,7 +187,24 @@ def contas(rng, op, maxi):
         else:
             a = rng.randint(2, maxi); b = rng.randint(1, a - 1); r = a - b
         vistos.add((a, b, r))
-    for i, (a, b, r) in enumerate(sorted(vistos, key=lambda t: rng.random())):
+    ordem = sorted(vistos, key=lambda t: rng.random())  # gasta o rng principal como antes (as outras páginas não mudam)
+    if maxi > 10:
+        # folhas depois do aquecimento: toda conta tem um número de 10 para cima (soma: uma parcela >= 10;
+        # diminuir: o primeiro número >= 11). Sorteadas num rng derivado, sem repetir conta no bump.
+        alt = random.Random(f"contas-{op}-{maxi}-{len(CONTAS_USADAS)}")
+        novas = []
+        while len(novas) < 12:
+            if op == "+":
+                a = alt.randint(1, maxi - 1); b = alt.randint(1, maxi - a)
+                ok = max(a, b) >= 10
+            else:
+                a = alt.randint(11, maxi); b = alt.randint(2, a - 1)
+                ok = True
+            r = a + b if op == "+" else a - b
+            if ok and (op, a, b) not in CONTAS_USADAS and r not in {x[2] for x in novas if x[:2] == (a, b)}:
+                CONTAS_USADAS.add((op, a, b)); novas.append((a, b, r))
+        ordem = novas
+    for i, (a, b, r) in enumerate(ordem):
         x, y = (i % 2) * 92, (i // 2) * 37
         s.append(f'<rect x="{x + 2}" y="{y + 2}" width="86" height="31" rx="5" fill="none" stroke="#bbb" stroke-width=".5"/>')
         s.append(_txt(x + 36, y + 17.5, f"{a} {'+' if op == '+' else '−'} {b} =", 9.5, 800, fonte="Baloo 2"))

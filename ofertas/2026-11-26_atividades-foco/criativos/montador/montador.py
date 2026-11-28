@@ -70,7 +70,7 @@ ROTEIROS = {
         F("Abre, imprime, entrega com um lápis.", "Abre, imprime, entrega com um lápis.",
           {"tipo": "imagem", "src": "mockup-pacote.png", "lapis": True, "titulo": "Abre · imprime · entrega"}),
         F("As respostas estão no gabarito.", "As respostas estão no gabarito.",
-          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "titulo": "Gabarito no fim"}),
+          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "titulo": "Gabarito completo"}),
         F("Cento e vinte atividades por trinta e sete reais.", "120 atividades por R$ 37,00.",
           {"tipo": "numeros", "linhas": ["120 atividades", "R$ 37,00"], "titulo": "Uma vez só"}),
         F("Um real e vinte e três por dia, no plano de trinta dias.", "R$ 1,23 por dia, no plano de 30 dias.",

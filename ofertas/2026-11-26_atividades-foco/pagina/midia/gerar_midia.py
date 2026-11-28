@@ -3,7 +3,8 @@ rasterizado a 192 dpi (o mesmo tamanho das antigas vitrine-XX.png, que vinham do
 páginas que não existem no caderno — corrigido em 2026-11-28).
 Uso (depois de gerar o PDF final):
   python3 gerar_midia.py && node fotografar.cjs && python3 gerar_midia.py --finalizar
-Saída: ../img/ (mockups PNG/WebP, vídeo MP4 + GIF do caderno sendo folheado, amostras JPG)."""
+Saída: ../img/ (mockups PNG/WebP, vídeo MP4 + GIF do caderno sendo folheado, amostras JPG) e a imagem do produto
+da Hotmart (../../hotmart/imagem-produto.png, que mostra a capa)."""
 import json
 import pathlib
 import subprocess
@@ -77,6 +78,12 @@ def montar_cenas():
         corpo += f'<div class="folha" style="left:{390 + (i - 2) * 95}px;top:{130 + abs(i - 2) * 22}px;transform:rotate({ang}deg);background-image:url({url(n)})"></div>'
     corpo += lapis(170, 760, 8, 340)
     lista.append(cena("mockup-pacote", 1200, 900, corpo))
+    # imagem do produto na Hotmart (1200x1200, fundo laranja): capa do caderno com o labirinto embaixo e um lápis
+    grande = "width:600px;height:849px;"
+    corpo = (f'<div class="folha" style="{grande}left:380px;top:170px;transform:rotate(6deg);background-image:url({url(7)})"></div>'
+             f'<div class="folha" style="{grande}left:150px;top:120px;transform:rotate(-3deg);background-image:url({url(1)})"></div>'
+             + lapis(540, 960, -22, 560))
+    lista.append(cena("hotmart-produto", 1200, 1200, corpo, fundo="#ff7a45"))
     # 3) quadros do "folheando": pilha fixa + página do topo trocando
     for k, n in enumerate(FOLHEAR):
         corpo = (f'<div class="folha" style="left:318px;top:96px;transform:rotate(4deg);background-image:url({url(FOLHEAR[(k + 2) % len(FOLHEAR)])})"></div>'
@@ -93,6 +100,8 @@ def finalizar():
         im = Image.open(CENAS / f"{nome}.png")
         im.save(IMG / f"{nome}.png", optimize=True)
         im.save(IMG / f"{nome}.webp", quality=88, method=6)
+    HOTMART = AQUI.parents[1] / "hotmart"
+    Image.open(CENAS / "hotmart-produto.png").convert("RGB").save(HOTMART / "imagem-produto.png", optimize=True)
     # vídeo e GIF do caderno sendo folheado (1,4 s por página + transição de 0,35 s)
     n = len(FOLHEAR)
     dur, tr = 1.4, 0.35

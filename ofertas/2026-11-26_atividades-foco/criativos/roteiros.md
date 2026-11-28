@@ -108,7 +108,7 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 | 0–3 s | Página p. 6 subindo + carimbo "PRONTO" | Imprimiu. Entregou. Pronto. | Imprimiu, entregou, pronto. Zero preparo. |
 | 3–7 s | Plano N1 (p. 5), destaque no Dia 1 → p. 6 e p. 7 lado a lado | O plano já separou as folhas | O plano já diz as duas folhas de cada dia. |
 | 7–10 s | `mockup-pacote.png` + lápis ilustrado (plano, sem mão) entrando pela lateral | Abre · imprime · entrega | Abre, imprime, entrega com um lápis. |
-| 10–13 s | Gabarito (p. 128), zoom numa resposta | Gabarito no fim | As respostas estão no gabarito. |
+| 10–13 s | Gabarito (p. 128), zoom numa resposta | Gabarito completo | As respostas estão no gabarito. |
 | 13–19,5 s | `mockup-capa.png`; números entram em sequência | 120 atividades · R$ 37,00 → R$ 1,23 por dia no plano de 30 dias | Cento e vinte atividades por trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. |
 | 19,5–25 s | `folheando.mp4` → cartão final | Imprime de novo quando quiser · Saiba mais | E imprime de novo quando quiser. Toque em saiba mais. |
 

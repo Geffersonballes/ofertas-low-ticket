@@ -15,20 +15,36 @@ TEMAS = {
     "casa": (["SALA", "QUARTO", "COZINHA", "PORTA", "JANELA", "TELHADO", "ESCADA", "BANHEIRO"], "partes da casa"),
     "roupas": (["SAIA", "MEIA", "BLUSA", "SAPATO", "CASACO", "VESTIDO", "BERMUDA", "LUVA"], "roupas"),
     "doces": (["BOLO", "PUDIM", "BALA", "PIRULITO", "SORVETE", "BISCOITO", "GELATINA", "BRIGADEIRO"], "doces"),
-    "brincadeiras": (["PIQUE", "PEGA", "PIPA", "CORDA", "RODA", "BOLINHA", "CIRANDA", "PETECA"], "brincadeiras"),
+    # antes: PIQUE, PEGA e BOLINHA (pedaços de pique-esconde, pega-pega e bolinha de gude). O sorteio da grade
+    # antiga gasta o rng principal e a grade nova sai de um rng derivado (as outras páginas não mudam).
+    "brincadeiras": (["XADREZ", "QUEIMADA", "PIPA", "AMARELINHA", "RODA", "CORDA", "CIRANDA", "PETECA"], "brincadeiras"),
 }
+BRINCADEIRAS_ANTIGO = ["PIQUE", "PEGA", "PIPA", "CORDA", "RODA", "BOLINHA", "CIRANDA", "PETECA"]
 
 
 VOGAL_EXTRAS = {
     "livro": ("LIVRO", ["LI", "VRO"], lambda v: '<path d="M50 24 C 38 16, 20 16, 8 20 L 8 82 C 20 78, 38 78, 50 86 Z"/>'
               '<path d="M50 24 C 62 16, 80 16, 92 20 L 92 82 C 80 78, 62 78, 50 86 Z"/><path d="M18 34 L 40 32 M18 46 L 40 44 M60 32 L 82 34 M60 44 L 82 46" fill="none"/>'),
     "mesa": ("MESA", ["ME", "SA"], lambda v: '<rect x="6" y="36" width="88" height="12" rx="2"/><rect x="14" y="48" width="8" height="40"/><rect x="78" y="48" width="8" height="40"/>'),
-    "faca": ("FACA", ["FA", "CA"], lambda v: '<path d="M8 56 L 60 40 C 70 38, 72 48, 64 52 L 8 60 Z" fill="#fff"/>'
-             '<rect x="62" y="44" width="32" height="12" rx="5" transform="rotate(-8 62 50)" fill="#d9d9d9"/>'),
+    # faca de mesa: lâmina larga com ponta arredondada e cabo com rebites (a fina parecia um palito)
+    "faca": ("FACA", ["FA", "CA"], lambda v: '<path d="M6 56 C 6 40, 22 32, 60 32 L 60 60 L 12 60 C 8 60, 6 59, 6 56 Z" fill="#fff"/>'
+             '<rect x="60" y="36" width="34" height="20" rx="7" fill="#d9d9d9"/>'
+             '<circle cx="70" cy="46" r="2.6" fill="#1d1d1f" stroke="none"/><circle cx="84" cy="46" r="2.6" fill="#1d1d1f" stroke="none"/>'),
     "vela": ("VELA", ["VE", "LA"], lambda v: '<rect x="38" y="36" width="24" height="54" rx="3"/><path d="M50 32 L 50 36" fill="none"/>'
              '<path d="M50 8 Q 40 22 50 30 Q 60 22 50 8 Z" fill="#d9d9d9"/>'),
     "meia": ("MEIA", ["MEI", "A"], lambda v: '<path d="M34 8 L 62 8 L 62 58 L 82 72 C 92 80, 84 96, 70 92 L 38 76 C 30 72, 34 64, 34 58 Z"/><path d="M34 20 L 62 20" fill="none"/>'),
-    "mala": ("MALA", ["MA", "LA"], lambda v: '<rect x="10" y="32" width="80" height="56" rx="6"/><path d="M38 32 L 38 20 L 62 20 L 62 32" fill="none"/><path d="M10 54 L 90 54" fill="none"/>'),
+    # mala de viagem com rodinhas e alça de puxar (a antiga parecia uma pasta)
+    "mala": ("MALA", ["MA", "LA"], lambda v: '<path d="M40 26 L 40 6 L 60 6 L 60 26" fill="none"/>'
+             '<rect x="22" y="26" width="56" height="60" rx="7"/><path d="M36 34 L 36 78 M50 34 L 50 78 M64 34 L 64 78" fill="none"/>'
+             '<circle cx="33" cy="91" r="5" fill="#1d1d1f"/><circle cx="67" cy="91" r="5" fill="#1d1d1f"/>'),
+}
+# palavras de 1 sílaba com ícone próprio: o "Quantas sílabas?" precisa de uma por folha sem repetir (só havia SOL e FLOR)
+NOVAS_1SIL = {
+    "pao": ("PÃO", ["PÃO"], lambda v: '<path d="M8 62 C 8 34, 92 34, 92 62 C 92 76, 8 76, 8 62 Z"/>'
+            '<path d="M28 46 L 38 60 M46 42 L 56 58 M64 44 L 74 58" fill="none"/>'),
+    "trem": ("TREM", ["TREM"], lambda v: '<rect x="8" y="42" width="54" height="32" rx="3"/><rect x="56" y="22" width="34" height="52" rx="3"/>'
+             '<rect x="63" y="29" width="20" height="15" fill="#d9d9d9"/><rect x="18" y="22" width="12" height="20"/>'
+             '<path d="M4 88 L 96 88" fill="none"/><circle cx="24" cy="80" r="8"/><circle cx="48" cy="80" r="8"/><circle cx="74" cy="80" r="8"/>'),
 }
 
 
@@ -49,8 +65,77 @@ def gerar():
 
     # palavras extras só para trocar repetidas no "Qual vogal falta?" (entram depois dos sorteios: o rng não muda)
     # (só entram no L.PALAVRAS durante a montagem dessas folhas: outras atividades sorteiam do dicionário inteiro)
-    for k, (pal, sil, desenho) in VOGAL_EXTRAS.items():
-        icones.DESENHOS.setdefault(k, desenho)
+    for k, (pal, sil, desenho) in {**VOGAL_EXTRAS, **NOVAS_1SIL}.items():
+        icones.DESENHOS[k] = desenho
+    extras_pal = {k: (p_, s_) for k, (p_, s_, _) in {**VOGAL_EXTRAS, **NOVAS_1SIL}.items()}
+
+    def com_extras(f):
+        """Roda f() com as palavras extras no dicionário (só durante a montagem da folha)."""
+        L.PALAVRAS.update(extras_pal)
+        try:
+            return f()
+        finally:
+            for k in extras_pal:
+                del L.PALAVRAS[k]
+
+    usadas_n2 = {"silaba": set(), "conte": set(), "forme": set()}
+
+    def trocar_repetidas(orig, usadas, pool, alt):
+        livres = [k for k in pool if k not in usadas and k not in orig]
+        esc = [k if k not in usadas else livres.pop(alt.randrange(len(livres))) for k in orig]
+        usadas.update(esc)
+        return esc
+
+    def silaba_sem_repetir(i):
+        """"Complete com a sílaba" sem repetir palavra no nível (sorteio original no rng principal, troca no derivado)."""
+        orig = amostra(multi, 6)
+        L.complete_silaba(rng, orig)  # só gasta o rng como antes
+        alt = random.Random(f"silaba-{i}")
+        pool = multi + [k for k, (p_, s_) in extras_pal.items() if len(s_) >= 2]
+        esc = trocar_repetidas(orig, usadas_n2["silaba"], pool, alt)
+        return com_extras(lambda: L.complete_silaba(alt, esc))
+
+    def conte_sem_repetir(i):
+        """"Quantas sílabas?" sem repetir palavra no nível e com palavras de 1, 2 e 3 sílabas em toda folha."""
+        orig = amostra(todas, 8)
+        alt = random.Random(f"conte-{i}")
+        L.PALAVRAS.update(extras_pal)
+        try:
+            n_sil = lambda k: len(L.PALAVRAS[k][1])
+            pool = todas + list(extras_pal)
+            usadas = usadas_n2["conte"]
+            esc = [k for k in orig]
+            for pos, k in enumerate(esc):
+                if k in usadas:
+                    livres = [x for x in pool if x not in usadas and x not in esc and n_sil(x) == n_sil(k)] or \
+                             [x for x in pool if x not in usadas and x not in esc]
+                    esc[pos] = livres[alt.randrange(len(livres))]
+            for alvo, pos in [(1, 7), (3, 6)]:
+                if not any(n_sil(k) == alvo for k in esc):
+                    cand = [x for x in pool if n_sil(x) == alvo and x not in usadas and x not in esc]
+                    esc[pos] = cand[alt.randrange(len(cand))]
+            assert len(set(esc)) == 8 and {n_sil(k) for k in esc} >= {1, 2, 3} and not set(esc) & usadas, esc
+            usadas.update(esc)
+            return L.conte_silabas(esc)
+        finally:
+            for k in extras_pal:
+                del L.PALAVRAS[k]
+
+    def forme_sem_repetir(i):
+        """"Desembaralhe" sem repetir palavra no nível e sem embaralhado que forme outra palavra (TOGA, SACA)."""
+        pool7 = [k for k in todas if len(L.PALAVRAS[k][0]) <= 7]
+        orig = amostra(pool7, 6)
+        L.forme_palavra(rng, orig)  # só gasta o rng como antes
+        alt = random.Random(f"forme-{i}")
+        pool = pool7 + [k for k, (p_, s_) in extras_pal.items() if len(p_) >= 4]
+        esc = trocar_repetidas(orig, usadas_n2["forme"], pool, alt)
+        return com_extras(lambda: L.forme_palavra(alt, esc, L.EMBARALHADAS_PROIBIDAS))
+
+    def caca_brincadeiras():
+        B.TEMAS_PALAVRAS["brincadeiras"] = BRINCADEIRAS_ANTIGO
+        B.caca_palavras(rng, "brincadeiras")  # só gasta o rng como antes
+        B.TEMAS_PALAVRAS["brincadeiras"] = TEMAS["brincadeiras"][0]
+        return B.caca_palavras(random.Random("caca-brincadeiras"), "brincadeiras")
 
     def vogal_sem_repetir(pool):
         """5 folhas de "Qual vogal falta?" sem repetir palavra. O sorteio original gasta o rng principal
@@ -70,17 +155,6 @@ def gerar():
                 del L.PALAVRAS[k]
         return folhas
 
-    def misturar_silabas(esc, i):
-        """Cada folha de "Quantas sílabas?" mistura palavras de 1, 2 e 3 sílabas (sem rng)."""
-        esc = esc[:]
-        n_sil = lambda k: len(L.PALAVRAS[k][1])
-        for alvo, pos in [(1, 7), (3, 6)]:
-            if not any(n_sil(k) == alvo for k in esc):
-                cand = [k for k in todas if n_sil(k) == alvo and k not in esc]
-                esc[pos] = cand[i % len(cand)]
-        assert len(set(esc)) == 8 and {n_sil(k) for k in esc} >= {1, 2, 3}
-        return esc
-
     n1 = intercalar([
         [L.trace_letra(v) for v in "AEIOU"] + [L.trace_vogais()],
         [L.letra_inicial(rng, amostra(todas, 6)) for _ in range(6)],
@@ -94,10 +168,10 @@ def gerar():
     frases = L.FRASES[:]
     rng.shuffle(frases)
     n2 = intercalar([
-        [L.complete_silaba(rng, amostra(multi, 6)) for _ in range(5)],
-        [L.conte_silabas(misturar_silabas(amostra(todas, 8), i)) for i in range(4)],
-        [L.forme_palavra(rng, amostra([k for k in todas if len(L.PALAVRAS[k][0]) <= 7], 6)) for _ in range(4)],
-        [B.caca_palavras(rng, t) for t in TEMAS],
+        [silaba_sem_repetir(i) for i in range(5)],
+        [conte_sem_repetir(i) for i in range(4)],
+        [forme_sem_repetir(i) for i in range(4)],
+        [B.caca_palavras(rng, t) if t != "brincadeiras" else caca_brincadeiras() for t in TEMAS],
         [L.rimas(rng, rimas[i * 5:(i + 1) * 5]) for i in range(4)],
         [L.complete_frase(rng, frases[i * 4:(i + 1) * 4]) for i in range(5)],
         [L.ordem_alfabetica(rng, amostra(todas, 5, i < 2)) for i in range(4)],

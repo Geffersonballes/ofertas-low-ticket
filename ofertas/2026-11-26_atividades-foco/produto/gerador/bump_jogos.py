@@ -200,7 +200,7 @@ REGRAS = """
   <p>Espalhe as cartas viradas para baixo. Na sua vez, vire duas. Se forem iguais, fique com o par e jogue de novo. Se não, desvire e passe a vez. Ganha quem tiver mais pares.
   Para os pequenos, comece com 6 pares.</p>
   <h2>Trilha das figuras (2 a 4 jogadores)</h2>
-  <p>Todos começam no INÍCIO. Na sua vez, jogue o dado e ande as casas. Estrela: avance 2. Nuvem: volte 2. Lua: fique uma rodada sem jogar. Não precisa tirar o número exato: quem passar da casa 30 também chega. Ganha quem chegar primeiro.</p>
+  <p>Todos começam no INÍCIO. Na sua vez, jogue o dado e ande as casas. Estrela: avance 2. Nuvem: volte 2. Lua: fique uma rodada sem jogar. A figura só vale na casa onde o dado parou: se a estrela ou a nuvem levar a outra figura, essa não vale. Não precisa tirar o número exato: quem passar da casa 30 também chega. Ganha quem chegar primeiro.</p>
   <h2>Jogo da velha (2 jogadores)</h2>
   <p>Um fica com as estrelas e o outro com os corações. Cada um coloca uma peça por vez. Ganha quem fizer uma linha de 3: em pé, deitada ou na diagonal.</p>
   <p class="aviso">Uso permitido: imprima quantas vezes quiser para a sua família. Não é permitido revender nem repassar o arquivo.</p>"""

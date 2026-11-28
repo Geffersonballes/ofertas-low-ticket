@@ -297,21 +297,34 @@ CICLOS_EXTRAS = [
     [("barco", 0, False), ("barco", 0, True), ("barco", 0, True)],
     [("triangulo", 0, False), ("triangulo", 90, False), ("circulo", 0, False)],
     [("banana", g, False) for g in (0, 90, 180, 270)],
-    [("casa", 0, False), ("casa", 180, False), ("casa", 180, False)],
+    [("coracao", 0, False), ("coracao", 0, False), ("coracao", 180, False)],  # (era a casa de cabeça para baixo: irreconhecível)
     [("passaro", 0, True), ("passaro", 0, False), ("nuvem", 0, False)],
     [("lua", 0, True), ("lua", 0, True), ("lua", 0, False)],
     [("peixe", 0, True), ("estrela", 0, False), ("peixe", 0, False), ("estrela", 0, False)],
 ]
 
 
-def sem_repetir_filas(ciclos, usadas):
+# filas extras do Nível 1 (sem girar nem espelhar: só figuras em pé, como as outras filas do Nível 1)
+CICLOS_EXTRAS_N1 = [
+    ["sol", "nuvem"], ["peixe", "peixe", "flor"], ["coracao", "estrela", "estrela"], ["maca", "balao"],
+    ["arvore", "arvore", "casa"], ["lua", "sol", "sol"], ["losango", "circulo"], ["triangulo", "triangulo", "quadrado"],
+    ["balao", "flor", "flor"], ["casa", "nuvem"], ["estrela", "estrela", "peixe"], ["quadrado", "coracao"],
+]
+
+
+def _sig(c):
+    return tuple(_item(x) for x in (c["mostrar"] if isinstance(c, dict) else c))
+
+
+def sem_repetir_filas(ciclos, usadas, extras=None):
     """Troca as filas que já apareceram no nível (`usadas`, guardado por quem chama) por filas extras."""
+    extras = CICLOS_EXTRAS if extras is None else extras
     out = []
     for c in ciclos:
         sig = tuple(_item(x) for x in c)
         if sig in usadas:
-            c = next(e for e in CICLOS_EXTRAS if tuple(e) not in usadas and tuple(e) not in {tuple(_item(x) for x in o) for o in out})
-            usadas.add(tuple(c))
+            c = next(e for e in extras if _sig(e) not in usadas and _sig(e) not in {_sig(o) for o in out})
+            usadas.add(_sig(c))
             out.append({"mostrar": c, "sorteio": list(sig)})  # o sorteio das opções segue a fila original
             continue
         usadas.add(sig)
@@ -330,6 +343,14 @@ REGRAS_SEQ = [
 # A fila nunca repete: se o sorteio principal cair numa fila usada, sorteia de novo com um rng
 # derivado (a sequência do rng principal não muda, então as outras páginas continuam iguais).
 SEQ_USADAS = set()
+# Volume 2: também não pode sair a mesma progressão deslocada uma casa (2 4 6 8 10 × 4 6 8 10 12): compara as
+# janelas de 4 termos seguidos. Só o Volume 2 liga isto (no caderno as filas já foram revisadas e não mudam).
+CHECAR_JANELAS = False
+SEQ_JANELAS = set()
+
+
+def _janelas(seq):
+    return {tuple(seq[i:i + 4]) for i in range(len(seq) - 3)}
 
 
 def _sorteia_seq(rng, faixa, dobras=(1, 2, 3, 5)):
@@ -362,11 +383,12 @@ def sequencias(rng, faixa):
             if max(seq) <= 99 and min(seq) >= 0 and tuple(seq) not in usadas:
                 usadas.add(tuple(seq)); break
         k_alt = 0
-        while tuple(seq) in na_pagina or tuple(seq) in SEQ_USADAS or max(seq) > 99 or min(seq) < 0:
+        while (tuple(seq) in na_pagina or tuple(seq) in SEQ_USADAS or max(seq) > 99 or min(seq) < 0
+               or (CHECAR_JANELAS and _janelas(seq) & SEQ_JANELAS)):
             k_alt += 1
             assert k_alt < 500, "sem fila nova"
             tipo, seq, regra = _sorteia_seq(random.Random(f"seq-{faixa}-{i}-{seq}-{k_alt}"), faixa, (1, 2, 3, 4, 5, 6))
-        na_pagina.add(tuple(seq)); SEQ_USADAS.add(tuple(seq))
+        na_pagina.add(tuple(seq)); SEQ_USADAS.add(tuple(seq)); SEQ_JANELAS.update(_janelas(seq))
         y = 6 + i * 36
         falta = rng.choice([2, 3, 4]) if faixa >= 2 else 4
         if tipo == "alterna":
@@ -683,7 +705,8 @@ DESENHOS_PONTOS = {
 
 
 # partes do desenho que já vêm traçadas (não fazem parte do caminho de pontos), no mesmo sistema 0..200
-TRACO_PRONTO = {}
+# barquinho: o convés entre o pé do mastro e a ponta da direita já vem traçado (separa a vela do casco)
+TRACO_PRONTO = {"barquinho": "M100 150 L 172 150"}
 # pontos onde o traço pronto encosta: o número vai para o lado (não fica em cima do traço)
 ROTULO_AO_LADO = {}
 
@@ -744,15 +767,18 @@ def ligue_pontos(rng, nivel, desenho, alvo):
         dx, dy = x - cx, y - cy; d = math.hypot(dx, dy) or 1
         s.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="1.5" fill="{TRACO}"/>')
         lx, ly = x + dx / d * 5.5, y + dy / d * 5.5
+        ao_lado = False
         for ax, ay in ROTULO_AO_LADO.get(desenho, []):
             if math.dist((x, y), (ax * e, 8 + ay * e)) < 4:
                 lx, ly = x + 5, y - 3.5
+                ao_lado = True
 
         def folga(px, py, i=i):
             outros = [q for j, q in enumerate(pts) if j != i] + rotulos
             return min(math.dist((px, py), q) for q in outros)
         if folga(lx, ly) < 4.5:  # número colado no ponto vizinho: procura o lado com mais espaço
-            cands = [(x + 5.5 * math.cos(k * math.pi / 4), y + 5.5 * math.sin(k * math.pi / 4)) for k in range(8)]
+            cands = [(x + 5.5 * math.cos(k * math.pi / 4), y + 5.5 * math.sin(k * math.pi / 4)) for k in range(8)
+                     if not (ao_lado and k in (1, 2, 3))]  # ponto onde encosta o traço pronto (cabo): nunca por cima dele
             lx, ly = max(cands, key=lambda c: folga(*c))
         rotulos.append((lx, ly))
         s.append(_txt(lx, ly, str(i + 1), tl, 800))
@@ -892,7 +918,7 @@ def _arte(nome):
         "barco": ["............", ".....1......", ".....11.....", ".....111....", ".....1111...", ".....11111..",
                   ".....5......", ".5555555555.", "..55555555..", "...555555...", "444444444444", ".4444444444."],
         "flor": ["....11......", "...1111.....", "..112211....", "..112211....", "...1111.....", "....11......",
-                 "....33...33.", "....33..333.", "..3333333...", ".333.33.....", "....33......", "....33......"],
+                 "....33...33.", "....33..333.", "..3333333...", ".33333......", "....33......", "....33......"],
         "peixe": ["............", "............", "....6666....", "..66666666.6", ".6.666666666", "666666666666",
                   "666666666666", ".66666666666", "..66666666.6", "....6666....", "............", "............"],
         # o mesmo peixe com 4 cores: nadadeiras vermelhas, listra amarela, rabo azul, corpo laranja

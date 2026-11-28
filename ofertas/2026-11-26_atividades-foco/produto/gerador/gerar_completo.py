@@ -75,6 +75,7 @@ def nivel1(rng):
     for nv, no in [(3, 6), (3, 6), (3, 6), (4, 6), (4, 8), (4, 8), (5, 8), (5, 8)]:
         cat["Memória"].append(("mem", lambda nv=nv, no=no: B.memoria_figuras(rng, 1, nv, no)))
     moldes = [["A", "B"], ["A", "A", "B"], ["A", "B", "B"], ["A", "B", "C"], ["A", "A", "B", "B"]]
+    filas_n1 = set()  # nenhuma fila repete entre as folhas de "O que vem depois?" do Nível 1 (como no Nível 2)
     for p in range(10):
         dif = moldes[:3] if p < 4 else moldes
         ciclos = []
@@ -83,6 +84,7 @@ def nivel1(rng):
             figs = rng.sample(B.FIG_PADRAO, len(set(m)))
             mapa = dict(zip(sorted(set(m)), figs))
             ciclos.append([mapa[x] for x in m])
+        ciclos = B.sem_repetir_filas(ciclos, filas_n1, B.CICLOS_EXTRAS_N1)  # não gasta rng: as outras páginas não mudam
         cat["Padrões"].append(("pad", lambda c=ciclos: B.padroes(rng, 1, c)))
     pares_lab = [("passaro", "arvore"), ("peixe", "flor"), ("carro", "casa"), ("balao", "nuvem"), ("barco", "estrela"),
                  ("passaro", "casa"), ("carro", "arvore"), ("peixe", "estrela")]
@@ -213,6 +215,9 @@ def capa():
     html = html.replace('<div><span class="tag">', '<p style="font-weight:800;font-size:13pt;margin-top:5mm">por Gefferson Balles</p>\n    <div><span class="tag">', 1)
     assert "por Gefferson Balles" in html
     assert "120 ATIVIDADES" in html
+    # os bônus vêm depois do gabarito: a capa não diz "no final" (decisão do dono, 2026-11-28)
+    html = html.replace("<span>Gabarito no final</span>", "<span>Gabarito completo</span>")
+    assert "Gabarito completo" in html and "no final" not in html
     return html
 
 
@@ -327,7 +332,7 @@ IDEIAS = [
     ("Adivinhe o som", "De olhos fechados, a criança tenta descobrir que objeto fez o barulho: chave, colher, papel…"),
     ("História maluca", "Cada pessoa fala uma frase e o próximo continua a história. Quanto mais estranha, melhor."),
     ("Mímica de bichos", "Imite um bicho sem fazer som. Os outros tentam adivinhar."),
-    ("Ajudante de cozinha", "Lavar frutas, contar colheres, arrumar a mesa. Sem faca e sem fogo."),
+    ("Ajudante de cozinha", "Lave frutas, conte colheres, arrume a mesa. Sem faca e sem fogo."),
     ("Meias em par", "Misture as meias limpas e peça para juntar os pares e separar por tamanho."),
     ("Sombras na parede", "Com uma lanterna no escuro, faça bichos de sombra com as mãos."),
     ("Feijão no algodão", "Plante um feijão num copo com algodão úmido e acompanhe o broto a cada dia."),
@@ -336,7 +341,7 @@ IDEIAS = [
     ("Inventor de caixas", "Caixas de papelão e fita adesiva viram carro, robô, casa ou o que imaginar."),
     ("Medir com palmos", "Quantos palmos tem a mesa? E a cama? Quem tem o palmo maior da casa?"),
     ("Lista ilustrada", "Faça a lista de compras junto: a criança desenha o que está faltando em casa."),
-    ("Cartinha", "Escrever ou desenhar uma cartinha para alguém da família ou para um amigo."),
+    ("Cartinha", "Escreva ou desenhe uma cartinha para alguém da família ou para um amigo."),
     ("Dança das almofadas", "Almofadas no chão, música tocando. Quando parar, cada um procura uma almofada."),
     ("Janela de contar", "Olhando pela janela: quantos carros brancos passam? Quantos cachorros?"),
     ("Do menor ao maior", "Arrume brinquedos ou livros em fila, do menor para o maior. Depois ao contrário."),

@@ -55,11 +55,14 @@ NOVAS_ARTES = {
               "111111111111", "..55....55..", "..55....55..", "............", "333333333333", "333333333333"],
     "guarda-chuva": [".....11.....", "...111111...", "..11111111..", ".1111111111.", "111111111111", "1.11.11.11.1",
                      ".....5......", ".....5......", ".....5......", ".....5......", ".....5.5....", "......5....."],
+    # fatia de melancia (no lugar do guarda-chuva do pinte, que caía no dia seguinte ao "ligue" do guarda-chuva)
+    "melancia": ["............", "............", "311111111113", "311511115113", ".3111111113.", ".3115111513.",
+                 "..31111113..", "..31151113..", "...311113...", "....3333....", "............", "............"],
     "castelo": ["4.4......4.4", "444......444", "444.4..4.444", "444444444444", "442444444244", "444444444444",
                 "444445544444", "444455554444", "444455554444", "444455554444", "333333333333", "333333333333"],
 }
 NOVOS_NOMES_ARTE = {"cogumelo": "um cogumelo", "maca": "uma maçã", "borboleta": "uma borboleta", "foguete": "um foguete",
-                    "pipa": "uma pipa", "carro": "um carro", "guarda-chuva": "um guarda-chuva", "castelo": "um castelo",
+                    "pipa": "uma pipa", "carro": "um carro", "guarda-chuva": "um guarda-chuva", "castelo": "um castelo", "melancia": "uma melancia",
                     "arco-iris": "um arco-íris"}
 NOVOS_TEMAS_PALAVRAS = {
     "escola": ["CADERNO", "BORRACHA", "MOCHILA", "ESTOJO", "LIVRO", "TESOURA", "COLA", "GIZ"],
@@ -138,9 +141,41 @@ def labirinto(nivel, rng, cols, lins, ini, fim):
 def nivel1(rng):
     cat = {k: [] for k in ["Atenção", "Memória", "Padrões", "Lógica", "Traçado", "Cores e códigos"]}
     var = B.VARIANTES[:]
-    for _ in range(4):
+    vistos = {}  # variante → filas e posições já usadas no nível
+
+    def diferente_variado(v, pag):
+        """"Qual é diferente?" sem duas filas da mesma figura na folha e sem repetir a mesma fila (variante,
+        linha e posição) de uma folha anterior. Gasta o rng principal como antes; o resto sai de um rng derivado."""
+        for _ in v:
+            rng.randrange(5)
+        alt = random.Random(f"dif-v2-{pag}")
+        chave = lambda x: (x[0], tuple(sorted(x[1].items())))
+        linhas, nomes = [], set()
+        for x in v:
+            if x[0] in nomes:
+                livres = [y for y in B.VARIANTES if y[0] not in nomes and y not in v]
+                menos = min(len(vistos.get(chave(y), [])) for y in livres)
+                livres = [y for y in livres if len(vistos.get(chave(y), [])) == menos]
+                x = livres[alt.randrange(len(livres))]
+            nomes.add(x[0]); linhas.append(x)
+        alt.shuffle(linhas)
+        ks = []
+        for i, x in enumerate(linhas):
+            antes = vistos.setdefault(chave(x), [])
+            ok = [k for k in range(5) if all(k != k0 for _, k0 in antes)] or list(range(5))
+            k = ok[alt.randrange(len(ok))]
+            antes.append((i, k)); ks.append(k)
+
+        class Fixo:
+            def __init__(self, ks):
+                self.it = iter(ks)
+
+            def randrange(self, n):
+                return next(self.it)
+        return B.diferente(Fixo(ks), linhas)
+    for p in range(4):
         rng.shuffle(var)
-        cat["Atenção"].append(("dif", lambda v=var[:6]: B.diferente(rng, v)))
+        cat["Atenção"].append(("dif", lambda v=var[:6], p=p: diferente_variado(v, p)))
     tipos_cont = [["pato", "bola", "dado", "pipa"], ["sorvete", "uva", "ovo", "gato"], ["chave", "copo", "anel", "lapis"],
                   ["bola", "flor", "sorvete", "carro"], ["gato", "pato", "dado", "balao"]]
     for t, (a, b) in zip(tipos_cont, [(1, 5), (2, 6), (3, 8), (3, 9), (4, 10)]):
@@ -176,7 +211,7 @@ def nivel1(rng):
         pares = [tuple(rng.sample(figs, 2)) for _ in range(5)]
         cat["Traçado"].append(("tr", lambda t=t, p=pares: B.tracado(rng, t, p)))
     cat["Traçado"] = [cat["Traçado"][i] for i in [5, 0, 6, 1, 7, 2, 8, 3, 9, 4]]
-    for arte in ["cogumelo", "maca", "pipa", "carro", "guarda-chuva", "foguete", "borboleta", "arco-iris"]:
+    for arte in ["cogumelo", "maca", "pipa", "carro", "melancia", "foguete", "borboleta", "arco-iris"]:
         cat["Cores e códigos"].append(("pinte", lambda a=arte: B.pinte_codigo(rng, 1, a)))
     return cat
 
@@ -220,7 +255,7 @@ def nivel2(rng):
         else:
             pad.append(("seq", lambda f=f: B.sequencias(rng, f)))
     cat["Padrões"] = pad
-    labs = [(11, 13, "pato", "ilha"), (12, 15, "pipa", "nuvem"), (14, 17, "gato", "casa"), (15, 19, "passaro", "flor")]
+    labs = [(11, 13, "pato", "ilha"), (12, 15, "pipa", "nuvem"), (14, 17, "gato", "arvore"), (15, 19, "passaro", "flor")]  # gato→casa já está no Nível 1
     t = NOVOS_TEMAS_LOGICA
     cat["Lógica"] = [("sud", lambda: B.sudoku6(rng, 20)), ("lab", lambda: labirinto(2, rng, *labs[0])),
                      ("gl", lambda: B.grade_logica(rng, t[0])), ("sud", lambda: B.sudoku6(rng, 18)),
@@ -265,6 +300,9 @@ def gerar():
     import json
     v1 = json.loads((GC.SAIDA / "completo.json").read_text())["sequencias"]  # rode gerar_completo.py antes
     B.SEQ_USADAS.update(tuple(x) for x in v1)
+    B.CHECAR_JANELAS = True
+    for x in v1:
+        B.SEQ_JANELAS.update(B._janelas(x))
     GC.rodape = rodape
     GC.topo = BUMP.topo
     rng = random.Random(SEMENTE)

@@ -241,16 +241,24 @@ def conte_silabas(chaves):
     return at("Quantas sílabas?", "Fale a palavra batendo palmas em cada pedacinho. Pinte uma bolinha por palma e escreva o número.", 2, CAT, base, base + "".join(g))
 
 
-def forme_palavra(rng, chaves):
+# embaralhados que formam outra palavra (a criança acha que já está certo): sorteia de novo
+EMBARALHADAS_PROIBIDAS = {"TOGA", "SACA", "ACAS", "VAU", "VOO", "AMOR", "ROMA", "MORA", "OMAR", "RAMO", "LOBA", "ALBO",
+                          "PAPI", "DOAD", "SOLA", "ALAS", "LAMA", "MALA", "SALA", "OPCO", "POCO", "COPO", "TAPO",
+                          "TOPA", "POTA", "PATO", "OVO", "SOL", "LUA", "MESA", "MEAS", "SEMA", "AMES", "VALE",
+                          "LEVA", "VELA", "AVEL", "ALVE", "FACA", "CAFA", "BOLA", "LOBA", "ABLO", "DADO", "GATO",
+                          "CASA", "PIPA", "ILHA", "ANEL", "LENA", "ELAN", "PEIXE", "TREM", "PAO", "PÃO"}
+
+
+def forme_palavra(rng, chaves, evitar=()):
     s, g = [], []
     for i, k in enumerate(chaves):
         palavra = PALAVRAS[k][0]
         letras = list(palavra)
-        for _ in range(50):
+        for _ in range(200):
             rng.shuffle(letras)
-            if "".join(letras) != palavra:
+            if "".join(letras) != palavra and "".join(letras) not in evitar:
                 break
-        assert "".join(letras) != palavra and sorted(letras) == sorted(palavra)
+        assert "".join(letras) != palavra and "".join(letras) not in evitar and sorted(letras) == sorted(palavra)
         x, y = (i % 2) * 92, (i // 2) * 74
         s.append(f'<rect x="{x + 2}" y="{y + 2}" width="86" height="68" rx="5" fill="none" stroke="{TRACO}" stroke-width=".6"/>')
         s.append(icone(k, x + 6, y + 8, 28))
@@ -302,7 +310,7 @@ def rimas(rng, pares):
     return at("Palavras que rimam", "Leia em voz alta e ligue cada palavra à que rima com ela (o final soa igual).", 2, CAT, base, base + "".join(g))
 
 
-FRASES = [("O ___ nada no rio.", "peixe"), ("A ___ brilha no céu à noite.", "lua"), ("Eu chutei a ___ no gol.", "bola"),
+FRASES = [("O ___ vive na água e tem escamas.", "peixe"), ("A ___ brilha no céu à noite.", "lua"), ("Eu chutei a ___ no gol.", "bola"),
           ("A ___ voa alto com o vento.", "pipa"), ("O ___ mia em cima do muro.", "gato"), ("Comi uma ___ vermelha no lanche.", "maca"),
           ("O ___ navega no mar.", "barco"), ("Abri a porta com a ___.", "chave"), ("O ___ é quente e amarelo.", "sol"),
           ("O ___ faz quá-quá no lago.", "pato"), ("Bebi água no ___.", "copo"), ("Recortei o papel com a ___.", "tesoura"),

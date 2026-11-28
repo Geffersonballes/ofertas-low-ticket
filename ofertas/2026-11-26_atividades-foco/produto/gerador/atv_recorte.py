@@ -1,6 +1,7 @@
 """Atividades do bump "Recortar e colar" (área 182x228 mm): área de colar em cima, peças com linha de
 corte embaixo. Respostas conferidas com assert; gabarito mostra o resultado montado."""
 import itertools
+import random
 
 from atividades import W, H, _txt
 from bumps_base import at, caixa_corte, faixa_recorte, LAR
@@ -122,7 +123,8 @@ def do_menor_ao_maior(rng, nome):
 GRUPOS = {
     "ceu_agua": (("No céu", ["sol", "lua", "nuvem", "estrela", "pipa", "passaro", "balao"]), ("Na água", ["peixe", "barco", "pato", "polvo"])),
     "frutas_brinq": (("Frutas", ["maca", "banana", "uva"]), ("Brinquedos", ["bola", "dado", "pipa", "balao", "carro"])),
-    "bichos_coisas": (("Bichos", ["gato", "pato", "peixe", "passaro"]), ("Coisas", ["copo", "chave", "lapis", "tesoura", "anel"])),
+    # sem o pato: o ícone parece patinho de banheira (brinquedo) e a criança poria em "Coisas"
+    "bichos_coisas": (("Bichos", ["gato", "polvo", "peixe", "passaro"]), ("Coisas", ["copo", "chave", "lapis", "tesoura", "anel"])),
     "comer_brincar": (("De comer", ["maca", "banana", "uva", "sorvete", "ovo"]), ("De brincar", ["bola", "dado", "pipa", "carro", "balao"])),
     "casa_natureza": (("Na natureza", ["arvore", "passaro", "sol", "nuvem", "ilha"]), ("Dentro de casa", ["copo", "lapis", "tesoura", "chave", "dado"])),
 }
@@ -234,16 +236,24 @@ def ordem_numeros(rng, n=6, maxi=99):
     return at("Coloque em ordem", "Recorte os números e cole nos quadrinhos do menor para o maior.", 2, CAT, base, base + "".join(g))
 
 
+CONTAS_USADAS = set()   # nenhuma conta repete entre as folhas de "Cole o resultado"
+SOBRAS_USADAS = set()   # e a peça que sobra muda de folha para folha
+
+
 def contas_cola(rng, op, maxi):
+    """Nível 2: contas com resultado (soma) ou primeiro número (diminuir) acima de 10, sem repetir conta no bump.
+    A peça que sobra fica perto dos resultados (± 1 ou ± 2), para não dar para descartar sem fazer a conta."""
     vistos, contas = set(), []
     while len(contas) < 5:
         if op == "+":
             a = rng.randint(1, maxi - 1); b = rng.randint(1, maxi - a); r = a + b
+            facil = r <= 10
         else:
             a = rng.randint(2, maxi); b = rng.randint(1, a - 1); r = a - b
-        if r in vistos:
+            facil = a <= 10
+        if r in vistos or facil or (op, a, b) in CONTAS_USADAS:
             continue
-        vistos.add(r); contas.append((a, b, r))
+        vistos.add(r); contas.append((a, b, r)); CONTAS_USADAS.add((op, a, b))
     s, g = [], []
     for i, (a, b, r) in enumerate(contas):
         y = 4 + i * 21
@@ -251,7 +261,11 @@ def contas_cola(rng, op, maxi):
         s.append(f'<rect x="76" y="{y}" width="24" height="18" rx="3" fill="none" stroke="{TRACO}" stroke-width=".8" stroke-dasharray="2 1.5"/>')
         g.append(_txt(88, y + 9, str(r), 9, 800, cor=LAR, fonte="Baloo 2"))
     s.append(faixa_recorte(Y_CORTE - 6))
-    extra = next(v for v in range(maxi + 1, 0, -1) if v not in vistos)
+    alt = random.Random(f"sobra-{op}-{contas}")
+    perto = sorted({r + d for *_, r in contas for d in (-2, -1, 1, 2)} - vistos)
+    perto = [v for v in perto if 0 < v <= maxi and v not in SOBRAS_USADAS] or [v for v in perto if 0 < v <= maxi]
+    extra = alt.choice(perto)
+    SOBRAS_USADAS.add(extra)
     pecas = [r for *_, r in contas] + [extra]
     rng.shuffle(pecas)
     for i, v in enumerate(pecas):
