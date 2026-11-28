@@ -236,6 +236,9 @@ td.hl,th.hl{background:rgba(62,224,255,.16)!important}
 .esteira>summary::after{order:0}
 @media(min-width:1200px){.et-res .ag{display:none}}
 .et-in{padding:0 16px 14px}
+.et-sel{display:flex;align-items:center;gap:8px;margin:0 0 10px}
+.et-sel label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#et-of{flex:1;min-width:0;max-width:100%;padding:6px 10px;font-size:13px;border-radius:10px}
 .et-prog{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 6px}
 .et-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--vi),var(--cy))}
 .et-agora{border:1px solid rgba(255,207,92,.3);background:rgba(255,207,92,.07);border-radius:12px;padding:9px 11px;margin:10px 0 12px;font-size:12.5px;color:#c4d3ea;overflow-wrap:anywhere}
@@ -286,7 +289,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
   </div>
   <div id="banner"></div>
   <div id="filtro"></div>
-  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in" id="etapas-of"></div></details>
+  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in"><div class="et-sel"><label for="et-of">Acompanhar</label><select id="et-of"></select></div><div id="etapas-of"></div></div></details>
   <div class="grid kpis" id="resumo"></div>
   <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
     <div class="etapas" id="etapas"></div></div>
@@ -351,12 +354,12 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b
   const tr=e.target.closest('tr.ad');if(tr){selecionar(+tr.dataset.i)}});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr.ad')){e.preventDefault();selecionar(+e.target.dataset.i)}});
 
-let D,OI=0,SEL=null;
+let D,OI=0,SEL=null,ESI=0;
 const CAMPOS=['gasto','impressoes','v3s','thruplay','cliques','lp','checkouts','vendas','faturamento'];
 function soma(lista){const t={};CAMPOS.forEach(k=>t[k]=lista.reduce((a,x)=>a+(x[k]||0),0));return t}
 fetch('dados.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const s=$('oferta');
   d.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
-  s.onchange=()=>{OI=+s.value;SEL=null;render();if(window.ofSync)ofSync()};seletor(s);render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
+  s.onchange=()=>{OI=+s.value;SEL=null;render();if(window.ofSync)ofSync()};seletor(s);esteiraSel();render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
 function selecionar(i){SEL=SEL===i?null:i;render();$('filtro').scrollIntoView({block:'start'})}
 function render(){
   const o=D.ofertas[OI],m=D.metas,ads=o.anuncios||[];
@@ -373,7 +376,7 @@ function render(){
   bumps(o,tot);
   const ap=(D.aprendizados||[]).filter(a=>!a.oferta||a.oferta===o.slug);
   $('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+H(a.texto)+' <span class="na">· '+H(a.confianca||'')+' · '+H(a.data||'')+'</span></li>').join('')+'</ul>':vazio('faturamento','Ainda sem conclusões com número.','Elas aparecem aqui conforme os anúncios rodam.');
-  esteira(o);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
+  esteira(D.ofertas[ESI]);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
 }
 /* lista de ofertas estilizada: só com mouse; no toque fica o seletor do aparelho */
 function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
@@ -401,6 +404,11 @@ function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches
   ofSync()}
 /* checklist das etapas (dados.json -> ofertas[i].etapas, copiado do status.md por painel/etapas_do_status.py) */
 const LARGA=matchMedia('(min-width: 1200px)');
+/* escolha da oferta acompanhada na coluna de status (independe do seletor do topo; lembrada no navegador) */
+function esteiraSel(){const s=$('et-of');let g=null;try{g=localStorage.getItem('painel.esteira')}catch(e){}
+  D.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
+  const k=D.ofertas.findIndex(o=>(o.slug||o.nome)===g);ESI=k>=0?k:OI;s.value=ESI;
+  s.onchange=()=>{ESI=+s.value;try{localStorage.setItem('painel.esteira',D.ofertas[ESI].slug||D.ofertas[ESI].nome)}catch(e){}esteira(D.ofertas[ESI])}}
 function esteira(o){const el=$('etapas-of'),det=$('s-etapas'),es=o.etapas||[];
   if(!es.length){$('et-res').textContent='sem etapas registradas';el.innerHTML=vazio('esp','Sem etapas para esta oferta.','Rode painel/etapas_do_status.py para copiar do status.md.');return}
   const f=es.filter(e=>e.situacao==='feito').length,at=es.find(e=>e.situacao==='andamento'||e.situacao==='bloqueado');
@@ -579,7 +587,7 @@ const AJUDA={
  's-bumps':['Order bumps','Ofertas extras do checkout e quanto cada uma vende.',m=>'O aceite é calculado sobre as vendas do produto principal.'],
  's-aprendizados':['O que vende','Conclusões com número que valem para as próximas ofertas.',m=>'Vêm de aprendizados/o-que-vende.md.'],
  's-esp':['Leitura dos especialistas','O que cada analista do time de dados concluiu: funil, criativos, financeiro e testes.',m=>'Confiança baixa = pouco dado ainda; não decida só com ela.'],
- 's-etapas':['Status da Próxima Oferta','Checklist da esteira da oferta escolhida: o que já foi feito, o que está em andamento e o que falta.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
+ 's-etapas':['Status da Próxima Oferta','Checklist da esteira da oferta escolhida em "Acompanhar": o que já foi feito, o que está em andamento e o que falta. A escolha fica salva neste navegador.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
  's-reembolsos':['Reembolsos','Pedidos de dinheiro de volta na Hotmart e o motivo de cada um.',m=>'Os motivos mostram onde a promessa e o produto não batem.']};
 const tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip);
 let tipDe=null,tipT=null,tipY=0;
