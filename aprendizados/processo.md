@@ -11,6 +11,11 @@ O que **vende** fica em `o-que-vende.md`; aqui fica **como trabalhar** com menos
 ## Material (infoproduto)
 - (preencher com os achados da revisão de 2026-11-28: tipo de erro → regra para o gerador)
 
+## Criativos
+- 2026-11-28 · Dez Minutinhos · o vídeo "caderno folheando" (página e fim dos anúncios) foi gravado do
+  caderno-amostra e mostra páginas que não existem no produto vendido → criativos só depois do material
+  aprovado e feitos a partir do PDF final (Portão C confere).
+
 ## Hotmart
 - 2026-11-27 · O e-mail de compra e o checkout mostram o nome do titular da conta (CPF) → os dados legais
   da página precisam ser os mesmos da conta Hotmart.

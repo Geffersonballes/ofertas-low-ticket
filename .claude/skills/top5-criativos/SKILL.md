@@ -17,3 +17,5 @@ description: Etapa 6 — recria em pt-BR os 5 anúncios da referência que estã
 5. Montagem com ffmpeg: cortes dinâmicos, zoom in/out, legenda queimada, trilha livre de
    direitos baixa sob a voz. Exporte 1080×1920 MP4 (fora do git; link no `status.md`).
 6. Textos de cada anúncio: Texto Principal, Título e Descrição inspirados nos vencedores.
+
+Depois de produzir: rode a skill `revisar-criativos` (Portão C). Nada sobe para a Meta antes disso.

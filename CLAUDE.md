@@ -53,6 +53,9 @@ repositório: agentes em `.claude/agents/` (`minerador-de-ofertas`, `analista-de
    cosméticas, salvo as que o dono aceitar por escrito —, (c) uma nova revisão do documento inteiro sair
    limpa e (d) o dono aprovar o material (skill `revisar-material`, Portão M). Confira sempre com
    `python3 ferramentas/conferir_material.py ofertas/<pasta>` → "MATERIAL APROVADO".
+   Depois do material, os **criativos** passam pelo mesmo ciclo (skill `revisar-criativos`, Portão C):
+   nenhum criativo sobe para a Meta e nenhum anúncio é criado ou atualizado antes de
+   `python3 ferramentas/conferir_criativos.py ofertas/<pasta>` → "CRIATIVOS APROVADOS".
 8. **Aprenda com cada oferta.** Erro, retrabalho ou atalho descoberto vira uma linha em
    `aprendizados/processo.md`; leia esse arquivo antes de cada etapa para não repetir o caminho.
 

@@ -2,8 +2,9 @@
 name: subir-campanhas
 description: Etapa 7 — monta as 2 campanhas CBO de teste (1-1-3 e 1-1-2, R$ 35/dia cada) no Meta Ads, sempre em rascunho. Use depois dos criativos prontos e do pixel testado.
 ---
-**Antes de tudo:** rode `python3 ferramentas/conferir_material.py ofertas/<pasta>`. Se não disser
-"MATERIAL APROVADO", pare e rode a skill `revisar-material` (Portão M). Leia também `aprendizados/processo.md`.
+**Antes de tudo:** rode `python3 ferramentas/conferir_criativos.py ofertas/<pasta>` (ele confere também o
+material). Se não disser "CRIATIVOS APROVADOS", pare: material → `revisar-material` (Portão M);
+criativos → `revisar-criativos` (Portão C). Leia também `aprendizados/processo.md`.
 
 Entrada: `[NOME_CONTA]` (padrão: Ofertas Low Ticket · 1534301375187089, ver `docs/06_stack-e-conexoes.md`), `[URL_PAGINA]`, `[NOME_ANUNCIANTE]`.
 

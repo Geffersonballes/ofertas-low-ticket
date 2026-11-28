@@ -17,6 +17,8 @@ Cada oferta vive em `ofertas/AAAA-MM-DD_<slug>/` (cópia de `ofertas/_modelo/`),
 | — | **Portão 2:** `revisor-de-conformidade` (veto) · **Portão 3 (dono):** aprova página e produto | | | |
 | 5. Cadastro e pixel | Produto + .zip na Hotmart, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Hotmart | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
 | 6. Criativos | Top 5 anúncios mais antigos da referência recriados em pt-BR (cenas, narração, trilha) | `roteirista-de-criativos` | `top5-criativos` | `criativos/` |
+| 6b. Revisão dos criativos | Cada vídeo e imagem: quadros, áudio, legenda, área segura; tudo o que aparece existe no PDF aprovado; conformidade; texto do anúncio | `controle-de-qualidade`, `revisor-de-conformidade` | `revisar-criativos` | `revisoes/criativos-AAAA-MM-DD/` |
+| — | **Portão C (dono):** depois do Portão M, aprova os criativos → `APROVACAO.md` com o hash de cada arquivo. `ferramentas/conferir_criativos.py` tem de dar "CRIATIVOS APROVADOS" | | | |
 | 7. Campanhas | 2 campanhas CBO (1-1-3 e 1-1-2), R$ 35/dia cada, Vendas (Site), público aberto, **rascunho** | `gestor-de-trafego` | `subir-campanhas` | `campanha.md` (parte 2) |
 | — | **Portão 4 (dono):** revisa os rascunhos, publica e liga o orçamento | | | |
 | Fase 2. Otimização | Leitura diária, diagnóstico de página/checkout, corte e escala | `analista-de-metricas` | — | `resultados/painel.md` |
@@ -28,6 +30,8 @@ Regras:
 - Depois do Portão 1, as etapas 3 e 4 podem rodar em paralelo. **Criativos (6), cadastro na Hotmart (5) e
   campanhas (7) só depois do Portão M** (decidido pelo dono em 2026-11-28): primeiro o conteúdo do
   infoproduto é validado; só então sobe para a Hotmart e seguem anúncios e criativos.
+- Ordem das validações: **material (Portão M) → criativos (Portão C) → campanhas.** Os criativos só são
+  validados depois do documento principal, porque mostram as páginas dele.
 - Mudou um PDF depois do Portão M? `conferir_material.py` bloqueia até nova revisão e nova aprovação.
 - Antes de começar uma oferta, leia `aprendizados/processo.md` (o que já deu errado e como evitar).
 - Produto visual (cadernos, planilhas, kits): faça primeiro um **caderno-amostra** (10–15 páginas, uma de
