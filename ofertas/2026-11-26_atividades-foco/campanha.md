@@ -7,7 +7,7 @@
 - Eventos testados: PageView ✅ · InitiateCheckout ✅ (2026-11-27, navegador comum) · Purchase ⬜ (Hotmart + API de Conversões configuradas; confirmar na 1ª venda)
 - Domínio verificado no Business Manager: ⬜ (ballestech.com.br)
 - Página do Facebook: Dez Minutinhos · ID 1532919519896130 (perfil 61596940384058; para anúncios use o 1532…) · no portfólio Balles Tech Energia Solar · sem Instagram
-- Conta de anúncios: Gefferson Balles · 669738203091982 (escolhida pelo dono em 2026-11-27)
+- Conta de anúncios: **Ofertas Low Ticket · 1534301375187089** (criada em 2026-11-28 no portfólio Balles Tech Energia Solar, com pagamento, telefone verificado e acesso ao pixel). A conta pessoal Gefferson Balles (669738203091982) não pôde entrar no portfólio (conta pessoal sem pagamento) e ficou com 2 campanhas pausadas sem anúncios (C1 120252296153610122, C2 120252296243390122): podem ser apagadas.
 
 ## Mídia enviada à conta de anúncios (2026-11-27)
 | Criativo | Arquivo | video_id / imagem | Miniatura |
@@ -20,17 +20,22 @@
 
 Arquivos públicos em https://ofertas.ballestech.com.br/dez-minutinhos/anuncios/
 
-## Criado via Windsor.ai em 2026-11-28 (tudo PAUSADO)
-| Item | ID |
-|---|---|
-| Campanha C1 "[DM] C1 1-1-3 \| Vendas \| CBO R$35" | 120252296153610122 |
-| Conjunto C1 "[DM] C1 \| Brasil 18+ aberto \| Purchase" | 120252296164410122 |
-| Campanha C2 "[DM] C2 1-1-2 \| Vendas \| CBO R$35" | 120252296243390122 |
-| Conjunto C2 "[DM] C2 \| Brasil 18+ aberto \| Purchase" | 120252296244040122 |
+## Criado via Windsor.ai em 2026-11-28 na conta Ofertas Low Ticket (TUDO PAUSADO)
+| Item | ID | Mídia |
+|---|---|---|
+| Campanha C1 "[DM] C1 1-1-3 \| Vendas \| CBO R$35" | 52612403757385 | |
+| Conjunto C1 "[DM] C1 \| Brasil 18+ aberto \| Purchase" | 52612403764585 | Advantage+ público, pixel 2360537971467958, Purchase |
+| Anúncio A1 curiosidade | 52612403776985 | vídeo 1184765064420655 |
+| Anúncio A2 zero preparo | 52612403793185 | vídeo 1904870020878313 |
+| Anúncio A3 tela | 52612403805385 | vídeo 29265877899700558 |
+| Campanha C2 "[DM] C2 1-1-2 \| Vendas \| CBO R$35" | 52612403822585 | |
+| Conjunto C2 "[DM] C2 \| Brasil 18+ aberto \| Purchase" | 52612403843185 | idem |
+| Anúncio A4 troca de tela | 52612403855385 | vídeo 1150000431334596 |
+| Anúncio A5 férias (imagem 4:5) | 52612403862985 | anuncio-5-ferias-4x5.jpg |
 
-Anúncios: a API recusou ("A Página do Facebook está ausente": o Windsor não tem acesso à Página nova e a
-integração do Facebook não oferece escolha de Página). O dono cria os 5 anúncios no Gerenciador de Anúncios
-com os textos de `criativos/roteiros.md`. "Anunciante e pagador" (exigência Brasil) é escolhido no conjunto.
+Todos os anúncios: Página Dez Minutinhos (1532919519896130), Texto Principal + Título + Descrição de
+`criativos/roteiros.md`, URL https://ofertas.ballestech.com.br/dez-minutinhos/, CTA "Saiba mais".
+Falta na revisão do dono (Portão 4): "Anunciante e pagador" no conjunto (exigência Brasil) e conferir a prévia.
 
 ## Estrutura planejada
 - Campanha 1 (1-1-3): Vendas, CBO R$ 35/dia · conjunto Brasil 18+, aberto, Advantage+ · criativos 1, 2, 3

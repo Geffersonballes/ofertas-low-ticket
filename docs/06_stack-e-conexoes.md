@@ -29,3 +29,23 @@ Situação levantada em 2026-11-26 nesta conta (diagnóstico respondido pelo don
    ao Claude (Remote Control) com as abas já logadas.
 6. **Criativos:** gerador de cenas + ElevenLabs + montagem com ffmpeg.
 7. **Campanhas:** Windsor.ai com a conta de anúncios conectada (conector `facebook`).
+
+## Meta Ads — o que já está pronto (configurado em 2026-11-28, vale para todas as ofertas)
+
+| Item | Valor | Repete por oferta? |
+|---|---|---|
+| Portfólio empresarial | Balles Tech Energia Solar (873867164377276) | não |
+| Conta de anúncios | **Ofertas Low Ticket · 1534301375187089** (pagamento, telefone verificado) | não |
+| Windsor.ai | conector `facebook` com a conta acima liberada | não |
+| Página do Facebook | uma por oferta (ex.: Dez Minutinhos · **1532919519896130**) | **sim** |
+| Pixel | um por oferta (ex.: Pixel Oferta Dez Minutinhos · 2360537971467958) | **sim** |
+
+Checklist de uma oferta nova (o resto o Claude faz pela API):
+1. Criar a Página da oferta **dentro do portfólio** (business.facebook.com/settings → Contas → Páginas → Adicionar → Criar).
+2. Criar o pixel no Gerenciador de Eventos e, em Ativos conectados, ligar a conta **Ofertas Low Ticket**.
+3. Liberar a Página nova no Windsor: refazer o link de conexão do Windsor → "Editar configurações" → marcar a Página.
+4. Passar ao Claude o **ID da Página do portfólio** (Configurações → Páginas → ID embaixo do nome). Atenção: o número de
+   `profile.php?id=` é o ID do perfil e a API de anúncios recusa ("Página ausente").
+
+Lições: conta de anúncios pessoal sem pagamento não entra no portfólio; a conta precisa ter forma de pagamento até
+para criar anúncio pausado; a conta precisa estar ligada ao pixel do conjunto.

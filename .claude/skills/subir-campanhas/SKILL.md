@@ -2,7 +2,7 @@
 name: subir-campanhas
 description: Etapa 7 — monta as 2 campanhas CBO de teste (1-1-3 e 1-1-2, R$ 35/dia cada) no Meta Ads, sempre em rascunho. Use depois dos criativos prontos e do pixel testado.
 ---
-Entrada: `[NOME_CONTA]`, `[URL_PAGINA]`, `[NOME_ANUNCIANTE]`.
+Entrada: `[NOME_CONTA]` (padrão: Ofertas Low Ticket · 1534301375187089, ver `docs/06_stack-e-conexoes.md`), `[URL_PAGINA]`, `[NOME_ANUNCIANTE]`.
 
 Estrutura:
 - **Campanha 1 (1-1-3):** Vendas (Site), CBO R$ 35/dia, 1 conjunto, criativos 1–3.
