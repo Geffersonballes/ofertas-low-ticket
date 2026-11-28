@@ -60,3 +60,21 @@ Falta na revisão do dono (Portão 4): "Anunciante e pagador" no conjunto (exig�
 
 ## Publicação
 - Aprovado e publicado pelo dono em:
+
+## Criativos aprovados no ar (Portão C, 2026-11-28) — conta Ofertas Low Ticket, TUDO PAUSADO
+Vídeos v2 enviados à conta: A1 1613158993448066 · A2 1008437125088505 · A3 1320672556855027 · A4 1175753961508195.
+
+| Anúncio (pausado) | ID | Conjunto | Mídia |
+|---|---|---|---|
+| [DM] A1 curiosidade \| video v2 | 52612435071185 | C1 52612403764585 | vídeo 1613158993448066 |
+| [DM] A2 zero preparo \| video v2 | 52612435110785 | C1 52612403764585 | vídeo 1008437125088505 |
+| [DM] A3 tela \| video v2 | 52612435129985 | C1 52612403764585 | vídeo 1320672556855027 |
+| [DM] A4 troca de tela \| video v2 | 52612435207585 | C2 52612403843185 | vídeo 1175753961508195 |
+| [DM] A5 férias \| imagem 4:5 v2 | 52612435228585 | C2 52612403843185 | anuncio-5-ferias-4x5.jpg — só ativar de 2026-12-15 a 2027-02-28 |
+
+Textos: os aprovados em `criativos/roteiros.md` (conformidade sem veto). Os 5 anúncios da versão anterior
+(52612403776985, 52612403793185, 52612403805385, 52612403855385, 52612403862985) foram renomeados
+"[ANTIGO - NÃO ATIVAR]" e continuam pausados (podem ser apagados quando o dono quiser).
+
+Falta para o Portão 4 (dono): "Anunciante e pagador" nos 2 conjuntos; conferir as prévias; ativar as campanhas e só os
+anúncios v2 (A5 fica pausado até 15/12).
