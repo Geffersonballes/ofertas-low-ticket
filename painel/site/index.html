@@ -43,6 +43,10 @@ thead th{border-top:0;font-size:12px;text-transform:uppercase;letter-spacing:.06
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 svg text{fill:var(--muted);font-size:11px;font-family:'Nunito'}
 ul.ap{margin:0;padding-left:18px}ul.ap li{margin:6px 0}
+.esp{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.esp h3{font-family:'Baloo 2',system-ui,sans-serif;font-size:16px;font-weight:800;margin:0 0 6px}
+.dg{border-top:1px solid var(--line);padding:8px 0}.dg:first-of-type{border-top:0;padding-top:0}
+.dg p{margin:0 0 4px;overflow-wrap:anywhere}.dg .meta{font-size:12.5px;color:var(--muted)}
 footer{margin-top:26px;color:var(--muted);font-size:12.5px}
 </style>
 </head>
@@ -67,6 +71,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px}
     <div class="card"><h2>Order bumps</h2><div class="tw"><table style="min-width:420px"><thead><tr><th>Bump</th><th>Preço</th><th>Vendidos</th><th>Aceite</th><th>Receita</th></tr></thead><tbody id="bumps"></tbody></table></div></div>
     <div class="card"><h2>O que vende (aprendizados)</h2><div id="aprendizados"></div></div>
   </div>
+  <div class="card" style="margin-top:14px"><h2>Leitura dos especialistas</h2><div id="diagnosticos"></div></div>
   <div class="card" style="margin-top:14px"><h2>Reembolsos</h2><div id="reembolsos"></div></div>
   <footer>Números atualizados pelo agente <b>analista-de-metricas</b> (Meta Ads via Windsor.ai e Hotmart). Regras de corte e escala: <code>docs/08_inteligencia-de-anuncios.md</code>. Os agentes só recomendam; quem liga, desliga e muda orçamento é o Gefferson.</footer>
 </div>
@@ -103,8 +108,21 @@ function render(i){
   document.getElementById('reembolsos').innerHTML='<p>'+rb+' de '+vh+' vendas · '+pill(P(tx&&tx*100),nivel)+' <span class="na">(limite '+mr+'%)</span></p>'+
     (tx!=null&&tx*100>mr?'<div class="alert bad"><b>Acima de '+mr+'%</b>A promessa da página pode estar maior que o produto. Leia os motivos abaixo antes de mexer nos anúncios.</div>':'')+
     (mot.length?'<div class="tw"><table style="min-width:360px"><thead><tr><th>Data</th><th>Motivo informado</th></tr></thead><tbody>'+mot.map(x=>'<tr><td>'+(x.data||'')+'</td><td style="text-align:left;white-space:normal">'+x.motivo+'</td></tr>').join('')+'</tbody></table></div>':'<p class="empty">Nenhum reembolso registrado.</p>');
+  diagnosticos(o);
   grafico(o.diario);
 }
+const H=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ESP=[['funil','Funil'],['criativos','Criativos'],['financeiro','Financeiro'],['testes','Testes']];
+function diagnosticos(o){const el=document.getElementById('diagnosticos');
+  const ds=(D.diagnosticos||[]).filter(x=>!x.oferta||x.oferta===o.slug);
+  if(!ds.length){el.innerHTML='<p class="empty">Nenhuma leitura dos especialistas para esta oferta ainda. Ela aparece aqui depois da primeira leitura diária com anúncios no ar.</p>';return}
+  const chave=e=>String(e||'').toLowerCase().replace(/^analista-(de|do|da)-/,'');
+  const grupos={};ds.forEach(x=>{const k=chave(x.especialista)||'outros';(grupos[k]=grupos[k]||[]).push(x)});
+  const ordem=ESP.map(e=>e[0]).filter(k=>grupos[k]).concat(Object.keys(grupos).filter(k=>!ESP.some(e=>e[0]===k)));
+  const nome=k=>(ESP.find(e=>e[0]===k)||[k,k.charAt(0).toUpperCase()+k.slice(1)])[1];
+  const cc=c=>{c=String(c||'').toLowerCase();return c==='alta'?'ok':c.startsWith('m')?'warn':c==='baixa'?'bad':'na'};
+  el.innerHTML='<div class="esp">'+ordem.map(k=>'<div><h3>'+H(nome(k))+'</h3>'+grupos[k].slice().sort((a,b)=>String(b.data||'').localeCompare(String(a.data||''))).map(x=>
+    '<div class="dg"><p>'+H(x.texto)+'</p><div class="meta">'+(x.data?H(String(x.data).slice(0,10).split('-').reverse().join('/'))+' · ':'')+'confiança '+(x.confianca?pill(H(x.confianca),cc(x.confianca)):'<span class="na">não informada</span>')+'</div></div>').join('')+'</div>').join('')+'</div>'}
 function grafico(d){const el=document.getElementById('grafico');if(!d.length){el.innerHTML='<p class="empty">Sem dias com gasto ainda.</p>';return}
   const W=520,H=180,p=28,max=Math.max(1,...d.map(x=>Math.max(x.gasto,x.faturamento))),bw=(W-p*2)/d.length;
   let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Gasto e faturamento por dia">';
