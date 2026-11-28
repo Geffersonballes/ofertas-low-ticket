@@ -2,119 +2,246 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Painel · Ofertas Low Ticket</title>
 <style>
 @font-face{font-family:'Baloo 2';font-weight:400 800;font-display:swap;src:url('Baloo2.woff2') format('woff2')}
 @font-face{font-family:'Nunito';font-weight:200 1000;font-display:swap;src:url('Nunito.woff2') format('woff2')}
 /* tema escuro fixo (pedido do dono em 2026-11-27) */
-:root{color-scheme:dark;--bg:#0f0d0b;--card:#1a1714;--ink:#f2ece4;--muted:#a89d8f;--line:#2e2822;--accent:#ff8a55;--ok:#6fd39c;--okbg:#14301f;--warn:#f0c060;--warnbg:#36290f;--bad:#ff9088;--badbg:#3a1a17;--chart:#ff8a55;--chart2:#8fb0ff}
+:root{color-scheme:dark;--bg:#0f0d0b;--card:#1a1714;--card2:#221e1a;--ink:#f2ece4;--muted:#a89d8f;--line:#2e2822;--accent:#ff8a55;--ok:#6fd39c;--okbg:#14301f;--warn:#f0c060;--warnbg:#36290f;--bad:#ff9088;--badbg:#3a1a17;--chart:#ff8a55;--chart2:#8fb0ff}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;font-size:15px;line-height:1.5;padding:0 max(16px,env(safe-area-inset-left)) 40px max(16px,env(safe-area-inset-right))}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;font-size:15px;line-height:1.5;padding:0 max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left));overflow-x:hidden}
 .wrap{max-width:1200px;margin:0 auto}
-h1,h2{font-family:'Baloo 2',system-ui,sans-serif;margin:0;line-height:1.1}
-h1{font-size:28px;font-weight:800}
+h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif;margin:0;line-height:1.1}
+h1{font-size:clamp(22px,5vw,28px);font-weight:800}
 h2{font-size:19px;font-weight:800;margin-bottom:10px}
-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:22px 0 14px;border-bottom:1px solid var(--line)}
-header .sub{color:var(--muted);font-size:13.5px}
-select{font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
-.grid{display:grid;gap:14px;margin-top:16px}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+h3{font-size:16px;font-weight:800;margin-bottom:6px}
+button{font:inherit;color:inherit}
+/* topo fixo */
+.top{position:sticky;top:0;z-index:5;background:var(--bg);margin:0 -16px;padding:0 16px;border-bottom:1px solid var(--line)}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:14px 0 8px}
+header .sub{color:var(--muted);font-size:13px}
+select{font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:100%}
+nav{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav a{flex:none;color:var(--muted);text-decoration:none;font-size:13px;font-weight:700;padding:4px 10px;border:1px solid var(--line);border-radius:999px}
+nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--accent)}
+.grid{display:grid;gap:12px;margin-top:14px}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:620px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:1100px){.kpis{grid-template-columns:repeat(7,minmax(0,1fr))}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
-.kpi .v{font-family:'Baloo 2';font-weight:800;font-size:28px;font-variant-numeric:tabular-nums;line-height:1.1}
+.sec{margin-top:14px}
+.kpi{cursor:pointer;text-align:left;width:100%;transition:border-color .15s}
+.kpi:hover,.kpi:focus-visible{border-color:var(--accent);outline:none}
+.kpi .v{font-family:'Baloo 2';font-weight:800;font-size:clamp(20px,5.5vw,26px);font-variant-numeric:tabular-nums;line-height:1.15;overflow-wrap:anywhere}
 .kpi .l{color:var(--muted);font-size:13px;font-weight:700}
-.kpi .m{font-size:12px;color:var(--muted)}
-.two{grid-template-columns:1fr}
-@media(min-width:900px){.two{grid-template-columns:1.4fr 1fr}}
-.tw{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px;font-variant-numeric:tabular-nums}
+.kpi .m{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi .f{font-size:12px;color:var(--ink);opacity:.85;margin-top:4px;border-top:1px dashed var(--line);padding-top:4px}
+.two{grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.two{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
+/* funil em etapas */
+.etapas{display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:700px){.etapas{grid-template-columns:repeat(7,minmax(0,1fr))}}
+.et{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;text-align:left;width:100%;display:flex;flex-direction:column;gap:2px;position:relative}
+@media(max-width:699px){.et{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px}.et .tx{margin-left:auto}}
+.et:hover,.et:focus-visible{border-color:var(--accent);outline:none}
+.et .n{font-size:12.5px;color:var(--muted);font-weight:700}
+.et .q{font-family:'Baloo 2';font-weight:800;font-size:20px;font-variant-numeric:tabular-nums}
+.et .tx{font-size:12.5px}
+.bar{height:4px;border-radius:2px;background:var(--line);width:100%;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--accent)}
+/* tabelas: viram cartões no celular */
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
 th,td{padding:8px 10px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
 th:first-child,td:first-child{text-align:left}
 thead th{border-top:0;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tfoot td{font-weight:800;border-top:2px solid var(--line)}
+td.rec{text-align:left;white-space:normal;min-width:160px}
+tbody tr.ad{cursor:pointer}tbody tr.ad:hover td{background:var(--card2)}
+tr.sel td{background:#2a1d15}
+.frac{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
+@media(min-width:900px){.frac{display:none}}
+@media(max-width:899px){
+  table.cards thead{display:none}
+  table.cards,table.cards tbody,table.cards tfoot,table.cards tr,table.cards td{display:block;width:100%}
+  table.cards tr{border:1px solid var(--line);border-radius:10px;padding:6px 12px;margin-bottom:10px;background:var(--card2)}
+  table.cards tr.sel{border-color:var(--accent)}
+  table.cards td{border:0;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 0;white-space:normal;text-align:right}
+  table.cards td::before{content:attr(data-label);color:var(--muted);font-size:13px;font-weight:700;text-align:left;flex:none}
+  table.cards td:first-child{font-family:'Baloo 2';font-weight:800;font-size:16px;border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:2px}
+  table.cards td:first-child::before{display:none}
+  table.cards td.rec{display:block;text-align:left}table.cards td.rec::before{display:block;margin-bottom:2px}
+  tr.sel td{background:none}
+  table.cards .frac{display:inline;margin-left:8px}
+}
 .pill{display:inline-block;border-radius:999px;padding:1px 8px;font-weight:800}
 .ok{background:var(--okbg);color:var(--ok)}.warn{background:var(--warnbg);color:var(--warn)}.bad{background:var(--badbg);color:var(--bad)}.na{color:var(--muted)}
-.alert{border-left:4px solid var(--warn);background:var(--warnbg);border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:8px}
+.alert{border-left:4px solid var(--warn);background:var(--warnbg);border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:8px;overflow-wrap:anywhere}
 .alert.bad{border-color:var(--bad);background:var(--badbg)}.alert.ok{border-color:var(--ok);background:var(--okbg)}
 .alert b{display:block}
 .empty{color:var(--muted);font-style:italic}
-.banner{margin-top:16px;border:1px dashed var(--accent);border-radius:12px;padding:12px 16px;background:var(--card)}
-.legend{display:flex;gap:14px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.banner{margin-top:14px;border:1px dashed var(--accent);border-radius:12px;padding:12px 16px;background:var(--card)}
+.filtro{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;border:1px solid var(--accent);border-radius:12px;padding:10px 14px;background:#2a1d15}
+.btn{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer;font-size:13px;font-weight:700}
+.btn:hover{border-color:var(--accent)}
+.lk{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin-top:8px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.dica{font-size:12.5px;color:var(--muted);margin:-4px 0 10px}
 svg text{fill:var(--muted);font-size:11px;font-family:'Nunito'}
-ul.ap{margin:0;padding-left:18px}ul.ap li{margin:6px 0}
-.esp{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.esp h3{font-family:'Baloo 2',system-ui,sans-serif;font-size:16px;font-weight:800;margin:0 0 6px}
+.gtip{min-height:20px;font-size:13px;margin-top:4px}
+ul.ap{margin:0;padding-left:18px}ul.ap li{margin:6px 0;overflow-wrap:anywhere}
+.esp{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
 .dg{border-top:1px solid var(--line);padding:8px 0}.dg:first-of-type{border-top:0;padding-top:0}
 .dg p{margin:0 0 4px;overflow-wrap:anywhere}.dg .meta{font-size:12.5px;color:var(--muted)}
-footer{margin-top:26px;color:var(--muted);font-size:12.5px}
+/* destaque quando um número leva a outro */
+@keyframes pisca{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 2px var(--accent)}}
+.hl{animation:pisca 1.6s ease 2;border-radius:6px}
+td.hl,th.hl{background:#3a2516!important}
+/* janelinha de ajuda nos títulos */
+[data-ajuda]{cursor:help;text-decoration:underline dotted var(--muted);text-decoration-thickness:1px;text-underline-offset:4px}
+[data-ajuda]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+#tip{position:fixed;z-index:20;max-width:min(320px,calc(100vw - 24px));background:#f7f3ee;color:#231e19;border-radius:12px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.45);font-size:14px;line-height:1.45;display:none;text-align:left;white-space:normal}
+#tip.on{display:block}
+#tip h4{margin:0 0 6px;font-family:'Baloo 2',system-ui,sans-serif;font-size:16px;font-weight:800}
+#tip p{margin:0}#tip .fm{margin-top:8px;font-size:13px;color:#5b5047}
+#tip .lk{color:#1f6fd1;display:inline-block;margin-top:10px;text-align:left}
+footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div><h1>Painel · Ofertas Low Ticket</h1><div class="sub" id="atualizado">carregando…</div></div>
-    <label>Oferta <select id="oferta"></select></label>
-  </header>
-  <div id="banner"></div>
-  <div class="grid kpis" id="kpis"></div>
-  <div class="grid two">
-    <div class="card"><h2>O que fazer hoje</h2><div id="alertas"></div></div>
-    <div class="card"><h2>Gasto × faturamento por dia</h2><div id="grafico"></div>
-      <div class="legend"><span><i style="background:var(--chart2)"></i>Gasto</span><span><i style="background:var(--chart)"></i>Faturamento</span></div></div>
+  <div class="top">
+    <header>
+      <div><h1>Painel · Ofertas Low Ticket</h1><div class="sub" id="atualizado">carregando…</div></div>
+      <label>Oferta <select id="oferta"></select></label>
+    </header>
+    <nav aria-label="Seções">
+      <a href="#resumo">Resumo</a><a href="#s-funil">Funil</a><a href="#s-anuncios">Anúncios</a><a href="#s-alertas">O que fazer</a><a href="#s-grafico">Por dia</a><a href="#s-bumps">Bumps</a><a href="#s-esp">Especialistas</a><a href="#s-reembolsos">Reembolsos</a>
+    </nav>
   </div>
-  <div class="card" style="margin-top:14px"><h2>Funil por anúncio</h2>
-    <div class="tw"><table><thead><tr><th>Anúncio</th><th>Gasto</th><th>Gancho 3 s</th><th>Retenção</th><th>CTR link</th><th>Chegada</th><th>Checkout</th><th>Vendas</th><th>CPA</th><th>ROAS</th><th>Recomendação</th></tr></thead><tbody id="funil"></tbody></table></div>
+  <div id="banner"></div>
+  <div id="filtro"></div>
+  <div class="grid kpis" id="resumo"></div>
+  <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
+    <p class="dica">Cada etapa mostra quantas pessoas chegaram e a taxa em relação à etapa de onde ela vem. Toque numa etapa para ver a coluna dela nos anúncios.</p>
+    <div class="etapas" id="etapas"></div></div>
+  <div class="card sec" id="s-anuncios"><h2 data-ajuda="s-anuncios">Funil por anúncio</h2>
+    <p class="dica">Toque num anúncio para ver o painel todo só dele.</p>
+    <table class="cards" id="t-anuncios"><thead><tr><th data-ajuda="anuncio">Anúncio</th><th data-col="gasto" data-ajuda="gasto">Gasto</th><th data-col="gancho" data-ajuda="gancho">Gancho 3 s</th><th data-col="retencao" data-ajuda="retencao">Retenção</th><th data-col="ctr" data-ajuda="ctr">CTR link</th><th data-col="chegada" data-ajuda="chegada">Chegada</th><th data-col="checkout" data-ajuda="checkout">Checkout</th><th data-col="vendas" data-ajuda="vendas">Vendas</th><th data-col="cpa" data-ajuda="cpa">CPA</th><th data-col="roas" data-ajuda="roas">ROAS</th><th data-ajuda="recomendacao">Recomendação</th></tr></thead><tbody id="funil"></tbody><tfoot id="funil-total"></tfoot></table>
     <div class="legend" id="metas"></div>
   </div>
   <div class="grid two">
-    <div class="card"><h2>Order bumps</h2><div class="tw"><table style="min-width:420px"><thead><tr><th>Bump</th><th>Preço</th><th>Vendidos</th><th>Aceite</th><th>Receita</th></tr></thead><tbody id="bumps"></tbody></table></div></div>
-    <div class="card"><h2>O que vende (aprendizados)</h2><div id="aprendizados"></div></div>
+    <div class="card" id="s-alertas"><h2 data-ajuda="s-alertas">O que fazer hoje</h2><div id="alertas"></div></div>
+    <div class="card" id="s-grafico"><h2 data-ajuda="s-grafico">Gasto × faturamento por dia</h2><div id="grafico"></div><div class="gtip" id="gtip"></div>
+      <div class="legend"><span><i style="background:var(--chart2)"></i>Gasto</span><span><i style="background:var(--chart)"></i>Faturamento</span></div></div>
   </div>
-  <div class="card" style="margin-top:14px"><h2>Leitura dos especialistas</h2><div id="diagnosticos"></div></div>
-  <div class="card" style="margin-top:14px"><h2>Reembolsos</h2><div id="reembolsos"></div></div>
+  <div class="grid two">
+    <div class="card" id="s-bumps"><h2 data-ajuda="s-bumps">Order bumps</h2><table class="cards"><thead><tr><th data-ajuda="bump">Bump</th><th data-ajuda="preco-bump">Preço</th><th data-ajuda="vendidos">Vendidos</th><th data-ajuda="aceite">Aceite</th><th data-ajuda="receita">Receita</th></tr></thead><tbody id="bumps"></tbody></table></div>
+    <div class="card" id="s-aprendizados"><h2 data-ajuda="s-aprendizados">O que vende (aprendizados)</h2><div id="aprendizados"></div></div>
+  </div>
+  <div class="card sec" id="s-esp"><h2 data-ajuda="s-esp">Leitura dos especialistas</h2><div id="diagnosticos"></div></div>
+  <div class="card sec" id="s-reembolsos"><h2 data-ajuda="s-reembolsos">Reembolsos</h2><div id="reembolsos"></div></div>
   <footer>Números atualizados pelo agente <b>analista-de-metricas</b> (Meta Ads via Windsor.ai e Hotmart). Regras de corte e escala: <code>docs/08_inteligencia-de-anuncios.md</code>. Os agentes só recomendam; quem liga, desliga e muda orçamento é o Gefferson.</footer>
 </div>
 <script>
 const R=v=>'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const N=v=>(v||0).toLocaleString('pt-BR');
 const P=v=>v==null?'–':v.toLocaleString('pt-BR',{maximumFractionDigits:1})+'%';
 const div=(a,b)=>b>0?a/b:null;
+const pct=(a,b)=>{const x=div(a,b);return x==null?null:x*100};
 const X=v=>v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-function cor(v,meta,menorMelhor){if(v==null)return 'na';if(menorMelhor)return v<=meta?'ok':v<=meta*1.3?'warn':'bad';return v>=meta?'ok':v>=meta*.7?'warn':'bad'}
-function pill(txt,c){return c==='na'?'<span class="na">'+txt+'</span>':'<span class="pill '+c+'">'+txt+'</span>'}
-let D;
-fetch('dados.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const s=document.getElementById('oferta');
-  d.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
-  s.onchange=()=>render(+s.value);render(0)}).catch(()=>{document.getElementById('atualizado').textContent='Não foi possível ler dados.json'});
-function render(i){
-  const o=D.ofertas[i],m=D.metas;
-  document.getElementById('atualizado').textContent=D.atualizado_em?('Atualizado em '+new Date(D.atualizado_em).toLocaleString('pt-BR')):'Ainda sem leitura de dados';
-  const gasto=o.anuncios.reduce((a,x)=>a+x.gasto,0),vendas=o.anuncios.reduce((a,x)=>a+x.vendas,0),fat=o.anuncios.reduce((a,x)=>a+x.faturamento,0);
-  const cpa=div(gasto,vendas),roas=div(fat,gasto),tm=div(fat,vendas);
-  document.getElementById('banner').innerHTML=gasto===0?'<div class="banner"><b>'+o.nome+': '+(o.situacao||'sem anúncios no ar')+'.</b> Os números aparecem aqui quando a campanha estiver rodando e a conta de anúncios estiver conectada ao Windsor.ai.</div>':'';
-  const k=[['Gasto',R(gasto),''],['Vendas',vendas,''],['Faturamento',R(fat),''],['CPA',cpa==null?'–':R(cpa),'meta ≤ '+R(m.cpa_max),cor(cpa,m.cpa_max,true)],['ROAS',roas==null?'–':X(roas),'meta ≥ '+X(m.roas_min),cor(roas,m.roas_min)],['Ticket médio',tm==null?'–':R(tm),'produto '+R(o.preco)]];
-  document.getElementById('kpis').innerHTML=k.map(x=>'<div class="card kpi"><div class="l">'+x[0]+'</div><div class="v">'+(x[3]&&x[3]!=='na'?pill(x[1],x[3]):x[1])+'</div><div class="m">'+x[2]+'</div></div>').join('');
-  const al=D.alertas.filter(a=>!a.oferta||a.oferta===o.slug);
-  document.getElementById('alertas').innerHTML=al.length?al.map(a=>'<div class="alert '+(a.nivel||'')+'"><b>'+(a.anuncio||o.nome)+'</b>'+a.texto+(a.regra?' <span class="na">('+a.regra+')</span>':'')+'</div>').join(''):'<p class="empty">Nenhuma recomendação por enquanto.</p>';
-  document.getElementById('funil').innerHTML=o.anuncios.map(a=>{const g=div(a.v3s,a.impressoes),r=div(a.thruplay,a.v3s),c=div(a.cliques,a.impressoes),ch=div(a.lp,a.cliques),ck=div(a.checkouts,a.lp),cp=div(a.gasto,a.vendas),ro=div(a.faturamento,a.gasto);
-    return '<tr><td>'+a.nome+'</td><td>'+R(a.gasto)+'</td><td>'+pill(P(g&&g*100),cor(g&&g*100,m.gancho))+'</td><td>'+pill(P(r&&r*100),cor(r&&r*100,m.retencao))+'</td><td>'+pill(P(c&&c*100),cor(c&&c*100,m.ctr))+'</td><td>'+pill(P(ch&&ch*100),cor(ch&&ch*100,m.chegada))+'</td><td>'+pill(P(ck&&ck*100),cor(ck&&ck*100,m.checkout))+'</td><td>'+a.vendas+'</td><td>'+pill(cp==null?'–':R(cp),cor(cp,m.cpa_max,true))+'</td><td>'+pill(ro==null?'–':X(ro),cor(ro,m.roas_min))+'</td><td style="text-align:left;white-space:normal">'+(a.recomendacao||'<span class="na">–</span>')+'</td></tr>'}).join('');
-  document.getElementById('metas').textContent='Metas: gancho ≥ '+m.gancho+'% · retenção ≥ '+m.retencao+'% · CTR ≥ '+m.ctr+'% · chegada ≥ '+m.chegada+'% · checkout ≥ '+m.checkout+'% · CPA ≤ '+R(m.cpa_max)+' · ROAS ≥ '+X(m.roas_min)+'. Verde = na meta, amarelo = perto, vermelho = longe.';
-  document.getElementById('bumps').innerHTML=o.bumps.map(b=>{const ac=div(b.vendidos,vendas);return '<tr><td>'+b.nome+'</td><td>'+R(b.preco)+'</td><td>'+b.vendidos+'</td><td>'+P(ac&&ac*100)+'</td><td>'+R(b.vendidos*b.preco)+'</td></tr>'}).join('');
-  const ap=D.aprendizados.filter(a=>!a.oferta||a.oferta===o.slug);
-  document.getElementById('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+a.texto+' <span class="na">· '+(a.confianca||'')+' · '+(a.data||'')+'</span></li>').join('')+'</ul>':'<p class="empty">Ainda sem conclusões com número. Elas aparecem aqui conforme os anúncios rodam.</p>';
-  const vh=o.vendas_hotmart||vendas,rb=o.reembolsos||0,tx=div(rb,vh),mr=m.reembolso_max||10;
-  const nivel=tx==null?'':(tx*100>mr?'bad':tx*100>mr/2?'warn':'ok');
-  const mot=(o.motivos_reembolso||[]);
-  document.getElementById('reembolsos').innerHTML='<p>'+rb+' de '+vh+' vendas · '+pill(P(tx&&tx*100),nivel)+' <span class="na">(limite '+mr+'%)</span></p>'+
-    (tx!=null&&tx*100>mr?'<div class="alert bad"><b>Acima de '+mr+'%</b>A promessa da página pode estar maior que o produto. Leia os motivos abaixo antes de mexer nos anúncios.</div>':'')+
-    (mot.length?'<div class="tw"><table style="min-width:360px"><thead><tr><th>Data</th><th>Motivo informado</th></tr></thead><tbody>'+mot.map(x=>'<tr><td>'+(x.data||'')+'</td><td style="text-align:left;white-space:normal">'+x.motivo+'</td></tr>').join('')+'</tbody></table></div>':'<p class="empty">Nenhum reembolso registrado.</p>');
-  diagnosticos(o);
-  grafico(o.diario);
-}
 const H=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id);
+function cor(v,meta,menorMelhor){if(v==null||meta==null)return 'na';if(menorMelhor)return v<=meta?'ok':v<=meta*1.3?'warn':'bad';return v>=meta?'ok':v>=meta*.7?'warn':'bad'}
+function pill(txt,c){return c==='na'?'<span class="na">'+txt+'</span>':'<span class="pill '+c+'">'+txt+'</span>'}
+/* link entre números: data-go="#id" rola até lá; data-col="x" acende a coluna x dos anúncios */
+const lk=(txt,go,col)=>'<button type="button" class="lk" data-go="'+go+'"'+(col?' data-col-go="'+col+'"':'')+'>'+txt+'</button>';
+function ir(go,col){const el=document.querySelector(go);if(!el)return;el.scrollIntoView({block:'start'});
+  const alvos=col?document.querySelectorAll('#t-anuncios [data-col="'+col+'"]'):[el];
+  alvos.forEach(a=>{a.classList.remove('hl');void a.offsetWidth;a.classList.add('hl')});
+  setTimeout(()=>alvos.forEach(a=>a.classList.remove('hl')),3400)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();e.stopPropagation();ir(b.dataset.go,b.dataset.colGo);return}
+  const tr=e.target.closest('tr.ad');if(tr){selecionar(+tr.dataset.i)}});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr.ad')){e.preventDefault();selecionar(+e.target.dataset.i)}});
+
+let D,OI=0,SEL=null;
+const CAMPOS=['gasto','impressoes','v3s','thruplay','cliques','lp','checkouts','vendas','faturamento'];
+function soma(lista){const t={};CAMPOS.forEach(k=>t[k]=lista.reduce((a,x)=>a+(x[k]||0),0));return t}
+fetch('dados.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const s=$('oferta');
+  d.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
+  s.onchange=()=>{OI=+s.value;SEL=null;render()};render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
+function selecionar(i){SEL=SEL===i?null:i;render();$('filtro').scrollIntoView({block:'start'})}
+function render(){
+  const o=D.ofertas[OI],m=D.metas,ads=o.anuncios||[];
+  const ad=SEL!=null?ads[SEL]:null,base=ad?soma([ad]):soma(ads),tot=soma(ads);
+  $('atualizado').textContent=D.atualizado_em?('Atualizado em '+new Date(D.atualizado_em).toLocaleString('pt-BR')):'Ainda sem leitura de dados';
+  $('banner').innerHTML=tot.gasto===0?'<div class="banner"><b>'+H(o.nome)+': '+H(o.situacao||'sem anúncios no ar')+'.</b> Os números aparecem aqui quando a campanha estiver rodando e a conta de anúncios estiver conectada ao Windsor.ai.</div>':'';
+  $('filtro').innerHTML=ad?'<div class="filtro"><span>Mostrando só o anúncio <b>'+H(ad.nome)+'</b> — resumo, funil, alertas e especialistas.</span><button type="button" class="btn" id="limpar">Ver a oferta toda</button></div>':'';
+  if(ad)$('limpar').onclick=()=>{SEL=null;render()};
+  $('t-funil').textContent=ad?'Funil do anúncio '+ad.nome:'Funil da oferta';
+  kpis(o,m,base,ad);etapas(m,base);tabela(o,m,ads,tot);
+  const doAd=x=>!ad||!x.anuncio||x.anuncio===ad.nome;
+  const al=(D.alertas||[]).filter(a=>(!a.oferta||a.oferta===o.slug)&&doAd(a));
+  $('alertas').innerHTML=al.length?al.map(a=>'<div class="alert '+H(a.nivel||'')+'"><b>'+H(a.anuncio||o.nome)+'</b>'+H(a.texto)+(a.regra?' <span class="na">('+H(a.regra)+')</span>':'')+'</div>').join(''):'<p class="empty">Nenhuma recomendação por enquanto.</p>';
+  bumps(o,tot);
+  const ap=(D.aprendizados||[]).filter(a=>!a.oferta||a.oferta===o.slug);
+  $('aprendizados').innerHTML=ap.length?'<ul class="ap">'+ap.map(a=>'<li>'+H(a.texto)+' <span class="na">· '+H(a.confianca||'')+' · '+H(a.data||'')+'</span></li>').join('')+'</ul>':'<p class="empty">Ainda sem conclusões com número. Elas aparecem aqui conforme os anúncios rodam.</p>';
+  diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
+}
+function kpis(o,m,b,ad){
+  const cpa=div(b.gasto,b.vendas),roas=div(b.faturamento,b.gasto),tm=div(b.faturamento,b.vendas);
+  const vh=o.vendas_hotmart||0,rb=o.reembolsos||0,tx=pct(rb,vh),mr=m.reembolso_max||10;
+  const k=[
+    ['Gasto',R(b.gasto),'',ad?'só deste anúncio':lk('soma de '+(o.anuncios||[]).length+' anúncios','#s-anuncios','gasto'),'#s-anuncios','gasto',null,'gasto'],
+    ['Vendas',N(b.vendas),'',lk(N(b.checkouts)+' checkouts','#s-funil')+' → '+N(b.vendas)+' vendas','#s-funil',null,null,'vendas'],
+    ['Faturamento',R(b.faturamento),'',lk('ver por dia','#s-grafico'),'#s-grafico',null,null,'faturamento'],
+    ['CPA',cpa==null?'–':R(cpa),'meta ≤ '+R(m.cpa_max),lk(R(b.gasto),'#s-anuncios','gasto')+' ÷ '+lk(N(b.vendas)+' vendas','#s-anuncios','vendas'),'#s-anuncios','cpa',cor(cpa,m.cpa_max,true),'cpa'],
+    ['ROAS',roas==null?'–':X(roas),'meta ≥ '+X(m.roas_min),lk(R(b.faturamento),'#s-grafico')+' ÷ '+lk(R(b.gasto),'#s-anuncios','gasto'),'#s-anuncios','roas',cor(roas,m.roas_min),'roas'],
+    ['Ticket médio',tm==null?'–':R(tm),'produto '+R(o.preco),lk(R(b.faturamento),'#s-grafico')+' ÷ '+N(b.vendas)+' vendas · '+lk('bumps','#s-bumps'),'#s-bumps',null,null,'ticket'],
+    ['Reembolso',P(tx),'limite '+mr+'%',lk(N(rb)+' de '+N(vh)+' vendas','#s-reembolsos'),'#s-reembolsos',null,tx==null?'na':(tx>mr?'bad':tx>mr/2?'warn':'ok'),'reembolso']];
+  $('resumo').innerHTML=k.map(x=>'<div class="card kpi" role="button" tabindex="0" data-go="'+x[4]+'"'+(x[5]?' data-col-go="'+x[5]+'"':'')+'><div class="l"><span data-ajuda="'+x[7]+'">'+x[0]+'</span></div><div class="v">'+(x[6]&&x[6]!=='na'?pill(x[1],x[6]):x[1])+'</div><div class="m">'+x[2]+'</div><div class="f">'+x[3]+'</div></div>').join('');
+  document.querySelectorAll('.kpi').forEach(c=>c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();ir(c.dataset.go,c.dataset.colGo)}});
+}
+const ETAPAS=[
+  {k:'impressoes',n:'Impressões'},
+  {k:'v3s',n:'Viram 3 s',t:'gancho',b:'impressoes',bn:'das impressões'},
+  {k:'thruplay',n:'Assistiram (ThruPlay)',t:'retencao',b:'v3s',bn:'de quem viu 3 s'},
+  {k:'cliques',n:'Clicaram no link',t:'ctr',b:'impressoes',bn:'das impressões'},
+  {k:'lp',n:'Chegaram na página',t:'chegada',b:'cliques',bn:'dos cliques'},
+  {k:'checkouts',n:'Abriram o checkout',t:'checkout',b:'lp',bn:'de quem chegou'},
+  {k:'vendas',n:'Compraram',t:'vendas',b:'checkouts',bn:'dos checkouts'}];
+function etapas(m,b){const mx=Math.max(1,b.impressoes);
+  $('etapas').innerHTML=ETAPAS.map(e=>{const r=e.b?pct(b[e.k],b[e.b]):null;
+    return '<button type="button" class="et" data-go="#s-anuncios" data-col-go="'+(e.t||'gasto')+'"><span class="n"><span data-ajuda="et-'+e.k+'">'+e.n+'</span></span><span class="q">'+N(b[e.k])+'</span>'+
+      (e.b?'<span class="tx">'+pill(P(r),cor(r,m[e.t]))+' <span class="na">'+e.bn+(m[e.t]!=null?' · meta '+m[e.t]+'%':'')+'</span></span>':'<span class="tx na">base do funil</span>')+
+      '<span class="bar"><i style="width:'+Math.max(b[e.k]?1:0,100*b[e.k]/mx)+'%"></i></span></button>'}).join('');
+}
+function celula(lbl,col,a,b,meta,menor,fmt){const v=fmt==='pct'?pct(a,b):null;
+  return '<td data-label="'+lbl+'" data-col="'+col+'" title="'+N(a)+' de '+N(b)+'"><span>'+pill(P(v),cor(v,meta,menor))+'<span class="frac">'+N(a)+' de '+N(b)+'</span></span></td>'}
+function linha(a,m,extra){const cp=div(a.gasto,a.vendas),ro=div(a.faturamento,a.gasto);
+  return '<td data-label="Gasto" data-col="gasto">'+R(a.gasto)+'</td>'+
+    celula('Gancho 3 s','gancho',a.v3s,a.impressoes,m.gancho,false,'pct')+
+    celula('Retenção','retencao',a.thruplay,a.v3s,m.retencao,false,'pct')+
+    celula('CTR link','ctr',a.cliques,a.impressoes,m.ctr,false,'pct')+
+    celula('Chegada','chegada',a.lp,a.cliques,m.chegada,false,'pct')+
+    celula('Checkout','checkout',a.checkouts,a.lp,m.checkout,false,'pct')+
+    '<td data-label="Vendas" data-col="vendas">'+N(a.vendas)+'</td>'+
+    '<td data-label="CPA" data-col="cpa">'+pill(cp==null?'–':R(cp),cor(cp,m.cpa_max,true))+'</td>'+
+    '<td data-label="ROAS" data-col="roas">'+pill(ro==null?'–':X(ro),cor(ro,m.roas_min))+'</td>'+extra}
+function tabela(o,m,ads,tot){
+  $('funil').innerHTML=ads.length?ads.map((a,i)=>'<tr class="ad'+(SEL===i?' sel':'')+'" data-i="'+i+'" tabindex="0" aria-pressed="'+(SEL===i)+'"><td>'+H(a.nome)+'</td>'+linha(a,m,'<td class="rec" data-label="Recomendação">'+(a.recomendacao?H(a.recomendacao):'<span class="na">–</span>')+'</td>')+'</tr>').join(''):'<tr><td class="empty">Nenhum anúncio cadastrado.</td></tr>';
+  $('funil-total').innerHTML=ads.length>1?'<tr><td>Total da oferta</td>'+linha(tot,m,'<td class="rec" data-label=""></td>')+'</tr>':'';
+  $('metas').textContent='Metas: gancho ≥ '+m.gancho+'% · retenção ≥ '+m.retencao+'% · CTR ≥ '+m.ctr+'% · chegada ≥ '+m.chegada+'% · checkout ≥ '+m.checkout+'% · CPA ≤ '+R(m.cpa_max)+' · ROAS ≥ '+X(m.roas_min)+'. Verde = na meta, amarelo = perto, vermelho = longe.';
+}
+function bumps(o,tot){const bs=o.bumps||[];
+  $('bumps').innerHTML=bs.length?bs.map(b=>{const ac=pct(b.vendidos,tot.vendas);
+    return '<tr><td>'+H(b.nome)+'</td><td data-label="Preço">'+R(b.preco)+'</td><td data-label="Vendidos">'+N(b.vendidos)+'</td><td data-label="Aceite"><span>'+P(ac)+'<span class="frac">'+N(b.vendidos)+' de '+lk(N(tot.vendas)+' vendas','#resumo')+'</span></span></td><td data-label="Receita">'+R(b.vendidos*b.preco)+'</td></tr>'}).join(''):'<tr><td class="empty">Sem order bumps.</td></tr>';
+}
 const ESP=[['funil','Funil'],['criativos','Criativos'],['financeiro','Financeiro'],['testes','Testes']];
-function diagnosticos(o){const el=document.getElementById('diagnosticos');
-  const ds=(D.diagnosticos||[]).filter(x=>!x.oferta||x.oferta===o.slug);
+function diagnosticos(o,doAd){const el=$('diagnosticos');
+  const ds=(D.diagnosticos||[]).filter(x=>(!x.oferta||x.oferta===o.slug)&&doAd(x));
   if(!ds.length){el.innerHTML='<p class="empty">Nenhuma leitura dos especialistas para esta oferta ainda. Ela aparece aqui depois da primeira leitura diária com anúncios no ar.</p>';return}
   const chave=e=>String(e||'').toLowerCase().replace(/^analista-(de|do|da)-/,'');
   const grupos={};ds.forEach(x=>{const k=chave(x.especialista)||'outros';(grupos[k]=grupos[k]||[]).push(x)});
@@ -122,15 +249,87 @@ function diagnosticos(o){const el=document.getElementById('diagnosticos');
   const nome=k=>(ESP.find(e=>e[0]===k)||[k,k.charAt(0).toUpperCase()+k.slice(1)])[1];
   const cc=c=>{c=String(c||'').toLowerCase();return c==='alta'?'ok':c.startsWith('m')?'warn':c==='baixa'?'bad':'na'};
   el.innerHTML='<div class="esp">'+ordem.map(k=>'<div><h3>'+H(nome(k))+'</h3>'+grupos[k].slice().sort((a,b)=>String(b.data||'').localeCompare(String(a.data||''))).map(x=>
-    '<div class="dg"><p>'+H(x.texto)+'</p><div class="meta">'+(x.data?H(String(x.data).slice(0,10).split('-').reverse().join('/'))+' · ':'')+'confiança '+(x.confianca?pill(H(x.confianca),cc(x.confianca)):'<span class="na">não informada</span>')+'</div></div>').join('')+'</div>').join('')+'</div>'}
-function grafico(d){const el=document.getElementById('grafico');if(!d.length){el.innerHTML='<p class="empty">Sem dias com gasto ainda.</p>';return}
-  const W=520,H=180,p=28,max=Math.max(1,...d.map(x=>Math.max(x.gasto,x.faturamento))),bw=(W-p*2)/d.length;
-  let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Gasto e faturamento por dia">';
-  [0,.5,1].forEach(t=>{const y=H-p-(H-p*2)*t;s+='<line x1="'+p+'" x2="'+(W-p)+'" y1="'+y+'" y2="'+y+'" stroke="currentColor" opacity=".12"/><text x="2" y="'+(y+4)+'">'+Math.round(max*t)+'</text>'});
-  d.forEach((x,i)=>{const h1=(H-p*2)*x.gasto/max,h2=(H-p*2)*x.faturamento/max,x0=p+i*bw;
-    s+='<rect x="'+(x0+bw*.12)+'" y="'+(H-p-h1)+'" width="'+(bw*.36)+'" height="'+h1+'" fill="var(--chart2)" rx="2"/><rect x="'+(x0+bw*.52)+'" y="'+(H-p-h2)+'" width="'+(bw*.36)+'" height="'+h2+'" fill="var(--chart)" rx="2"/>';
-    if(d.length<=14||i%Math.ceil(d.length/10)===0)s+='<text x="'+(x0+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+x.data.slice(5).split('-').reverse().join('/')+'</text>'});
-  el.innerHTML=s+'</svg>'}
+    '<div class="dg"><p>'+H(x.texto)+'</p><div class="meta">'+(x.anuncio?H(x.anuncio)+' · ':'')+(x.data?H(String(x.data).slice(0,10).split('-').reverse().join('/'))+' · ':'')+'confiança '+(x.confianca?pill(H(x.confianca),cc(x.confianca)):'<span class="na">não informada</span>')+'</div></div>').join('')+'</div>').join('')+'</div>'}
+function reembolsos(o,m,tot){
+  const vh=o.vendas_hotmart||0,rb=o.reembolsos||0,tx=pct(rb,vh),mr=m.reembolso_max||10;
+  const nivel=tx==null?'na':(tx>mr?'bad':tx>mr/2?'warn':'ok');
+  const mot=(o.motivos_reembolso||[]);
+  $('reembolsos').innerHTML='<p>'+N(rb)+' de '+N(vh)+' vendas na Hotmart · '+pill(P(tx),nivel)+' <span class="na">(limite '+mr+'%)</span>'+
+    (vh!==tot.vendas?' <span class="na">· a Meta registrou '+lk(N(tot.vendas)+' vendas','#s-funil')+'</span>':'')+'</p>'+
+    (tx!=null&&tx>mr?'<div class="alert bad"><b>Acima de '+mr+'%</b>A promessa da página pode estar maior que o produto. Leia os motivos abaixo antes de mexer nos anúncios.</div>':'')+
+    (mot.length?'<table class="cards"><thead><tr><th>Data</th><th>Motivo informado</th></tr></thead><tbody>'+mot.map(x=>'<tr><td>'+H(x.data||'')+'</td><td class="rec" data-label="Motivo">'+H(x.motivo)+'</td></tr>').join('')+'</tbody></table>':'<p class="empty">Nenhum reembolso registrado.</p>');
+}
+function grafico(d){const el=$('grafico');$('gtip').textContent='';if(!d.length){el.innerHTML='<p class="empty">Sem dias com gasto ainda.</p>';return}
+  const W=520,H2=190,p=30,max=Math.max(1,...d.map(x=>Math.max(x.gasto||0,x.faturamento||0))),bw=(W-p*2)/d.length;
+  let s='<svg viewBox="0 0 '+W+' '+H2+'" width="100%" role="img" aria-label="Gasto e faturamento por dia">';
+  [0,.5,1].forEach(t=>{const y=H2-p-(H2-p*2)*t;s+='<line x1="'+p+'" x2="'+(W-p)+'" y1="'+y+'" y2="'+y+'" stroke="currentColor" opacity=".12"/><text x="2" y="'+(y+4)+'">'+Math.round(max*t)+'</text>'});
+  d.forEach((x,i)=>{const h1=(H2-p*2)*(x.gasto||0)/max,h2=(H2-p*2)*(x.faturamento||0)/max,x0=p+i*bw;
+    s+='<g class="dia" data-d="'+i+'" style="cursor:pointer"><rect x="'+x0+'" y="0" width="'+bw+'" height="'+(H2-p)+'" fill="transparent"/><rect x="'+(x0+bw*.12)+'" y="'+(H2-p-h1)+'" width="'+(bw*.36)+'" height="'+h1+'" fill="var(--chart2)" rx="2"/><rect x="'+(x0+bw*.52)+'" y="'+(H2-p-h2)+'" width="'+(bw*.36)+'" height="'+h2+'" fill="var(--chart)" rx="2"/></g>';
+    if(d.length<=14||i%Math.ceil(d.length/10)===0)s+='<text x="'+(x0+bw/2)+'" y="'+(H2-8)+'" text-anchor="middle">'+H(String(x.data).slice(5).split('-').reverse().join('/'))+'</text>'});
+  el.innerHTML=s+'</svg>';
+  const mostra=i=>{const x=d[i],r=div(x.faturamento,x.gasto);$('gtip').innerHTML='<b>'+H(String(x.data).split('-').reverse().join('/'))+'</b>: gasto '+R(x.gasto)+' · faturamento '+R(x.faturamento)+(x.vendas!=null?' · '+N(x.vendas)+' vendas':'')+' · ROAS '+(r==null?'–':X(r))};
+  el.querySelectorAll('.dia').forEach(g=>{g.onmouseenter=g.onclick=()=>mostra(+g.dataset.d)});mostra(d.length-1)}
+/* janelinha de ajuda: passe o mouse (ou toque) num título com sublinhado pontilhado */
+const AJUDA={
+ 'gasto':['Gasto','Quanto a Meta cobrou pelos anúncios no período.',m=>'Vem da Meta (Windsor.ai). É a base do CPA e do ROAS.',['Ver gasto por anúncio','#s-anuncios','gasto']],
+ 'vendas':['Vendas','Compras do produto principal que a Meta atribuiu aos anúncios (pixel + API de Conversões).',m=>'Pode diferir um pouco da Hotmart, que é a fonte oficial de vendas e reembolsos.',['Ver o funil até a venda','#s-funil']],
+ 'faturamento':['Faturamento','Valor das compras atribuídas aos anúncios, com os order bumps.',m=>'Não desconta taxas da Hotmart nem reembolsos.',['Ver por dia','#s-grafico']],
+ 'cpa':['CPA (custo por venda)','Quanto custou, em anúncio, cada venda.',m=>'Gasto ÷ vendas. Meta: até '+R(m.cpa_max)+'. Acima disso a venda dá prejuízo.',['Ver CPA por anúncio','#s-anuncios','cpa']],
+ 'roas':['ROAS (retorno do anúncio)','Quanto voltou de faturamento para cada R$ 1 gasto em anúncio.',m=>'Faturamento ÷ gasto. Meta: pelo menos '+X(m.roas_min)+'. Ex.: 2,00 = cada R$ 1 virou R$ 2.',['Ver ROAS por anúncio','#s-anuncios','roas']],
+ 'ticket':['Ticket médio','Quanto cada comprador pagou, em média, somando produto e bumps.',m=>'Faturamento ÷ vendas. Acima do preço do produto = os bumps estão vendendo.',['Ver os bumps','#s-bumps']],
+ 'reembolso':['Reembolso','Parte das vendas da Hotmart que pediu o dinheiro de volta (garantia de 7 dias).',m=>'Reembolsos ÷ vendas Hotmart. Limite: '+(m.reembolso_max||10)+'%. Acima disso, a promessa da página pode estar maior que o produto.',['Ver motivos','#s-reembolsos']],
+ 'anuncio':['Anúncio','Cada criativo rodando, com o ângulo dele.',m=>'Toque numa linha para ver o painel todo só desse anúncio.'],
+ 'gancho':['Gancho 3 s','De cada 100 pessoas que viram o anúncio, quantas assistiram pelo menos 3 segundos.',m=>'Visualizações de 3 s ÷ impressões. Meta: '+m.gancho+'%. Baixo = o começo do vídeo não prende.',['Ver no funil','#s-funil']],
+ 'retencao':['Retenção','De quem passou dos 3 s, quantos assistiram até o fim (ou 15 s).',m=>'ThruPlay ÷ visualizações de 3 s. Meta: '+m.retencao+'%. Baixo = o meio do vídeo perde as pessoas.',['Ver no funil','#s-funil']],
+ 'ctr':['CTR do link','De cada 100 pessoas que viram o anúncio, quantas clicaram no link.',m=>'Cliques no link ÷ impressões. Meta: '+m.ctr+'%. Baixo = a chamada do anúncio não convence.',['Ver no funil','#s-funil']],
+ 'chegada':['Chegada na página','De quem clicou, quantos de fato carregaram a página de vendas.',m=>'Visualizações da página ÷ cliques. Meta: '+m.chegada+'%. Baixo = página lenta ou link com problema.',['Ver no funil','#s-funil']],
+ 'checkout':['Checkout','De quem chegou na página, quantos abriram o checkout da Hotmart.',m=>'Checkouts iniciados ÷ visualizações da página. Meta: '+m.checkout+'%. Baixo = a página não convence ou o preço assusta.',['Ver no funil','#s-funil']],
+ 'recomendacao':['Recomendação','O que o analista-de-metricas sugere: desligar, manter ou escalar.',m=>'É só sugestão. Quem liga, desliga e muda orçamento é você.'],
+ 'bump':['Order bump','Oferta extra marcada no próprio checkout, antes de pagar.',m=>'Aumenta o ticket médio sem gastar mais em anúncio.'],
+ 'preco-bump':['Preço do bump','Valor cobrado pelo bump no checkout.',null],
+ 'vendidos':['Vendidos','Quantas vezes o bump foi comprado junto com o produto.',m=>'Vem da Hotmart.'],
+ 'aceite':['Aceite','De cada 100 compradores, quantos levaram esse bump.',m=>'Bumps vendidos ÷ vendas do produto.',['Ver vendas','#resumo']],
+ 'receita':['Receita do bump','Quanto o bump trouxe no período.',m=>'Vendidos × preço.'],
+ 'et-impressoes':['Impressões','Quantas vezes o anúncio apareceu na tela de alguém.',m=>'É a base do funil: gancho e CTR são medidos sobre ela.'],
+ 'et-v3s':['Viram 3 s','Pessoas que assistiram pelo menos 3 segundos do vídeo.',m=>'Vira a taxa de gancho. Meta: '+m.gancho+'%.',['Ver gancho por anúncio','#s-anuncios','gancho']],
+ 'et-thruplay':['Assistiram (ThruPlay)','Pessoas que viram o vídeo até o fim, ou pelo menos 15 s.',m=>'Vira a taxa de retenção. Meta: '+m.retencao+'%.',['Ver retenção por anúncio','#s-anuncios','retencao']],
+ 'et-cliques':['Clicaram no link','Cliques no botão do anúncio que levam para a página.',m=>'Vira o CTR. Meta: '+m.ctr+'%.',['Ver CTR por anúncio','#s-anuncios','ctr']],
+ 'et-lp':['Chegaram na página','Pessoas que carregaram a página de vendas (pixel PageView).',m=>'Vira a taxa de chegada. Meta: '+m.chegada+'%.',['Ver chegada por anúncio','#s-anuncios','chegada']],
+ 'et-checkouts':['Abriram o checkout','Pessoas que clicaram em comprar e abriram o checkout da Hotmart.',m=>'Vira a taxa de checkout. Meta: '+m.checkout+'%.',['Ver checkout por anúncio','#s-anuncios','checkout']],
+ 'et-vendas':['Compraram','Pessoas que pagaram.',m=>'Compraram ÷ abriram o checkout mostra se o checkout está travando a compra.',['Ver vendas por anúncio','#s-anuncios','vendas']],
+ 's-funil':['Funil','O caminho da pessoa: viu o anúncio, assistiu, clicou, chegou na página, abriu o checkout e comprou.',m=>'A etapa mais vermelha é onde está o conserto.'],
+ 's-anuncios':['Funil por anúncio','As mesmas taxas do funil, separadas por anúncio, com a cor da meta.',m=>'Verde = na meta, amarelo = perto, vermelho = longe. Toque numa linha para filtrar o painel.'],
+ 's-alertas':['O que fazer hoje','Decisões que pedem sua ação, tiradas da leitura diária.',m=>'Cada alerta cita a regra que o gerou (docs/08_inteligencia-de-anuncios.md).'],
+ 's-grafico':['Gasto × faturamento por dia','Azul = gasto; laranja = faturamento.',m=>'Laranja maior que azul = o dia deu retorno. Passe o mouse ou toque num dia para ver os números.'],
+ 's-bumps':['Order bumps','Ofertas extras do checkout e quanto cada uma vende.',m=>'O aceite é calculado sobre as vendas do produto principal.'],
+ 's-aprendizados':['O que vende','Conclusões com número que valem para as próximas ofertas.',m=>'Vêm de aprendizados/o-que-vende.md.'],
+ 's-esp':['Leitura dos especialistas','O que cada analista do time de dados concluiu: funil, criativos, financeiro e testes.',m=>'Confiança baixa = pouco dado ainda; não decida só com ela.'],
+ 's-reembolsos':['Reembolsos','Pedidos de dinheiro de volta na Hotmart e o motivo de cada um.',m=>'Os motivos mostram onde a promessa e o produto não batem.']};
+const tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip);
+let tipDe=null,tipT=null;
+function abreTip(el){const a=AJUDA[el.dataset.ajuda];if(!a)return;clearTimeout(tipT);tipDe=el;
+  const fm=a[2]&&D?a[2](D.metas):'';
+  tip.innerHTML='<h4>'+H(a[0])+'</h4><p>'+H(a[1])+'</p>'+(fm?'<p class="fm">'+H(fm)+'</p>':'')+(a[3]?lk(a[3][0]+' →',a[3][1],a[3][2]):'');
+  tip.classList.add('on');const r=el.getBoundingClientRect(),t=tip.getBoundingClientRect();
+  let x=Math.min(Math.max(8,r.left),innerWidth-t.width-8),y=r.bottom+8;if(y+t.height>innerHeight-8)y=Math.max(8,r.top-t.height-8);
+  tip.style.left=x+'px';tip.style.top=y+'px'}
+function fechaTip(){tip.classList.remove('on');tipDe=null}
+const fechaDepois=()=>{clearTimeout(tipT);tipT=setTimeout(fechaTip,250)};
+const semMouse=matchMedia('(hover: none)');
+document.addEventListener('mouseover',e=>{if(semMouse.matches)return;const el=e.target.closest('[data-ajuda]');
+  if(el){if(el!==tipDe)abreTip(el);else clearTimeout(tipT)}else if(e.target.closest('#tip'))clearTimeout(tipT)});
+document.addEventListener('mouseout',e=>{if(semMouse.matches)return;const de=e.target.closest('[data-ajuda],#tip');const rt=e.relatedTarget;
+  const para=rt&&rt.closest?rt.closest('[data-ajuda],#tip'):null;if(de&&de!==para)fechaDepois()});
+document.addEventListener('click',e=>{const el=e.target.closest('[data-ajuda]');
+  if(el){e.preventDefault();e.stopImmediatePropagation();
+    if(semMouse.matches&&tipDe===el&&tip.classList.contains('on'))fechaTip();else abreTip(el);return}
+  if(e.target.closest('#tip')){if(e.target.closest('[data-go]'))setTimeout(fechaTip,0);return}
+  fechaTip()},true);
+document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('[data-ajuda]');if(el&&el.matches(':focus-visible'))abreTip(el)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechaTip()});
+addEventListener('scroll',()=>{if(tip.classList.contains('on'))fechaTip()},{passive:true});
+const marca=()=>document.querySelectorAll('[data-ajuda]:not([tabindex])').forEach(el=>el.tabIndex=0);
+new MutationObserver(marca).observe(document.body,{childList:true,subtree:true});marca();
 </script>
 </body>
 </html>
