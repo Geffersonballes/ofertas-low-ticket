@@ -36,11 +36,31 @@ def grupo(nome, n, x, y, larg, tam=11, cols=5):
 
 
 # ======================================================================= NÍVEL 1
+def _sem_repetir(itens, sortear, possiveis, resposta=lambda x: x):
+    """Percorre a folha e troca (por `sortear()`) só o item que repete uma resposta anterior. Se há menos respostas
+    possíveis que itens, aceita o mínimo de repetição necessário."""
+    out = []
+    for x in itens:
+        for _ in range(1000):
+            resps = [resposta(o) for o in out]
+            livre_rep = len(set(resps)) >= possiveis or len(resps) - len(set(resps)) < len(itens) - possiveis
+            if resposta(x) not in resps or (livre_rep and possiveis < len(itens)):
+                break
+            x = sortear()
+        out.append(x)
+    resps = [resposta(o) for o in out]
+    assert len(set(resps)) == min(len(out), possiveis), out  # respostas diferentes (e, com elas, contas diferentes)
+    return out
+
+
 def conte_escreva(rng, faixa):
     a, b = faixa
     s, g = [], []
     qs = [rng.randint(a, b) for _ in range(6)]
     figs = rng.sample(FIGS, 6)
+    # resposta repetida na folha: troca só o quadro repetido (rng derivado), o resto da folha fica igual
+    alt = random.Random(f"conte-{faixa}-{qs}")
+    qs = _sem_repetir(qs, lambda: alt.randint(a, b), b - a + 1)
     for i, (q, f) in enumerate(zip(qs, figs)):
         x, y = (i % 2) * 92, (i // 2) * 74
         s.append(f'<rect x="{x + 1}" y="{y + 1}" width="88" height="70" rx="5" fill="none" stroke="{TRACO}" stroke-width=".7"/>')
@@ -54,10 +74,21 @@ def conte_escreva(rng, faixa):
 
 def soma_figuras(rng, maxi):
     s, g = [], []
+    linhas = []
     for i in range(4):
         a = rng.randint(1, maxi - 1); b = rng.randint(1, maxi - a)
+        linhas.append([a, b, rng.choice(FIGS)])
+    # sem conta repetida (2 + 1 = 1 + 2) e sem total repetido na folha: troca só a linha repetida (rng derivado)
+    alt = random.Random(f"soma-n1-{maxi}-{linhas}")
+
+    def nova_soma():
+        x = alt.randint(1, maxi - 1)
+        return (x, alt.randint(1, maxi - x))
+    contas = _sem_repetir([tuple(l[:2]) for l in linhas], nova_soma, maxi - 1, lambda c: c[0] + c[1])
+    for l, c in zip(linhas, contas):
+        l[:2] = c
+    for i, (a, b, f) in enumerate(linhas):
         assert a + b <= maxi
-        f = rng.choice(FIGS)
         y = 4 + i * 56
         s.append(f'<rect x="1" y="{y}" width="{W - 2}" height="50" rx="5" fill="none" stroke="#bbb" stroke-width=".5"/>')
         s.append(grupo(f, a, 6, y + 8, 60, 10, 5))
@@ -74,9 +105,20 @@ def soma_figuras(rng, maxi):
 
 def subtrai_figuras(rng, maxi):
     s, g = [], []
+    linhas = []
     for i in range(4):
         a = rng.randint(3, maxi); b = rng.randint(1, a - 1)
-        f = rng.choice(FIGS)
+        linhas.append([a, b, rng.choice(FIGS)])
+    # sem conta nem resultado repetido na folha: troca só a linha repetida (rng derivado)
+    alt = random.Random(f"subtrai-n1-{maxi}-{linhas}")
+
+    def nova_sub():
+        x = alt.randint(3, maxi)
+        return (x, alt.randint(1, x - 1))
+    contas = _sem_repetir([tuple(l[:2]) for l in linhas], nova_sub, maxi - 1, lambda c: c[0] - c[1])
+    for l, c in zip(linhas, contas):
+        l[:2] = c
+    for i, (a, b, f) in enumerate(linhas):
         y = 4 + i * 56
         s.append(f'<rect x="1" y="{y}" width="{W - 2}" height="50" rx="5" fill="none" stroke="#bbb" stroke-width=".5"/>')
         for k in range(a):
@@ -303,20 +345,28 @@ def mercadinho2(rng):
         s.append(icone(ic, x + 3, y + 4, 22))
         s.append(_txt(x + 40, y + 11, nome, 4.6, 800))
         s.append(_txt(x + 40, y + 21, f"{precos[nome]} fichas", 5.4, 800, cor=TRACO))  # preço em preto: em P&B o laranja ficava claro
-    probs = []
     nomes = [n for _, n in itens]
     a, b = rng.sample(nomes, 2)
-    probs.append((f"{rng.choice(NOMES_KIDS)} comprou {_art(a)} e {_art(b)}. Quantas fichas gastou?", precos[a] + precos[b]))
+    k1 = rng.choice(NOMES_KIDS)
     c = rng.choice(nomes); tinha = rng.randint(precos[c] + 1, 20)
-    probs.append((f"{rng.choice(NOMES_KIDS)} tinha {tinha} fichas e comprou {_art(c)}. Quantas sobraram?", tinha - precos[c]))
+    k2 = rng.choice(NOMES_KIDS)
     d = rng.choice(nomes)
-    probs.append((f"Quanto custam 2 {_plural(d)}?", 2 * precos[d]))
     pares = [(e, f) for e in nomes for f in nomes if precos[e] > precos[f]]
     assert pares
     e, f = rng.choice(pares)
-    probs.append((f"Quantas fichas {_art(e)} custa a mais que {_art(f)}?", precos[e] - precos[f]))
     h1, h2, h3 = rng.sample(nomes, 3)
-    probs.append((f"Quanto custam {_art(h1)}, {_art(h2)} e {_art(h3)} juntos?", precos[h1] + precos[h2] + precos[h3]))
+    # nenhum item em mais de 2 dos 5 problemas da folha (antes o copo caiu nos 5): se cair, sorteia os itens de novo
+    # num rng derivado (o rng principal já foi gasto como antes, então as outras folhas não mudam)
+    alt = random.Random(f"mercadinho2-{nomes}-{sorted(precos.items())}")
+    while max([a, b, c, d, e, f, h1, h2, h3].count(x) for x in nomes) > 2:
+        a, b = alt.sample(nomes, 2); c = alt.choice(nomes); d = alt.choice(nomes)
+        e, f = alt.choice(pares); h1, h2, h3 = alt.sample(nomes, 3)
+        tinha = max(tinha, precos[c] + 1)
+    probs = [(f"{k1} comprou {_art(a)} e {_art(b)}. Quantas fichas gastou?", precos[a] + precos[b]),
+             (f"{k2} tinha {tinha} fichas e comprou {_art(c)}. Quantas sobraram?", tinha - precos[c]),
+             (f"Quanto custam 2 {_plural(d)}?", 2 * precos[d]),
+             (f"Quantas fichas {_art(e)} custa a mais que {_art(f)}?", precos[e] - precos[f]),
+             (f"Quanto custam {_art(h1)}, {_art(h2)} e {_art(h3)} juntos?", precos[h1] + precos[h2] + precos[h3])]
     for i, (q, r) in enumerate(probs):
         y = 82 + i * 29
         s.append(_txt(4, y, f"{i + 1}. {q}", 5.2, 700, anchor="start"))

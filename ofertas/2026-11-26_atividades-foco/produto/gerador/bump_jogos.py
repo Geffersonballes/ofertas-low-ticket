@@ -38,9 +38,28 @@ def bingo(rng):
             break
     cartelas = [list(c) for c in sorted(cartelas)]
     for c in cartelas:
-        rng.shuffle(c)
-    # cada figura aparece em pelo menos uma cartela
+        rng.shuffle(c)  # o rng principal é gasto como antes (o jogo da memória, sorteado depois, não muda)
+    # as figuras ficam distribuídas por igual: 54 casas ÷ 16 figuras = cada figura em 3 ou 4 cartelas (antes o balão
+    # estava nas 6 e a árvore em 1). Sorteio num rng derivado.
+    alt = random.Random("bingo-parelho")
+    while True:
+        resta = {f: 3 for f in range(16)}
+        for f in alt.sample(range(16), 6):
+            resta[f] = 4
+        novas = []
+        for _ in range(6):
+            ordem = sorted(range(16), key=lambda f: (-resta[f], alt.random()))[:9]
+            for f in ordem:
+                resta[f] -= 1
+            alt.shuffle(ordem)
+            novas.append(ordem)
+        if len({tuple(sorted(c)) for c in novas}) == 6 and not any(resta.values()):
+            break
+    cartelas = novas
+    conta = [sum(f in c for c in cartelas) for f in range(16)]
+    # cada figura aparece em 3 ou 4 cartelas, sem repetir dentro da cartela, e as 6 cartelas são diferentes
     assert set(itertools.chain(*cartelas)) == set(range(16)) and len({tuple(sorted(c)) for c in cartelas}) == 6
+    assert all(len(set(c)) == 9 for c in cartelas) and min(conta) >= 3 and max(conta) <= 4, conta
     pags = []
     for p in range(3):
         s = []

@@ -296,3 +296,81 @@ p. 124 do Volume 2, como antes acontecia com a casa virada. São volumes diferen
 outras; se a rodada 3 achar que isso conta como repetição entre volumes, a troca é de uma linha em `CICLOS_EXTRAS`.
 
 Nada foi publicado (`publicado/` intocado), nada foi enviado à Hotmart nem à Meta, e nada foi commitado.
+
+## Rodada 3
+
+Base: `rodada3-caderno.md`, `rodada3-bumps.md` e `rodada3-volume2-e-midia.md`. Tudo corrigido no gerador
+(`produto/gerador/`) e no montador (`criativos/montador/`); nenhum PDF ou vídeo editado à mão. Itens aceitos pelo
+dono e não mexidos: "Cores e códigos" dos caça-palavras e a estrela da p. 24.
+Gerador reprodutível: md5 igual de todos os HTML com PYTHONHASHSEED 0, 1, 77 e aleatório. As trocas gastam o rng
+principal como antes e sorteiam o novo num rng derivado, então só mudaram as páginas listadas abaixo (comparação
+por pixel com a versão do git). Paginação igual em todos os PDFs; contagens iguais.
+
+### Volume 2 e caderno: "O que vem depois?" (A6 atrapalha, A7 e cosmético do caderno)
+
+| Item | Arquivo/página | O que foi feito | Conferido em imagem |
+|---|---|---|---|
+| Trava nova: fila repetida = igual, girada ou deslocada | `atividades2.canon` + `sem_repetir_filas` | A fila é comparada como ciclo (menor rotação), com o que a criança vê: peixe/lua de ponta-cabeça = espelhado, figura simétrica espelhada = em pé. Vale para o caderno e o Volume 2, nos dois níveis | — |
+| A6 · V2 N2 repetia 15 das 20 filas do caderno | `bump_volume2.gerar` (`CHECAR_FILAS`, `FILAS_PROIBIDAS` carregadas do `completo.json`) + `extra_n2` · p. 76, 93, 112, 124 (gabarito p. 134, 136, 138, 140) | Como o `CHECAR_JANELAS` dos números: nenhuma fila do V2 pode ser igual, girada ou deslocada a uma do caderno nem a outra do V2. Também não pode repetir o "núcleo" (a parte que gira: peixe/peixe virado + estrela × peixe/peixe virado + coração), e cada figura gira numa fila só por folha. As trocas saem de moldes do N2 (girando em 3 ou 4 posições, em pé/virado, em pé/deitado, de lado + outra figura). Ficaram do sorteio original só p. 76 f3, p. 93 f2 e p. 124 f1 | sim (resposta única conferida nas 17 filas novas) |
+| A7 · V2 N1 repetia o caderno | `bump_volume2.nivel1` + `extra_n1` · p. 7, 13, 19, 44, 56, 61 (gabarito p. 127, 128, 131, 132, 133) | O V2 N1 não tinha a trava. Agora tem: além das 2 do relatório (p. 19 f1, p. 56 f5), o script achou mais 8 filas repetidas, giradas ou iguais (p. 7 f1 e f3, p. 13 f1 e f4, p. 19 f2, p. 44 f3, p. 56 f4 × caderno; p. 61 f2 = p. 31 f3 do próprio V2). A troca usa o mesmo molde da fila trocada (a dificuldade da folha não muda) e figuras que não estão nas outras filas da folha | sim |
+| Caderno N1: mesma série deslocada (p. 14 × 20, p. 27 × 38) | `gerar_completo.nivel1` (`giradas=extra_n1(...)`) · p. 20 f3, p. 38 f2 (gabarito p. 129, 131) | 2ª ocorrência trocada: p. 20 f3 casa, casa, maçã; p. 38 f2 nuvem, coração. As trocas antigas (p. 32, 45, 51, 62) ficaram iguais | sim |
+| Assert | `gerar_completo.main` e `bump_volume2.gerar` | Caderno: 70 filas, todas diferentes (canônicas). V2: 70 filas, todas diferentes, nenhuma igual ao caderno e nenhum núcleo repetido | — |
+
+**Conferência por script (todas as 140 filas dos dois volumes, depois da geração):** 140 filas, 140 diferentes,
+0 repetidas (igual, girada ou deslocada), contando caderno × caderno, V2 × V2 e caderno × V2.
+
+### Bumps (9 cosméticos)
+
+| Item | Arquivo/página | O que foi feito | Conferido em imagem |
+|---|---|---|---|
+| B3 · carta 35 repetia a ideia da 28 | `bump_cartas.py` · p. 8 | "E se a sua sombra saísse para passear sozinha? Aonde ela iria?" (sem comida e sem nuvem, que já aparece em outra carta) | sim |
+| B5 · p. 54: SA para CASA e MESA, 7 sílabas | `atv_letras.complete_silaba` · p. 54 (gabarito p. 68) | A fileira traz cada sílaba que falta quantas vezes é usada (SA duas vezes) + 2 que sobram: 8 sílabas, como as outras. Assert: fileira = 6 + 2 | sim |
+| B5 · p. 61: sobra MA formava MALA | `atv_letras._sobras_ok` · p. 61 (gabarito p. 69) | A sobra não pode ser resposta nem formar palavra com nenhuma metade da folha (palavras do bump + lista `PALAVRAS_COMUNS`). Aplicado às 5 folhas: p. 40 (BE formava BECO) e p. 47 (LO formava COLO) também mudaram; p. 54 (NO formava CANO) também. Sobras novas: p. 40 ZU/JE, p. 47 JE/FE, p. 54 FU/ZI, p. 61 JU/XI. p. 33 igual. Conferi por script todas as combinações sobra + metade | sim |
+| B5 · p. 13: 5 de 6 respostas A | `bump_letras.vogal_sem_repetir` + `VOGAL_VARIEDADE` (ícones novos SINO, PENTE, BULE, MILHO) · p. 13, 29 (gabarito p. 64, 65) | Pelo menos 3 vogais diferentes por folha (assert). p. 13: A, E, A, A, A, U (entraram PENTE e BULE). A p. 29 tinha só O e A e também foi corrigida: O, I, O, I, E, E (entraram SINO e MILHO). As palavras novas não entram nos outros sorteios (as outras folhas não mudam) | sim |
+| B4 · p. 4, 5, 6, 12: conta/resposta repetida na folha | `atv_matematica._sem_repetir` (conte_escreva, soma_figuras, subtrai_figuras) · p. 4, 5, 6, 11, 12, 13, 19, 20, 25, 26, 27, 31, 32, 33 (gabarito p. 64–69) | Regra para todas as folhas desses 3 tipos no N1: nenhuma resposta repete (e com isso nenhuma conta); no "Conte e escreva" de 1 a 5 (6 quadros, 5 números) só uma repete. Só a linha repetida é sorteada de novo, o resto da folha fica igual (a dificuldade não cai). p. 18 já cumpria e ficou igual | sim |
+| B4 · p. 47: copo nos 5 problemas | `atv_matematica.mercadinho2` · p. 39, 47, 55, 61 (gabarito p. 71, 72, 73) | Nenhum item em mais de 2 dos 5 problemas (as p. 39, 55 e 61 tinham um item 3 vezes e também mudaram). p. 47: copo 2 vezes, carrinho 2, pipa 2, sorvete 2, maçã 1 | sim |
+| B6 · bingo mal distribuído | `bump_jogos.bingo` · p. 3, 4, 5 | 54 casas ÷ 16 figuras: cada figura em 3 ou 4 cartelas (6 em 4, 10 em 3), 9 figuras diferentes por cartela, 6 cartelas diferentes (asserts). O rng principal é gasto como antes: a memória (p. 9–10) não mudou | sim |
+
+### Anúncios 1 e 2 (B1)
+
+| Item | Arquivo | O que foi feito | Conferido em imagem |
+|---|---|---|---|
+| Zoom cortava a borda da página | `criativos/montador/montador.py` (cena `pagina`, opção `caber`) · anúncio 1 (plano p. 5) e anúncio 2 (plano p. 5 e gabarito p. 128) | Com `caber`, o zoom final é limitado para a página ficar inteira na largura do quadro (16 px de margem). "Plano de 30 dias" aparece inteiro e o gabarito não sai pela direita; o selo "Gabarito completo" fica acima do cabeçalho | sim (quadros a 2 por segundo de 11–15 s e de 8,5–12,5 s, e folhas de contato do `qc.py`) |
+| Remontagem | `montador.py 1 amandinha`, `montador.py 2 amandinha` | Mesmo áudio (md5 do áudio decodificado igual ao de antes) e mesma duração: 22,10 s e 21,63 s; fronteiras 8/8 e 8/8. `qc.py`: 1080×1920, 30 fps, h264 + aac, pico −1,5 dB | sim |
+| Quadros de referência | `criativos/videos/quadro-anuncio-1.jpg`, `quadro-anuncio-2.jpg` | Tirados nos mesmos instantes (2,0 e 3,2 s, `-q:v 3`): o 1 saiu igual byte a byte; o 2 mudou (o zoom do plano já começa aos 3,2 s) e foi refeito | sim |
+
+Mídia da página de vendas, imagem do produto da Hotmart e criativos estáticos: não mudam. Nenhuma página que eles
+mostram mudou (capa e págs. 5, 6, 7, 8, 39, 68, 69, 70, 73, 78, 104, 128, 142 e 143 do caderno estão idênticas por
+pixel), e as capas dos bumps também.
+
+### Páginas que mudaram (comparação por pixel, 72 dpi, PDF novo × `git show HEAD:<pdf>`)
+
+| PDF | Págs. | Mudaram | Idênticas por pixel |
+|---|---|---|---|
+| `produto/final/dez-minutinhos.pdf` | 149 | 20, 38, 129, 131 | 145 |
+| Bump 1 `para-levar-na-bolsa.pdf` | 20 | nenhuma (não regenerado) | 20 |
+| Bump 2 `recortar-e-colar.pdf` | 47 | nenhuma (não regenerado) | 47 |
+| Bump 3 `cartas-de-conversa.pdf` | 10 | 8 | 9 |
+| Bump 4 `matematica-brincando.pdf` | 73 | 4, 5, 6, 11, 12, 13, 19, 20, 25, 26, 27, 31, 32, 33, 39, 47, 55, 61, 64, 65, 66, 67, 68, 69, 71, 72, 73 | 46 |
+| Bump 5 `letras-e-palavras.pdf` | 69 | 13, 29, 40, 47, 54, 61, 64, 65, 67, 68, 69 | 58 |
+| Bump 6 `jogos-de-mesa.pdf` | 12 | 3, 4, 5 | 9 |
+| Volume 2 `volume-2.pdf` | 140 | 7, 13, 19, 44, 56, 61, 76, 93, 112, 124, 127, 128, 131, 132, 133, 134, 136, 138, 140 | 121 |
+
+Todas as páginas da coluna "Mudaram" foram renderizadas (50–75 dpi) e olhadas lado a lado com a versão anterior.
+
+### Arquivos regenerados
+
+- PDFs: `produto/final/dez-minutinhos.pdf`; `produto/bumps/3_cartas-de-conversa/cartas-de-conversa.pdf`,
+  `4_matematica-brincando/matematica-brincando.pdf`, `5_letras-e-palavras/letras-e-palavras.pdf`,
+  `6_jogos-de-mesa/jogos-de-mesa.pdf`, `7_volume-2/volume-2.pdf`.
+- Zips (1 PDF dentro, md5 igual ao da pasta): `produto/final/dez-minutinhos-entrega.zip` e os zips desses 5 bumps.
+- Vídeos (local, nada enviado à Meta): `criativos/videos/anuncio-1-amandinha.mp4`, `anuncio-2-amandinha.mp4`;
+  `quadro-anuncio-2.jpg`.
+- Código: `produto/gerador/{atividades2,gerar_completo,bump_volume2,bump_cartas,atv_matematica,atv_letras,bump_letras,bump_jogos}.py`,
+  `criativos/montador/montador.py`.
+
+### Pendências não corrigidas
+
+Nenhuma. (Os 2 aceitos pelo dono por escrito continuam como estão: "Cores e códigos" e a estrela da p. 24.)
+
+Nada foi publicado (`publicado/` intocado), nada foi enviado à Hotmart nem à Meta, e nada foi commitado.

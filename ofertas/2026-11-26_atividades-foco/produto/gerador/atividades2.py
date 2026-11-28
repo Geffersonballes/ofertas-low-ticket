@@ -3,7 +3,7 @@ Mesmo contrato do atividades.py: cada função devolve dict com titulo, instruca
 tipo, svg e gabarito_svg (ou gabarito_txt). Toda resposta é calculada e conferida com assert."""
 import math
 import random
-from itertools import permutations, product
+from itertools import chain, permutations, product
 
 from icones import icone, TRACO
 from atividades import W, H, _txt, _gera_labirinto, _desenha_labirinto
@@ -258,6 +258,7 @@ def padroes(rng, nivel, ciclos):
             ciclo = ciclo["mostrar"]
             rng_opc = random.Random(f"fila-{ciclo}")
         ciclo = [_item(c) for c in ciclo]
+        FILAS_MOSTRADAS.append((nivel, canon(ciclo)))
         y = 2 + i * alt
         seq = (ciclo * 4)[:6]
         resp = (ciclo * 4)[6]
@@ -316,20 +317,141 @@ def _sig(c):
     return tuple(_item(x) for x in (c["mostrar"] if isinstance(c, dict) else c))
 
 
-def sem_repetir_filas(ciclos, usadas, extras=None):
-    """Troca as filas que já apareceram no nível (`usadas`, guardado por quem chama) por filas extras."""
+# figuras que, giradas 180°, ficam com a mesma cara que espelhadas (peixe, lua), e figuras simétricas, que espelhadas
+# ficam iguais: a comparação de filas usa o que a criança vê
+SIMETRICAS = {"coracao", "triangulo", "circulo", "quadrado", "losango", "estrela", "sol", "flor", "arvore", "casa", "nuvem"}
+
+
+def _vis(x):
+    n, g, e = _item(x)
+    if n in ("peixe", "lua") and g == 180:
+        return (n, 0, not e)
+    if n in SIMETRICAS and e:
+        return (n, g, False)
+    return (n, g, e)
+
+
+def canon(c):
+    """A fila como a criança vê: um ciclo que se repete. A mesma série girada ou deslocada (A B C × B C A)
+    é a mesma fila, então a assinatura é a menor rotação do ciclo (peixe virado de cabeça para baixo = peixe
+    espelhado)."""
+    t = tuple(_vis(x) for x in _sig(c))
+    return min(t[i:] + t[:i] for i in range(len(t)))
+
+
+# Filas de "O que vem depois?" que não podem sair: o Volume 2 liga CHECAR_FILAS e carrega aqui as filas do caderno
+# (completo.json). Cada fila aceita no Volume 2 também entra, para não repetir entre os níveis do Volume 2.
+CHECAR_FILAS = False
+FILAS_PROIBIDAS = set()
+FILAS_MOSTRADAS = []  # (nível, fila canônica) de cada fila que vai para a página, na ordem; vai para o completo.json
+
+
+def _mexe(c):
+    """Figuras que aparecem giradas ou espelhadas na fila."""
+    return {n for n, g, e in (_vis(x) for x in _sig(c)) if g or e}
+
+
+def nucleo(c):
+    """A parte girada/espelhada da fila, sem a figura de apoio: peixe, peixe virado, estrela × peixe, peixe virado,
+    coração têm o mesmo núcleo (parecem a mesma fila). None se nada gira nem espelha."""
+    t, m = canon(c), _mexe(c)
+    deitar = lambda x: (x[0], 90 if x[1] == 270 else x[1], x[2])  # deitada para um lado ou para o outro: mesma ideia
+    return canon([deitar(x) for x in t if x[0] in m]) if m else None
+
+
+NUCLEOS_PROIBIDOS = set()  # (Volume 2) núcleos já usados no caderno ou no Volume 2
+
+
+def _livre(sig, usadas, ja):
+    if sig in usadas or sig in ja:
+        return False
+    if not CHECAR_FILAS:
+        return True
+    # Volume 2: nem a fila, nem o núcleo dela pode ter saído antes; e na mesma folha cada figura gira numa fila só
+    return (sig not in FILAS_PROIBIDAS and (nucleo(sig) is None or nucleo(sig) not in NUCLEOS_PROIBIDOS)
+            and not any(_mexe(sig) & _mexe(o) for o in ja))
+
+
+def sem_repetir_filas(ciclos, usadas, extras=None, giradas=None):
+    """Troca as filas que já apareceram (`usadas`, guardado por quem chama) por filas extras.
+    Repetida = igual, girada ou deslocada (`canon`). `extras` é uma lista ou uma função k → fila candidata
+    (sorteio derivado, não gasta o rng principal). `giradas` (opcional): de onde tirar a troca quando a fila não é
+    igual a outra, só girada/deslocada (assim as trocas antigas, por fila igual, continuam as mesmas)."""
     extras = CICLOS_EXTRAS if extras is None else extras
     out = []
-    for c in ciclos:
-        sig = tuple(_item(x) for x in c)
-        if sig in usadas:
-            c = next(e for e in extras if _sig(e) not in usadas and _sig(e) not in {_sig(o) for o in out})
-            usadas.add(_sig(c))
-            out.append({"mostrar": c, "sorteio": list(sig)})  # o sorteio das opções segue a fila original
-            continue
-        usadas.add(sig)
+    figs = lambda x: frozenset(n for n, _, _ in _sig(x))
+    for i, c in enumerate(ciclos):
+        sig, exata = canon(c), ("=",) + _sig(c)
+        ja = [canon(o) for o in out]
+        if not _livre(sig, usadas, ja):
+            fonte = giradas if giradas is not None and exata not in usadas else extras
+            if isinstance(fonte, list):
+                cand = iter(fonte)
+            else:  # sorteada: não usa o mesmo par de figuras de outra fila da folha; no Nível 1 (figuras em pé),
+                # de preferência nenhuma figura das outras filas
+                vizinhas = [figs(o) for o in out + list(ciclos[i + 1:])]
+                todas = (fonte(k, c) for k in range(100000))
+                cand = (e for e in todas if figs(e) not in vizinhas)
+                if not _mexe(c):
+                    sorteadas = [fonte(k, c) for k in range(3000)]
+                    cand = chain((e for e in sorteadas if not any(figs(e) & v for v in vizinhas)), cand)
+            novo = next(e for e in cand if _livre(canon(e), usadas, ja))
+            sig, exata = canon(novo), ("=",) + _sig(novo)
+            c = {"mostrar": novo, "sorteio": list(_sig(c))}  # o sorteio das opções segue a fila original
+        usadas.add(sig); usadas.add(exata)
+        if CHECAR_FILAS:
+            FILAS_PROIBIDAS.add(sig)
+            if nucleo(sig) is not None:
+                NUCLEOS_PROIBIDOS.add(nucleo(sig))
         out.append(c)
     return out
+
+
+# Figuras que continuam reconhecíveis giradas (giram) e as que só ficam boas espelhadas (viram de lado).
+# Figura simétrica (coração, triângulo) não é espelhada: espelhada fica igual. Casa virada é irreconhecível.
+FIG_GIRAM = ["triangulo", "banana", "coracao", "peixe"]  # lua girada 180° = lua espelhada: fica só em FIG_ESPELHAM
+FIG_ESPELHAM = ["peixe", "passaro", "barco", "lua", "banana"]  # carro e balão: quase simétricos, espelhados não se nota
+
+
+def extra_n2(semente):
+    """Fila extra do Nível 2 (girar/espelhar), sorteada num rng derivado: k → fila. Os moldes são os mesmos
+    tipos das filas do Nível 2 (girando em 3 ou 4 posições, em pé/virado, de lado + outra figura)."""
+    def f(k, _orig=None):
+        r = random.Random(f"{semente}-{k}")
+        tipo = r.choice(["gira4", "gira3", "aab", "abb", "ab_c", "aab_c", "g90", "g90_c", "aab90", "esp_ab", "esp_aab", "esp_abb",
+                         "esp_ab_c", "esp_aabb"])
+        if tipo.startswith("esp"):
+            fig = r.choice(FIG_ESPELHAM)
+            a, b = (fig, 0, False), (fig, 0, True)
+        else:
+            fig = r.choice(FIG_GIRAM)
+            a, b = (fig, 0, False), (fig, 0, True) if fig == "peixe" else (fig, 180, False)  # peixe de ponta-cabeça: não
+        outra = (r.choice([x for x in FIG_PADRAO if x not in (fig, "circulo", "quadrado", "losango")]), 0, False)
+        if tipo in ("g90", "g90_c", "aab90"):  # de pé e deitada (90° ou 270°)
+            d = (fig, r.choice([90, 270]), False)
+            return {"g90": [a, d], "g90_c": [a, d, outra], "aab90": [a, a, d]}[tipo]
+        if tipo == "esp_aabb":
+            return [a, a, b, b]
+        if tipo == "gira4":
+            return [(fig, g, False) for g in (0, 90, 180, 270)]
+        if tipo == "gira3":
+            return [(fig, g, False) for g in (0, 90, 180)]
+        return {"aab": [a, a, b], "abb": [a, b, b], "ab_c": [a, b, outra], "aab_c": [a, a, b, outra],
+                "esp_ab": [a, b, outra], "esp_aab": [a, a, b], "esp_abb": [a, b, b], "esp_ab_c": [a, b, b, outra]}[tipo]
+    return f
+
+
+def extra_n1(semente):
+    """Fila extra do Nível 1 (só figuras em pé), sorteada num rng derivado, com o mesmo molde da fila trocada
+    (A B, A A B, A B B, A B C, A A B B): a dificuldade da folha não muda."""
+    def f(k, orig):
+        r = random.Random(f"{semente}-{k}")
+        letras = {}
+        m = [letras.setdefault(_item(x)[0], "ABCD"[len(letras)]) for x in _sig(orig)]
+        figs = r.sample(FIG_PADRAO, len(set(m)))
+        mapa = dict(zip(sorted(set(m)), figs))
+        return [mapa[x] for x in m]
+    return f
 
 
 REGRAS_SEQ = [

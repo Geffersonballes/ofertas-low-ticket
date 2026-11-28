@@ -46,7 +46,7 @@ CATEGORIAS = [
         "E se todos os carros virassem bicicletas gigantes?",
         "E se você acordasse dentro do seu desenho animado preferido?",
         "E se toda segunda-feira fosse dia de festa?",
-        "E se o jantar caísse do céu como chuva? O que você queria que caísse?",
+        "E se a sua sombra saísse para passear sozinha? Aonde ela iria?",
         "E se você ganhasse um robô ajudante? O que ele faria primeiro?",
     ]),
     ("PREFERIDOS", "coracao", [

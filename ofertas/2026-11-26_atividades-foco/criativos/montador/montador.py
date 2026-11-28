@@ -54,7 +54,7 @@ ROTEIROS = {
           {"tipo": "folheando", "titulo": "120 atividades · 4 a 10 anos"}),
         F("O plano de trinta dias já diz as duas folhas de cada dia.", "O plano de 30 dias já diz as 2 folhas de cada dia.",
           {"tipo": "partes", "titulo": "Plano de 30 dias · 2 folhas por dia", "partes": [
-              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17]},
+              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True},
               {"tipo": "duas", "pags": [6, 7], "rotulos": ["Dia 1 · folha 1", "Dia 1 · folha 2"]}]}),
         F("Dez Minutinhos, trinta e sete reais.", "Dez Minutinhos, R$ 37,00.", FINAL),
         F("Toque em saiba mais.", "Toque em Saiba mais."),
@@ -65,12 +65,12 @@ ROTEIROS = {
         F("Zero preparo.", "Zero preparo."),
         F("O plano já diz as duas folhas de cada dia.", "O plano já diz as 2 folhas de cada dia.",
           {"tipo": "partes", "titulo": "O plano já separou as folhas", "partes": [
-              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17]},
+              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True},
               {"tipo": "duas", "pags": [6, 7], "rotulos": ["Dia 1 · folha 1", "Dia 1 · folha 2"]}]}),
         F("Abre, imprime, entrega com um lápis.", "Abre, imprime, entrega com um lápis.",
           {"tipo": "imagem", "src": "mockup-pacote.png", "lapis": True, "titulo": "Abre · imprime · entrega"}),
         F("As respostas estão no gabarito.", "As respostas estão no gabarito.",
-          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "titulo": "Gabarito completo"}),
+          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "caber": True, "titulo": "Gabarito completo"}),
         F("Cento e vinte atividades por trinta e sete reais.", "120 atividades por R$ 37,00.",
           {"tipo": "numeros", "linhas": ["120 atividades", "R$ 37,00"], "titulo": "Uma vez só"}),
         F("Um real e vinte e três por dia, no plano de trinta dias.", "R$ 1,23 por dia, no plano de 30 dias.",
@@ -355,7 +355,17 @@ const A = {
   },
   pagina(el, c, p, dt) {
     const card = el.querySelector('.card'), e = ease(dt / 0.3);
-    const z = lerp(c.zoom[0], c.zoom[1], ease(cl(p * 1.15)));
+    let z1 = c.zoom[1];
+    if (c.caber) {
+      // o zoom para antes de a página sair do quadro dos lados (antes cortava "Plano" e o gabarito à direita)
+      const t = card.style.transform; card.style.transform = 'none';
+      const r = card.getBoundingClientRect(); card.style.transform = t;
+      const W = window.innerWidth, m = 16, f = c.foco[0] / 100;
+      if (f > 0) z1 = Math.min(z1, 1 + (r.left - m) / (f * r.width));
+      if (f < 1) z1 = Math.min(z1, 1 + (W - m - r.right) / ((1 - f) * r.width));
+      z1 = Math.max(z1, c.zoom[0]);
+    }
+    const z = lerp(c.zoom[0], z1, ease(cl(p * 1.15)));
     card.style.transformOrigin = `${c.foco[0]}% ${c.foco[1]}%`;
     card.style.transform = `translateY(${(1 - e) * 30}px) scale(${(0.95 + 0.05 * e) * z})`;
     card.style.opacity = 1;

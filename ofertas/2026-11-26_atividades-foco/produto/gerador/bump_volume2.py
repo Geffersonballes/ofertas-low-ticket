@@ -185,6 +185,7 @@ def nivel1(rng):
     for nv, no in [(3, 6), (3, 6), (3, 6), (4, 6), (4, 8), (4, 8), (5, 8), (5, 8)]:
         cat["Memória"].append(("mem", lambda nv=nv, no=no: B.memoria_figuras(rng, 1, nv, no)))
     moldes = [["A", "B"], ["A", "A", "B"], ["A", "B", "B"], ["A", "B", "C"], ["A", "A", "B", "B"]]
+    filas_n1 = set()  # nenhuma fila repete no nível, nem no caderno (B.CHECAR_FILAS)
     for p in range(10):
         dif = moldes[:3] if p < 4 else moldes
         ciclos = []
@@ -193,6 +194,7 @@ def nivel1(rng):
             figs = rng.sample(B.FIG_PADRAO, len(set(m)))
             mapa = dict(zip(sorted(set(m)), figs))
             ciclos.append([mapa[x] for x in m])
+        ciclos = B.sem_repetir_filas(ciclos, filas_n1, B.extra_n1("v2-n1"))  # não gasta rng: as outras páginas não mudam
         cat["Padrões"].append(("pad", lambda c=ciclos: B.padroes(rng, 1, c)))
     pares_lab = [("pato", "flor"), ("gato", "casa"), ("carro", "flor"), ("barco", "ilha"), ("balao", "sol"),
                  ("passaro", "nuvem"), ("peixe", "barco"), ("pipa", "estrela")]
@@ -246,7 +248,7 @@ def nivel2(rng):
             lambda: [(f, 0, False) for f in rng.sample(B.FIG_PADRAO, 4)],
             lambda: [("banana", 0, False), ("banana", 90, False), ("banana", 180, False)],
         ]
-        return B.sem_repetir_filas([f() for f in rng.sample(tipos, 5)], filas_usadas)
+        return B.sem_repetir_filas([f() for f in rng.sample(tipos, 5)], filas_usadas, B.extra_n2("v2-n2"))
     pad = []
     for f in [1, None, 2, 1, None, 3, 2, None, 3, None]:
         if f is None:
@@ -303,6 +305,14 @@ def gerar():
     B.CHECAR_JANELAS = True
     for x in v1:
         B.SEQ_JANELAS.update(B._janelas(x))
+    # "O que vem depois?": nenhuma fila do Volume 2 igual, girada ou deslocada em relação a uma fila do caderno
+    # (nem a outra fila do Volume 2, nos dois níveis)
+    filas_v1 = {tuple(tuple(x) for x in f) for _, f in json.loads((GC.SAIDA / "completo.json").read_text())["filas"]}
+    assert len(filas_v1) == 70, "rode gerar_completo.py antes"
+    B.CHECAR_FILAS = True
+    B.FILAS_PROIBIDAS.update(filas_v1)
+    B.NUCLEOS_PROIBIDOS.update(B.nucleo(f) for f in filas_v1 if B.nucleo(f) is not None)
+    B.FILAS_MOSTRADAS.clear()
     GC.rodape = rodape
     GC.topo = BUMP.topo
     rng = random.Random(SEMENTE)
@@ -332,6 +342,12 @@ def gerar():
         for n_, x, d in [o for o in ordem if o[1]["nivel"] == nv]:
             html.append(GC.pag_atividade(x, n_, d))
     html += GC.gabarito([(n_, x) for n_, x, _ in ordem], pags["gabarito"])
+    filas_v2 = [f for _, f in B.FILAS_MOSTRADAS]
+    assert len(filas_v2) == 70 and len(set(filas_v2)) == 70, "fila repetida no Volume 2"
+    assert not set(filas_v2) & filas_v1, "fila do Volume 2 repete o caderno"
+    nuc_v1 = {B.nucleo(f) for f in filas_v1} - {None}
+    nuc_v2 = [B.nucleo(f) for f in filas_v2 if B.nucleo(f) is not None]
+    assert len(set(nuc_v2)) == len(nuc_v2) and not set(nuc_v2) & nuc_v1, "fila girada do Volume 2 parecida com outra"
     total = BUMP.montar(html)
     tipos = {}
     for _, x, _ in ordem:

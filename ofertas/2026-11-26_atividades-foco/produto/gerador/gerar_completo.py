@@ -84,7 +84,7 @@ def nivel1(rng):
             figs = rng.sample(B.FIG_PADRAO, len(set(m)))
             mapa = dict(zip(sorted(set(m)), figs))
             ciclos.append([mapa[x] for x in m])
-        ciclos = B.sem_repetir_filas(ciclos, filas_n1, B.CICLOS_EXTRAS_N1)  # não gasta rng: as outras páginas não mudam
+        ciclos = B.sem_repetir_filas(ciclos, filas_n1, B.CICLOS_EXTRAS_N1, B.extra_n1("cad-n1-girada"))  # não gasta rng: as outras páginas não mudam
         cat["Padrões"].append(("pad", lambda c=ciclos: B.padroes(rng, 1, c)))
     pares_lab = [("passaro", "arvore"), ("peixe", "flor"), ("carro", "casa"), ("balao", "nuvem"), ("barco", "estrela"),
                  ("passaro", "casa"), ("carro", "arvore"), ("peixe", "estrela")]
@@ -449,6 +449,9 @@ def main():
 <title>Dez Minutinhos — caderno completo</title><style>{fontes}{GA.CSS}{CSS_EXTRA}</style></head>
 <body>{''.join(html_pags)}</body></html>"""
     assert "amostra" not in html.lower(), "sobrou texto de amostra"
+    # trava: nenhuma fila de "O que vem depois?" repete no caderno (igual, girada ou deslocada), em nenhum nível
+    filas = [f for _, f in B.FILAS_MOSTRADAS]
+    assert len(filas) == 70 and len(set(filas)) == len(filas), "fila repetida no O que vem depois?"
     SAIDA.mkdir(exist_ok=True)
     (SAIDA / "completo.html").write_text(html, encoding="utf-8")
     import shutil
@@ -456,7 +459,9 @@ def main():
     # resumo para o sumario.md
     resumo = {"paginas": len(html_pags), "secoes": pags, "niveis": [],
               # filas de "Que número falta?" do volume 1: o Volume 2 (bump_volume2.py) não repete nenhuma
-              "sequencias": sorted(list(t) for t in B.SEQ_USADAS)}
+              "sequencias": sorted(list(t) for t in B.SEQ_USADAS),
+              # filas de "O que vem depois?" (canônicas: menor rotação do ciclo): o Volume 2 não repete nenhuma
+              "filas": [[nv, [list(x) for x in f]] for nv, f in B.FILAS_MOSTRADAS]}
     for nv, dias_at in enumerate(niveis, 1):
         resumo["niveis"].append([[(a["titulo"], a["categoria"], a["tipo"], pag_de[id(a)]), (b["titulo"], b["categoria"], b["tipo"], pag_de[id(b)])]
                                  for a, b in dias_at])

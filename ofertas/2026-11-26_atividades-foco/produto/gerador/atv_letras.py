@@ -1,4 +1,5 @@
 """Atividades do bump "Letras e palavras" (área 182x228 mm). Palavras, sílabas e rimas conferidas com assert."""
+import random
 import unicodedata
 
 from atividades import W, H, _txt
@@ -149,12 +150,13 @@ def encontre_letra(rng, alvo):
 
 
 def complete_vogal(rng, chaves):
-    s, g = [], []
+    s, g, respostas = [], [], []
     for i, k in enumerate(chaves):
         palavra = PALAVRAS[k][0]
         idx = [j for j, c in enumerate(palavra) if c in "AEIOU"]
         assert idx, k
         j = rng.choice(idx)
+        respostas.append(palavra[j])
         x, y = (i % 2) * 92, (i // 2) * 74
         s.append(f'<rect x="{x + 2}" y="{y + 2}" width="86" height="68" rx="5" fill="none" stroke="{TRACO}" stroke-width=".6"/>')
         s.append(icone(k, x + 29, y + 6, 30))
@@ -169,7 +171,9 @@ def complete_vogal(rng, chaves):
                 s.append(_txt(cx, y + 51, ch, 10, 800, fonte="Baloo 2"))
     s.append(_txt(W / 2, 224, "Vogais: A  E  I  O  U", 6, 800, cor="#666"))
     base = "".join(s)
-    return at("Qual vogal falta?", "O adulto lê a palavra em voz alta. A criança escreve na caixinha a vogal que está faltando.", 1, CAT, base, base + "".join(g))
+    d = at("Qual vogal falta?", "O adulto lê a palavra em voz alta. A criança escreve na caixinha a vogal que está faltando.", 1, CAT, base, base + "".join(g))
+    d["_respostas"] = respostas
+    return d
 
 
 def letras_iguais(rng, modelos):
@@ -192,6 +196,37 @@ def letras_iguais(rng, modelos):
 
 
 # ======================================================================= NÍVEL 2
+# troca de sobra: sílabas que quase nunca formam palavra com as metades (a lista antiga continua no sorteio principal)
+SOBRAS = ["XU", "ZI", "JU", "FU", "PU", "ZU", "XI", "JE", "FE", "BU"]
+# palavras que a criança conhece e que não podem aparecer trocando uma sílaba pela que sobra (além das do bump)
+PALAVRAS_COMUNS = set("""
+MALA BOLA BOLO BALA CAMA CASA MESA SAPO GATO PATO RATO MATO FOGO LOBO LUVA VACA FACA VELA MEIA PIPA COPO DADO DEDO MOLA
+COLA LATA NATA PENA PERA TELA TETO TEIA PELO MAPA BULE LOJA SUCO MOTO FOCA PANELA JANELA CANETA BONECA PETECA MALETA
+CAMELO TOMATE MOEDA SAPATO CABELO CAVALO GALO GALINHA MACACO BATATA FOLHA RODA PORTA SALA BALDE LIXO NINHO PIPOCA BOCA
+NARIZ JUBA PUMA ZEBRA RIO RIMA NUCA TELHA FINO FILA PELE LOTE LONA RUGA BEIJO BECO COLO CANO CABE BELA FICO PELA NULO
+BEBE BOTA BICO FITA FIO LUA RUA SOPA SUJO FUMO FUGA JUBA JUJU ZICO XIXI FEIO FEIA FECHO FEZ BUCHO BURRO BUZINA BOLSA
+BELO CERA COCO CUCA DOCE FADA FAVO GOMA GULA JOGO LAGO LAMA LEÃO LIMA LIXA LOBA LUPA MAGO MAÇO MATA MEDO MEL MOÇA
+MULA NAVE NOVE ONDA PACA PAPA PAPAI MAMÃE PAU PIÃO POTE POVO PUXA RABO RAMO REDE REI ROSA SACO SAIA SECO SINO SOFÁ
+SOLA TACO TATU TOCA TOCO TUBO URSO VALE VIDA VOVÓ VOVÔ ZERO BABA BOBO CACO COCA DEDÃO FARO GOLA JUCA LUZ NENÊ NONO
+JURO FURO XUPA MEXI MEXE PUXA FEZ ZIZI JUJUBA CAXU
+PEPINO TUCANO CORVO PERU PULO PUMA PUXO FUBÁ BUZO CAJU CAQUI CUBO DADA DUDA FIFI GIBI JIPE LULA MIMO NADA NAVE OCA
+""".split())
+
+
+def _sobras_ok(sobras, faltando, chaves):
+    """As 2 sílabas que sobram são diferentes das respostas e não formam palavra com nenhuma metade da folha."""
+    if len(set(sobras)) < 2 or set(sobras) & set(faltando):
+        return False
+    conhecidas = PALAVRAS_COMUNS | {sem_acento(p) for p, _ in PALAVRAS.values()}
+    for k, t in zip(chaves, faltando):
+        palavra, sil = PALAVRAS[k]
+        j = sil.index(t)
+        for so in sobras:
+            if sem_acento("".join(sil[:j] + [so] + sil[j + 1:])) in conhecidas:
+                return False
+    return True
+
+
 def complete_silaba(rng, chaves):
     s, g = [], []
     faltando = []
@@ -213,7 +248,16 @@ def complete_silaba(rng, chaves):
             else:
                 s.append(_txt(cx + w / 2, y + 43.5, t, 8, 800, fonte="Baloo 2"))
             cx += w + 3
-    banco = sorted(set(faltando + rng.sample(["MA", "TE", "LO", "RU", "BE", "FI", "NO", "PE"], 2)))
+    sobras = rng.sample(["MA", "TE", "LO", "RU", "BE", "FI", "NO", "PE"], 2)
+    if not _sobras_ok(sobras, faltando, chaves):
+        # sobra repetindo uma resposta (a fileira ficava com 7) ou formando palavra (MA + LA = MALA): sorteia de novo
+        # num rng derivado (as folhas que já estavam certas não mudam)
+        alt = random.Random(f"sobras-{faltando}")
+        while not _sobras_ok(sobras, faltando, chaves):
+            sobras = alt.sample(SOBRAS, 2)
+    # a fileira traz cada sílaba que falta quantas vezes ela é usada (CASA e MESA: SA duas vezes) + 2 que sobram
+    banco = sorted(faltando + sobras)
+    assert len(banco) == len(chaves) + 2
     s.append(_txt(4, 8, "Sílabas:", 6, 800, anchor="start"))
     for q, t in enumerate(banco):
         s.append(f'<rect x="{36 + q * 18}" y="1" width="16" height="13" rx="3" fill="#fff1e8" stroke="{TRACO}" stroke-width=".6"/>')

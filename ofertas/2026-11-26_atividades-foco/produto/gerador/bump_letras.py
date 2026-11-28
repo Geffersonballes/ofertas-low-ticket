@@ -38,6 +38,20 @@ VOGAL_EXTRAS = {
              '<rect x="22" y="26" width="56" height="60" rx="7"/><path d="M36 34 L 36 78 M50 34 L 50 78 M64 34 L 64 78" fill="none"/>'
              '<circle cx="33" cy="91" r="5" fill="#1d1d1f"/><circle cx="67" cy="91" r="5" fill="#1d1d1f"/>'),
 }
+# palavras só com E, I, O ou U, para variar a vogal que falta numa folha em que quase tudo dava A (ficam fora dos
+# outros sorteios: as outras folhas não mudam)
+VOGAL_VARIEDADE = {
+    "sino": ("SINO", ["SI", "NO"], lambda v: '<path d="M50 14 C 30 14, 24 30, 24 50 L 24 68 L 12 80 L 88 80 L 76 68 L 76 50 C 76 30, 70 14, 50 14 Z"/>'
+             '<circle cx="50" cy="88" r="7" fill="#d9d9d9"/><path d="M50 4 L 50 14 M36 30 C 32 40, 32 52, 32 62" fill="none"/>'),
+    "pente": ("PENTE", ["PEN", "TE"], lambda v: '<rect x="6" y="28" width="88" height="18" rx="5" fill="#d9d9d9"/>'
+              + '<path d="' + " ".join(f"M{x} 46 L {x} 76" for x in range(13, 92, 7)) + '" fill="none"/>'),
+    "bule": ("BULE", ["BU", "LE"], lambda v: '<path d="M24 40 L 76 40 C 84 60, 80 84, 66 90 L 34 90 C 20 84, 16 60, 24 40 Z"/>'
+             '<path d="M24 50 C 8 50, 6 34, 4 26" fill="none" stroke-width="7"/><path d="M76 48 C 96 48, 96 78, 76 80" fill="none"/>'
+             '<path d="M30 40 C 32 28, 68 28, 70 40 Z" fill="#d9d9d9"/><circle cx="50" cy="24" r="5" fill="#d9d9d9"/>'),
+    "milho": ("MILHO", ["MI", "LHO"], lambda v: '<path d="M50 6 C 66 6, 72 30, 70 58 C 68 78, 60 88, 50 88 C 40 88, 32 78, 30 58 C 28 30, 34 6, 50 6 Z" fill="#d9d9d9"/>'
+              '<path d="M36 22 L 64 22 M32 36 L 68 36 M31 50 L 69 50 M32 64 L 68 64 M36 76 L 64 76 M43 10 L 41 84 M57 10 L 59 84" fill="none" stroke-width="2.4"/>'
+              '<path d="M50 96 C 30 92, 18 74, 20 48 C 30 62, 38 76, 48 88 Z" fill="#fff"/><path d="M50 96 C 70 92, 82 74, 80 48 C 70 62, 62 76, 52 88 Z" fill="#fff"/>'),
+}
 # palavras de 1 sílaba com ícone próprio: o "Quantas sílabas?" precisa de uma por folha sem repetir (só havia SOL e FLOR)
 NOVAS_1SIL = {
     "pao": ("PÃO", ["PÃO"], lambda v: '<path d="M8 62 C 8 34, 92 34, 92 62 C 92 76, 8 76, 8 62 Z"/>'
@@ -65,7 +79,7 @@ def gerar():
 
     # palavras extras só para trocar repetidas no "Qual vogal falta?" (entram depois dos sorteios: o rng não muda)
     # (só entram no L.PALAVRAS durante a montagem dessas folhas: outras atividades sorteiam do dicionário inteiro)
-    for k, (pal, sil, desenho) in {**VOGAL_EXTRAS, **NOVAS_1SIL}.items():
+    for k, (pal, sil, desenho) in {**VOGAL_EXTRAS, **NOVAS_1SIL, **VOGAL_VARIEDADE}.items():
         icones.DESENHOS[k] = desenho
     extras_pal = {k: (p_, s_) for k, (p_, s_, _) in {**VOGAL_EXTRAS, **NOVAS_1SIL}.items()}
 
@@ -140,7 +154,8 @@ def gerar():
     def vogal_sem_repetir(pool):
         """5 folhas de "Qual vogal falta?" sem repetir palavra. O sorteio original gasta o rng principal
         (as outras páginas não mudam); a palavra repetida é trocada usando um rng derivado."""
-        folhas, usadas = [], set()
+        folhas, usadas, escolhas = [], set(), []
+        extras = {k: (p_, s_) for k, (p_, s_, _) in VOGAL_EXTRAS.items()}
         for f in range(5):
             orig = amostra(pool, 6)
             L.complete_vogal(rng, orig)  # só gasta o rng como antes
@@ -148,10 +163,35 @@ def gerar():
             livres = [k for k in pool + list(VOGAL_EXTRAS) if k not in usadas and k not in orig]
             esc = [k if k not in usadas else livres.pop(alt.randrange(len(livres))) for k in orig]
             usadas.update(esc)
-            extras = {k: (p_, s_) for k, (p_, s_, _) in VOGAL_EXTRAS.items()}
+            escolhas.append(esc)
             L.PALAVRAS.update(extras)
             folhas.append(L.complete_vogal(alt, esc))
             for k in extras:
+                del L.PALAVRAS[k]
+        # pelo menos 3 vogais diferentes nas respostas de cada folha (antes uma folha tinha 5 A em 6). Depois de todas
+        # as folhas: as palavras novas vêm das que nenhuma folha usou (as outras folhas não mudam)
+        variedade = {k: (p_, s_) for k, (p_, s_, _) in VOGAL_VARIEDADE.items()}
+        L.PALAVRAS.update({**extras, **variedade})
+        try:
+            for f, esc in enumerate(escolhas):
+                resp = folhas[f]["_respostas"]
+                mais = max(sorted(set(resp)), key=resp.count)
+                k_tent = 0
+                while len(set(folhas[f]["_respostas"])) < 3:
+                    alt = random.Random(f"vogal-var-{f}-{k_tent}")
+                    livres = sorted(k for k in pool + list(VOGAL_EXTRAS) + list(VOGAL_VARIEDADE) if k not in usadas
+                                    and set(L.sem_acento(L.PALAVRAS[k][0])) & (set("AEIOU") - {mais}))
+                    nova = esc[:]
+                    for pos in alt.sample([i for i, v in enumerate(resp) if v == mais], 2):
+                        nova[pos] = livres.pop(alt.randrange(len(livres)))
+                    folhas[f] = L.complete_vogal(random.Random(f"vogal-{f}-{k_tent}"), nova)
+                    k_tent += 1
+                    assert k_tent < 200, f
+                    if len(set(folhas[f]["_respostas"])) >= 3:
+                        usadas.update(nova)
+                assert len(set(folhas[f]["_respostas"])) >= 3, f
+        finally:
+            for k in {**extras, **variedade}:
                 del L.PALAVRAS[k]
         return folhas
 

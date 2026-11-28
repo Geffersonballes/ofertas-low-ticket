@@ -29,11 +29,17 @@ O que **vende** fica em `o-que-vende.md`; aqui fica **como trabalhar** com menos
 - 2026-11-28 · Dez Minutinhos (rodada 2) · capa e anúncio com texto de promessa antigo ("Gabarito no fim") depois de a página mudar → quando o dono muda um texto de promessa, procurar a frase no repositório todo (gerador, capa, montador, roteiros, imagens da Hotmart) e refazer toda a mídia que mostra aquilo.
 - 2026-11-28 · Dez Minutinhos (rodada 2) · imagem do produto da Hotmart não tinha gerador e ficou com a capa antiga → toda imagem derivada do PDF sai de um script (`pagina/midia/gerar_midia.py` agora gera também `hotmart/imagem-produto.png`); para saber o que refazer, comparar PDF novo × antigo por pixel e refazer o que usa as páginas alteradas.
 - 2026-11-28 · Dez Minutinhos (rodada 2) · número do "ligue os pontos" movido para "o lado com mais espaço" caiu em cima do traço pronto (cabo do guarda-chuva) → a posição do rótulo considera também os traços já impressos, não só pontos e rótulos.
+- 2026-11-28 · Dez Minutinhos (rodada 3) · a trava de "não repetir" entre volumes existia só para os números (`CHECAR_JANELAS`); as filas de figuras do Volume 2 saíam das mesmas listas do caderno e 15 de 20 repetiam → toda atividade sorteada de um volume novo carrega o que o volume anterior já usou (via `completo.json`) e tem assert "nada em comum"; ao criar a trava num tipo, criar nos tipos irmãos no mesmo dia.
+- 2026-11-28 · Dez Minutinhos (rodada 3) · "fila igual" comparada como tupla deixou passar a mesma série deslocada (A B × B A) e a figura que, girada 180°, fica igual à espelhada (peixe, lua) → comparar o que a criança vê: ciclo pela menor rotação, figura simétrica espelhada = em pé, e também o "núcleo" (a parte que gira, sem a figura de apoio).
+- 2026-11-28 · Dez Minutinhos (rodada 3) · troca sorteando a folha inteira de novo deixou folhas do fim do nível mais fáceis (10 − 1 virou 3 − 1) → ao corrigir repetição, trocar só o item repetido, com o mesmo molde/faixa do original, e olhar a dificuldade antes × depois.
+- 2026-11-28 · Dez Minutinhos (rodada 3) · sílaba que sobra formando palavra (MA + LA = MALA; também BECO, COLO, CANO, BELA) e a fileira com uma sílaba só para duas respostas → toda sobra/distrator passa por teste "sobra + metade não é palavra" contra as palavras do bump + uma lista de palavras comuns, conferido imprimindo todas as combinações; fileira traz cada resposta quantas vezes ela é usada.
+- 2026-11-28 · Dez Minutinhos (rodada 3) · respostas concentradas na mesma folha (5 de 6 vogais A; 4 de 6 contas dando 5; o mesmo item nos 5 problemas; balão nas 6 cartelas) → toda folha sorteada tem regra de variedade com assert (respostas diferentes, ≥ 3 vogais, item ≤ 2 vezes, figura em 3–4 cartelas), aplicada a todas as folhas do tipo.
 
 ## Criativos
 - 2026-11-28 · Dez Minutinhos · o vídeo "caderno folheando" (página e fim dos anúncios) foi gravado do
   caderno-amostra e mostra páginas que não existem no produto vendido → criativos só depois do material
   aprovado e feitos a partir do PDF final (Portão C confere).
+- 2026-11-28 · Dez Minutinhos (rodada 3) · zoom de câmera com escala fixa (1,9×) cortava a borda da página ("lano de 30 dias") → zoom de página com limite calculado para caber no quadro (`caber` no montador); conferir os quadros do fim de cada zoom, não só o meio da frase (a folha de contato do `qc.py` pega o meio).
 
 ## Hotmart
 - 2026-11-27 · O e-mail de compra e o checkout mostram o nome do titular da conta (CPF) → os dados legais

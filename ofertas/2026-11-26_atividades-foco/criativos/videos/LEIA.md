@@ -8,6 +8,8 @@ As versões já enviadas à Meta (IDs em `campanha.md`) são as ANTIGAS: precisa
 **Remontados de novo em 2026-11-28 (rodada 2)**, mesmo áudio e mesma duração: a capa do caderno agora diz
 "Gabarito completo" (aparece no mockup e no cartão final dos 4) e a tela do gabarito no anúncio 2 também diz
 "Gabarito completo" (antes "Gabarito no fim"). O `folheando.mp4` foi refeito do PDF novo (capa e p. 39).
+**Anúncios 1 e 2 remontados de novo em 2026-11-28 (rodada 3)**, mesmo áudio e mesma duração: o zoom no plano (p. 5)
+e no gabarito (p. 128) agora para com a página inteira dentro do quadro (opção `caber` do montador). `quadro-anuncio-2.jpg` refeito.
 Formato: 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz, áudio normalizado (−16 LUFS, pico ≤ −1,4 dB).
 Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 6 palavras, sincronizada
 pelas pausas reais da fala. Só mídia real do produto: atividades do caderno completo (com o gabarito
