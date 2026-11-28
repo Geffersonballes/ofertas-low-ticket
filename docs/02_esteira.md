@@ -13,7 +13,7 @@ Cada oferta vive em `ofertas/AAAA-MM-DD_<slug>/` (cópia de `ofertas/_modelo/`),
 | 4. Entregável | Produto completo + bônus práticos em .zip; até 12 order bumps + oferta pós-compra | `criador-de-produto`, `criador-de-order-bumps` | `entregavel-e-bonus` | `produto/`, `bumps/`, .zip |
 | 3b. Revisão da página | Ciclo de até 2 rodadas: `critico-de-conversao` + `editor-de-copy` (em paralelo) → `diretor-de-arte-web` implementa → supervisor confere fotos 390/1280 px | `critico-de-conversao`, `editor-de-copy`, `diretor-de-arte-web` | `pagina-de-vendas` | `pagina/revisoes/` |
 | 4b. Revisão do material | Página por página: textos, desenhos, atividades, gabarito, impressão, contagem × promessa; correção no gerador | 4 revisores em paralelo | `revisar-material` | `revisoes/material-AAAA-MM-DD/` |
-| — | **Portão M (dono):** aprova o conteúdo do infoproduto → `APROVACAO.md` com o hash de cada PDF. `ferramentas/conferir_material.py` tem de dar "MATERIAL APROVADO" | | | |
+| — | **Portão M (dono):** só depois de corrigir tudo e de uma nova revisão do documento inteiro sair limpa, o dono aprova o conteúdo do infoproduto → `APROVACAO.md` com o hash de cada PDF. `ferramentas/conferir_material.py` tem de dar "MATERIAL APROVADO" | | | |
 | — | **Portão 2:** `revisor-de-conformidade` (veto) · **Portão 3 (dono):** aprova página e produto | | | |
 | 5. Cadastro e pixel | Produto + .zip na Hotmart, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Hotmart | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
 | 6. Criativos | Top 5 anúncios mais antigos da referência recriados em pt-BR (cenas, narração, trilha) | `roteirista-de-criativos` | `top5-criativos` | `criativos/` |

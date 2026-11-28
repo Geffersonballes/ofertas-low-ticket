@@ -27,6 +27,10 @@ def main():
         if not re.search(r"^data:\s*\d{4}-\d{2}-\d{2}", t, re.M): prob.append(f"{a.name}: falta 'data: AAAA-MM-DD'")
         if not re.search(r"^pendencias_bloqueia_atrapalha:\s*0\s*$", t, re.M):
             prob.append(f"{a.name}: 'pendencias_bloqueia_atrapalha: 0' ausente (há erro que bloqueia/atrapalha em aberto?)")
+        if not re.search(r"^pendencias_cosmeticas:\s*0\s*$", t, re.M):
+            prob.append(f"{a.name}: 'pendencias_cosmeticas: 0' ausente (corrija tudo ou liste em cosmeticos_aceitos o que o dono aceitou)")
+        if not re.search(r"^revisao_final_limpa:\s*\d{4}-\d{2}-\d{2}", t, re.M):
+            prob.append(f"{a.name}: falta 'revisao_final_limpa: AAAA-MM-DD' (nova revisão do documento inteiro, sem pendências)")
         aprovados = {nome: h for h, nome in re.findall(r"^([0-9a-f]{64})\s+(\S+)$", t, re.M)}
         for p in arqs:
             rel = str(p.relative_to(pasta))

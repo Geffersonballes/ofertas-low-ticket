@@ -2,7 +2,7 @@
 name: revisar-material
 description: Etapa 4b — revisa página por página o infoproduto (PDF principal, bônus e order bumps) antes de qualquer coisa ir para a Hotmart, criativos ou campanhas. Textos, desenhos, atividades, gabarito, impressão e promessa da página. Termina no Portão M (dono aprova o conteúdo). Use depois de produzir o entregável e sempre que um PDF mudar.
 ---
-Regra fixa (decidida pelo dono em 2026-11-28): **nenhum arquivo sobe para a Hotmart e nenhum criativo
+Regra fixa (decidida pelo dono em 2026-11-28; reforçada no mesmo dia: corrigir tudo e revisar o documento inteiro de novo antes de seguir): **nenhum arquivo sobe para a Hotmart e nenhum criativo
 ou campanha é criado antes de `python3 ferramentas/conferir_material.py ofertas/<pasta>` dizer
 "MATERIAL APROVADO".** Mudou um PDF depois da aprovação → esta skill roda de novo (pelo menos nos
 arquivos que mudaram).
@@ -31,7 +31,11 @@ Página | Gravidade (**bloqueia** / **atrapalha** / cosmético) | Problema | Sug
 
 ## 2. Correção
 - Corrija no **gerador** (`produto/gerador/`), nunca editando o PDF à mão, e gere de novo.
-- Revise de novo só as páginas corrigidas (máximo 2 rodadas; depois leve ao dono).
+- Corrija **tudo**: bloqueia, atrapalha e cosmético. Cosmético só fica de fora se o dono aceitar por
+  escrito (anote em `APROVACAO.md`, em `cosmeticos_aceitos:`).
+- Depois das correções, rode a **revisão do documento inteiro de novo** (todos os PDFs que mudaram, todas
+  as páginas, não só as corrigidas): uma correção pode estragar outra página (paginação, plano, gabarito).
+  Repita corrigir → revisar inteiro até a rodada sair **limpa** (0 pendências). Passou de 3 rodadas, leve ao dono.
 - Promessa que não confere: corrija o produto **ou** a página — os dois precisam dizer a mesma coisa.
 - Registre em `revisoes/material-AAAA-MM-DD/correcoes.md` o que foi corrigido e onde.
 
@@ -44,6 +48,9 @@ gere `revisoes/material-AAAA-MM-DD/APROVACAO.md`:
 aprovado_por: Gefferson
 data: AAAA-MM-DD
 pendencias_bloqueia_atrapalha: 0
+pendencias_cosmeticas: 0
+revisao_final_limpa: AAAA-MM-DD (rodada N, documento inteiro)
+cosmeticos_aceitos: nenhum   (ou a lista que o dono aceitou)
 <sha256>  produto/final/<arquivo>.pdf
 <sha256>  produto/bumps/<n>_<slug>/<slug>.pdf
 ...

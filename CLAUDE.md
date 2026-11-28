@@ -48,8 +48,10 @@ repositório: agentes em `.claude/agents/` (`minerador-de-ofertas`, `analista-de
 5. **Produto entregue de verdade.** O comprador tem de receber um material útil e completo,
    coerente com a promessa da página. Garantia de 7 dias (CDC) sempre visível.
 6. **Registre tudo** no `status.md` da oferta: etapa, data, decisão e motivo.
-7. **Material primeiro.** Nenhum arquivo sobe para a Hotmart e nenhum criativo, anúncio ou campanha é criado
-   antes de o dono aprovar o conteúdo do infoproduto (skill `revisar-material`, Portão M). Confira sempre com
+7. **Material primeiro, e completo.** Nenhum passo seguinte começa (Hotmart, criativos, anúncios, campanhas)
+   antes de: (a) o documento inteiro ser revisado, (b) **todas** as correções serem feitas — inclusive as
+   cosméticas, salvo as que o dono aceitar por escrito —, (c) uma nova revisão do documento inteiro sair
+   limpa e (d) o dono aprovar o material (skill `revisar-material`, Portão M). Confira sempre com
    `python3 ferramentas/conferir_material.py ofertas/<pasta>` → "MATERIAL APROVADO".
 8. **Aprenda com cada oferta.** Erro, retrabalho ou atalho descoberto vira uma linha em
    `aprendizados/processo.md`; leia esse arquivo antes de cada etapa para não repetir o caminho.
