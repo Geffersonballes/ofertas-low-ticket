@@ -286,7 +286,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
   </div>
   <div id="banner"></div>
   <div id="filtro"></div>
-  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Etapas da oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in" id="etapas-of"></div></details>
+  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in" id="etapas-of"></div></details>
   <div class="grid kpis" id="resumo"></div>
   <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
     <div class="etapas" id="etapas"></div></div>
@@ -579,7 +579,7 @@ const AJUDA={
  's-bumps':['Order bumps','Ofertas extras do checkout e quanto cada uma vende.',m=>'O aceite é calculado sobre as vendas do produto principal.'],
  's-aprendizados':['O que vende','Conclusões com número que valem para as próximas ofertas.',m=>'Vêm de aprendizados/o-que-vende.md.'],
  's-esp':['Leitura dos especialistas','O que cada analista do time de dados concluiu: funil, criativos, financeiro e testes.',m=>'Confiança baixa = pouco dado ainda; não decida só com ela.'],
- 's-etapas':['Etapas da oferta','Checklist da esteira da oferta escolhida: o que já foi feito, o que está em andamento e o que falta.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
+ 's-etapas':['Status da Próxima Oferta','Checklist da esteira da oferta escolhida: o que já foi feito, o que está em andamento e o que falta.',m=>'✓ = feito · ponto amarelo = em andamento · vazio = a fazer. Losango = portão (aprovação). Passe o mouse ou toque numa etapa para ver o detalhe.'],
  's-reembolsos':['Reembolsos','Pedidos de dinheiro de volta na Hotmart e o motivo de cada um.',m=>'Os motivos mostram onde a promessa e o produto não batem.']};
 const tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip);
 let tipDe=null,tipT=null,tipY=0;
