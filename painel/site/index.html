@@ -236,9 +236,14 @@ td.hl,th.hl{background:rgba(62,224,255,.16)!important}
 .esteira>summary::after{order:0}
 @media(min-width:1200px){.et-res .ag{display:none}}
 .et-in{padding:0 16px 14px}
-.et-sel{display:flex;align-items:center;gap:8px;margin:0 0 10px}
+.et-sel{display:flex;flex-direction:column;align-items:stretch;gap:5px;margin:0 0 10px}
 .et-sel label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-#et-of{flex:1;min-width:0;max-width:100%;padding:6px 10px;font-size:13px;border-radius:10px}
+.et-sel .ofw{flex:1;min-width:0}
+#et-of{width:100%;max-width:100%;padding:6px 10px;font-size:13px;border-radius:10px}
+.et-sel .ofb{width:100%;justify-content:space-between;padding:6px 10px 6px 12px;font-size:13px;border-radius:10px}
+.et-sel .ofb>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.et-sel .ofl{left:0;right:0;min-width:0;max-width:none;font-size:13px}
+.et-sel .ofl li{white-space:normal}
 .et-prog{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 6px}
 .et-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--vi),var(--cy))}
 .et-agora{border:1px solid rgba(255,207,92,.3);background:rgba(255,207,92,.07);border-radius:12px;padding:9px 11px;margin:10px 0 12px;font-size:12.5px;color:#c4d3ea;overflow-wrap:anywhere}
@@ -289,7 +294,7 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;overflow-wrap:anywher
   </div>
   <div id="banner"></div>
   <div id="filtro"></div>
-  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in"><div class="et-sel"><label for="et-of">Acompanhar</label><select id="et-of"></select></div><div id="etapas-of"></div></div></details>
+  <details class="card sec esteira" id="s-etapas"><summary><h2 data-ajuda="s-etapas">Status da Próxima Oferta</h2><span class="et-res" id="et-res"></span></summary><div class="et-in"><div class="et-sel"><label for="et-of" id="etr">Acompanhar</label><div class="ofw" id="etw"><select id="et-of" aria-labelledby="etr"></select></div></div><div id="etapas-of"></div></div></details>
   <div class="grid kpis" id="resumo"></div>
   <div class="card sec" id="s-funil"><h2 id="t-funil" data-ajuda="s-funil">Funil da oferta</h2>
     <div class="etapas" id="etapas"></div></div>
@@ -359,7 +364,7 @@ const CAMPOS=['gasto','impressoes','v3s','thruplay','cliques','lp','checkouts','
 function soma(lista){const t={};CAMPOS.forEach(k=>t[k]=lista.reduce((a,x)=>a+(x[k]||0),0));return t}
 fetch('dados.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const s=$('oferta');
   d.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
-  s.onchange=()=>{OI=+s.value;SEL=null;render();if(window.ofSync)ofSync()};seletor(s);esteiraSel();render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
+  const sy=seletor(s,$('ofw'),'ofr','of');s.onchange=()=>{OI=+s.value;SEL=null;render();sy()};esteiraSel();render()}).catch(()=>{$('atualizado').textContent='Não foi possível ler dados.json'});
 function selecionar(i){SEL=SEL===i?null:i;render();$('filtro').scrollIntoView({block:'start'})}
 function render(){
   const o=D.ofertas[OI],m=D.metas,ads=o.anuncios||[];
@@ -379,17 +384,17 @@ function render(){
   esteira(D.ofertas[ESI]);diagnosticos(o,doAd);reembolsos(o,m,tot);grafico(o.diario||[]);
 }
 /* lista de ofertas estilizada: só com mouse; no toque fica o seletor do aparelho */
-function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
-  const w=$('ofw');w.classList.add('custom');
-  const b=document.createElement('button');b.type='button';b.className='ofb';b.setAttribute('aria-haspopup','listbox');b.setAttribute('aria-expanded','false');b.setAttribute('aria-labelledby','ofr ofbt');
-  b.innerHTML='<span id="ofbt"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
-  const l=document.createElement('ul');l.className='ofl';l.id='ofl';l.setAttribute('role','listbox');l.setAttribute('aria-labelledby','ofr');l.hidden=true;l.tabIndex=-1;
+function seletor(s,w,rot,px){const nada=()=>{};if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return nada;
+  w.classList.add('custom');
+  const b=document.createElement('button');b.type='button';b.className='ofb';b.setAttribute('aria-haspopup','listbox');b.setAttribute('aria-expanded','false');b.setAttribute('aria-labelledby',rot+' '+px+'bt');
+  b.innerHTML='<span id="'+px+'bt"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+  const l=document.createElement('ul');l.className='ofl';l.id=px+'l';l.setAttribute('role','listbox');l.setAttribute('aria-labelledby',rot);l.hidden=true;l.tabIndex=-1;
   w.appendChild(b);w.appendChild(l);let at=0;
   const itens=()=>[...l.children];
   const marca=i=>{at=i;itens().forEach((li,j)=>li.classList.toggle('at',j===i));const li=itens()[i];if(li){l.setAttribute('aria-activedescendant',li.id);li.scrollIntoView({block:'nearest'})}};
-  window.ofSync=()=>{$('ofbt').textContent=s.options[s.selectedIndex]?s.options[s.selectedIndex].text:'';
-    l.innerHTML=[...s.options].map((o,i)=>'<li role="option" id="ofo'+i+'" data-v="'+H(o.value)+'" aria-selected="'+(i===s.selectedIndex)+'">'+H(o.text)+'</li>').join('')};
-  const abre=()=>{ofSync();l.hidden=false;b.setAttribute('aria-expanded','true');marca(Math.max(0,s.selectedIndex));l.focus()};
+  const sync=()=>{$(px+'bt').textContent=s.options[s.selectedIndex]?s.options[s.selectedIndex].text:'';
+    l.innerHTML=[...s.options].map((o,i)=>'<li role="option" id="'+px+'o'+i+'" data-v="'+H(o.value)+'" aria-selected="'+(i===s.selectedIndex)+'">'+H(o.text)+'</li>').join('')};
+  const abre=()=>{sync();l.hidden=false;b.setAttribute('aria-expanded','true');marca(Math.max(0,s.selectedIndex));l.focus()};
   const fecha=foco=>{l.hidden=true;b.setAttribute('aria-expanded','false');if(foco)b.focus()};
   const escolhe=i=>{if(i!==s.selectedIndex){s.selectedIndex=i;s.dispatchEvent(new Event('change'))}fecha(true)};
   b.onclick=()=>l.hidden?abre():fecha(true);
@@ -401,14 +406,14 @@ function seletor(s){if(!matchMedia('(hover: hover) and (pointer: fine)').matches
   l.onmousemove=e=>{const li=e.target.closest('li');if(li)marca(itens().indexOf(li))};
   l.onclick=e=>{const li=e.target.closest('li');if(li)escolhe(itens().indexOf(li))};
   document.addEventListener('mousedown',e=>{if(!l.hidden&&!w.contains(e.target))fecha(false)});
-  ofSync()}
+  sync();return sync}
 /* checklist das etapas (dados.json -> ofertas[i].etapas, copiado do status.md por painel/etapas_do_status.py) */
 const LARGA=matchMedia('(min-width: 1200px)');
 /* escolha da oferta acompanhada na coluna de status (independe do seletor do topo; lembrada no navegador) */
 function esteiraSel(){const s=$('et-of');let g=null;try{g=localStorage.getItem('painel.esteira')}catch(e){}
   D.ofertas.forEach((o,i)=>{const op=document.createElement('option');op.value=i;op.textContent=o.nome;s.appendChild(op)});
   const k=D.ofertas.findIndex(o=>(o.slug||o.nome)===g);ESI=k>=0?k:OI;s.value=ESI;
-  s.onchange=()=>{ESI=+s.value;try{localStorage.setItem('painel.esteira',D.ofertas[ESI].slug||D.ofertas[ESI].nome)}catch(e){}esteira(D.ofertas[ESI])}}
+  const sy=seletor(s,$('etw'),'etr','et');s.onchange=()=>{ESI=+s.value;try{localStorage.setItem('painel.esteira',D.ofertas[ESI].slug||D.ofertas[ESI].nome)}catch(e){}esteira(D.ofertas[ESI]);sy()}}
 function esteira(o){const el=$('etapas-of'),det=$('s-etapas'),es=o.etapas||[];
   if(!es.length){$('et-res').textContent='sem etapas registradas';el.innerHTML=vazio('esp','Sem etapas para esta oferta.','Rode painel/etapas_do_status.py para copiar do status.md.');return}
   const f=es.filter(e=>e.situacao==='feito').length,at=es.find(e=>e.situacao==='andamento'||e.situacao==='bloqueado');
