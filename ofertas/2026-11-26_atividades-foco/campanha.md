@@ -6,7 +6,7 @@
 - Pixel/dataset: Pixel Oferta Dez Minutinhos · 2360537971467958 (portfólio Balles Tech Energia Solar)
 - Eventos testados: PageView ✅ · InitiateCheckout ✅ (2026-11-27, navegador comum) · Purchase ⬜ (Hotmart + API de Conversões configuradas; confirmar na 1ª venda)
 - Domínio verificado no Business Manager: ⬜ (ballestech.com.br)
-- Página do Facebook: Dez Minutinhos · ID: 61596940384058 · sem Instagram
+- Página do Facebook: Dez Minutinhos · ID 1532919519896130 (perfil 61596940384058; para anúncios use o 1532…) · no portfólio Balles Tech Energia Solar · sem Instagram
 - Conta de anúncios: Gefferson Balles · 669738203091982 (escolhida pelo dono em 2026-11-27)
 
 ## Mídia enviada à conta de anúncios (2026-11-27)
