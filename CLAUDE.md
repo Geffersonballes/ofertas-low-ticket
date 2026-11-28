@@ -27,6 +27,11 @@ O minerador só adiciona: `mineracao/`, `pesquisas/` novos, linhas em `aprendiza
 `mineracao/descartadas.md`, e uma pasta nova em `ofertas/`. Mudança em regra, agente, skill, ferramenta, painel,
 infra ou oferta existente vira proposta para o dono.
 
+**Mural de mudanças (regra R14):** qualquer mudança de processo feita pelo Gefferson ou pelo Marcos (regras, esteira,
+portões, agentes, skills, travas em `ferramentas/`) ganha uma entrada em `docs/mural-de-mudancas.md` no mesmo
+commit, explicando o que é, no que ajuda e o que muda para cada um. Confira com `python3 ferramentas/conferir_mural.py`.
+**No começo de cada sessão, leia o mural e conte ao seu dono, em poucas linhas, o que é novo desde a última sessão dele.**
+
 Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
 
 ## Primeira vez neste repositório (Claude do minerador)
@@ -36,7 +41,8 @@ repositório: agentes em `.claude/agents/` (`minerador-de-ofertas`, `analista-de
 `pesquisador-de-anuncios`) e a skill `pacote-de-oferta`. Ao começar:
 1. Apresente em 5 linhas o papel dele (etapas 1–2, entrega por pull request, sem merge, sem
    publicar, sem cadastrar nada) e a rotina (`docs/07_divisao-do-trabalho.md`).
-2. Leia `aprendizados/o-que-vende.md` e `resultados/painel.md` e diga o que vendeu até agora.
+2. Leia `docs/mural-de-mudancas.md` (o que mudou no processo), `aprendizados/o-que-vende.md` e
+   `resultados/painel.md`, e diga o que mudou e o que vendeu até agora.
 3. Quando ele pedir para minerar ("monte o próximo pacote de oferta"), siga a skill
    `pacote-de-oferta` à risca. O pacote só sai com `ferramentas/conferir_pacote.py` dando
    "PACOTE OK", e o relatório (`relatorio-pacote.md`) vai inteiro na descrição do PR.

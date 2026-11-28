@@ -37,7 +37,10 @@ def main():
     else:
         print("PR DENTRO DO ESCOPO (só mineração e pasta de oferta nova)")
     for f in ok: print("  ok", f)
-    sys.exit(1 if fora else 0)
+    m = subprocess.run([sys.executable, __file__.replace("conferir_pr_minerador.py", "conferir_mural.py"), base, head],
+                       capture_output=True, text=True)
+    print(m.stdout.strip())
+    sys.exit(1 if fora or m.returncode else 0)
 
 if __name__ == "__main__":
     main()

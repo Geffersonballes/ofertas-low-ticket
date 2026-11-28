@@ -27,9 +27,11 @@ etapa manual repetida, erro que volta), padroniza o que funciona e automatiza o 
    - a(s) skill(s) e agente(s) que executam a etapa (passo 0 "antes de tudo…");
    - uma **trava** em `ferramentas/` quando a regra puder ser conferida por script (como
      `conferir_material.py` e `conferir_criativos.py`): regra que pode ser pulada sem ninguém ver, um dia é pulada.
-3. Teste a trava (caso que passa e caso que bloqueia) e registre em `docs/09_processos.md` → "Regras
+3. Escreva a entrada em `docs/mural-de-mudancas.md` (o que é, no que ajuda, o que muda para o Gefferson e para o
+   Marcos) e confira com `ferramentas/conferir_mural.py`.
+4. Teste a trava (caso que passa e caso que bloqueia) e registre em `docs/09_processos.md` → "Regras
    vigentes" (data, origem, onde está aplicada, trava).
-4. Nunca enfraqueça uma regra existente sem o dono pedir. Duas regras em conflito → leve ao dono.
+5. Nunca enfraqueça uma regra existente sem o dono pedir. Duas regras em conflito → leve ao dono.
 
 ## 2. Auditar (a cada etapa concluída e na revisão semanal)
 Para cada oferta em `ofertas/`: a etapa atual respeitou os portões (P1, PM, PC, P2, P3, P4)? As travas
