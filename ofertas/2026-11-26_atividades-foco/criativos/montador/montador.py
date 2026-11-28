@@ -5,10 +5,12 @@ atividades reais do caderno (SVG do gerador, com o gabarito animado), páginas d
 Uso:
   node paginas2x.cjs 5 6 7 8 78 128 142 143        # uma vez: páginas em 2x → cache/
   ffmpeg -i ../../pagina/img/folheando.mp4 -vf fps=30 -q:v 3 cache/folheando/%04d.jpg   # uma vez
-  python3 montador.py                 # os 8 vídeos
+  python3 palavras.py amandinha       # uma vez: tempo de cada palavra (faster-whisper) → cache/palavras/
+  python3 montador.py                 # os 4 vídeos
   python3 montador.py 2 amandinha     # só um
 Saída: ../videos/anuncio-<n>-<voz>.mp4
 """
+import difflib
 import html as H
 import json
 import math
@@ -43,18 +45,18 @@ def F(texto, legenda, cena=None):
 FINAL = {"tipo": "final"}
 ROTEIROS = {
     1: [
-        F("Isto é o que cabe em dez minutinhos de papel e lápis.", "Isto é o que cabe em 10 minutinhos de papel e lápis.",
+        F("Isto é o que cabe | em dez minutinhos de papel e lápis.", "Isto é o que cabe | em 10 minutinhos de papel e lápis.",
           {"tipo": "atividade", "pag": 7, "titulo": "Isto cabe em 10 minutinhos"}),
         F("Um labirinto.", "Um labirinto.", {"tipo": "atividade", "pag": 75, "titulo": "Labirinto"}),
         F("Um jogo de memória.", "Um jogo de memória.", {"tipo": "atividade", "pag": 11, "titulo": "Memória"}),
         F("Um sudoku.", "Um sudoku.", {"tipo": "atividade", "pag": 18, "titulo": "Sudoku"}),
         F("Um código secreto.", "Um código secreto.", {"tipo": "atividade", "pag": 78, "titulo": "Código secreto"}),
-        F("Cento e vinte atividades prontas para imprimir, de quatro a dez anos.",
-          "120 atividades prontas para imprimir, de 4 a 10 anos.",
+        F("Cento e vinte atividades prontas para imprimir, | de quatro a dez anos.",
+          "120 atividades prontas para imprimir, | de 4 a 10 anos.",
           {"tipo": "folheando", "titulo": "120 atividades · 4 a 10 anos"}),
-        F("O plano de trinta dias já diz as duas folhas de cada dia.", "O plano de 30 dias já diz as 2 folhas de cada dia.",
+        F("O plano de trinta dias já diz | as duas folhas de cada dia.", "O plano de 30 dias já diz | as 2 folhas de cada dia.",
           {"tipo": "partes", "titulo": "Plano de 30 dias · 2 folhas por dia", "partes": [
-              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True},
+              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True, "janela": True},
               {"tipo": "duas", "pags": [6, 7], "rotulos": ["Dia 1 · folha 1", "Dia 1 · folha 2"]}]}),
         F("Dez Minutinhos, trinta e sete reais.", "Dez Minutinhos, R$ 37,00.", FINAL),
         F("Toque em saiba mais.", "Toque em Saiba mais."),
@@ -63,18 +65,19 @@ ROTEIROS = {
         F("Imprimiu, entregou, pronto.", "Imprimiu, entregou, pronto.",
           {"tipo": "carimbo", "pag": 6, "titulo": "Imprimiu. Entregou. Pronto."}),
         F("Zero preparo.", "Zero preparo."),
-        F("O plano já diz as duas folhas de cada dia.", "O plano já diz as 2 folhas de cada dia.",
+        F("O plano já diz | as duas folhas de cada dia.", "O plano já diz | as 2 folhas de cada dia.",
           {"tipo": "partes", "titulo": "O plano já separou as folhas", "partes": [
-              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True},
+              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.9], "foco": [50, 17], "caber": True, "janela": True},
               {"tipo": "duas", "pags": [6, 7], "rotulos": ["Dia 1 · folha 1", "Dia 1 · folha 2"]}]}),
-        F("Abre, imprime, entrega com um lápis.", "Abre, imprime, entrega com um lápis.",
+        # a voz diz "imprime E entrega" (faster-whisper small e medium); a legenda segue o áudio
+        F("Abre, imprime e entrega com um lápis.", "Abre, imprime e entrega com um lápis.",
           {"tipo": "imagem", "src": "mockup-pacote.png", "lapis": True, "titulo": "Abre · imprime · entrega"}),
         F("As respostas estão no gabarito.", "As respostas estão no gabarito.",
-          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "caber": True, "titulo": "Gabarito completo"}),
+          {"tipo": "pagina", "pag": 128, "zoom": [1.0, 1.8], "foco": [22, 28], "caber": True, "janela": True, "titulo": "Gabarito completo"}),
         F("Cento e vinte atividades por trinta e sete reais.", "120 atividades por R$ 37,00.",
           {"tipo": "numeros", "linhas": ["120 atividades", "R$ 37,00"], "titulo": "Uma vez só"}),
-        F("Um real e vinte e três por dia, no plano de trinta dias.", "R$ 1,23 por dia, no plano de 30 dias.",
-          {"tipo": "numeros", "linhas": ["R$ 1,23", "por dia no plano de 30 dias"], "titulo": "Faça a conta"}),
+        F("Um real e vinte e três por dia, | no plano de trinta dias.", "R$ 1,23 por dia, | no plano de 30 dias.",
+          {"tipo": "numeros", "linhas": ["R$ 1,23", "por dia no plano\nde 30 dias"], "titulo": "Faça a conta"}),
         F("E imprime de novo quando quiser.", "E imprime de novo quando quiser.",
           {"tipo": "folheando", "titulo": "Imprime de novo quando quiser"}),
         F("Toque em saiba mais.", "Toque em Saiba mais.", FINAL),
@@ -84,41 +87,43 @@ ROTEIROS = {
           {"tipo": "risco", "antes": "App", "riscado": "educativo", "depois": "= tela"}),
         F("Vídeo de desenho também.", "Vídeo de desenho também.",
           {"tipo": "texto", "escuro": True, "linhas": ["Vídeo de desenho", "também."]}),
-        F("Quer o mesmo tipo de desafio, só que no papel?", "Quer o mesmo tipo de desafio, só que no papel?",
+        F("Quer o mesmo tipo de desafio, | só que no papel?", "Quer o mesmo tipo de desafio, | só que no papel?",
           {"tipo": "atividade", "pag": 75, "revelar": False, "entrada": "baixo", "titulo": "O mesmo desafio. No papel."}),
-        F("Labirinto, sudoku, sequência, jogo dos sete erros.", "Labirinto, sudoku, sequência, jogo dos 7 erros.",
+        F("Labirinto, sudoku, | sequência, jogo dos sete erros.", "Labirinto, sudoku, | sequência, jogo dos 7 erros.",
           {"tipo": "partes", "partes": [
               {"tipo": "atividade", "pag": 75, "titulo": "Labirinto"},
               {"tipo": "atividade", "pag": 69, "titulo": "Sudoku"},
               {"tipo": "atividade", "pag": 8, "titulo": "Sequência"},
               {"tipo": "atividade", "pag": 68, "titulo": "7 erros"}]}),
-        F("Dois níveis: de quatro a seis anos, sem precisar ler, e de sete a dez.",
-          "2 níveis: de 4 a 6 anos, sem precisar ler, e de 7 a 10.",
+        F("Dois níveis: de quatro a seis anos, | sem precisar ler, | e de sete a dez.",
+          "2 níveis: de 4 a 6 anos, | sem precisar ler, | e de 7 a 10.",
           {"tipo": "duas", "pags": [6, 78], "rotulos": ["Nível 1 · 4 a 6 anos · sem leitura", "Nível 2 · 7 a 10 anos"],
            "titulo": "Dois níveis"}),
-        F("Dez Minutinhos: cento e vinte atividades para imprimir.", "Dez Minutinhos: 120 atividades para imprimir.", FINAL),
+        F("Dez Minutinhos: | cento e vinte atividades para imprimir.", "Dez Minutinhos: | 120 atividades para imprimir.", FINAL),
         F("Toque em saiba mais.", "Toque em Saiba mais."),
     ],
     4: [
-        F("Troque dez minutos de tela por dez minutos disto.", "Troque 10 minutos de tela por 10 minutos disto.",
+        F("Troque dez minutos de tela | por dez minutos disto.", "Troque 10 minutos de tela | por 10 minutos disto.",
           {"tipo": "partes", "partes": [
               {"tipo": "texto", "escuro": True, "linhas": ["10 min", "de tela"]},
               {"tipo": "atividade", "pag": 8, "revelar": False, "titulo": "10 min disto"}]}),
         F("Padrões para completar.", "Padrões para completar.", {"tipo": "atividade", "pag": 8, "titulo": "Padrões"}),
-        F("Memória: olha, dobra a folha e responde.", "Memória: olha, dobra a folha e responde.",
-          {"tipo": "atividade", "pag": 11, "zoom": [1.55, 1.0], "foco": [50, 30], "titulo": "Memória"}),
+        F("Memória: olha, | dobra a folha e responde.", "Memória: olha, | dobra a folha e responde.",
+          # foco no topo do cartão: o cabeçalho fica parado abaixo do título; 1,25× deixa margem dos lados
+          {"tipo": "atividade", "pag": 11, "zoom": [1.25, 1.0], "foco": [50, 0], "janela": True, "titulo": "Memória"}),
         F("Lógica, com labirinto e sudoku.", "Lógica, com labirinto e sudoku.",
           {"tipo": "partes", "titulo": "Lógica", "partes": [
               {"tipo": "atividade", "pag": 13}, {"tipo": "atividade", "pag": 18}]}),
         F("Ligue os pontos.", "Ligue os pontos.", {"tipo": "atividade", "pag": 15, "titulo": "Traçado"}),
-        F("Não precisa saber ensinar nem montar rotina.", "Não precisa saber ensinar nem montar rotina.",
+        F("Não precisa saber ensinar | nem montar rotina.", "Não precisa saber ensinar | nem montar rotina.",
           {"tipo": "folheando", "titulo": "Sem saber ensinar · sem montar rotina"}),
-        F("O plano de trinta dias já vem pronto, com quadro de conquistas.",
-          "O plano de 30 dias já vem pronto, com quadro de conquistas.",
+        F("O plano de trinta dias | já vem pronto, | com quadro de conquistas.",
+          "O plano de 30 dias | já vem pronto, | com quadro de conquistas.",
           {"tipo": "partes", "titulo": "Plano pronto · quadro de conquistas", "partes": [
-              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.3], "foco": [50, 20]},
-              {"tipo": "pagina", "pag": 142, "zoom": [1.0, 1.12], "foco": [50, 40]},
-              {"tipo": "pagina", "pag": 143, "zoom": [1.0, 1.12], "foco": [50, 30]}]}),
+              {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.3], "foco": [50, 20], "janela": True},
+              # zoom pequeno no centro: a página inteira termina acima da legenda (y < 704)
+              {"tipo": "pagina", "pag": 142, "zoom": [1.0, 1.04], "foco": [50, 50]},
+              {"tipo": "pagina", "pag": 143, "zoom": [1.0, 1.04], "foco": [50, 50]}]}),
         F("Dez Minutinhos.", "Dez Minutinhos.", FINAL),
         F("Toque em saiba mais.", "Toque em Saiba mais."),
     ],
@@ -189,18 +194,65 @@ def _alinhar(dur, sil, frases):
     return dur, list(zip(inicios, fins)), [j is not None for j in esc], custo
 
 
-def blocos_legenda(texto, t0, t1, maxp=6):
-    pal = texto.split()
-    n = max(1, math.ceil(len(pal) / maxp))
-    tam = math.ceil(len(pal) / n)
-    grupos = [" ".join(pal[i:i + tam]) for i in range(0, len(pal), tam)]
-    pesos = [len(g) + 2 for g in grupos]
-    tot, t, out = sum(pesos), t0, []
-    for g, w in zip(grupos, pesos):
-        d = (t1 - t0) * w / tot
-        out.append({"t0": round(t, 3), "t1": round(t + d, 3), "txt": g})
-        t += d
-    return out
+def _norm(w):
+    return re.sub(r"[^0-9a-záàâãéêíóôõúç]", "", w.lower())
+
+
+def tempos_palavras(voz, n, frases):
+    """Início real (s) de cada bloco de legenda. Os blocos são marcados com " | " no texto da narração (e no da
+    legenda, nas mesmas posições). O tempo de cada palavra vem de cache/palavras/<voz>-<n>.json (palavras.py,
+    faster-whisper). A narração escrita é casada com a transcrição (difflib); trechos que o whisper escreveu
+    diferente ("cento e vinte" → "120") recebem o tempo do trecho correspondente, repartido."""
+    arq = CACHE / "palavras" / f"{voz}-{n}.json"
+    if not arq.exists():
+        raise SystemExit(f"falta {arq}: rode python3 palavras.py {voz}")
+    wsp = [w for w in json.loads(arq.read_text()) if _norm(w["w"])]
+    nar, inicio_bloco = [], []
+    for f in frases:
+        blocos = []
+        for b in f["texto"].split("|"):
+            blocos.append(len(nar))
+            nar += [_norm(w) for w in b.split() if _norm(w)]
+        inicio_bloco.append(blocos)
+    t = [None] * len(nar)
+    sm = difflib.SequenceMatcher(None, nar, [_norm(w["w"]) for w in wsp], autojunk=False)
+    for op, i1, i2, j1, j2 in sm.get_opcodes():
+        if op == "equal":
+            for k in range(i2 - i1):
+                t[i1 + k] = wsp[j1 + k]["t0"]
+        elif op == "replace":
+            a, b = wsp[j1]["t0"], wsp[j2 - 1]["t1"]
+            for k in range(i2 - i1):
+                t[i1 + k] = a + (b - a) * k / (i2 - i1)
+    for k in range(len(t) - 1, -1, -1):  # palavra que o whisper não ouviu: tempo da seguinte
+        if t[k] is None:
+            t[k] = t[k + 1] if k + 1 < len(t) else wsp[-1]["t1"]
+    return [[t[i] for i in blocos] for blocos in inicio_bloco]
+
+
+NB = [(r"(\d+) a (\d+)", "\\1\u00a0a\u00a0\\2"), (r"R\$ ", "R$\u00a0"),
+      (r"(\d) (anos|dias|atividades|minutinhos|minutos|folhas|min|erros|níveis)", "\\1\u00a0\\2")]
+
+
+def nb(txt):
+    """Espaços que não quebram: "4 a 10 anos", "30 dias", "R$ 37,00" nunca ficam partidos entre duas linhas."""
+    for a, b in NB:
+        txt = re.sub(a, b, txt)
+    return txt
+
+
+def blocos_legenda(legenda, inicios, t0, t1):
+    """Um bloco por trecho marcado com "|"; cada bloco entra no tempo real da 1ª palavra (−0,05 s) e fica até o
+    próximo bloco (ou o fim da frase, que cai no meio da pausa)."""
+    grupos = [g.strip() for g in legenda.split("|")]
+    if len(grupos) != len(inicios):
+        raise ValueError(f"blocos da legenda ≠ blocos da narração: {legenda!r}")
+    for g in grupos:
+        if len(g.split()) > 7:
+            raise ValueError(f"bloco de legenda com mais de 7 palavras: {g!r} (marque com |)")
+    ini = [t0] + [max(t0, x - 0.05) for x in inicios[1:]]
+    fim = ini[1:] + [t1]
+    return [{"t0": round(a, 3), "t1": round(b, 3), "txt": nb(g)} for g, a, b in zip(grupos, ini, fim)]
 
 
 # ------------------------------------------------------------------ HTML das cenas
@@ -241,12 +293,18 @@ LAPIS = ('<svg class="lapis" viewBox="0 0 360 30"><polygon points="0,15 34,3 34,
          '<rect x="330" y="3" width="30" height="24" rx="5" fill="#f29bb0"/></svg>')
 
 
+def janela(c, html):
+    """Zoom dentro de uma janela que termina acima da legenda (y 708, com fade): a página ampliada nunca
+    passa por baixo da legenda (antes a legenda tampava as últimas linhas do plano e do cartão da memória)."""
+    return f'<div class="janela">{html}</div>' if c.get("janela") else html
+
+
 def html_cena(c):
     t = c["tipo"]
     if t == "atividade":
-        return card_atividade(c["pag"])
+        return janela(c, card_atividade(c["pag"]))
     if t == "pagina":
-        return f'<div class="card pag"><img src="{pag_url(c["pag"])}" alt=""></div>'
+        return janela(c, f'<div class="card pag"><img src="{pag_url(c["pag"])}" alt=""></div>')
     if t == "duas":
         return "".join(f'<div class="mini m{i}"><img src="{pag_url(p)}" alt=""><span>{H.escape(r)}</span></div>'
                        for i, (p, r) in enumerate(zip(c["pags"], c["rotulos"])))
@@ -256,7 +314,7 @@ def html_cena(c):
         return f'<img class="foto" src="{(IMG / c["src"]).as_uri()}" alt="">' + (LAPIS if c.get("lapis") else "")
     if t == "numeros":
         return (f'<img class="fundo-mock" src="{(IMG / "mockup-capa.png").as_uri()}" alt="">'
-                + "".join(f'<div class="num l{i}">{H.escape(l)}</div>' for i, l in enumerate(c["linhas"])))
+                + "".join(f'<div class="num l{i}">{H.escape(nb(l))}</div>' for i, l in enumerate(c["linhas"])))
     if t == "texto":
         return "".join(f'<div class="tx l{i}">{H.escape(l)}</div>' for i, l in enumerate(c["linhas"]))
     if t == "risco":
@@ -266,8 +324,8 @@ def html_cena(c):
         return '<canvas class="folh" width="720" height="551"></canvas>'
     if t == "final":
         return (f'<img class="fmock" src="{(IMG / "mockup-capa.png").as_uri()}" alt=""><div class="fnome">Dez Minutinhos</div>'
-                '<div class="fsub">120 atividades para imprimir · 4 a 10 anos</div><div class="fpreco">R$ 37,00</div>'
-                '<div class="fbot">Toque em Saiba mais</div>')
+                f'<div class="fsub">{nb("120 atividades para imprimir · 4 a 10 anos")}</div><div class="fpreco">{nb("R$ 37,00")}</div>'
+                f'<div class="fgar">{nb("Garantia de 7 dias")}</div><div class="fbot">Toque em Saiba mais</div>')
     raise ValueError(t)
 
 
@@ -281,10 +339,11 @@ html,body{width:540px;height:960px;overflow:hidden;background:#fff7f1;font-famil
 .escuro{background:#1d1d1f}.laranja{background:#ff7a45}
 #titulo{position:absolute;left:24px;right:24px;top:118px;z-index:5;text-align:center;display:none}
 #titulo span{display:inline-block;background:#fff;border:2.5px solid #1d1d1f;border-radius:16px;padding:6px 16px 4px;
-  font-family:'Baloo 2';font-weight:800;font-size:27px;line-height:1.1;box-shadow:4px 4px 0 #ff7a45}
+  font-family:'Baloo 2';font-weight:800;font-size:27px;line-height:1.1;box-shadow:4px 4px 0 #ff7a45;text-wrap:balance}
 #legenda{position:absolute;left:22px;right:22px;top:712px;height:100px;z-index:6;display:flex;align-items:flex-start;justify-content:center}
 #legenda span{background:rgba(29,29,31,.9);color:#fff;font-family:'Baloo 2';font-weight:700;font-size:27px;line-height:1.18;
-  padding:7px 14px 5px;border-radius:12px;text-align:center;max-width:496px}
+  padding:7px 14px 5px;border-radius:12px;text-align:center;max-width:496px;text-wrap:balance}
+/* text-wrap:balance: título e legenda de 2 linhas quebram em linhas parecidas (nada de "rotina" ou "dias" sozinho) */
 /* palco: área entre o título e a legenda (y 190–700) */
 .palco .card{position:absolute;left:50%;top:445px;width:372px;margin-left:-186px;transform-origin:50% 50%}
 .card{background:#fff;border-radius:14px;box-shadow:0 2px 4px rgba(0,0,0,.08),0 18px 40px rgba(80,40,10,.22);overflow:hidden}
@@ -317,12 +376,18 @@ html,body{width:540px;height:960px;overflow:hidden;background:#fff7f1;font-famil
 .linha{position:absolute;left:-4px;top:52%%;height:9px;background:#ff7a45;border-radius:5px;width:0}
 .rs2{position:absolute;left:0;right:0;top:420px;text-align:center;font-family:'Baloo 2';font-weight:800;font-size:76px;color:#ff7a45;opacity:0}
 .folh{position:absolute;left:20px;top:265px;width:500px;height:383px;border-radius:16px;box-shadow:0 18px 40px rgba(80,40,10,.22)}
-.fmock{position:absolute;width:330px;left:105px;top:150px}
-.fnome{position:absolute;left:0;right:0;top:438px;text-align:center;font-family:'Baloo 2';font-weight:800;font-size:54px;line-height:1}
-.fsub{position:absolute;left:0;right:0;top:496px;text-align:center;font-weight:800;font-size:17px}
-.fpreco{position:absolute;left:50%%;top:528px;transform:translateX(-50%%);background:#fff;border:3px solid #1d1d1f;border-radius:14px;
+/* fecho: botão escuro em 598–640; a legenda do fecho fica clara e desce para 748 (sem 2 pílulas escuras empilhadas) */
+.fmock{position:absolute;width:300px;left:120px;top:112px}
+.fnome{position:absolute;left:0;right:0;top:384px;text-align:center;font-family:'Baloo 2';font-weight:800;font-size:54px;line-height:1}
+.fsub{position:absolute;left:0;right:0;top:442px;text-align:center;font-weight:800;font-size:17px}
+.fpreco{position:absolute;left:50%%;top:472px;transform:translateX(-50%%);background:#fff;border:3px solid #1d1d1f;border-radius:14px;
   font-family:'Baloo 2';font-weight:800;font-size:40px;padding:4px 18px 0;box-shadow:4px 4px 0 #1d1d1f}
-.fbot{position:absolute;left:50%%;top:616px;background:#1d1d1f;color:#fff;font-family:'Baloo 2';font-weight:800;font-size:24px;
+.fgar{position:absolute;left:0;right:0;top:558px;text-align:center;font-family:'Baloo 2';font-weight:800;font-size:22px;line-height:1}
+#legenda.clara{top:748px}#legenda.clara span{background:rgba(255,255,255,.9);color:#1d1d1f}
+.janela{position:absolute;left:0;top:0;width:540px;height:708px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to bottom,#000 684px,transparent 708px);mask-image:linear-gradient(to bottom,#000 684px,transparent 708px)}
+.num{white-space:pre-line}
+.fbot{position:absolute;left:50%%;top:598px;background:#1d1d1f;color:#fff;font-family:'Baloo 2';font-weight:800;font-size:24px;
   padding:9px 22px 6px;border-radius:14px;white-space:nowrap}
 """
 
@@ -410,7 +475,7 @@ const A = {
     ctx.drawImage(folh[i], 0, 0, 720, 551); cv.style.opacity = 1;
   },
   final(el, c, p, dt) {
-    const parts = ['.fmock', '.fnome', '.fsub', '.fpreco', '.fbot'];
+    const parts = ['.fmock', '.fnome', '.fsub', '.fpreco', '.fgar', '.fbot'];
     parts.forEach((s, i) => { const n = el.querySelector(s), k = ease((dt - i * 0.12) / 0.35); n.style.opacity = k;
       const base = s === '.fpreco' ? 'translateX(-50%) ' : s === '.fbot' ? 'translateX(-50%) ' : '';
       const extra = s === '.fmock' ? ` translateY(${Math.sin(dt * 2.2) * 6}px) rotate(-3deg)` : s === '.fbot' ? ` scale(${1 + 0.04 * Math.sin(dt * 7)})` : '';
@@ -431,6 +496,7 @@ window.render = function (t) {
     const k = ease((t - titT0) / 0.25); tituloSp.style.transform = `scale(${0.85 + 0.15 * k})`; tituloEl.style.opacity = 1; }
   else tituloEl.style.display = 'none';
   const b = LEG.find(x => t >= x.t0 && t < x.t1);
+  legEl.classList.toggle('clara', final);
   if (b) { legEl.style.display = 'flex'; legSp.textContent = b.txt; } else legEl.style.display = 'none';
 };
 """
@@ -439,14 +505,15 @@ window.render = function (t) {
 def montar(n, voz):
     frases = ROTEIROS[n]
     mp3 = AUDIO / f"{voz}-{n}.mp3"
-    dur, tempos, ancoras = alinhar(mp3, [f["texto"] for f in frases])
+    dur, tempos, ancoras = alinhar(mp3, [f["texto"].replace(" |", "") for f in frases])
+    inicios = tempos_palavras(voz, n, frases)
     total = dur + FECHO
     nq = math.ceil(total * FPS)
     total = nq / FPS
     # cenas: cada frase com cena abre uma nova; frases sem cena continuam a anterior
     cenas, legs = [], []
     for k, (f, (a, b)) in enumerate(zip(frases, tempos)):
-        legs += blocos_legenda(f["legenda"], a + 0.02, b)
+        legs += blocos_legenda(f["legenda"], inicios[k], a + 0.02, b)
         if f["cena"]:
             cenas.append({"c": f["cena"], "t0": 0.0 if k == 0 else a})
     for i, c in enumerate(cenas):
@@ -495,7 +562,8 @@ def montar(n, voz):
                     "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart",
                     str(saida)], check=True)
     info = {"video": saida.name, "duracao": round(total, 2), "fala": round(dur, 2),
-            "frases": [{"t0": round(a, 2), "t1": round(b, 2), "txt": f["legenda"]} for f, (a, b) in zip(frases, tempos)],
+            "frases": [{"t0": round(a, 2), "t1": round(b, 2), "txt": f["legenda"].replace(" |", "")} for f, (a, b) in zip(frases, tempos)],
+            "legenda": legs,
             "ancoras_em_pausa": f"{sum(ancoras)}/{len(ancoras)}"}
     (TMP / f"{nome}.json").write_text(json.dumps(info, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{saida.name}: {total:.2f}s · fronteiras em pausas {sum(ancoras)}/{len(ancoras)}")
@@ -504,6 +572,6 @@ def montar(n, voz):
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    alvos = [(int(args[0]), args[1])] if len(args) == 2 else [(n, v) for n in (1, 2, 3, 4) for v in ("laynner", "amandinha")]
+    alvos = [(int(args[0]), args[1])] if len(args) == 2 else [(n, v) for n in (1, 2, 3, 4) for v in ("amandinha",)]  # Laynner retirada (2026-11-27)
     for n, v in alvos:
         montar(n, v)

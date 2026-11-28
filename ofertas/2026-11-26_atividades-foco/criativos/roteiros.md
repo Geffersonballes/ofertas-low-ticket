@@ -21,7 +21,8 @@ Etapa 6 (roteiros) · 2026-11-26 · base: `briefing.md` (5 ângulos), `dossie.md
 - **Texto na tela:** fonte da página, fundo claro, no máximo 7 palavras por vez, fora das áreas de
   interface do Reels/Stories (margem de 250 px em cima e 340 px embaixo).
 - **Cartão final (igual nos 4 vídeos):** `mockup-capa.png` + "Dez Minutinhos" + "120 atividades
-  para imprimir · 4 a 10 anos" + "R$ 37,00 · garantia de 7 dias" + botão desenhado "Saiba mais".
+  para imprimir · 4 a 10 anos" + "R$ 37,00" + "Garantia de 7 dias" + botão desenhado "Toque em Saiba mais".
+  A legenda do fecho fica clara e bem abaixo do botão (só o botão é escuro). Montado assim desde 2026-11-28 (rodada 2 dos criativos).
 - **Anúncio:** CTA "Saiba mais"; URL de destino `https://ofertas.ballestech.com.br/dez-minutinhos/`
   (UTM a definir na Etapa 7); campanha, conjunto e anúncio em rascunho/pausados.
 - **Declaração de conteúdo gerado com IA:** não marcar (oferta comum, voz sintética sobre telas do
@@ -76,17 +77,17 @@ a curiosidade vem do próprio produto aparecendo.
 
 **Anúncio**
 - **Texto principal:**
-  Um labirinto, um jogo de memória, um sudoku e um código secreto. É isso que cabe em 10
-  minutinhos de papel e lápis.
+  Um labirinto e um jogo de memória. É isso que cabe em uns 10 minutinhos de papel e lápis. No
+  outro dia, outras duas folhas: sudoku, padrões, ligue os pontos, código secreto…
 
   O Dez Minutinhos tem 120 atividades prontas para imprimir, de 4 a 10 anos, em 2 níveis. O plano
   de 30 dias já diz quais duas folhas imprimir em cada dia, e as respostas estão no gabarito.
 
   PDF em A4, funciona em preto e branco. R$ 37,00, uma vez só. Garantia de 7 dias.
 - **Título:** 120 atividades prontas para imprimir
-- **Descrição:** O PDF chega no seu e-mail após o pagamento
+- **Descrição:** Acesso pelo e-mail após o pagamento
 - **CTA:** Saiba mais
-- **Arquivo final:** (link)
+- **Arquivo final:** `criativos/videos/anuncio-1-amandinha.mp4`
 
 ---
 
@@ -107,7 +108,7 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 |---|---|---|---|
 | 0–3 s | Página p. 6 subindo + carimbo "PRONTO" | Imprimiu. Entregou. Pronto. | Imprimiu, entregou, pronto. Zero preparo. |
 | 3–7 s | Plano N1 (p. 5), destaque no Dia 1 → p. 6 e p. 7 lado a lado | O plano já separou as folhas | O plano já diz as duas folhas de cada dia. |
-| 7–10 s | `mockup-pacote.png` + lápis ilustrado (plano, sem mão) entrando pela lateral | Abre · imprime · entrega | Abre, imprime, entrega com um lápis. |
+| 7–10 s | `mockup-pacote.png` + lápis ilustrado (plano, sem mão) entrando pela lateral | Abre · imprime · entrega | Abre, imprime e entrega com um lápis. (a voz gravada diz "e"; a legenda segue o áudio) |
 | 10–13 s | Gabarito (p. 128), zoom numa resposta | Gabarito completo | As respostas estão no gabarito. |
 | 13–19,5 s | `mockup-capa.png`; números entram em sequência | 120 atividades · R$ 37,00 → R$ 1,23 por dia no plano de 30 dias | Cento e vinte atividades por trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. |
 | 19,5–25 s | `folheando.mp4` → cartão final | Imprime de novo quando quiser · Saiba mais | E imprime de novo quando quiser. Toque em saiba mais. |
@@ -116,7 +117,7 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 
 **Narração completa:**
 > Imprimiu, entregou, pronto. Zero preparo. O plano já diz as duas folhas de cada dia. Abre,
-> imprime, entrega com um lápis. As respostas estão no gabarito. Cento e vinte atividades por
+> imprime e entrega com um lápis. As respostas estão no gabarito. Cento e vinte atividades por
 > trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. E imprime de novo
 > quando quiser. Toque em saiba mais.
 
@@ -126,17 +127,18 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 - **Texto principal:**
   Imprimiu, entregou, pronto.
 
-  Sem procurar folhinha na internet, sem separar por idade, sem comprar material. Cada dia do plano
-  de 30 dias já tem as duas folhas escolhidas, e as respostas ficam no gabarito.
+  Sem procurar folhinha na internet e sem comprar material: as folhas já vêm separadas em 2 níveis
+  de idade. Cada dia do plano de 30 dias já tem as duas folhas escolhidas, e as respostas ficam no
+  gabarito.
 
   São 120 atividades por R$ 37,00, uma vez só: dá R$ 1,23 por dia no plano. O arquivo é seu.
   Imprime de novo para repetir o plano ou para o irmão.
 
   Garantia de 7 dias.
 - **Título:** Zero preparo: abre, imprime e entrega
-- **Descrição:** R$ 1,23 por dia no plano de 30 dias
+- **Descrição:** R$ 37,00, uma vez só. Sem mensalidade.
 - **CTA:** Saiba mais
-- **Arquivo final:** (link)
+- **Arquivo final:** `criativos/videos/anuncio-2-amandinha.mp4`
 
 ---
 
@@ -186,7 +188,7 @@ inventado (CLAUDE.md, regra 3). A "dor" da criança que não para sentada sai; f
 - **Título:** O mesmo desafio, só que no papel
 - **Descrição:** 2 níveis: 4 a 6 e 7 a 10 anos
 - **CTA:** Saiba mais
-- **Arquivo final:** (link)
+- **Arquivo final:** `criativos/videos/anuncio-3-amandinha.mp4`
 
 ---
 
@@ -234,11 +236,11 @@ trocando…" (prova social difusa); a troca vira convite direto.
   Não precisa saber ensinar nem montar rotina: o plano de 30 dias já vem pronto, com quadro de
   conquistas e certificados para imprimir.
 
-  120 atividades · 4 a 10 anos · R$ 37,00 · garantia de 7 dias.
+  120 atividades · 4 a 10 anos · R$ 37,00, uma vez só · garantia de 7 dias.
 - **Título:** Pediu o tablet? Entregue um labirinto.
 - **Descrição:** Plano de 30 dias já pronto
 - **CTA:** Saiba mais
-- **Arquivo final:** (link)
+- **Arquivo final:** `criativos/videos/anuncio-4-amandinha.mp4`
 
 ---
 
@@ -256,22 +258,25 @@ inventado); o texto fala da rotina.
 **Peça 4:5 (1080×1350)**
 - Topo (faixa clara, letra grande): "Férias. O que tem para fazer hoje?"
 - Linha logo abaixo: "30 dias de atividades prontas para imprimir"
-- Centro: `mockup-capa.png` à esquerda, em leque à direita 3 páginas reais: labirinto (p. 7),
-  jogo dos 7 erros (p. 68), código secreto (p. 78).
-- Embaixo: miniatura do plano de 30 dias (p. 5) com a legenda "2 folhas por dia".
+- Centro: leque de 3 páginas reais: labirinto (p. 7, Nível 1), jogo dos 7 erros (p. 68, Nível 2),
+  código secreto (p. 78, Nível 2).
+- Embaixo: capa à esquerda e, à direita, o plano em texto grande: "Plano de 30 dias" e "2 folhas por dia"
+  (a miniatura da p. 5 ficava ilegível no celular e saiu em 2026-11-28).
+- Páginas rasterizadas do PDF aprovado (`produto/final/dez-minutinhos.pdf`) pelo `estatico/gerar.cjs`; o leque
+  fica aberto para cada página mostrar o título da atividade.
 - Rodapé (faixa da cor da marca): "4 a 10 anos · 2 níveis · R$ 37,00"
 - Texto ocupando pouco da peça; nada de selo, estrela, número de clientes ou "%".
 
 **Peça 1:1 (1080×1080)**
 - Topo: "Férias. O que tem para fazer hoje?"
 - Centro: `mockup-capa.png` + 2 páginas (p. 7 e p. 78).
-- Rodapé: "30 dias prontos para imprimir · 4 a 10 anos · R$ 37,00"
+- Rodapé: "Plano de 30 dias · 4 a 10 anos · R$ 37,00" (frase da página; "30 dias prontos" não existe nela)
 
 **Variação opcional (carrossel 4:5, mesmo texto do anúncio):** 1) capa + gancho; 2) labirinto
 p. 7 "Nível 1 · 4 a 6 anos"; 3) jogo dos 7 erros p. 68 "Nível 2 · 7 a 10 anos"; 4) código
 secreto p. 78; 5) plano p. 5 "30 dias · 2 folhas por dia · R$ 37,00".
 
-**Quando rodar:** férias de verão (dez–fev). Fora da temporada, trocar o topo por outra ocasião
+**Quando rodar:** férias de verão, de 2026-12-15 a 2027-02-28 (registrado em `campanha.md`). Fora da temporada, trocar o topo por outra ocasião
 (volta às aulas, férias de julho, viagem) — nunca por prazo ou "últimos dias".
 
 **Anúncio**
@@ -291,7 +296,7 @@ secreto p. 78; 5) plano p. 5 "30 dias · 2 folhas por dia · R$ 37,00".
 - **Título:** Férias: 30 dias de atividades prontas
 - **Descrição:** PDF A4 · 4 a 10 anos · 2 níveis
 - **CTA:** Saiba mais
-- **Arquivo final:** (link 1:1) · (link 4:5)
+- **Arquivo final:** `criativos/estatico/anuncio-5-ferias-1x1.jpg` (1:1) · `criativos/estatico/anuncio-5-ferias-4x5.jpg` (4:5)
 
 ---
 

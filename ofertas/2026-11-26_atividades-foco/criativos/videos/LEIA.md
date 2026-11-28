@@ -10,9 +10,13 @@ As versões já enviadas à Meta (IDs em `campanha.md`) são as ANTIGAS: precisa
 "Gabarito completo" (antes "Gabarito no fim"). O `folheando.mp4` foi refeito do PDF novo (capa e p. 39).
 **Anúncios 1 e 2 remontados de novo em 2026-11-28 (rodada 3)**, mesmo áudio e mesma duração: o zoom no plano (p. 5)
 e no gabarito (p. 128) agora para com a página inteira dentro do quadro (opção `caber` do montador). `quadro-anuncio-2.jpg` refeito.
+**Os 4 remontados de novo em 2026-11-28 (rodada 2 dos criativos, `revisoes/criativos-2026-11-28/correcoes.md`)**, mesmo áudio
+e mesma duração: legenda cortada pelo tempo real de cada palavra (faster-whisper, `montador/palavras.py`), blocos
+marcados à mão sem partir "4 a 6 anos"/"30 dias"; zoom do plano, do gabarito e da memória dentro de uma janela que
+termina acima da legenda; fecho com "Garantia de 7 dias" e legenda clara, longe do botão. `quadro-anuncio-1..4.jpg` refeitos.
 Formato: 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz, áudio normalizado (−16 LUFS, pico ≤ −1,4 dB).
-Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 6 palavras, sincronizada
-pelas pausas reais da fala. Só mídia real do produto: atividades do caderno completo (com o gabarito
+Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 7 palavras (marcados com "|" no
+montador), cada bloco entrando no tempo real da 1ª palavra. Só mídia real do produto: atividades do caderno completo (com o gabarito
 animado), páginas do PDF, mockups e o vídeo do caderno folheando. Sem pessoas, sem rosto de criança.
 
 | Arquivo | Roteiro | Voz | Duração | Fronteiras de frase em pausas reais |
@@ -29,7 +33,7 @@ animado), páginas do PDF, mockups e o vídeo do caderno folheando. Sem pessoas,
 - **Anúncio 4:** "10 min de tela" em fundo escuro → corte para "O que vem depois?" (p. 8) → padrões com a resposta → memória (p. 11, zoom do quadro de cima para a página toda) → labirinto (p. 13) e sudoku (p. 18) → ligue os pontos (p. 15) se ligando → caderno folheando → plano (p. 5), quadro de conquistas (p. 142), certificado (p. 143) → cartão final.
 
 Fecho de todos: capa do caderno + "Dez Minutinhos · 120 atividades para imprimir · 4 a 10 anos ·
-R$ 37,00 · Toque em Saiba mais", fundo laranja.
+R$ 37,00 · Garantia de 7 dias · Toque em Saiba mais", fundo laranja; a legenda do fecho é clara e fica bem abaixo do botão.
 
 Quadros de referência: `quadro-anuncio-1.jpg` … `quadro-anuncio-4.jpg`.
 
@@ -44,7 +48,8 @@ Quadros de referência: `quadro-anuncio-1.jpg` … `quadro-anuncio-4.jpg`.
 cd criativos/montador
 node paginas2x.cjs 5 6 7 8 78 128 142 143
 ffmpeg -i ../../pagina/img/folheando.mp4 -vf fps=30 -q:v 3 cache/folheando/%04d.jpg
-python3 montador.py            # os 8 (≈ 7 min)
+python3 palavras.py amandinha  # uma vez por áudio: tempo de cada palavra → cache/palavras/
+python3 montador.py            # os 4 (≈ 4 min)
 python3 qc.py anuncio-1-amandinha
 ```
 
