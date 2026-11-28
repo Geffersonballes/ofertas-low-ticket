@@ -23,3 +23,7 @@ entregue o passo a passo para o dono montar.
 
 Depois de criar, liste os IDs e um resumo de tudo em `campanha.md` e peça ao dono a revisão
 e a publicação (Portão 4). **Nunca publique nem ative.**
+
+**Antes de pedir o Portão 4:** rode `node ferramentas/testar_checkout.cjs <link do checkout> --preco "<preço>" --bumps "<nome1>,<nome2>,..."`
+→ "CHECKOUT OK" (preço, todos os bumps, Pix/boleto/cartão, botão). Mande o print `checkout-teste.png` junto com o resumo
+das campanhas. Se a sessão estiver fora do Brasil, peça ao dono para conferir os bumps no celular, a partir da página.

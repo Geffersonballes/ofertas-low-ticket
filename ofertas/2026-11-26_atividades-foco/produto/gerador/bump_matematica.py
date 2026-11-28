@@ -66,7 +66,7 @@ def gerar():
         num = len(pags) + 1
         pags.append(BUMP.pagina_atividade(a, num))
         lista.append((num, a))
-    pags += BUMP.gabarito(lista, len(pags) + 1)
+    pags += BUMP.gabarito(lista, len(pags) + 1, por_pag=6)  # 2 por linha: respostas maiores no papel
     return dict(paginas=BUMP.montar(pags), atividades=len(lista))
 
 

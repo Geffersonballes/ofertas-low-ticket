@@ -1,5 +1,5 @@
 """Mockup do topo (rodada 1 de design): caderno impresso em perspectiva sobre fundo laranja, com folhas
-soltas reais (labirinto e código secreto) e um lápis. Só páginas reais do caderno (produto/gerador/saida/vitrine-XX.png).
+soltas reais (labirinto e código secreto) e um lápis. Só páginas do caderno vendido (PDF final rasterizado por gerar_midia.py).
 Uso:  python3 gerar_heroi.py && node fotografar.cjs lista-heroi.json && python3 gerar_heroi.py --finalizar
 Saída: ../img/heroi.webp (fundo #ff7a45 nas bordas, igual ao fundo do topo da página)."""
 import json
@@ -9,15 +9,16 @@ import sys
 from PIL import Image
 
 AQUI = pathlib.Path(__file__).parent
-PAGS = AQUI.parents[1] / "produto" / "gerador" / "saida"
+PAGS = AQUI.parents[1] / "produto" / "gerador" / "saida" / "paginas-final"  # gerar_midia.py rasteriza o PDF final
 CENAS = AQUI / "cenas"
 IMG = AQUI.parent / "img"
 W, H = 1200, 900
 LARANJA = "#ff7a45"
 
 
+# página do caderno final: 1 capa, 7 labirinto (N1), 78 código secreto (N2)
 def url(n):
-    return (PAGS / f"vitrine-{n:02d}.png").as_uri()
+    return (PAGS / f"pagina-{n:03d}.png").as_uri()
 
 
 def lapis(x, y, ang, w):
@@ -51,8 +52,8 @@ html,body{{width:{W}px;height:{H}px;overflow:hidden;background:{LARANJA}}}
 .pg:first-child{{box-shadow:0 30px 60px rgba(110,35,0,.35)}}
 </style></head><body><div class="palco">
 <div style="{fl}{sombra}left:120px;top:190px;transform:rotate(-15deg)">
-  <div style="position:absolute;inset:0;background:url({url(3)}) center/cover"></div></div>
-<div style="{fl}{sombra}left:720px;top:150px;transform:rotate(13deg);background-image:url({url(12)})"></div>
+  <div style="position:absolute;inset:0;background:url({url(7)}) center/cover"></div></div>
+<div style="{fl}{sombra}left:720px;top:150px;transform:rotate(13deg);background-image:url({url(78)})"></div>
 <div class="chao"></div>
 <div class="caderno">{camadas}<div class="capa"></div></div>
 {lapis(70, 770, -6, 440)}

@@ -211,11 +211,12 @@ def svg_atividade(pag):
     at = ATV[pag]
     base = at["svg"]
     gab = at.get("gabarito_svg") or ""
-    traços = re.findall(r'<polyline points="([^"]+)"([^>]*?)/>', gab)
-    traços = [(p, r) for p, r in traços if "#ff7a45" in r]
+    # polyline (aberto) ou polygon (ligue os pontos fechado: o traço volta ao 1 desde 2026-11-28)
+    traços = re.findall(r'<(polyline|polygon) points="([^"]+)"([^>]*?)/>', gab)
+    traços = [(t, p, r) for t, p, r in traços if "#ff7a45" in r]
     if traços:
-        ov = "".join(f'<path class="traco" d="M{" L".join(p.split())}" pathLength="1" stroke-dasharray="1" '
-                     f'stroke-dashoffset="1"{r}/>' for p, r in traços)
+        ov = "".join(f'<path class="traco" d="M{" L".join(p.split())}{" Z" if t == "polygon" else ""}" pathLength="1" stroke-dasharray="1" '
+                     f'stroke-dashoffset="1"{r}/>' for t, p, r in traços)
         modo = "traco"
     else:
         ov, modo = gab, ("fade" if gab else "nada")

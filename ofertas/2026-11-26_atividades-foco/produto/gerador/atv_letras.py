@@ -264,12 +264,20 @@ def forme_palavra(rng, chaves):
     return at("Desembaralhe", "As letras estão misturadas. Olhe a figura e escreva a palavra certa, uma letra em cada risquinho.", 2, CAT, base, base + "".join(g))
 
 
+# Cada par tem uma rima diferente dos outros 19 (famílias abaixo): numa folha, cada palavra só rima com o seu par.
+# Antes havia BALÃO/AVIÃO + FOGÃO/MAMÃO (+ PÃO/MÃO), GATO/PATO + SAPATO/RATO e JANELA/PANELA + VELA/TELA.
 RIMAS = [("GATO", "PATO"), ("BOLA", "COLA"), ("CASA", "ASA"), ("DADO", "LADO"), ("JANELA", "PANELA"), ("LUA", "RUA"),
          ("UVA", "LUVA"), ("CAMA", "LAMA"), ("BALÃO", "AVIÃO"), ("MEIA", "AREIA"), ("CHAVE", "NAVE"), ("FLOR", "CALOR"),
-         ("PIPOCA", "MINHOCA"), ("CANECA", "BONECA"), ("FOGÃO", "MAMÃO"), ("PÃO", "MÃO"), ("VELA", "TELA"), ("SAPATO", "RATO"),
+         ("PIPOCA", "MINHOCA"), ("CANECA", "BONECA"), ("SAPO", "PAPO"), ("DEDO", "MEDO"), ("NARIZ", "GIZ"), ("MEL", "PAPEL"),
          ("COPO", "TOPO"), ("MALA", "SALA")]
-for _a, _b in RIMAS:
+FAMILIAS_RIMA = ["ATO", "OLA", "ASA", "ADO", "ELA", "UA", "UVA", "AMA", "ÃO", "EIA", "AVE", "OR",
+                 "OCA", "ECA", "APO", "EDO", "IZ", "EL", "OPO", "ALA"]
+assert len(set(FAMILIAS_RIMA)) == len(RIMAS)
+for (_a, _b), _f in zip(RIMAS, FAMILIAS_RIMA):
     assert _a[-2:] == _b[-2:] and _a != _b, (_a, _b)
+    assert _a.endswith(_f) and _b.endswith(_f), (_a, _b, _f)
+    # nenhuma palavra do par termina com a família de outro par
+    assert not any(o != _f and len(o) >= 3 and (_a.endswith(o) or _b.endswith(o)) for o in FAMILIAS_RIMA), (_a, _b)
 
 
 def rimas(rng, pares):

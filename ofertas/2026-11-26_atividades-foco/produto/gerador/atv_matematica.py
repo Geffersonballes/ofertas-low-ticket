@@ -146,10 +146,12 @@ def complete_numeros(rng, ate):
                 s.append(_txt(x + 7.5, y + 7.8, str(v), 7, 800, fonte="Baloo 2"))
         s.append(icone(rng.choice(["passaro", "pato", "gato", "carro"]), 2, y - 13, 11))
     if ate <= 10:
+        s.append(_txt(W / 2, 143, "Terminou? Pinte as figuras:", 6, 800))
         for k, f in enumerate(rng.sample(FIGS, 5)):
             s.append(icone(f, 15 + k * 34, 150, 22))
     base = "".join(s)
-    return at("Complete os números", f"Escreva os números que faltam nas casinhas pontilhadas, de 1 até {ate}.", 1, CAT, base, base + "".join(g))
+    ultimo = linhas * por  # a instrução diz até onde a folha vai de verdade (antes dizia 10 numa folha até 20)
+    return at("Complete os números", f"Escreva os números que faltam nas casinhas pontilhadas, de 1 até {ultimo}.", 1, CAT, base, base + "".join(g))
 
 
 def mercadinho1(rng):
@@ -190,7 +192,11 @@ def contas(rng, op, maxi):
         assert r == (a + b if op == "+" else a - b)
     base = "".join(s)
     tit = "Contas de somar" if op == "+" else "Contas de diminuir"
-    return at(tit, "Resolva cada conta e escreva o resultado na caixinha. Pode usar os dedos ou desenhar bolinhas.", 2, CAT, base, base + "".join(g))
+    instr = "Resolva cada conta e escreva o resultado na caixinha. Pode usar os dedos ou desenhar bolinhas."
+    if maxi <= 10:
+        tit += " (aquecimento)"
+        instr = "Aquecimento com contas até 10. " + instr
+    return at(tit, instr, 2, CAT, base, base + "".join(g))
 
 
 def compara(rng, maxi):
@@ -275,7 +281,7 @@ def mercadinho2(rng):
         s.append(f'<rect x="{x}" y="{y}" width="56" height="32" rx="4" fill="#fff" stroke="{TRACO}" stroke-width=".6"/>')
         s.append(icone(ic, x + 3, y + 4, 22))
         s.append(_txt(x + 40, y + 11, nome, 4.6, 800))
-        s.append(_txt(x + 40, y + 21, f"{precos[nome]} fichas", 5, 800, cor=LAR))
+        s.append(_txt(x + 40, y + 21, f"{precos[nome]} fichas", 5.4, 800, cor=TRACO))  # preço em preto: em P&B o laranja ficava claro
     probs = []
     nomes = [n for _, n in itens]
     a, b = rng.sample(nomes, 2)

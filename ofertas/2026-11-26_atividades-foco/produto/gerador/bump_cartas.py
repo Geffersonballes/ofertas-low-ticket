@@ -18,7 +18,7 @@ CATEGORIAS = [
         "O que você quer fazer amanhã?",
         "Qual foi o momento mais tranquilo do seu dia?",
         "Qual é a lembrança mais divertida das últimas férias?",
-        "Qual foi o passeio mais legal que a gente já fez junto?",
+        "Qual foi o passeio mais legal que a gente já fez juntos?",
         "Conte uma coisa boa que aconteceu esta semana.",
     ]),
     ("IMAGINAÇÃO", "balao", [
@@ -46,7 +46,7 @@ CATEGORIAS = [
         "E se todos os carros virassem bicicletas gigantes?",
         "E se você acordasse dentro do seu desenho animado preferido?",
         "E se toda segunda-feira fosse dia de festa?",
-        "E se você escolhesse o jantar de hoje? O que seria?",
+        "E se você pudesse escolher um jantar? O que seria?",
         "E se você ganhasse um robô ajudante? O que ele faria primeiro?",
     ]),
     ("PREFERIDOS", "coracao", [
@@ -58,9 +58,9 @@ CATEGORIAS = [
         "Dia de sol ou dia de chuva? O que você faz em cada um?",
         "Qual é a sua cor preferida hoje? Ela já foi outra?",
         "Qual é a sua história preferida? Conte o começo.",
-        "Se pudesse escolher um passeio para amanhã, qual seria?",
+        "Se você pudesse escolher um passeio, qual seria?",
         "Qual comida você comeria todo dia?",
-        "Doce ou salgado? Qual é o seu preferido de cada?",
+        "Doce ou salgado? Qual é o seu doce preferido? E o salgado?",
         "Qual é o seu cantinho preferido da casa? Por quê?",
     ]),
 ]

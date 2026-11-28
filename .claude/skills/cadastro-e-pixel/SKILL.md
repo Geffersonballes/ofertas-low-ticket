@@ -4,6 +4,8 @@ description: Etapa 5 — cadastra o produto e o .zip na Hotmart, cria a Página 
 ---
 **Antes de tudo:** rode `python3 ferramentas/conferir_material.py ofertas/<pasta>`. Se não disser
 "MATERIAL APROVADO", pare e rode a skill `revisar-material` (Portão M). Leia também `aprendizados/processo.md`.
+Para a parte da Meta (Página, pixel, Windsor), use a skill `preparar-meta-oferta` (todos os prompts de uma vez).
+Troca de PDF depois do cadastro: skill `trocar-arquivo-hotmart`.
 
 Entrada: `[NOME_PIXEL]` (padrão "Pixel Oferta <Nome>"), `[NOME_CONTA]` de anúncios/BM.
 

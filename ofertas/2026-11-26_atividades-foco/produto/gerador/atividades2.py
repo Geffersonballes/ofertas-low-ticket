@@ -2,6 +2,7 @@
 Mesmo contrato do atividades.py: cada função devolve dict com titulo, instrucao, nivel, categoria,
 tipo, svg e gabarito_svg (ou gabarito_txt). Toda resposta é calculada e conferida com assert."""
 import math
+import random
 from itertools import permutations, product
 
 from icones import icone, TRACO
@@ -24,11 +25,28 @@ def _at(titulo, instrucao, nivel, categoria, tipo, svg, gab=None, gab_txt=None):
 
 
 # ======================================================================= LÓGICA
+def _curvas(cam):
+    dirs = [(b[0] - a[0], b[1] - a[1]) for a, b in zip(cam, cam[1:])]
+    return sum(1 for d1, d2 in zip(dirs, dirs[1:]) if d1 != d2)
+
+
+def labirinto_bom(cols, lins, rng):
+    """Gera com o rng principal (a sequência das outras páginas não muda). Se o caminho sair trivial
+    (quase reto, com menos de 3 curvas, sem usar o miolo), gera de novo com um rng derivado até ter desafio."""
+    paredes, cam = _gera_labirinto(cols, lins, rng)
+    k = 0
+    while _curvas(cam) < 3:  # ex.: descer a coluna da esquerda e seguir a última linha
+        k += 1
+        assert k < 200, "labirinto sem desafio"
+        paredes, cam = _gera_labirinto(cols, lins, random.Random(f"lab-{cols}x{lins}-{len(cam)}-{k}"))
+    return paredes, cam
+
+
 def labirinto(nivel, rng, cols, lins, ini="passaro", fim="arvore"):
     cel = min((W - 10) / cols, (H - 52) / lins)
     x0 = (W - cols * cel) / 2
     y0 = 25
-    paredes, cam = _gera_labirinto(cols, lins, rng)
+    paredes, cam = labirinto_bom(cols, lins, rng)
     esp = 1.8 if cel > 18 else (1.4 if cel > 12 else 1.0)
     base = (_desenha_labirinto(paredes, cols, lins, x0, y0, cel, esp)
             + icone(ini, x0 + cel / 2 - 11, y0 - 23, 22)
@@ -149,8 +167,8 @@ def sudoku6(rng, dicas=17):
             s.append(f'<line x1="{x0}" y1="{y0 + k * cel}" x2="{x0 + 6 * cel}" y2="{y0 + k * cel}" stroke="{TRACO}" stroke-width="{e}"/>')
         return "".join(s)
 
-    dica = _txt(W / 2, y0 + 6 * cel + 16, "Cada linha, cada coluna e cada quadradão de 6 casinhas tem 1, 2, 3, 4, 5 e 6.", 4.6, 600)
-    return _at("Sudoku 6x6", "Complete com números de 1 a 6 sem repetir na linha, na coluna nem no quadradão.",
+    dica = _txt(W / 2, y0 + 6 * cel + 16, "Cada linha, coluna e bloco de linha grossa (2 linhas x 3 colunas) tem 1 a 6.", 4.6, 600)
+    return _at("Sudoku 6x6", "Complete com números de 1 a 6 sem repetir na linha, na coluna nem no bloco de 6 casinhas.",
                2, "Lógica", "sudoku", desenha(puz) + dica, desenha(sol, True))
 
 
@@ -228,6 +246,17 @@ def padroes(rng, nivel, ciclos):
     s, gab = [], []
     alt = 45
     for i, ciclo in enumerate(ciclos):
+        rng_opc = rng
+        if isinstance(ciclo, dict):
+            # fila trocada: gasta o rng principal como a fila original e sorteia as opções num rng derivado
+            orig = [_item(c) for c in ciclo["sorteio"]]
+            r0 = (orig * 4)[6]
+            ex0 = [(f, 0, False) for f in FIG_PADRAO if f not in {c[0] for c in orig}]
+            pool0 = [c for c in dict.fromkeys(orig) if c != r0] + rng.sample(ex0, 3)
+            o0 = [r0] + rng.sample([p for p in pool0 if p != r0], 2)
+            rng.shuffle(o0)
+            ciclo = ciclo["mostrar"]
+            rng_opc = random.Random(f"fila-{ciclo}")
         ciclo = [_item(c) for c in ciclo]
         y = 2 + i * alt
         seq = (ciclo * 4)[:6]
@@ -240,11 +269,11 @@ def padroes(rng, nivel, ciclos):
         s.append(f'<rect x="{bx}" y="{y + 3}" width="{tam}" height="{tam}" rx="3" fill="none" stroke="{TRACO}" stroke-width=".8" stroke-dasharray="2 1.5"/>')
         s.append(_txt(bx + tam / 2, y + 3 + tam / 2, "?", 11, 800, fonte="Baloo 2"))
         # opções: a certa + 2 erradas (outras do ciclo com outra rotação, ou figuras novas)
-        erradas = [c for c in set(ciclo) if c != resp]
+        erradas = [c for c in dict.fromkeys(ciclo) if c != resp]
         extra = [(f, 0, False) for f in FIG_PADRAO if f not in {c[0] for c in ciclo}]
-        pool = erradas + rng.sample(extra, 3)
-        opc = [resp] + rng.sample([p for p in pool if p != resp], 2)
-        rng.shuffle(opc)
+        pool = erradas + rng_opc.sample(extra, 3)
+        opc = [resp] + rng_opc.sample([p for p in pool if p != resp], 2)
+        rng_opc.shuffle(opc)
         oy = y + 24
         s.append(f'<rect x="68" y="{oy - 1}" width="{W - 72}" height="15" rx="3" fill="#f3f3f3"/>')
         s.append(_txt(64, oy + 6.5, "circule:", 4.8, 700, anchor="end", cor="#666"))
@@ -254,8 +283,40 @@ def padroes(rng, nivel, ciclos):
             if (nome, g, e) == resp:
                 gab.append(_circ(ox + 6.5, oy + 6.5, 9))
     base = "".join(s)
-    return _at("O que vem depois?", "Olhe a fila, descubra o que se repete e circule embaixo a figura que entra no ?.",
+    return _at("O que vem depois?", "Olhe a fila, descubra o que se repete e circule embaixo a figura que entra no quadrinho do ponto de interrogação.",
                nivel, "Padrões", "padrões", base, base + "".join(gab))
+
+
+# filas extras (girar/espelhar) para trocar filas repetidas do "O que vem depois?" do Nível 2, sem usar o rng
+CICLOS_EXTRAS = [
+    [("triangulo", 0, False), ("triangulo", 180, False)],
+    [("peixe", 0, False), ("peixe", 0, False), ("peixe", 0, True)],
+    [("banana", 0, False), ("banana", 180, False)],
+    [("lua", 0, False), ("lua", 0, True), ("estrela", 0, False)],
+    [("coracao", g, False) for g in (0, 90, 180, 270)],
+    [("barco", 0, False), ("barco", 0, True), ("barco", 0, True)],
+    [("triangulo", 0, False), ("triangulo", 90, False), ("circulo", 0, False)],
+    [("banana", g, False) for g in (0, 90, 180, 270)],
+    [("casa", 0, False), ("casa", 180, False), ("casa", 180, False)],
+    [("passaro", 0, True), ("passaro", 0, False), ("nuvem", 0, False)],
+    [("lua", 0, True), ("lua", 0, True), ("lua", 0, False)],
+    [("peixe", 0, True), ("estrela", 0, False), ("peixe", 0, False), ("estrela", 0, False)],
+]
+
+
+def sem_repetir_filas(ciclos, usadas):
+    """Troca as filas que já apareceram no nível (`usadas`, guardado por quem chama) por filas extras."""
+    out = []
+    for c in ciclos:
+        sig = tuple(_item(x) for x in c)
+        if sig in usadas:
+            c = next(e for e in CICLOS_EXTRAS if tuple(e) not in usadas and tuple(e) not in {tuple(_item(x) for x in o) for o in out})
+            usadas.add(tuple(c))
+            out.append({"mostrar": c, "sorteio": list(sig)})  # o sorteio das opções segue a fila original
+            continue
+        usadas.add(sig)
+        out.append(c)
+    return out
 
 
 REGRAS_SEQ = [
@@ -265,31 +326,51 @@ REGRAS_SEQ = [
 ]
 
 
+# Filas de "Que número falta?" já usadas no caderno (e, no Volume 2, também as do volume 1).
+# A fila nunca repete: se o sorteio principal cair numa fila usada, sorteia de novo com um rng
+# derivado (a sequência do rng principal não muda, então as outras páginas continuam iguais).
+SEQ_USADAS = set()
+
+
+def _sorteia_seq(rng, faixa, dobras=(1, 2, 3, 5)):
+    tipo = rng.choice(["soma", "soma", "tira"] + (["dobra"] if faixa >= 2 else []) + (["alterna"] if faixa >= 3 else []))
+    if tipo == "soma":
+        k = rng.choice([2, 3, 5, 10] if faixa == 1 else [3, 4, 5, 6, 9, 10, 11]); a = rng.randint(0, 20 if faixa == 1 else 40)
+        seq = [a + k * t for t in range(5)]; regra = f"soma {k}"
+    elif tipo == "tira":
+        k = rng.choice([2, 3, 5, 10] if faixa == 1 else [3, 4, 6, 7, 8]); a = rng.randint(4 * k, 4 * k + 30)
+        seq = [a - k * t for t in range(5)]; regra = f"tira {k}"
+    elif tipo == "dobra":
+        a = rng.choice(list(dobras)); seq = [a * 2 ** t for t in range(5)]; regra = "dobra"
+    else:
+        p, q = rng.sample([1, 2, 3, 4, 5], 2); a = rng.randint(1, 10)
+        seq = [a]
+        for t in range(4):
+            seq.append(seq[-1] + (p if t % 2 == 0 else q))
+        regra = f"+{p}, +{q}"
+    return tipo, seq, regra
+
+
 def sequencias(rng, faixa):
     """faixa: 1 (fácil) a 3 (difícil)."""
     s, gab = [], []
-    usadas = set()
+    usadas = set()       # sorteio principal (mesma regra de sempre: mantém a sequência do rng)
+    na_pagina = set()    # filas que de fato vão para a página
     for i in range(6):
         for _ in range(200):
-            tipo = rng.choice(["soma", "soma", "tira"] + (["dobra"] if faixa >= 2 else []) + (["alterna"] if faixa >= 3 else []))
-            if tipo == "soma":
-                k = rng.choice([2, 3, 5, 10] if faixa == 1 else [3, 4, 5, 6, 9, 10, 11]); a = rng.randint(0, 20 if faixa == 1 else 40)
-                seq = [a + k * t for t in range(5)]; regra = f"soma {k}"
-            elif tipo == "tira":
-                k = rng.choice([2, 3, 5, 10] if faixa == 1 else [3, 4, 6, 7, 8]); a = rng.randint(4 * k, 4 * k + 30)
-                seq = [a - k * t for t in range(5)]; regra = f"tira {k}"
-            elif tipo == "dobra":
-                a = rng.choice([1, 2, 3, 5]); seq = [a * 2 ** t for t in range(5)]; regra = "dobra"
-            else:
-                p, q = rng.sample([1, 2, 3, 4, 5], 2); a = rng.randint(1, 10)
-                seq = [a]
-                for t in range(4):
-                    seq.append(seq[-1] + (p if t % 2 == 0 else q))
-                regra = f"+{p}, +{q}"
+            tipo, seq, regra = _sorteia_seq(rng, faixa)
             if max(seq) <= 99 and min(seq) >= 0 and tuple(seq) not in usadas:
                 usadas.add(tuple(seq)); break
+        k_alt = 0
+        while tuple(seq) in na_pagina or tuple(seq) in SEQ_USADAS or max(seq) > 99 or min(seq) < 0:
+            k_alt += 1
+            assert k_alt < 500, "sem fila nova"
+            tipo, seq, regra = _sorteia_seq(random.Random(f"seq-{faixa}-{i}-{seq}-{k_alt}"), faixa, (1, 2, 3, 4, 5, 6))
+        na_pagina.add(tuple(seq)); SEQ_USADAS.add(tuple(seq))
         y = 6 + i * 36
         falta = rng.choice([2, 3, 4]) if faixa >= 2 else 4
+        if tipo == "alterna":
+            falta = 4  # regra alternada com o buraco no meio admite duas leituras (ex.: 1 5 _ 12 15)
         for k, v in enumerate(seq):
             x = 8 + k * 30
             tr = 'stroke-dasharray="2 1.5"' if k == falta else ""
@@ -302,7 +383,7 @@ def sequencias(rng, faixa):
                 s.append(_txt(x + 26, y + 11, "›", 9, 800, cor="#999"))
         s.append(_txt(160, y + 11, "regra:", 4.6, 700, cor="#666"))
         s.append(f'<line x1="150" y1="{y + 19}" x2="180" y2="{y + 19}" stroke="{TRACO}" stroke-width=".5"/>')
-        gab.append(_txt(165, y + 16, regra, 4.2, 800, cor=LAR))
+        gab.append(_txt(165, y + 15.5, regra, 6, 800, cor=TRACO))
     base = "".join(s)
     return _at("Que número falta?", "Descubra a regra de cada fila e escreva o número que falta no círculo pontilhado.",
                2, "Padrões", "sequência numérica", base, base + "".join(gab))
@@ -312,7 +393,7 @@ def sequencias(rng, faixa):
 VARIANTES = [("peixe", dict(espelhar=True)), ("estrela", dict(variante="6pontas")), ("casa", dict(variante="semporta")),
              ("flor", dict(variante="4petalas")), ("triangulo", dict(girar=180)), ("maca", dict(variante="semfolha")),
              ("passaro", dict(espelhar=True)), ("casa", dict(variante="semjanela")), ("sol", dict(variante="poucosraios")),
-             ("lua", dict(espelhar=True)), ("carro", dict(espelhar=True)), ("coracao", dict(girar=180)),
+             ("lua", dict(espelhar=True)), ("carro", dict(variante="semroda")), ("coracao", dict(girar=180)),
              ("barco", dict(espelhar=True)), ("banana", dict(espelhar=True))]
 
 
@@ -418,6 +499,8 @@ CENAS = {
               ("maca", 30, 92, 12), ("sol", 120, 0, 0)],
 }
 ESPELHAVEIS = {"peixe", "passaro", "barco", "carro", "lua", "banana", "balao"}
+# espelhar objeto quase simétrico (balão, carro) quase não muda o desenho: vira "menor" (ou "remover" se for pequeno)
+QUASE_SIMETRICOS = {"balao", "carro"}
 VAR_DIF = {"estrela": "6pontas", "casa": "semporta", "flor": "4petalas", "sol": "poucosraios", "maca": "semfolha"}
 
 
@@ -463,6 +546,13 @@ def diferencas(rng, nivel, cena, n):
             + (["variante", "variante"] if o["nome"] in VAR_DIF else [])
         mods[i] = rng.choice(poss)
     assert len(mods) == n
+    # ajustes depois do sorteio (o rng principal segue igual): diferença tem de ser visível para a idade
+    for i, m in mods.items():
+        o = objs[i]
+        if m == "espelhar" and o["nome"] in QUASE_SIMETRICOS:
+            mods[i] = "menor" if o["t"] >= 16 else "remover"
+        elif m == "variante" and (o["t"] < 16 or (nivel == 1 and o["t"] < 20)):
+            mods[i] = "cinza"  # 4 pétalas / maçã sem folha num objeto pequeno some na folha impressa
     esc = 1.0 if nivel == 2 else 1.0
     pw, ph = 176, 108
 
@@ -472,7 +562,10 @@ def diferencas(rng, nivel, cena, n):
         if marcar:
             for i in m:
                 o = objs[i]
-                g += _circ(o["x"] + o["t"] / 2, o["y"] + 1 + o["t"] / 2, min(o["t"] * .62 + 3, 17), 1.3)
+                r = min(o["t"] * .62 + 3, 17)
+                cx = min(max(o["x"] + o["t"] / 2, r + .8), pw - r - .8)
+                cy = min(max(o["y"] + 1 + o["t"] / 2, r + .8), ph - r - .8)
+                g += _circ(cx, cy, r, 1.3)
         return g + "</g>"
 
     base = painel(0, {}) + painel(114, mods)
@@ -488,7 +581,7 @@ def memoria_figuras(rng, nivel, n_ver, n_opc):
     escolhidas = rng.sample(pool, n_opc)
     vistas = escolhidas[:n_ver]
     s = [f'<rect x="1" y="1" width="{W - 2}" height="92" rx="6" fill="#fff7f1" stroke="{TRACO}" stroke-width=".7"/>',
-         _txt(8, 9, "OLHE BEM", 5.5, 800, anchor="start", cor="#888", fonte="Baloo 2")]
+         _txt(8, 9, "OLHE BEM", 5.5, 800, anchor="start", cor=TRACO, fonte="Baloo 2")]
     tam = 30 if n_ver <= 4 else 24
     cols = n_ver if n_ver <= 4 else math.ceil(n_ver / 2)
     linhas = 1 if n_ver <= 4 else 2
@@ -497,7 +590,8 @@ def memoria_figuras(rng, nivel, n_ver, n_opc):
         larg = cols * (tam + 10)
         x = (W - larg) / 2 + c * (tam + 10) + 5
         y = (92 - linhas * (tam + 6)) / 2 + l * (tam + 6) + 5
-        s.append(icone(nome, x, y, tam, girar=rng.choice([0, 0, -8, 8])))
+        g = rng.choice([0, 0, -8, 8])  # sorteio mantido para não mudar a sequência do rng
+        s.append(icone(nome, x, y, tam, girar=g if nivel == 2 else 0))  # Nível 1: igual em cima e embaixo
     s.append(f'<line x1="0" y1="101" x2="{W}" y2="101" stroke="{TRACO}" stroke-width=".7" stroke-dasharray="3 2"/>')
     s.append(_txt(W / 2, 97, "dobre aqui para esconder a parte de cima", 4.6, 700, cor="#777"))
     s.append(_txt(8, 112, "Quais figuras estavam lá em cima? Circule.", 6.2, 800, anchor="start"))
@@ -541,7 +635,7 @@ def memoria_lugares(rng, n):
         return "".join(g)
 
     s = [f'<rect x="1" y="1" width="{W - 2}" height="92" rx="6" fill="#fff7f1" stroke="{TRACO}" stroke-width=".7"/>',
-         _txt(8, 9, "OLHE BEM", 5.5, 800, anchor="start", cor="#888", fonte="Baloo 2"),
+         _txt(8, 9, "OLHE BEM", 5.5, 800, anchor="start", cor=TRACO, fonte="Baloo 2"),
          grade((W - 3 * cel) / 2, 8, "#fff"),
          f'<line x1="0" y1="101" x2="{W}" y2="101" stroke="{TRACO}" stroke-width=".7" stroke-dasharray="3 2"/>',
          _txt(W / 2, 97, "dobre aqui para esconder a parte de cima", 4.6, 700, cor="#777"),
@@ -581,11 +675,17 @@ def _peixe():
 
 
 DESENHOS_PONTOS = {
-    "barquinho": [(30, 150), (55, 185), (150, 185), (172, 150), (100, 150), (100, 25), (160, 135), (100, 135)],
+    "barquinho": [(30, 150), (55, 185), (150, 185), (172, 150), (100, 25), (100, 150), (30, 150)],
     "casinha": [(50, 190), (50, 100), (22, 100), (100, 30), (178, 100), (150, 100), (150, 190), (50, 190)],
     "foguete": [(100, 10), (130, 60), (130, 140), (158, 178), (126, 166), (116, 186), (84, 186), (74, 166), (42, 178), (70, 140), (70, 60), (100, 10)],
     "coração": None, "estrela": None, "peixe": None,
 }
+
+
+# partes do desenho que já vêm traçadas (não fazem parte do caminho de pontos), no mesmo sistema 0..200
+TRACO_PRONTO = {}
+# pontos onde o traço pronto encosta: o número vai para o lado (não fica em cima do traço)
+ROTULO_AO_LADO = {}
 
 
 def _pontos_de(nome):
@@ -639,19 +739,40 @@ def ligue_pontos(rng, nivel, desenho, alvo):
     cx = sum(p[0] for p in pts) / len(pts); cy = sum(p[1] for p in pts) / len(pts)
     s = []
     tl = 5.5 if len(pts) <= 25 else 4.6
+    rotulos = []
     for i, (x, y) in enumerate(pts):
         dx, dy = x - cx, y - cy; d = math.hypot(dx, dy) or 1
         s.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="1.5" fill="{TRACO}"/>')
-        s.append(_txt(x + dx / d * 5.5, y + dy / d * 5.5, str(i + 1), tl, 800))
+        lx, ly = x + dx / d * 5.5, y + dy / d * 5.5
+        for ax, ay in ROTULO_AO_LADO.get(desenho, []):
+            if math.dist((x, y), (ax * e, 8 + ay * e)) < 4:
+                lx, ly = x + 5, y - 3.5
+
+        def folga(px, py, i=i):
+            outros = [q for j, q in enumerate(pts) if j != i] + rotulos
+            return min(math.dist((px, py), q) for q in outros)
+        if folga(lx, ly) < 4.5:  # número colado no ponto vizinho: procura o lado com mais espaço
+            cands = [(x + 5.5 * math.cos(k * math.pi / 4), y + 5.5 * math.sin(k * math.pi / 4)) for k in range(8)]
+            lx, ly = max(cands, key=lambda c: folga(*c))
+        rotulos.append((lx, ly))
+        s.append(_txt(lx, ly, str(i + 1), tl, 800))
     if desenho == "barquinho":
         for k in range(3):
             yy = 196 + k * 6
             s.append(f'<path d="M6 {yy} q 11 -5 22 0 t 22 0 t 22 0 t 22 0 t 22 0 t 22 0 t 22 0 t 22 0" fill="none" stroke="{TRACO}" stroke-width=".7"/>')
+    if desenho in TRACO_PRONTO:
+        s.append(f'<path d="{TRACO_PRONTO[desenho]}" transform="translate(0,8) scale({e})" fill="none" stroke="{TRACO}" '
+                 f'stroke-width="{1.4 / e:.2f}" stroke-linecap="round" stroke-linejoin="round"/>')
     base = "".join(s)
     linha = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
-    gab = f'<polyline points="{linha}" fill="none" stroke="{LAR}" stroke-width="1.6" stroke-linejoin="round"/>'
-    return _at("Ligue os pontos", f"Ligue do 1 ao {len(pts)}, na ordem, e descubra o desenho. Depois pinte!",
-               nivel, "Traçado", "ligue os pontos", base, gab + base)
+    fechado = math.dist(cantos[0], cantos[-1]) <= 1
+    tag = "polygon" if fechado else "polyline"
+    gab = f'<{tag} points="{linha}" fill="none" stroke="{LAR}" stroke-width="1.6" stroke-linejoin="round"/>'
+    instr = (f"Ligue do 1 ao {len(pts)}, na ordem, e volte ao 1 para fechar o desenho. Depois pinte!" if fechado
+             else f"Ligue do 1 ao {len(pts)}, na ordem, e descubra o desenho. Depois pinte!")
+    if nivel == 1 and len(pts) > 15:
+        instr += " Se precisar, o adulto ajuda a achar os números depois do 10."
+    return _at("Ligue os pontos", instr, nivel, "Traçado", "ligue os pontos", base, gab + base)
 
 
 def tracado(rng, tipos, pares):
@@ -677,7 +798,7 @@ def tracado(rng, tipos, pares):
             d = f"M{x1} {y} C 70 {y - 30}, 110 {y + 30}, 150 {y}"
         else:  # laços
             d = f"M{x1} {y} " + " ".join("c 6 -16, 14 -16, 10 0 c -2 6, 6 6, 10 0" for _ in range(6))
-        s.append(f'<path d="{d}" fill="none" stroke="#9a9a9a" stroke-width="1.3" stroke-dasharray="2.2 1.8" stroke-linecap="round" stroke-linejoin="round"/>')
+        s.append(f'<path d="{d}" fill="none" stroke="#6b6b6b" stroke-width="1.6" stroke-dasharray="2.2 1.8" stroke-linecap="round" stroke-linejoin="round"/>')
         s.append(f'<circle cx="{x1}" cy="{y}" r="2" fill="{LAR}"/>')
         s.append(icone(a, 2, y - 12, 24))
         s.append(icone(b, 156, y - 12, 24))
@@ -702,6 +823,10 @@ def copie_desenho(rng, n_seg):
         if len(arestas) == n_seg:
             break
     assert len(arestas) == n_seg
+    xs, ys = [a for a, _ in caminho], [b for _, b in caminho]
+    dx = (N - 1 - max(xs) - min(xs)) // 2
+    dy = (N - 1 - max(ys) - min(ys)) // 2
+    caminho = [(a + dx, b + dy) for a, b in caminho]  # centraliza o modelo na grade
     passo = 12
 
     def grade(x0, y0, desenhar, cor=TRACO):
@@ -746,8 +871,8 @@ def _arte(nome):
                     g[l][c] = 2
         return g
     if nome == "estrela":
-        pol = [(6 + 5.8 * math.cos(-math.pi / 2 + i * math.pi / 5) * (1 if i % 2 == 0 else .45),
-                6.3 + 5.8 * math.sin(-math.pi / 2 + i * math.pi / 5) * (1 if i % 2 == 0 else .45)) for i in range(10)]
+        pol = [(6 + 6.4 * math.cos(-math.pi / 2 + i * math.pi / 5) * (1 if i % 2 == 0 else .42),
+                6.6 + 6.4 * math.sin(-math.pi / 2 + i * math.pi / 5) * (1 if i % 2 == 0 else .42)) for i in range(10)]
 
         def dentro(px, py):
             r = False
@@ -770,6 +895,8 @@ def _arte(nome):
                  "....33...33.", "....33..333.", "..3333333...", ".333.33.....", "....33......", "....33......"],
         "peixe": ["............", "............", "....6666....", "..66666666.6", ".6.666666666", "666666666666",
                   "666666666666", ".66666666666", "..66666666.6", "....6666....", "............", "............"],
+        # o mesmo peixe com 4 cores: nadadeiras vermelhas, listra amarela, rabo azul, corpo laranja
+        "peixe_cores": ["............", "............", "....1111....", "..66662666.4", ".6.666266644", "666666266644", "666666266644", ".66666266644", "..66662666.4", "....1111....", "............", "............"],
     }
     linhas = artes[nome]
     assert len(linhas) == n and all(len(r) == n for r in linhas), nome
@@ -777,11 +904,15 @@ def _arte(nome):
 
 
 ARTES_NOMES = {"coracao": "um coração", "sol": "um sol", "estrela": "uma estrela", "casa": "uma casa", "arvore": "uma árvore",
-               "sorvete": "um sorvete", "barco": "um barco", "flor": "uma flor", "peixe": "um peixe"}
+               "sorvete": "um sorvete", "barco": "um barco", "flor": "uma flor", "peixe": "um peixe", "peixe_cores": "um peixe"}
 
 
-def pinte_codigo(rng, nivel, arte, contas=False):
+def pinte_codigo(rng, nivel, arte, contas=False, sorteio_como=None):
+    """sorteio_como: nome da arte antiga com as mesmas casas, para sortear as contas do mesmo jeito
+    (assim a troca de cores de uma arte não muda as outras páginas, que vêm do mesmo rng)."""
     g = _arte(arte)
+    gs = _arte(sorteio_como) if sorteio_como else g
+    assert all((a > 0) == (b > 0) for ra, rb in zip(g, gs) for a, b in zip(ra, rb)), "arte e sorteio_como com casas diferentes"
     usados = sorted({v for r in g for v in r if v})
     cel = 12.5
     x0, y0 = (W - 12 * cel) / 2, 34
@@ -791,25 +922,27 @@ def pinte_codigo(rng, nivel, arte, contas=False):
         s.append(f'<rect x="{x}" y="2" width="30" height="17" rx="3" fill="#fff" stroke="{TRACO}" stroke-width=".6"/>')
         s.append(_txt(x + 8, 10.5, str(v), 9, 800, fonte="Baloo 2"))
         s.append(f'<rect x="{x + 15}" y="5" width="10" height="11" rx="1.5" fill="{CORES[v][1]}" stroke="{TRACO}" stroke-width=".4"/>')
-        s.append(_txt(x + 15, 24, CORES[v][0], 4.6, 800))
+        s.append(_txt(x + 15, 24.5, CORES[v][0].upper(), 5.2, 800, cor=TRACO))  # em P&B a cor vira cinza: o nome escrito resolve
     for l in range(12):
         for c in range(12):
             v = g[l][c]
             x, y = x0 + c * cel, y0 + l * cel
-            s.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{cel}" height="{cel}" fill="#fff" stroke="#9a9a9a" stroke-width=".35"/>')
+            s.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{cel}" height="{cel}" fill="#fff" stroke="#777" stroke-width=".45"/>')
             if v:
                 if contas:
-                    a = rng.randint(0, v); rot = f"{a}+{v - a}"
+                    vs = gs[l][c]
+                    a = rng.randint(0, vs) * v // vs; rot = f"{a}+{v - a}"
                     assert a + (v - a) == v
                     s.append(_txt(x + cel / 2, y + cel / 2, rot, 3.6, 700, cor="#444"))
                 else:
                     s.append(_txt(x + cel / 2, y + cel / 2 + .3, str(v), 5.6, 700, cor="#444"))
-                gab.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{cel}" height="{cel}" fill="{CORES[v][1]}"/>')
+                gab.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{cel}" height="{cel}" fill="{CORES[v][1]}" stroke="#777" stroke-width=".45"/>')
     base = "".join(s)
+    # gabarito: as casas pintadas vão POR CIMA da grade branca (antes ficavam por baixo e sumiam)
     instr = ("Pinte cada quadradinho com a cor do número. Deixe em branco os que não têm número."
              if not contas else "Faça a conta de cada quadradinho e pinte com a cor do resultado. Os sem conta ficam em branco.")
     return _at("Pinte pelo código", instr + f" Vai aparecer {ARTES_NOMES[arte]}!", nivel, "Cores e códigos", "pinte pelo código",
-               base, "".join(gab) + base)
+               base, base + "".join(gab))
 
 
 TEMAS_PALAVRAS = {

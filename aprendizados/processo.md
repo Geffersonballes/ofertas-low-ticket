@@ -9,7 +9,19 @@ O que **vende** fica em `o-que-vende.md`; aqui fica **como trabalhar** com menos
   `ferramentas/conferir_material.py`). Só então Hotmart → criativos → campanhas.
 
 ## Material (infoproduto)
-- (preencher com os achados da revisão de 2026-11-28: tipo de erro → regra para o gerador)
+- 2026-11-28 · Dez Minutinhos · gabarito do "Pinte pelo código" sem cor: as casas coloridas eram desenhadas antes da grade branca e ficavam cobertas → no SVG, o que é resposta vai sempre POR CIMA da base (`base + gab`), e a conferência olha a miniatura do gabarito, não só o texto.
+- 2026-11-28 · Dez Minutinhos · "Ligue os pontos" com desenho aberto (último número não voltava ao 1; barco sem metade do convés) → todo desenho de pontos é um contorno fechado de um traço só (canto final = canto inicial; T-junção vira traço pronto já impresso), instrução "volte ao 1" e gabarito em `polygon`.
+- 2026-11-28 · Dez Minutinhos · sequência numérica com regra alternada (+4, +3) e o buraco no meio admitia duas respostas → regra alternada só com o buraco na última casa; filas nunca se repetem no volume nem entre volumes (registro global `SEQ_USADAS`, e o Volume 2 lê as do volume 1 no `completo.json`).
+- 2026-11-28 · Dez Minutinhos · diferença "espelhada" em figura quase simétrica (carro, balão) e variante pequena (flor de 4 pétalas com 14 mm) eram invisíveis para 4–10 anos → não espelhar figura quase simétrica (usar variante visível: carro sem roda, ou "menor"); variante em objeto < 16 mm (N1 < 20 mm) vira "cinza".
+- 2026-11-28 · Dez Minutinhos · labirinto gerado com caminho quase reto (desce a coluna e segue a última linha) → rejeitar labirinto com menos de 3 curvas no caminho da solução (`labirinto_bom`).
+- 2026-11-28 · Dez Minutinhos · instrução com número fixo que não batia com a folha ("de 1 até 10" numa folha até 20) → texto da instrução sempre calculado do que foi desenhado (ex.: `linhas * por`), nunca do parâmetro.
+- 2026-11-28 · Dez Minutinhos · rimas com duas respostas (BALÃO/FOGÃO com MAMÃO/AVIÃO) → cada par de rima tem uma família de final própria (`FAMILIAS_RIMA` com assert); vale para qualquer "ligue" com pares: um item só pode casar com um.
+- 2026-11-28 · Dez Minutinhos · regra de jogo ambígua ("a peça com duas casas", sem desempate com 2 jogadores) → regra escrita com o caso de empate e o caso "ninguém tem"; não usar nome de figura como palavra comum.
+- 2026-11-28 · Dez Minutinhos · item no grupo errado (ilha em "Na água"; flor em "Na natureza" quando pode estar no vaso) → nas atividades de classificar, só itens sem dúvida para uma criança; revisar a lista de grupos à mão.
+- 2026-11-28 · Dez Minutinhos · cinzas claros que somem em P&B econômico (figura-guia a 13%, pontilhado #9a9a9a, ligações da trilha #bbb, legenda de cor só por cor, preço em laranja) → nada essencial abaixo de ~35% de tinta; cor nunca é a única pista (nome escrito, borda grossa, rótulo).
+- 2026-11-28 · Dez Minutinhos · conteúdo repetido entre folhas (palavras, filas de padrão, itens de grade lógica) → cada gerador guarda o que já usou no volume e troca o repetido.
+- 2026-11-28 · Dez Minutinhos · o gerador não era reprodutível (`set()` de tuplas/strings muda com o PYTHONHASHSEED) e qualquer troca mexia no rng e mudava páginas já revisadas → nunca iterar `set` para sortear (usar `dict.fromkeys`/`sorted`); correção que muda o conteúdo sorteado gasta o rng principal como antes e sorteia o novo com um `random.Random(derivado)`, para as outras páginas ficarem iguais (conferir com rastreio do estado do rng por página).
+- 2026-11-28 · Dez Minutinhos · imagens e vídeo da página de vendas vieram do PDF de amostra (páginas que não existem no caderno) → mídia da página sai do PDF FINAL rasterizado (`pagina/midia/gerar_midia.py` agora faz isso) e é refeita sempre que o PDF mudar.
 
 ## Criativos
 - 2026-11-28 · Dez Minutinhos · o vídeo "caderno folheando" (página e fim dos anúncios) foi gravado do

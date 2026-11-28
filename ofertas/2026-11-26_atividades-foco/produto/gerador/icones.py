@@ -63,7 +63,9 @@ DESENHOS = {
     "banana": lambda v: '<path d="M14 30 C 18 70, 60 92, 88 62 C 90 58, 86 54, 82 58 C 60 76, 30 62, 24 28 C 22 22, 14 24, 14 30 Z"/>',
     "uva": lambda v: "".join(f'<circle cx="{x}" cy="{y}" r="11"/>' for x, y in [(38, 34), (62, 34), (26, 54), (50, 54), (74, 54), (38, 74), (62, 74), (50, 92)]) + '<path d="M50 24 L 52 6" fill="none"/>',
     "balao": lambda v: '<ellipse cx="50" cy="40" rx="28" ry="34"/><path d="M50 74 L 46 80 L 54 80 Z"/><path d="M50 80 C 40 88, 60 92, 50 99" fill="none"/>',
-    "carro": lambda v: '<path d="M8 66 L 8 50 L 26 48 L 38 30 L 70 30 L 82 48 L 92 52 L 92 66 Z"/><circle cx="28" cy="70" r="10"/><circle cx="72" cy="70" r="10"/>',
+    "carro": lambda v: '<path d="M8 66 L 8 50 L 26 48 L 38 30 L 70 30 L 82 48 L 92 52 L 92 66 Z"/>'
+    + ('' if v == "semroda" else '<circle cx="28" cy="70" r="10"/>') + '<circle cx="72" cy="70" r="10"/>'
+    + ('<rect x="42" y="36" width="22" height="12" rx="2" fill="#1d1d1f"/>' if v == "janela" else ''),
 }
 
 

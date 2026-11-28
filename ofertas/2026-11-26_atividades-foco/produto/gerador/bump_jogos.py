@@ -116,10 +116,11 @@ def trilha():
             c = 5 - c
         pos.append((10 + c * (cel + gap), 8 + l * (cel + 12)))
     for (x1, y1), (x2, y2) in zip(pos, pos[1:]):
-        s.append(f'<line x1="{x1 + cel / 2}" y1="{y1 + cel / 2}" x2="{x2 + cel / 2}" y2="{y2 + cel / 2}" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>')
+        s.append(f'<line x1="{x1 + cel / 2}" y1="{y1 + cel / 2}" x2="{x2 + cel / 2}" y2="{y2 + cel / 2}" stroke="#777" stroke-width="4" stroke-linecap="round"/>')
     for n, (x, y) in enumerate(pos, 1):
         fundo = "#fff1e8" if n in ESPECIAIS else "#fff"
-        s.append(f'<rect x="{x}" y="{y}" width="{cel}" height="{cel}" rx="5" fill="{fundo}" stroke="{TRACO}" stroke-width=".9"/>')
+        borda = 2 if n in ESPECIAIS else .9  # casa especial com borda grossa: aparece mesmo em P&B
+        s.append(f'<rect x="{x}" y="{y}" width="{cel}" height="{cel}" rx="5" fill="{fundo}" stroke="{TRACO}" stroke-width="{borda}"/>')
         s.append(_txt(x + 4, y + 4.5, str(n), 4.6, 800, anchor="start", fonte="Baloo 2"))
         ic = {"avance": "estrela", "volte": "nuvem", "espere": "lua"}.get(ESPECIAIS.get(n))
         if ic:
@@ -183,8 +184,8 @@ def velha():
         s.append(_txt(8, y, f"Peças de {'estrela' if ic == 'estrela' else 'coração'}:", 5.2, 800, anchor="start"))
         for i in range(5):
             x = 8 + i * 34
-            s.append(caixa_corte(x, y + 5, 30, 30, 4))
-            s.append(icone(ic, x + 4, y + 9, 22))
+            s.append(caixa_corte(x + 5, y + 8, 20, 20, 3))  # peça menor que a casa do tabuleiro (26 mm)
+            s.append(icone(ic, x + 7.5, y + 10.5, 15))
     return [("Jogo da velha das figuras", "Dois tabuleiros e 10 peças para recortar: 5 estrelas e 5 corações. Também dá para jogar desenhando com lápis.", "".join(s))]
 
 
@@ -193,13 +194,13 @@ REGRAS = """
   <p>Cada um pega uma cartela. Um adulto sorteia uma ficha do potinho e fala o nome da figura. Quem tiver a figura marca com um feijão.
   Ganha quem marcar uma linha inteira (ou a cartela toda, se combinarem antes).</p>
   <h2>Dominó de figuras (2 a 4 jogadores)</h2>
-  <p>Vire as peças para baixo e cada um pega 7 (com 3 ou 4 jogadores, 5 cada). Quem tiver a peça com duas casas começa.
+  <p>Vire as peças para baixo e cada um pega 7 (com 3 ou 4 jogadores, 5 cada). Quem tiver uma peça com a mesma figura dos dois lados começa. Se ninguém tiver, ou se mais de um tiver, começa o mais novo.
   Na sua vez, encaixe uma peça que tenha a mesma figura de uma das pontas. Sem peça para jogar, compre do monte ou passe a vez. Ganha quem acabar as peças primeiro.</p>
   <h2>Jogo da memória (2 ou mais jogadores)</h2>
   <p>Espalhe as cartas viradas para baixo. Na sua vez, vire duas. Se forem iguais, fique com o par e jogue de novo. Se não, desvire e passe a vez. Ganha quem tiver mais pares.
   Para os pequenos, comece com 6 pares.</p>
   <h2>Trilha das figuras (2 a 4 jogadores)</h2>
-  <p>Todos começam no INÍCIO. Na sua vez, jogue o dado e ande as casas. Estrela: avance 2. Nuvem: volte 2. Lua: fique uma rodada sem jogar. Ganha quem chegar primeiro.</p>
+  <p>Todos começam no INÍCIO. Na sua vez, jogue o dado e ande as casas. Estrela: avance 2. Nuvem: volte 2. Lua: fique uma rodada sem jogar. Não precisa tirar o número exato: quem passar da casa 30 também chega. Ganha quem chegar primeiro.</p>
   <h2>Jogo da velha (2 jogadores)</h2>
   <p>Um fica com as estrelas e o outro com os corações. Cada um coloca uma peça por vez. Ganha quem fizer uma linha de 3: em pé, deitada ou na diagonal.</p>
   <p class="aviso">Uso permitido: imprima quantas vezes quiser para a sua família. Não é permitido revender nem repassar o arquivo.</p>"""

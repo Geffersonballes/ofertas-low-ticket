@@ -37,7 +37,7 @@ def quebra_cabeca(rng, nome, n, nivel, guia=True):
     x0, y0 = ((W - S) / 2, 6) if guia else (18, 6)
     s, g = [], []
     if guia:
-        s.append(f'<g opacity=".13">{icone(nome, x0, y0, S, traco=3)}</g>')
+        s.append(f'<g opacity=".38">{icone(nome, x0, y0, S, traco=3)}</g>')  # guia visível em P&B econômico (antes .13)
     w = S / n
     for k in range(n + 1):
         s.append(f'<line x1="{x0 + k * w}" y1="{y0}" x2="{x0 + k * w}" y2="{y0 + S}" stroke="#bbb" stroke-width=".5"/>')
@@ -120,11 +120,11 @@ def do_menor_ao_maior(rng, nome):
 
 # ------------------------------------------------------------------ classificar
 GRUPOS = {
-    "ceu_agua": (("No céu", ["sol", "lua", "nuvem", "estrela", "pipa", "passaro", "balao"]), ("Na água", ["peixe", "barco", "pato", "ilha"])),
+    "ceu_agua": (("No céu", ["sol", "lua", "nuvem", "estrela", "pipa", "passaro", "balao"]), ("Na água", ["peixe", "barco", "pato", "polvo"])),
     "frutas_brinq": (("Frutas", ["maca", "banana", "uva"]), ("Brinquedos", ["bola", "dado", "pipa", "balao", "carro"])),
     "bichos_coisas": (("Bichos", ["gato", "pato", "peixe", "passaro"]), ("Coisas", ["copo", "chave", "lapis", "tesoura", "anel"])),
     "comer_brincar": (("De comer", ["maca", "banana", "uva", "sorvete", "ovo"]), ("De brincar", ["bola", "dado", "pipa", "carro", "balao"])),
-    "casa_natureza": (("Na natureza", ["arvore", "flor", "sol", "nuvem", "ilha"]), ("Dentro de casa", ["copo", "lapis", "tesoura", "chave", "dado"])),
+    "casa_natureza": (("Na natureza", ["arvore", "passaro", "sol", "nuvem", "ilha"]), ("Dentro de casa", ["copo", "lapis", "tesoura", "chave", "dado"])),
 }
 
 
@@ -170,7 +170,7 @@ def padrao_cola(rng, ciclos):
         s.append(f'<rect x="{bx}" y="{y + 3}" width="24" height="24" rx="3" fill="none" stroke="{TRACO}" stroke-width=".8" stroke-dasharray="2 1.5"/>')
         g.append(icone(resp, bx + 1, y + 4, 22))
     s.append(faixa_recorte(Y_CORTE - 6))
-    todos = list({n for c in ciclos for n in c})
+    todos = list(dict.fromkeys(n for c in ciclos for n in c))  # ordem fixa (set dependia do PYTHONHASHSEED)
     distr = [n for n in todos if n not in respostas][:3]
     pecas = respostas + distr
     rng.shuffle(pecas)

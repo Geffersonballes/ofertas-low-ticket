@@ -10,11 +10,26 @@ SEMENTE = 2020
 BUMP = Bump("Recortar e colar", "recortar-e-colar", "40 ATIVIDADES · 2 NÍVEIS · GABARITO")
 
 
+def silabas_sem_repetir(rng, multi):
+    """5 folhas de "Monte as palavras" sem repetir palavra. O sorteio original roda no rng principal (as
+    outras páginas ficam iguais); a palavra repetida é trocada por outra com um rng derivado."""
+    folhas, usadas = [], set()
+    for f in range(5):
+        orig = rng.sample(multi, 3)
+        R.silabas_cola(rng, orig, L.PALAVRAS)  # só gasta o rng como antes
+        alt = random.Random(f"silabas-{f}")
+        livres = [k for k in multi if k not in usadas and k not in orig]
+        escolha = [k if k not in usadas else livres.pop(alt.randrange(len(livres))) for k in orig]
+        usadas.update(escolha)
+        folhas.append(R.silabas_cola(alt, escolha, L.PALAVRAS))
+    return folhas
+
+
 def gerar():
     rng = random.Random(SEMENTE)
     n1 = intercalar([
-        [R.quebra_cabeca(rng, n, 2, 1) for n in ["peixe", "casa", "gato", "sol", "barco"]],
-        [R.sombras(rng, rng.sample(["sol", "lua", "estrela", "coracao", "peixe", "maca", "casa", "arvore", "gato", "pato", "pipa", "balao"], 5))
+        [R.quebra_cabeca(rng, n, 2, 1) for n in ["peixe", "casa", "gato", "sol", "barco_qc"]],
+        [R.sombras(rng, rng.sample(["sol", "lua_grossa", "estrela", "coracao", "peixe", "maca", "casa", "arvore", "gato", "pato", "pipa", "balao"], 5))
          for _ in range(5)],
         [R.do_menor_ao_maior(rng, n) for n in ["estrela", "balao", "flor", "carro"]],
         [R.classifique(rng, k, 3, 1) for k in ["ceu_agua", "frutas_brinq", "bichos_coisas", "comer_brincar"]],
@@ -24,10 +39,10 @@ def gerar():
     multi = [k for k in L.PALAVRAS if len(L.PALAVRAS[k][1]) >= 2 and len(L.PALAVRAS[k][1]) <= 3]
     n2 = intercalar([
         [R.quebra_cabeca(rng, n, k, 2, guia=False) for n, k in [("pato", 3), ("arvore", 3), ("balao", 3), ("pipa", 3), ("gato", 3)]],
-        [R.silabas_cola(rng, rng.sample(multi, 3), L.PALAVRAS) for _ in range(5)],
+        silabas_sem_repetir(rng, multi),
         [R.classifique(rng, k, 4, 2) for k in ["comer_brincar", "casa_natureza", "bichos_coisas"]],
         [R.ordem_numeros(rng, 6, m) for m in [30, 60, 99]],
-        [R.contas_cola(rng, op, m) for op, m in [("+", 10), ("-", 10), ("+", 20), ("-", 20)]],
+        [R.contas_cola(rng, op, m) for op, m in [("+", 20), ("-", 20), ("+", 20), ("-", 20)]],  # Nível 2: contas até 20
     ])
     assert len(n1) == 20 and len(n2) == 20
     assert all(a["nivel"] == 1 for a in n1) and all(a["nivel"] == 2 for a in n2)

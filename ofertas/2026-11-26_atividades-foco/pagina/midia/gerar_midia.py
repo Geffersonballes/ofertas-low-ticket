@@ -1,5 +1,7 @@
-"""Mídias da página de vendas feitas SÓ com páginas reais do caderno (produto/gerador/saida/vitrine-XX.png, de `node render.cjs 2 vitrine`).
-Uso (depois de `node render.cjs 2` no gerador do produto):
+"""Mídias da página de vendas feitas SÓ com páginas do caderno VENDIDO: o PDF final (produto/final/dez-minutinhos.pdf)
+rasterizado a 192 dpi (o mesmo tamanho das antigas vitrine-XX.png, que vinham do PDF de amostra e mostravam
+páginas que não existem no caderno — corrigido em 2026-11-28).
+Uso (depois de gerar o PDF final):
   python3 gerar_midia.py && node fotografar.cjs && python3 gerar_midia.py --finalizar
 Saída: ../img/ (mockups PNG/WebP, vídeo MP4 + GIF do caderno sendo folheado, amostras JPG)."""
 import json
@@ -10,16 +12,27 @@ import sys
 from PIL import Image
 
 AQUI = pathlib.Path(__file__).parent
-PAGS = AQUI.parents[1] / "produto" / "gerador" / "saida"
+PDF_FINAL = AQUI.parents[1] / "produto" / "final" / "dez-minutinhos.pdf"
+PAGS = AQUI.parents[1] / "produto" / "gerador" / "saida" / "paginas-final"
 CENAS = AQUI / "cenas"
 IMG = AQUI.parent / "img"
 
-# páginas do caderno-amostra: 1 capa, 3 labirinto, 4 padrões, 5 diferente, 6 contar, 7 ligue,
-# 8 traçado, 9 labirinto desafio, 10 sudoku, 11 caça-palavras, 12 código, 13 7 erros, 14 lógica, 15 sequências
-FOLHEAR = [1, 3, 4, 7, 9, 10, 11, 13, 15]
-LEQUE = [13, 10, 4, 3, 1]          # de baixo para cima
-AMOSTRAS = {"amostra-nivel1": 4, "amostra-nivel2": 12, "dentro-1": 3, "dentro-2": 5, "dentro-3": 7,
-            "dentro-4": 10, "dentro-5": 11, "dentro-6": 13}
+# páginas do caderno final: 1 capa, 6 qual é diferente (N1), 7 labirinto (N1), 8 o que vem depois (N1),
+# 39 ligue os pontos (N1), 68 jogo dos 7 erros (N2), 69 sudoku 6x6 (N2), 70 que número falta (N2),
+# 73 caça-palavras (N2), 78 código secreto (N2), 104 labirinto desafio (N2)
+FOLHEAR = [1, 7, 8, 39, 104, 69, 73, 68, 70]
+LEQUE = [68, 69, 8, 7, 1]          # de baixo para cima
+AMOSTRAS = {"amostra-nivel1": 8, "amostra-nivel2": 78, "dentro-1": 7, "dentro-2": 6, "dentro-3": 39,
+            "dentro-4": 69, "dentro-5": 73, "dentro-6": 68}
+
+
+def rasterizar():
+    """Uma PNG por página do PDF final, 1587 px de largura (= A4 a 2x, como as vitrines antigas)."""
+    PAGS.mkdir(parents=True, exist_ok=True)
+    for n in sorted(set(FOLHEAR + LEQUE + list(AMOSTRAS.values()) + [1, 7, 78])):
+        alvo = PAGS / f"pagina-{n:03d}.png"
+        subprocess.run(["pdftoppm", "-r", "192", "-png", "-singlefile", "-f", str(n), "-l", str(n), str(PDF_FINAL),
+                        str(alvo.with_suffix(""))], check=True)
 
 BASE_CSS = """
 *{margin:0;padding:0;box-sizing:border-box}
@@ -31,7 +44,7 @@ html,body{width:%dpx;height:%dpx;overflow:hidden;background:transparent}
 
 
 def url(n):
-    return (PAGS / f"vitrine-{n:02d}.png").as_uri()
+    return (PAGS / f"pagina-{n:03d}.png").as_uri()
 
 
 def lapis(x, y, ang, w=360):
@@ -49,6 +62,7 @@ body{{background:{fundo}}}</style></head><body><div class="palco">{corpo}</div><
 
 
 def montar_cenas():
+    rasterizar()
     CENAS.mkdir(exist_ok=True)
     lista = []
     # 1) capa em 3D com uma folha de atividade embaixo e um lápis
@@ -101,7 +115,7 @@ def finalizar():
     Image.open(CENAS / "quadro-00.png").convert("RGB").resize((720, 551)).save(IMG / "folheando-poster.jpg", quality=82)
     # páginas reais em tamanho de tela
     for nome, n in AMOSTRAS.items():
-        im = Image.open(PAGS / f"vitrine-{n:02d}.png").convert("RGB")
+        im = Image.open(PAGS / f"pagina-{n:03d}.png").convert("RGB")
         larg = 900 if nome.startswith("amostra") else 600
         im.resize((larg, round(larg * im.height / im.width)), Image.LANCZOS).save(IMG / f"{nome}.jpg", quality=84, optimize=True)
     for f in sorted(IMG.iterdir()):

@@ -44,9 +44,9 @@ CSS_EXTRA = """
 .cert .t1 { font-family: 'Baloo 2'; font-weight: 800; font-size: 13pt; color: var(--laranja); letter-spacing: 1pt; margin-top: 2mm; }
 .cert .t2 { font-family: 'Baloo 2'; font-weight: 800; font-size: 27pt; line-height: 1.05; margin-top: 2mm; }
 .cert .nome { margin-top: 7mm; font-size: 12pt; font-weight: 700; width: 75%; border-bottom: .4mm solid var(--tinta); padding-bottom: 7mm; }
-.cert .rodcert { margin-top: auto; display: flex; justify-content: space-between; width: 100%; font-size: 10.5pt; font-weight: 700; }
+.cert .rodcert { margin-top: 5mm; display: flex; justify-content: space-between; width: 100%; font-size: 10.5pt; font-weight: 700; }
 .cert svg { position: absolute; width: 22mm; height: 22mm; }
-.corte { text-align: center; font-size: 8pt; color: var(--cinza); border-top: .3mm dashed #999; padding-top: 1mm; }
+.corte { text-align: center; font-size: 10pt; font-weight: 700; color: #444; border-top: .4mm dashed #555; padding-top: 1mm; }
 .ideias { counter-reset: i var(--ini); list-style: none; margin-top: 5mm; font-size: 12.6pt; line-height: 1.42; }
 .ideias li { counter-increment: i; position: relative; padding-left: 10mm; margin: 3.4mm 0; }
 .ideias li::before { content: counter(i); position: absolute; left: 0; top: 0; width: 7mm; height: 7mm; border-radius: 50%; background: var(--laranja);
@@ -115,7 +115,7 @@ def nivel2(rng):
     var = B.VARIANTES[:]
     gradesubs = [[("peixe", dict(espelhar=True)), ("estrela", dict(variante="6pontas")), ("maca", dict(variante="semfolha"))],
                  [("sol", dict(variante="poucosraios")), ("passaro", dict(espelhar=True)), ("flor", dict(variante="4petalas"))],
-                 [("casa", dict(variante="semjanela")), ("lua", dict(espelhar=True)), ("carro", dict(espelhar=True))],
+                 [("casa", dict(variante="semjanela")), ("lua", dict(espelhar=True)), ("carro", dict(variante="semroda"))],
                  [("casa", dict(variante="semporta")), ("banana", dict(espelhar=True)), ("barco", dict(espelhar=True))]]
     qt = [["estrela", "coracao", "lua"], ["maca", "uva", "banana", "flor"], ["peixe", "barco", "sol", "nuvem"]]
     at = [("erros", lambda: B.diferencas(rng, 2, "quintal", 7)), ("gr", lambda: B.diferente_grade(rng, gradesubs[0])),
@@ -130,6 +130,8 @@ def nivel2(rng):
                       ("lug", lambda: B.memoria_lugares(rng, 4)), ("mem", lambda: B.memoria_figuras(rng, 2, 7, 10)),
                       ("lug", lambda: B.memoria_lugares(rng, 5)), ("mem", lambda: B.memoria_figuras(rng, 2, 8, 10))]
 
+    filas_usadas = set()  # nenhuma fila repete entre as folhas de "O que vem depois?" do nível
+
     def ciclos_rot():
         tipos = [
             lambda: [("triangulo", g, False) for g in (0, 90, 180, 270)],
@@ -140,7 +142,7 @@ def nivel2(rng):
             lambda: [(f, 0, False) for f in rng.sample(B.FIG_PADRAO, 4)],
             lambda: [("banana", 0, False), ("banana", 90, False), ("banana", 180, False)],
         ]
-        return [f() for f in rng.sample(tipos, 5)]
+        return B.sem_repetir_filas([f() for f in rng.sample(tipos, 5)], filas_usadas)
     pad = []
     for k, f in enumerate([1, None, 1, 2, None, 2, 3, None, 3, None]):
         if f is None:
@@ -163,7 +165,7 @@ def nivel2(rng):
         tr.append(("pts", lambda d=des, a=alvo: B.ligue_pontos(rng, 2, d, a)))
     cat["Traçado"] = tr
     cat["Cores e códigos"] = [("caca", lambda: B.caca_palavras(rng, "frutas")), ("cod", lambda: B.codigo_secreto(rng, "BRINCAR FAZ BEM")),
-                              ("pinte", lambda: B.pinte_codigo(rng, 2, "peixe", contas=True)), ("caca", lambda: B.caca_palavras(rng, "brinquedos")),
+                              ("pinte", lambda: B.pinte_codigo(rng, 2, "peixe_cores", contas=True, sorteio_como="peixe")), ("caca", lambda: B.caca_palavras(rng, "brinquedos")),
                               ("cod", lambda: B.codigo_secreto(rng, "BOM TRABALHO")), ("caca", lambda: B.caca_palavras(rng, "cozinha")),
                               ("cod", lambda: B.codigo_secreto(rng, "SUPER DESAFIO")), ("caca", lambda: B.caca_palavras(rng, "cores"))]
     return cat
@@ -220,7 +222,7 @@ def como_usar(pags):
   <ol class="passos">
     <li><b>Escolha o nível pela idade.</b> Nível 1 (4 a 6 anos) não pede leitura: você lê a instrução em voz alta. Nível 2 (7 a 10 anos) tem leitura inicial.</li>
     <li><b>Siga o plano do seu nível.</b> São 30 dias, com 2 folhas por dia de tipos diferentes. O plano do Nível 1 está na página {pags['plano1']} e o do Nível 2 na página {pags['plano2']}.</li>
-    <li><b>Imprima só o que vai usar.</b> Uma semana são 14 folhas. Funciona em preto e branco, em papel A4 comum.</li>
+    <li><b>Imprima só o que vai usar.</b> Uma semana são 14 folhas. Funciona em preto e branco, em papel A4 comum. No “Pinte pelo código”, leia para a criança o nome da cor de cada número.</li>
     <li><b>Dez minutinhos bastam.</b> Se não terminar, tudo bem: guarde e continue depois. Pular um dia também não tem problema.</li>
     <li><b>Confira no gabarito</b> (a partir da página {pags['gabarito']}) e marque o dia no quadro de conquistas.</li>
   </ol>
@@ -237,8 +239,8 @@ def como_usar(pags):
 
 
 def sumario(pags):
-    itens = [("Como usar", "", 2), ("Nível 1 · 4 a 6 anos", "plano de 30 dias + 60 atividades", pags["plano1"]),
-             ("Nível 2 · 7 a 10 anos", "plano de 30 dias + 60 atividades", pags["plano2"]),
+    itens = [("Como usar", "", 2), ("Nível 1 · 4 a 6 anos", "abertura, plano de 30 dias + 60 atividades", pags["abertura1"]),
+             ("Nível 2 · 7 a 10 anos", "abertura, plano de 30 dias + 60 atividades", pags["abertura2"]),
              ("Gabarito", "respostas das atividades dos dois níveis", pags["gabarito"]),
              ("Bônus 1 · Quadro de conquistas e 6 certificados", "", pags["conquistas"]),
              ("Bônus 2 · 30 ideias longe da tela sem imprimir nada", "", pags["ideias"]),
@@ -284,6 +286,7 @@ def quadro_conquistas(num):
     return f"""<section class="pagina">{topo('<span class="selo">Bônus 1</span>')}<h1>Meu quadro de conquistas</h1>
   <p class="instrucao" style="min-height:0">A cada dia feito, pinte a estrela, cole um adesivo ou faça um carimbo.</p>
   <p class="linha-nome">Nome: ______________________________ &nbsp; Nível: ____</p>
+  <p style="font-size:10.5pt;color:var(--cinza);margin-top:1mm">Imprima um quadro para cada nível: são 30 dias no Nível 1 e mais 30 no Nível 2.</p>
   <div class="conquistas">{caixas}</div>{rodape(num)}</section>"""
 
 
@@ -294,6 +297,7 @@ CERTS = [("SEMANA 1 COMPLETA", "por fazer os dias 1 a 7 do plano"), ("SEMANA 2 C
 
 def certificados(num_ini):
     pags = []
+    figs_cert = GA.svg("".join(icone(n, 4 + k * 22, 3, 16) for k, n in enumerate(["sol", "coracao", "flor", "estrela", "peixe"])), 110, 22).replace("<svg ", '<svg style="position:static;width:70mm;height:14mm" ')
     for i in range(0, 6, 2):
         blocos = []
         for k, (t, sub) in enumerate(CERTS[i:i + 2]):
@@ -301,6 +305,8 @@ def certificados(num_ini):
             ic2 = GA.svg(icone("balao", 5, 5, 90), 100, 100).replace("<svg ", '<svg style="right:6mm;top:6mm" ')
             blocos.append(f"""<div class="cert">{ic1}{ic2}<div class="t1">CERTIFICADO DEZ MINUTINHOS</div><div class="t2">{t}</div>
               <div class="nome">Este certificado é de:</div><p style="margin-top:3mm;font-size:12pt;font-weight:700">{sub}</p>
+              <p style="margin-top:auto;font-family:'Baloo 2';font-weight:800;font-size:15pt">Cada dia de esforço conta. Parabéns!</p>
+              <div style="margin-top:2mm">{figs_cert}</div>
               <div class="rodcert"><span>Data: ____/____/______</span><span>Assinatura: ____________________</span></div></div>""")
         pags.append(f"""<section class="pagina">{topo(f'<span class="selo">Bônus 1 · Certificados {i + 1} e {i + 2}</span>')}
   {blocos[0]}<div class="corte">✂ recorte na linha</div>{blocos[1]}{rodape(num_ini + len(pags))}</section>""")
@@ -443,7 +449,9 @@ def main():
     import shutil
     shutil.copytree(AQUI / "fontes", SAIDA / "fontes", dirs_exist_ok=True)
     # resumo para o sumario.md
-    resumo = {"paginas": len(html_pags), "secoes": pags, "niveis": []}
+    resumo = {"paginas": len(html_pags), "secoes": pags, "niveis": [],
+              # filas de "Que número falta?" do volume 1: o Volume 2 (bump_volume2.py) não repete nenhuma
+              "sequencias": sorted(list(t) for t in B.SEQ_USADAS)}
     for nv, dias_at in enumerate(niveis, 1):
         resumo["niveis"].append([[(a["titulo"], a["categoria"], a["tipo"], pag_de[id(a)]), (b["titulo"], b["categoria"], b["tipo"], pag_de[id(b)])]
                                  for a, b in dias_at])

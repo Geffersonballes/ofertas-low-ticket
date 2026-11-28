@@ -27,13 +27,18 @@ NOVAS_CENAS = {
 NOVOS_PONTOS = {
     "pipa": [(100, 10), (160, 80), (100, 170), (40, 80), (100, 10)],
     "sorvete": [(70, 100), (100, 190), (130, 100), (150, 85), (150, 60), (130, 40), (100, 30), (70, 40), (50, 60), (50, 85), (70, 100)],
-    "guarda-chuva": [(20, 100), (40, 55), (100, 25), (160, 55), (180, 100), (140, 92), (100, 100), (100, 170), (90, 182), (76, 176)],
+    "guarda-chuva": [(20, 100), (40, 55), (100, 25), (160, 55), (180, 100), (140, 92), (100, 100), (60, 92), (20, 100)],
     "castelo": [(20, 190), (20, 60), (40, 60), (40, 80), (60, 80), (60, 60), (80, 60), (80, 80), (120, 80), (120, 60), (140, 60),
                 (140, 80), (160, 80), (160, 60), (180, 60), (180, 190), (20, 190)],
     "pinheiro": [(100, 10), (140, 60), (120, 60), (160, 110), (130, 110), (175, 160), (110, 160), (110, 190), (90, 190), (90, 160),
                  (25, 160), (70, 110), (40, 110), (80, 60), (60, 60), (100, 10)],
     "borboleta": [(100, 40), (70, 10), (25, 20), (20, 70), (60, 95), (25, 130), (35, 180), (80, 175), (100, 130), (120, 175),
                   (165, 180), (175, 130), (140, 95), (180, 70), (175, 20), (130, 10), (100, 40)],
+}
+# cabo do guarda-chuva e corpo da borboleta já vêm desenhados (o caminho de pontos é só o contorno fechado)
+TRACO_PRONTO = {
+    "guarda-chuva": "M100 100 L 100 170 Q 100 184 88 183 Q 77 182 77 172",
+    "borboleta": "M100 54 C 93 68, 93 110, 100 120 C 107 110, 107 68, 100 54 Z",
 }
 NOVAS_ARTES = {
     "cogumelo": ["....1111....", "..11111111..", ".11..1111.1.", "111111..1111", "111111111111", "....5555....",
@@ -65,8 +70,8 @@ NOVOS_TEMAS_PALAVRAS = {
 NOVOS_TITULOS = {"escola": "material escolar", "transportes": "transportes", "natureza": "natureza", "fazenda": "bichos da fazenda"}
 NOVOS_TEMAS_LOGICA = [
     dict(nomes=["Gabi", "Léo", "Sofia"], verbo="desenhou", itens=[("casa", "casa", "a casa"), ("arvore", "árvore", "a árvore"), ("flor", "flor", "a flor")]),
-    dict(nomes=["Pedro", "Clara", "Miguel"], verbo="come", itens=[("maca", "maçã", "a maçã"), ("banana", "banana", "a banana"), ("uva", "uva", "a uva")]),
-    dict(nomes=["Alice", "Heitor", "Laura"], verbo="brinca com", itens=[("balao", "balão", "o balão"), ("carro", "carrinho", "o carrinho"), ("barco", "barquinho", "o barquinho")]),
+    dict(nomes=["Pedro", "Clara", "Miguel"], verbo="come", itens=[("sorvete", "sorvete", "o sorvete"), ("ovo", "ovo", "o ovo"), ("uva", "uva", "a uva")]),
+    dict(nomes=["Alice", "Heitor", "Laura"], verbo="brinca com", itens=[("bola", "bola", "a bola"), ("pipa", "pipa", "a pipa"), ("dado", "dado", "o dado")]),
 ]
 MENSAGENS = ["MUITO BEM", "QUE LEGAL", "CONTINUE ASSIM"]
 
@@ -75,6 +80,8 @@ def _registrar():
     B.CENAS.update(NOVAS_CENAS)
     B.ESPELHAVEIS.add("pato")
     B.DESENHOS_PONTOS.update(NOVOS_PONTOS)
+    B.TRACO_PRONTO.update(TRACO_PRONTO)
+    B.ROTULO_AO_LADO.update({"guarda-chuva": [(100, 100)]})
     B.TEMAS_PALAVRAS.update(NOVOS_TEMAS_PALAVRAS)
     B.TITULO_TEMA.update(NOVOS_TITULOS)
     B.ARTES_NOMES.update(NOVOS_NOMES_ARTE)
@@ -116,7 +123,7 @@ def labirinto(nivel, rng, cols, lins, ini, fim):
     from icones import icone
     cel = min((W_ - 10) / cols, (H_ - 52) / lins)
     x0, y0 = (W_ - cols * cel) / 2, 25
-    paredes, cam = _gera_labirinto(cols, lins, rng)
+    paredes, cam = B.labirinto_bom(cols, lins, rng)
     esp = 1.8 if cel > 18 else (1.4 if cel > 12 else 1.0)
     base = (_desenha_labirinto(paredes, cols, lins, x0, y0, cel, esp)
             + icone(ini, x0 + cel / 2 - 11, y0 - 23, 22)
@@ -152,7 +159,7 @@ def nivel1(rng):
             mapa = dict(zip(sorted(set(m)), figs))
             ciclos.append([mapa[x] for x in m])
         cat["Padrões"].append(("pad", lambda c=ciclos: B.padroes(rng, 1, c)))
-    pares_lab = [("pato", "flor"), ("gato", "casa"), ("carro", "arvore"), ("barco", "ilha"), ("balao", "sol"),
+    pares_lab = [("pato", "flor"), ("gato", "casa"), ("carro", "flor"), ("barco", "ilha"), ("balao", "sol"),
                  ("passaro", "nuvem"), ("peixe", "barco"), ("pipa", "estrela")]
     for (c, l), (a, b) in zip([(5, 6), (5, 7), (6, 7), (6, 8), (7, 8), (7, 9), (8, 10), (8, 11)], pares_lab):
         cat["Lógica"].append(("lab", lambda c=c, l=l, a=a, b=b: labirinto(1, rng, c, l, a, b)))
@@ -177,7 +184,7 @@ def nivel1(rng):
 def nivel2(rng):
     cat = {k: [] for k in ["Atenção", "Memória", "Padrões", "Lógica", "Traçado", "Cores e códigos"]}
     gradesubs = [[("passaro", dict(espelhar=True)), ("flor", dict(variante="4petalas")), ("lua", dict(espelhar=True))],
-                 [("maca", dict(variante="semfolha")), ("carro", dict(espelhar=True)), ("estrela", dict(variante="6pontas"))],
+                 [("maca", dict(variante="semfolha")), ("carro", dict(variante="semroda")), ("estrela", dict(variante="6pontas"))],
                  [("barco", dict(espelhar=True)), ("sol", dict(variante="poucosraios")), ("peixe", dict(espelhar=True))],
                  [("banana", dict(espelhar=True)), ("casa", dict(variante="semjanela")), ("balao", dict(espelhar=True))]]
     qt = [["pato", "bola", "pipa"], ["sorvete", "dado", "gato", "uva"], ["ovo", "chave", "copo", "lapis"]]
@@ -192,6 +199,8 @@ def nivel2(rng):
                       ("lug", lambda: B.memoria_lugares(rng, 4)), ("mem", lambda: B.memoria_figuras(rng, 2, 7, 10)),
                       ("lug", lambda: B.memoria_lugares(rng, 5)), ("mem", lambda: B.memoria_figuras(rng, 2, 8, 10))]
 
+    filas_usadas = set()  # nenhuma fila repete entre as folhas de "O que vem depois?" do nível
+
     def ciclos_rot():
         tipos = [
             lambda: [("triangulo", g, False) for g in (0, 90, 180, 270)],
@@ -202,7 +211,7 @@ def nivel2(rng):
             lambda: [(f, 0, False) for f in rng.sample(B.FIG_PADRAO, 4)],
             lambda: [("banana", 0, False), ("banana", 90, False), ("banana", 180, False)],
         ]
-        return [f() for f in rng.sample(tipos, 5)]
+        return B.sem_repetir_filas([f() for f in rng.sample(tipos, 5)], filas_usadas)
     pad = []
     for f in [1, None, 2, 1, None, 3, 2, None, 3, None]:
         if f is None:
@@ -211,7 +220,7 @@ def nivel2(rng):
         else:
             pad.append(("seq", lambda f=f: B.sequencias(rng, f)))
     cat["Padrões"] = pad
-    labs = [(11, 13, "pato", "ilha"), (12, 15, "pipa", "nuvem"), (14, 17, "gato", "casa"), (15, 19, "carro", "arvore")]
+    labs = [(11, 13, "pato", "ilha"), (12, 15, "pipa", "nuvem"), (14, 17, "gato", "casa"), (15, 19, "passaro", "flor")]
     t = NOVOS_TEMAS_LOGICA
     cat["Lógica"] = [("sud", lambda: B.sudoku6(rng, 20)), ("lab", lambda: labirinto(2, rng, *labs[0])),
                      ("gl", lambda: B.grade_logica(rng, t[0])), ("sud", lambda: B.sudoku6(rng, 18)),
@@ -240,7 +249,7 @@ def rodape(num, dia=None):
 
 def como_usar(pags):
     return BUMP.pagina_texto("Como usar o Volume 2", f"""
-  <p>O Volume 2 tem <b>120 atividades novas</b>, nos mesmos dois níveis e nos mesmos seis tipos do caderno principal,
+  <p>O Volume 2 tem <b>120 atividades novas</b>, nos mesmos dois níveis e nas mesmas seis categorias do caderno principal,
   com outro plano de 30 dias. Use quando terminar o primeiro, ou para variar.</p>
   <ol class="passos">
     <li><b>Escolha o nível pela idade.</b> Nível 1 (4 a 6 anos) sem leitura; Nível 2 (7 a 10 anos) com leitura inicial.</li>
@@ -253,6 +262,9 @@ def como_usar(pags):
 
 def gerar():
     _registrar()
+    import json
+    v1 = json.loads((GC.SAIDA / "completo.json").read_text())["sequencias"]  # rode gerar_completo.py antes
+    B.SEQ_USADAS.update(tuple(x) for x in v1)
     GC.rodape = rodape
     GC.topo = BUMP.topo
     rng = random.Random(SEMENTE)

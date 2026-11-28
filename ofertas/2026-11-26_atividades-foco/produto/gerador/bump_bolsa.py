@@ -86,7 +86,7 @@ def meia_atividade(at, folha):
     return f"""<div class="meia">{BUMP.topo(f'<span class="selo">{at["categoria"]}</span>', GA.selo(at["nivel"]))}
   <h1>{at['titulo']}</h1><p class="instrucao">{at['instrucao']}</p>
   <div class="area">{GA.svg(at['svg'])}</div>
-  <div class="rodape"><span>Dez Minutinhos · Para levar na bolsa · folha {folha}</span><span class="feito">Feito!<span class="caixa"></span></span></div></div>"""
+  <div class="rodape"><span>Dez Minutinhos · Para levar na bolsa · meia folha {folha}</span><span class="feito">Feito!<span class="caixa"></span></span></div></div>"""
 
 
 def capa_e_uso():
@@ -103,11 +103,11 @@ def capa_e_uso():
   <div class="rodape"><span>Nível 1 · 4 a 6 anos | Nível 2 · 7 a 10 anos</span><span></span></div></div>"""
     uso = f"""<div class="meia">{BUMP.topo('<span class="selo">Para o adulto</span>')}<h1>Como usar</h1>
   <div class="texto"><ol class="passos">
-    <li><b>Imprima em A4 deitado</b> (paisagem), papel comum, preto e branco. Cada folha traz duas atividades.</li>
-    <li><b>Corte na linha tracejada do meio.</b> Cada metade é uma meia folha (A5): dobre e guarde na bolsa.</li>
-    <li><b>Folhas 1 a 15:</b> Nível 1 (4 a 6 anos, sem leitura). <b>Folhas 16 a 30:</b> Nível 2 (7 a 10 anos).</li>
+    <li><b>Imprima em A4 deitado</b> (paisagem), papel comum, preto e branco. Cada folha A4 traz duas atividades.</li>
+    <li><b>Corte na linha tracejada do meio.</b> Cada metade é uma meia folha (A5), numerada no rodapé: dobre e guarde na bolsa.</li>
+    <li><b>Meias folhas 1 a 15:</b> Nível 1 (4 a 6 anos, sem leitura). <b>Meias folhas 16 a 30:</b> Nível 2 (7 a 10 anos).</li>
     <li><b>Leve um lápis</b> e, se der, uma prancheta ou um livro para apoiar.</li>
-    <li><b>Gabarito</b> nas últimas páginas.</li>
+    <li><b>Gabarito</b> nas últimas páginas, em folha A4 inteira: essas não precisam ser cortadas.</li>
   </ol>
   <p class="aviso" style="font-size:9pt">Uso permitido: imprima quantas vezes quiser para as crianças da sua família. Não é permitido revender nem repassar o arquivo.</p></div>
   <div class="rodape"><span>Dez Minutinhos · Para levar na bolsa</span><span></span></div></div>"""
@@ -118,7 +118,7 @@ def gabarito(lista, pag_ini):
     cards = []
     for folha, at in lista:
         corpo = GA.svg(at["gabarito_svg"]) if at.get("gabarito_svg") else f"<p>{at['gabarito_txt']}</p>"
-        cards.append(f'<div class="card"><h3>Folha {folha} · N{at["nivel"]} · {at["titulo"]}</h3>{corpo}</div>')
+        cards.append(f'<div class="card"><h3>Meia folha {folha} · N{at["nivel"]} · {at["titulo"]}</h3>{corpo}</div>')
     pags = []
     for i in range(0, len(cards), 8):
         pags.append(f"""<section class="pagina paisagem paisagem-pad">{BUMP.topo('<span class="selo">Gabarito</span>')}

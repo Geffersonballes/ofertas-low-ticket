@@ -1,6 +1,10 @@
 # Vídeos dos anúncios — Dez Minutinhos
 
 Montados em 2026-11-27 por `criativos/montador/` (o código vai para o git; os .mp4 não).
+**Remontados em 2026-11-28** com o mesmo áudio e a mesma duração, depois da correção do material
+(`revisoes/material-2026-11-28/correcoes.md`): o `folheando.mp4` agora vem do PDF final (antes era da amostra),
+e as páginas 8, 11, 15, 69, 128, 142 e 143 mudaram (ligue os pontos fechando, gabarito do pinte colorido etc.).
+As versões já enviadas à Meta (IDs em `campanha.md`) são as ANTIGAS: precisam ser trocadas pelo dono.
 Formato: 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz, áudio normalizado (−16 LUFS, pico ≤ −1,4 dB).
 Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 6 palavras, sincronizada
 pelas pausas reais da fala. Só mídia real do produto: atividades do caderno completo (com o gabarito

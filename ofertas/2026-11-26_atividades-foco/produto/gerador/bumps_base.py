@@ -15,7 +15,17 @@ LAR = "#ff7a45"
 
 # ------------------------------------------------------------------ ícones extras (caixa 100x100)
 EXTRAS = {
-    "ovo": lambda v: '<ellipse cx="50" cy="54" rx="30" ry="38"/>',
+    # ovo no porta-ovo (um oval liso sozinho não é reconhecido)
+    "ovo": lambda v: '<ellipse cx="50" cy="40" rx="24" ry="31"/><path d="M38 24 Q 44 18 50 17" fill="none"/>'
+                     '<path d="M24 56 Q 26 76 50 78 Q 74 76 76 56 Z" fill="#d9d9d9"/><rect x="40" y="78" width="20" height="8"/><rect x="28" y="86" width="44" height="8" rx="3"/>',
+    "polvo": lambda v: '<path d="M22 52 C 22 22, 78 22, 78 52 C 78 60, 70 62, 64 62 L 36 62 C 30 62, 22 60, 22 52 Z"/>'
+                       '<circle cx="40" cy="44" r="4" fill="#1d1d1f"/><circle cx="60" cy="44" r="4" fill="#1d1d1f"/>'
+                       '<path d="M30 62 Q 22 76 30 88 M42 62 Q 38 78 44 92 M58 62 Q 62 78 56 92 M70 62 Q 78 76 70 88" fill="none" stroke-width="5"/>',
+    # lua mais gorda para o "Cada um na sua sombra": a lua fina virava só um contorno na silhueta
+    "lua_grossa": lambda v: '<path d="M62 10 A40 40 0 1 0 62 90 A50 50 0 0 1 62 10 Z"/>',
+    # barco do quebra-cabeça: deslocado para o mastro não cair na linha de corte do meio
+    "barco_qc": lambda v: '<g transform="translate(-9,0)"><polygon points="10,62 90,62 76,84 24,84"/><line x1="50" y1="62" x2="50" y2="10"/>'
+                          '<polygon points="50,14 82,56 50,56" fill="#d9d9d9"/></g>',
     "ilha": lambda v: '<path d="M8 82 Q 50 58 92 82 Z"/><path d="M52 70 Q 50 44 58 22" fill="none"/>'
                       '<path d="M58 22 Q 40 14 26 26 Q 42 22 56 26 Z" fill="#d9d9d9"/><path d="M58 22 Q 76 12 90 26 Q 74 22 60 26 Z" fill="#d9d9d9"/>'
                       '<path d="M58 22 Q 64 36 60 48" fill="none"/><path d="M4 90 q 8 -4 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0" fill="none"/>',
@@ -46,6 +56,7 @@ for _k, _f in EXTRAS.items():
 
 # ------------------------------------------------------------------ CSS
 CSS_BUMP = """
+.gab9.gab6 { grid-template-columns: repeat(2, 1fr); }
 .capa .titulo { font-size: 50pt; }
 .autor { font-family: 'Nunito'; font-weight: 700; font-size: 11pt; color: var(--cinza); margin-top: 2mm; }
 .capa .bump { font-family: 'Baloo 2'; font-weight: 800; font-size: 13pt; color: var(--laranja); letter-spacing: .6pt; margin-top: 2mm; }
@@ -122,7 +133,7 @@ class Bump:
         pags = []
         for i in range(0, len(cards), por_pag):
             pags.append(f"""<section class="pagina">{self.topo('<span class="selo">Gabarito</span>')}
-  <div class="gab9">{''.join(cards[i:i + por_pag])}</div>{self.rodape(num_ini + len(pags))}</section>""")
+  <div class="gab9{' gab6' if por_pag == 6 else ''}">{''.join(cards[i:i + por_pag])}</div>{self.rodape(num_ini + len(pags))}</section>""")
         return pags
 
     def montar(self, paginas, css_extra=""):
