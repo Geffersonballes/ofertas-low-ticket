@@ -20,6 +20,11 @@ Siga `docs/08_inteligencia-de-anuncios.md` (camadas 2 e 3) e `docs/05_metricas-e
    (oferta, anúncio, texto, regra, nivel ok/warn/bad), `aprendizados`, `vendas_hotmart`, `reembolsos`, `motivos_reembolso` (data, motivo) e `atualizado_em` (ISO).
    As taxas o painel calcula sozinho. Depois commit + push no `main`: a VPS publica em até 1 min.
    Atualize também `resultados/painel.md` (versão em texto, para o minerador) e o `status.md`.
+   **Etapas da oferta (coluna do painel):** em toda leitura, e sempre que o `status.md` de uma oferta
+   mudar, rode `python3 painel/etapas_do_status.py` antes do commit. Ele copia a tabela de etapas e a
+   última decisão do `status.md` para `dados.json` → `etapas`/`agora`. Cada oferta do `dados.json`
+   precisa do campo `pasta` (nome da pasta em `ofertas/`); oferta nova sem `pasta` aparece no aviso
+   do script — acrescente o campo. Rode também para ofertas que ainda não estão no ar.
 5. **Aprender:** quando houver conclusão com número (ex.: "gancho de curiosidade teve 31% de
    gancho vs 18% do de objeção, R$ 40 cada"), acrescente uma linha em `aprendizados/o-que-vende.md`
    com confiança (baixa < R$ 100 gastos por variante; média; alta > R$ 300 ou 20+ vendas).
