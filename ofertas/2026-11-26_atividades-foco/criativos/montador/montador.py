@@ -63,7 +63,8 @@ ROTEIROS = {
     ],
     2: [
         F("Imprimiu, entregou, pronto.", "Imprimiu, entregou, pronto.",
-          {"tipo": "carimbo", "pag": 6, "titulo": "Imprimiu. Entregou. Pronto."}),
+          # a página sobe DENTRO da janela (acima da legenda) e já aparece no 1º quadro (miniatura do vídeo)
+          {"tipo": "carimbo", "pag": 6, "sobe": 260, "janela": True, "titulo": "Imprimiu. Entregou. Pronto."}),
         F("Zero preparo.", "Zero preparo."),
         F("O plano já diz | as duas folhas de cada dia.", "O plano já diz | as 2 folhas de cada dia.",
           {"tipo": "partes", "titulo": "O plano já separou as folhas", "partes": [
@@ -88,7 +89,7 @@ ROTEIROS = {
         F("Vídeo de desenho também.", "Vídeo de desenho também.",
           {"tipo": "texto", "escuro": True, "linhas": ["Vídeo de desenho", "também."]}),
         F("Quer o mesmo tipo de desafio, | só que no papel?", "Quer o mesmo tipo de desafio, | só que no papel?",
-          {"tipo": "atividade", "pag": 75, "revelar": False, "entrada": "baixo", "titulo": "O mesmo desafio. No papel."}),
+          {"tipo": "atividade", "pag": 75, "revelar": False, "entrada": "baixo", "janela": True, "titulo": "O mesmo desafio. No papel."}),
         F("Labirinto, sudoku, | sequência, jogo dos sete erros.", "Labirinto, sudoku, | sequência, jogo dos 7 erros.",
           {"tipo": "partes", "partes": [
               {"tipo": "atividade", "pag": 75, "titulo": "Labirinto"},
@@ -116,9 +117,11 @@ ROTEIROS = {
               {"tipo": "atividade", "pag": 13}, {"tipo": "atividade", "pag": 18}]}),
         F("Ligue os pontos.", "Ligue os pontos.", {"tipo": "atividade", "pag": 15, "titulo": "Traçado"}),
         F("Não precisa saber ensinar | nem montar rotina.", "Não precisa saber ensinar | nem montar rotina.",
-          {"tipo": "folheando", "titulo": "Sem saber ensinar · sem montar rotina"}),
-        F("O plano de trinta dias | já vem pronto, | com quadro de conquistas.",
-          "O plano de 30 dias | já vem pronto, | com quadro de conquistas.",
+          {"tipo": "folheando", "titulo": "Sem saber ensinar\nnem montar rotina"}),
+        # a voz diz "com O quadro" (24/24 leituras do whisper large-v3 e medium em recorte; ver correcoes.md,
+        # rodada 2); a legenda segue o áudio, como no "imprime e entrega" do A2
+        F("O plano de trinta dias | já vem pronto, | com o quadro de conquistas.",
+          "O plano de 30 dias | já vem pronto, | com o quadro de conquistas.",
           {"tipo": "partes", "titulo": "Plano pronto · quadro de conquistas", "partes": [
               {"tipo": "pagina", "pag": 5, "zoom": [1.0, 1.3], "foco": [50, 20], "janela": True},
               # zoom pequeno no centro: a página inteira termina acima da legenda (y < 704)
@@ -309,7 +312,7 @@ def html_cena(c):
         return "".join(f'<div class="mini m{i}"><img src="{pag_url(p)}" alt=""><span>{H.escape(r)}</span></div>'
                        for i, (p, r) in enumerate(zip(c["pags"], c["rotulos"])))
     if t == "carimbo":
-        return f'<div class="card pag sobe"><img src="{pag_url(c["pag"])}" alt=""></div><div class="carimbo">PRONTO</div>'
+        return janela(c, f'<div class="card pag sobe"><img src="{pag_url(c["pag"])}" alt=""></div>') + '<div class="carimbo">PRONTO</div>'
     if t == "imagem":
         return f'<img class="foto" src="{(IMG / c["src"]).as_uri()}" alt="">' + (LAPIS if c.get("lapis") else "")
     if t == "numeros":
@@ -339,7 +342,7 @@ html,body{width:540px;height:960px;overflow:hidden;background:#fff7f1;font-famil
 .escuro{background:#1d1d1f}.laranja{background:#ff7a45}
 #titulo{position:absolute;left:24px;right:24px;top:118px;z-index:5;text-align:center;display:none}
 #titulo span{display:inline-block;background:#fff;border:2.5px solid #1d1d1f;border-radius:16px;padding:6px 16px 4px;
-  font-family:'Baloo 2';font-weight:800;font-size:27px;line-height:1.1;box-shadow:4px 4px 0 #ff7a45;text-wrap:balance}
+  font-family:'Baloo 2';font-weight:800;font-size:27px;line-height:1.1;box-shadow:4px 4px 0 #ff7a45;text-wrap:balance;white-space:pre-line}
 #legenda{position:absolute;left:22px;right:22px;top:712px;height:100px;z-index:6;display:flex;align-items:flex-start;justify-content:center}
 #legenda span{background:rgba(29,29,31,.9);color:#fff;font-family:'Baloo 2';font-weight:700;font-size:27px;line-height:1.18;
   padding:7px 14px 5px;border-radius:12px;text-align:center;max-width:496px;text-wrap:balance}
@@ -442,7 +445,7 @@ const A = {
   carimbo(el, c, p, dt) {
     const card = el.querySelector('.card'), s = el.querySelector('.carimbo');
     const u = ease(cl(p / 0.42));
-    card.style.transform = `translateY(${(1 - u) * 760}px)`;
+    card.style.transform = `translateY(${(1 - u) * (c.sobe ?? 760)}px)`;
     const k = cl((p - 0.52) / 0.1);
     s.style.opacity = k; s.style.transform = `translate(-50%,-50%) rotate(-12deg) scale(${2.2 - 1.2 * ease(k)})`;
   },

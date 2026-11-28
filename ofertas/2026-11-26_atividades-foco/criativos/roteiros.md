@@ -12,14 +12,17 @@ Etapa 6 (roteiros) · 2026-11-26 · base: `briefing.md` (5 ângulos), `dossie.md
   2,5 palavras por segundo. Se a fala passar do tempo, corte palavra, não acelere a voz.
 - **Imagens: só o produto real.** Páginas do PDF `final/dez-minutinhos.pdf` (número da página
   indicado em cada cena), `pagina/img/mockup-capa.png`, `pagina/img/mockup-pacote.png`,
-  `pagina/img/amostra-nivel1.jpg`, `pagina/img/amostra-nivel2.jpg`, `pagina/img/folheando.gif` e o
-  vídeo `folheando.mp4` (caminho a confirmar; supus `pagina/img/folheando.mp4`).
+  `pagina/img/folheando.gif` e o
+  vídeo `pagina/img/folheando.mp4`. Os vídeos são montados por `criativos/montador/montador.py` (as tabelas
+  abaixo descrevem o que foi montado; tempos reais da fala).
   Animações feitas sobre as páginas: traço de lápis resolvendo o labirinto, círculos aparecendo,
   folha dobrando. Se aparecer mão ou lápis, só em ilustração plana simples.
 - **Proibido em cena:** rosto de criança, qualquer pessoa real, "mãe" ou "criança" gerada por IA,
   cena gerada que pareça real, celular/tablet fotorrealista (a "tela" dos ganchos é só tipografia).
 - **Texto na tela:** fonte da página, fundo claro, no máximo 7 palavras por vez, fora das áreas de
-  interface do Reels/Stories (margem de 250 px em cima e 340 px embaixo).
+  interface do Reels/Stories: **título abaixo de 200 px do topo e legenda acima de 250 px da base** (a mesma
+  regra da skill `revisar-criativos`). Medido nos 4 vídeos (2026-11-28, todos os quadros a 2 por segundo): o texto
+  mais alto começa em y 236 e o mais baixo termina em y 1583 (336 px acima da base).
 - **Cartão final (igual nos 4 vídeos):** `mockup-capa.png` + "Dez Minutinhos" + "120 atividades
   para imprimir · 4 a 10 anos" + "R$ 37,00" + "Garantia de 7 dias" + botão desenhado "Toque em Saiba mais".
   A legenda do fecho fica clara e bem abaixo do botão (só o botão é escuro). Montado assim desde 2026-11-28 (rodada 2 dos criativos).
@@ -36,10 +39,10 @@ Resumo:
 
 | # | Ângulo | Modela | Gancho (0–3 s) | Fala | Vídeo |
 |---|---|---|---|---|---|
-| 1 | Curiosidade | 1534227 | "Isto é o que cabe em dez minutinhos de papel e lápis." | 58 palavras ≈ 23 s | 25 s |
-| 2 | Objeção: preparo e preço | 1534245 | "Imprimiu, entregou, pronto. Zero preparo." | 57 palavras ≈ 23 s | 25 s |
-| 3 | Objeção: tela | 1534248 | "App educativo continua sendo tela." | 53 palavras ≈ 21 s | 23 s |
-| 4 | Desejo: troca | 1534234 | "Troque dez minutos de tela por dez minutos disto." | 52 palavras ≈ 21 s | 22 s |
+| 1 | Curiosidade | 1534227 | "Isto é o que cabe em dez minutinhos de papel e lápis." | 58 palavras · 21,1 s gravados | 22,1 s |
+| 2 | Objeção: preparo e preço | 1534245 | "Imprimiu, entregou, pronto. Zero preparo." | 57 palavras · 20,6 s gravados | 21,6 s |
+| 3 | Objeção: tela | 1534248 | "App educativo continua sendo tela." | 53 palavras · 21,9 s gravados | 22,9 s |
+| 4 | Desejo: troca | 1534234 | "Troque dez minutos de tela por dez minutos disto." | 53 palavras · 21,5 s gravados | 22,5 s |
 | 5 | Ocasião: férias (estático) | 1599489 | "Férias. O que tem para fazer hoje?" (escrito) | — | — |
 
 ---
@@ -59,11 +62,14 @@ a curiosidade vem do próprio produto aparecendo.
 
 | Tempo | Mídia real | Texto na tela | Narração |
 |---|---|---|---|
-| 0–4,5 s | Labirinto N1 (p. 7), traço animado do início até a saída | Isto cabe em 10 minutinhos | Isto é o que cabe em dez minutinhos de papel e lápis. |
-| 4,5–9 s | Cortes de ~1 s: memória "Olhe e lembre" (p. 11) → sudoku de figuras (p. 18) → código secreto N2 (p. 78), cada um com uma animação curta (círculo, figura entrando na casa, letra aparecendo) | Labirinto · Memória · Sudoku · Código secreto (uma palavra por corte) | Um labirinto. Um jogo de memória. Um sudoku. Um código secreto. |
-| 9–14 s | `folheando.mp4` | 120 atividades · 4 a 10 anos | Cento e vinte atividades prontas para imprimir, de quatro a dez anos. |
-| 14–19,5 s | Plano de 30 dias N1 (p. 5), zoom na linha do Dia 1 → miniaturas das p. 6 e 7 | Plano de 30 dias · 2 folhas por dia | O plano de trinta dias já diz as duas folhas de cada dia. |
-| 19,5–25 s | Cartão final | Dez Minutinhos · R$ 37,00 · Saiba mais | Dez Minutinhos, trinta e sete reais. Toque em saiba mais. |
+| 0–3,4 s | Labirinto N1 (p. 7), caminho do gabarito se desenhando | Isto cabe em 10 minutinhos | Isto é o que cabe em dez minutinhos de papel e lápis. |
+| 3,4–4,5 s | Labirinto N2 (p. 75), caminho se desenhando | Labirinto | Um labirinto. |
+| 4,5–5,8 s | Memória "Olhe e lembre" (p. 11), resposta aparecendo | Memória | Um jogo de memória. |
+| 5,8–6,8 s | Sudoku de figuras (p. 18), figuras entrando | Sudoku | Um sudoku. |
+| 6,8–8,5 s | Código secreto N2 (p. 78), letras aparecendo | Código secreto | Um código secreto. |
+| 8,5–13,1 s | `folheando.mp4` | 120 atividades · 4 a 10 anos | Cento e vinte atividades prontas para imprimir, de quatro a dez anos. |
+| 13,1–16,7 s | Plano de 30 dias N1 (p. 5), zoom no Dia 1 (dentro da janela acima da legenda) → p. 6 e 7 lado a lado ("Dia 1 · folha 1/2") | Plano de 30 dias · 2 folhas por dia | O plano de trinta dias já diz as duas folhas de cada dia. |
+| 16,7–22,1 s | Cartão final | — (cartão) | Dez Minutinhos, trinta e sete reais. Toque em saiba mais. |
 
 **Chamada final:** "Dez Minutinhos, trinta e sete reais. Toque em saiba mais."
 
@@ -73,7 +79,7 @@ a curiosidade vem do próprio produto aparecendo.
 > O plano de trinta dias já diz as duas folhas de cada dia. Dez Minutinhos, trinta e sete reais.
 > Toque em saiba mais.
 
-58 palavras ≈ 23 s de fala.
+58 palavras · 21,1 s de fala gravada.
 
 **Anúncio**
 - **Texto principal:**
@@ -99,19 +105,22 @@ curta de impacto → o que é → "monta em menos de 5 minutos" (aqui: zero prep
 R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "calma e confiança".
 
 **Gancho (0–3 s)**
-- Visual: a página "Qual é diferente?" (N1, p. 6) sobe de baixo da tela como se saísse da
-  impressora (sem impressora na cena) e recebe um carimbo desenhado "PRONTO".
+- Visual: a página "Qual é diferente?" (N1, p. 6) sobe como se saísse da impressora (sem impressora
+  na cena), dentro da janela acima da legenda, e recebe um carimbo desenhado "PRONTO". No 1º quadro
+  (miniatura) já aparecem o título e a instrução da página, sem nada por cima.
 - Escrito: **"Imprimiu. Entregou. Pronto."**
 - Falado: "Imprimiu, entregou, pronto. Zero preparo."
 
 | Tempo | Mídia real | Texto na tela | Narração |
 |---|---|---|---|
-| 0–3 s | Página p. 6 subindo + carimbo "PRONTO" | Imprimiu. Entregou. Pronto. | Imprimiu, entregou, pronto. Zero preparo. |
-| 3–7 s | Plano N1 (p. 5), destaque no Dia 1 → p. 6 e p. 7 lado a lado | O plano já separou as folhas | O plano já diz as duas folhas de cada dia. |
-| 7–10 s | `mockup-pacote.png` + lápis ilustrado (plano, sem mão) entrando pela lateral | Abre · imprime · entrega | Abre, imprime e entrega com um lápis. (a voz gravada diz "e"; a legenda segue o áudio) |
-| 10–13 s | Gabarito (p. 128), zoom numa resposta | Gabarito completo | As respostas estão no gabarito. |
-| 13–19,5 s | `mockup-capa.png`; números entram em sequência | 120 atividades · R$ 37,00 → R$ 1,23 por dia no plano de 30 dias | Cento e vinte atividades por trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. |
-| 19,5–25 s | `folheando.mp4` → cartão final | Imprime de novo quando quiser · Saiba mais | E imprime de novo quando quiser. Toque em saiba mais. |
+| 0–3,5 s | Página p. 6 subindo (dentro da janela) + carimbo "PRONTO" | Imprimiu. Entregou. Pronto. | Imprimiu, entregou, pronto. Zero preparo. |
+| 3,5–6,2 s | Plano N1 (p. 5), zoom no Dia 1 → p. 6 e p. 7 lado a lado | O plano já separou as folhas | O plano já diz as duas folhas de cada dia. |
+| 6,2–9,0 s | `mockup-pacote.png` + lápis ilustrado (plano, sem mão) entrando pela lateral | Abre · imprime · entrega | Abre, imprime e entrega com um lápis. (a voz gravada diz "e"; a legenda segue o áudio) |
+| 9,0–10,9 s | Gabarito (p. 128), zoom numa resposta | Gabarito completo | As respostas estão no gabarito. |
+| 10,9–14,0 s | `mockup-capa.png`; "120 atividades" e depois "R$ 37,00" | Uma vez só | Cento e vinte atividades por trinta e sete reais. |
+| 14,0–17,3 s | `mockup-capa.png`; "R$ 1,23" e depois "por dia no plano / de 30 dias" (sem seta entre os preços) | Faça a conta | Um real e vinte e três por dia, no plano de trinta dias. |
+| 17,3–19,2 s | `folheando.mp4` | Imprime de novo quando quiser | E imprime de novo quando quiser. |
+| 19,2–21,6 s | Cartão final | — (cartão) | Toque em saiba mais. |
 
 **Chamada final:** "E imprime de novo quando quiser. Toque em saiba mais."
 
@@ -121,7 +130,7 @@ R$ 37,00 ÷ 30 = R$ 1,23) → link. Sai a prova social difusa e a promessa de "c
 > trinta e sete reais. Um real e vinte e três por dia, no plano de trinta dias. E imprime de novo
 > quando quiser. Toque em saiba mais.
 
-57 palavras ≈ 23 s de fala.
+57 palavras · 20,6 s de fala gravada.
 
 **Anúncio**
 - **Texto principal:**
@@ -158,11 +167,12 @@ inventado (CLAUDE.md, regra 3). A "dor" da criança que não para sentada sai; f
 
 | Tempo | Mídia real | Texto na tela | Narração |
 |---|---|---|---|
-| 0–4 s | Tipografia animada (sem aparelho na cena) | App educativo = tela · Vídeo também | App educativo continua sendo tela. Vídeo de desenho também. |
-| 4–8 s | Labirinto N2 (p. 75) entra por cima do texto e ocupa a tela | O mesmo desafio. No papel. | Quer o mesmo tipo de desafio, só que no papel? |
-| 8–12 s | Cortes de ~1 s: labirinto p. 75 com traço → sudoku 6×6 (p. 69) com números entrando → "O que vem depois?" (p. 8) → jogo dos 7 erros (p. 68) com círculos aparecendo | Labirinto · Sudoku · Sequência · 7 erros | Labirinto, sudoku, sequência, jogo dos sete erros. |
-| 12–18,5 s | Tela dividida: `amostra-nivel1.jpg` em cima, `amostra-nivel2.jpg` embaixo | Nível 1 · 4 a 6 anos · sem leitura / Nível 2 · 7 a 10 anos | Dois níveis: de quatro a seis anos, sem precisar ler, e de sete a dez. |
-| 18,5–23 s | Cartão final | Dez Minutinhos · 120 atividades · Saiba mais | Dez Minutinhos: cento e vinte atividades para imprimir. Toque em saiba mais. |
+| 0–2,5 s | Tipografia em fundo escuro: "App educativo", "educativo" riscado, "= tela" (sem aparelho na cena) | — (tipografia) | App educativo continua sendo tela. |
+| 2,5–4,2 s | Tipografia em fundo escuro: "Vídeo de desenho / também." | — (tipografia) | Vídeo de desenho também. |
+| 4,2–7,0 s | Labirinto N2 (p. 75) sobe de baixo, dentro da janela acima da legenda | O mesmo desafio. No papel. | Quer o mesmo tipo de desafio, só que no papel? |
+| 7,0–11,2 s | Cortes de ~1 s: labirinto p. 75 com traço → sudoku 6×6 (p. 69) com números entrando → "O que vem depois?" (p. 8) → jogo dos 7 erros (p. 68) com círculos aparecendo | Labirinto · Sudoku · Sequência · 7 erros | Labirinto, sudoku, sequência, jogo dos sete erros. |
+| 11,2–16,3 s | Duas páginas lado a lado: p. 6 (Nível 1) e p. 78 (Nível 2) | Dois níveis (rótulos: "Nível 1 · 4 a 6 anos · sem leitura" / "Nível 2 · 7 a 10 anos") | Dois níveis: de quatro a seis anos, sem precisar ler, e de sete a dez. |
+| 16,3–22,9 s | Cartão final | — (cartão) | Dez Minutinhos: cento e vinte atividades para imprimir. Toque em saiba mais. |
 
 **Chamada final:** "Dez Minutinhos: cento e vinte atividades para imprimir. Toque em saiba mais."
 
@@ -172,7 +182,7 @@ inventado (CLAUDE.md, regra 3). A "dor" da criança que não para sentada sai; f
 > sem precisar ler, e de sete a dez. Dez Minutinhos: cento e vinte atividades para imprimir. Toque
 > em saiba mais.
 
-53 palavras ≈ 21 s de fala.
+53 palavras · 21,9 s de fala gravada.
 
 **Anúncio**
 - **Texto principal:**
@@ -200,31 +210,32 @@ sendo feitas → "não precisa ser professor nem rotina complicada" → link. Sa
 trocando…" (prova social difusa); a troca vira convite direto.
 
 **Gancho (0–3 s)**
-- Visual: tipografia "10 min de TELA" em fundo escuro → corte seco (com som de "clique") para a
+- Visual: tipografia "10 min de TELA" em fundo escuro → corte seco para a
   página "O que vem depois?" (N1, p. 8), fundo claro, com "10 min DISTO".
 - Escrito: **"10 min de tela → 10 min disto"**
 - Falado: "Troque dez minutos de tela por dez minutos disto."
 
 | Tempo | Mídia real | Texto na tela | Narração |
 |---|---|---|---|
-| 0–3,5 s | Tipografia escura → corte seco → p. 8 | 10 min de tela → 10 min disto | Troque dez minutos de tela por dez minutos disto. |
-| 3,5–5 s | p. 8, lápis ilustrado completando a sequência | Padrões | Padrões para completar. |
-| 5–8 s | "Olhe e lembre" (p. 11): a folha dobra na linha (animação) e a pergunta aparece | Memória | Memória: olha, dobra a folha e responde. |
-| 8–10 s | Labirinto (p. 13) com traço → sudoku de figuras (p. 18) | Lógica | Lógica, com labirinto e sudoku. |
-| 10–11,5 s | Ligue os pontos (p. 15), traço ligando os números até formar o desenho | Traçado | Ligue os pontos. |
-| 11,5–14,5 s | `folheando.mp4` | Sem saber ensinar · Sem montar rotina | Não precisa saber ensinar nem montar rotina. |
-| 14,5–19 s | Plano de 30 dias (p. 5) → quadro de conquistas (p. 142) → certificado (p. 143) | Plano de 30 dias pronto · quadro de conquistas | O plano de trinta dias já vem pronto, com quadro de conquistas. |
-| 19–22 s | Cartão final | Dez Minutinhos · Saiba mais | Dez Minutinhos. Toque em saiba mais. |
+| 0–3,3 s | Tipografia escura "10 min / de tela" → corte seco → p. 8 | — (tipografia) → 10 min disto | Troque dez minutos de tela por dez minutos disto. |
+| 3,3–4,9 s | p. 8 com a resposta aparecendo | Padrões | Padrões para completar. |
+| 4,9–8,1 s | "Olhe e lembre" (p. 11): zoom do quadro de cima para a página toda, resposta aparecendo | Memória | Memória: olha, dobra a folha e responde. |
+| 8,1–10,5 s | Labirinto (p. 13) com traço → sudoku de figuras (p. 18) | Lógica | Lógica, com labirinto e sudoku. |
+| 10,5–11,8 s | Ligue os pontos (p. 15), traço ligando os números até formar o desenho | Traçado | Ligue os pontos. |
+| 11,8–14,6 s | `folheando.mp4` | Sem saber ensinar / nem montar rotina (2 linhas) | Não precisa saber ensinar nem montar rotina. |
+| 14,6–18,5 s | Plano de 30 dias (p. 5) → quadro de conquistas (p. 142) → certificados (p. 143) | Plano pronto · quadro de conquistas | O plano de trinta dias já vem pronto, com o quadro de conquistas. (a voz gravada diz "com o"; a legenda segue o áudio) |
+| 18,5–22,5 s | Cartão final | — (cartão) | Dez Minutinhos. Toque em saiba mais. |
 
 **Chamada final:** "Dez Minutinhos. Toque em saiba mais."
 
 **Narração completa:**
 > Troque dez minutos de tela por dez minutos disto. Padrões para completar. Memória: olha, dobra a
 > folha e responde. Lógica, com labirinto e sudoku. Ligue os pontos. Não precisa saber ensinar nem
-> montar rotina. O plano de trinta dias já vem pronto, com quadro de conquistas. Dez Minutinhos.
+> montar rotina. O plano de trinta dias já vem pronto, com o quadro de conquistas. Dez Minutinhos.
 > Toque em saiba mais.
 
-52 palavras ≈ 21 s de fala.
+53 palavras · 21,5 s de fala gravada. (O texto enviado à voz foi "com quadro"; a gravação diz "com o", e o
+roteiro e a legenda seguem o áudio. Ver `revisoes/criativos-2026-11-28/correcoes.md`, rodada 2.)
 
 **Anúncio**
 - **Texto principal:**
@@ -313,5 +324,4 @@ secreto p. 78; 5) plano p. 5 "30 dias · 2 folhas por dia · R$ 37,00".
   gabarito (p. 128), quadro de conquistas (p. 142), certificados (p. 143), bônus 2 (p. 146).
 - Código secreto, caça-palavras, sudoku 6×6 e jogo dos 7 erros são do Nível 2; nos criativos 1 e 3
   eles aparecem na lista geral, sem atribuir a idade errada.
-- Pendências: confirmar o caminho de `folheando.mp4`; definir UTMs; o título do criativo 4 depende
-  da escolha final do título da página pelo dono.
+- Pendência: definir UTMs (Etapa 7).

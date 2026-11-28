@@ -66,3 +66,80 @@ sha256 (início): mp4 1 `998a9b40…`, 2 `6c27ae78…`, 3 `bcf87fbc…`, 4 `b84f
 
 **Fica para a revisão da rodada 2:** pela skill, todos os criativos que mudaram (os 4 vídeos, as 2 imagens e os textos dos
 anúncios 1, 2, 4 e 5) têm de ser revisados de novo. Esta correção não substitui essa revisão. Só depois vem o Portão C.
+
+## Rodada 2
+
+- Data: 2026-11-28 · Base: `rodada2.md` (6 cosméticos: A2-1, A3-1, A4-1, A4-2, C-1, R-1). Os 6 corrigidos; nenhum "aceito como está".
+- Material intocado: `python3 ferramentas/conferir_material.py ofertas/2026-11-26_atividades-foco` → "MATERIAL APROVADO" (8 PDFs).
+- Nada publicado, nada enviado à Meta nem à Hotmart. Sem commit e sem push.
+- **Remontados só os vídeos 2, 3 e 4**, com o mesmo áudio e a mesma duração (21,63 / 22,90 / 22,50 s) e as mesmas fronteiras
+  em pausas (8/8, 6/6, 8/8). O A1 e o A5 (estáticos) não mudaram: a C-1 foi resolvida no roteiro, porque os 4 vídeos já cumprem a regra da skill.
+
+| Item | Arquivo | O que foi feito | Conferido |
+|---|---|---|---|
+| A2-1 · página do A2 sobe por baixo da legenda (0,0–0,9 s) e miniatura | `criativos/montador/montador.py` (cena `carimbo`: opções `janela` e `sobe`) | A p. 6 sobe **dentro da `janela`** (termina em y 1416 com fade, acima da legenda em y 1424) e parte de 260 px abaixo da posição final (era 760 px, fora da tela). No 1º quadro (miniatura) já aparecem o título "Imprimiu. Entregou. Pronto.", o cabeçalho, "Qual é diferente?" e a instrução "Em cada fila…", sem nada por cima; a legenda só entra aos 0,02 s, também abaixo da página. O carimbo "PRONTO" fica fora da janela (não é cortado) | Quadros de 0,0 a 1,2 s a cada 0,1 s; quadro 0,0 s em tamanho grande; folha do A2 a 2 qps |
+| A3-1 · p. 75 passa sob a legenda (4,25–4,6 s) | `montador.py` (cena do A3 com `entrada: "baixo"` agora com `janela`) | A entrada de baixo roda dentro da `janela`: o labirinto aparece saindo da linha acima da legenda e nunca passa por baixo dela | Quadros de 4,20 a 4,80 s a cada 1/15 s (10 quadros); folha do A3 a 2 qps |
+| A4-1 · "com quadro" × "com o quadro" (16,9–18,5 s) | `montador.py` (narração e legenda), `criativos/roteiros.md` | **Legenda passou a "com o quadro de conquistas."** (5 palavras, 1 linha, entra aos 17,05 s). O roteiro também. Áudio sem mudança. Decisão e evidência abaixo | Quadro 17,5 s em tamanho grande; folha do A4 a 2 qps; tempos em `montador/tmp/anuncio-4-amandinha.json` |
+| A4-2 · título com "·" pendurado e sem margem (11,8–14,6 s) | `montador.py` (título da cena `folheando` do A4 e CSS do `#titulo`) | Título em 2 linhas fixas, sem "·": "Sem saber ensinar" / "nem montar rotina" (como a fala). O `#titulo` aceita quebra explícita (`white-space: pre-line`); nenhum outro título tem quebra, então nada mais muda. A caixa vai de x ≈ 274 a 806 px: margem lateral de ~274 px (os outros ficam a ≥ 150 px) | Quadro 12,5 s em tamanho grande; folha do A4 (12,0–14,5 s) |
+| C-1 · margem do roteiro ≠ skill | `criativos/roteiros.md` (Regras de produção, "Texto na tela") | Regra única, a da skill `revisar-criativos`: título abaixo de 200 px do topo e legenda acima de 250 px da base | Medido por pixel em **todos** os quadros a 2 qps dos 4 vídeos (44 + 43 + 46 + 45): o conteúdo mais alto começa em y 236 nos 4 e o mais baixo termina em y 1583 nos 4 (336 px acima da base). Os 4 cumprem |
+| R-1 · roteiro desatualizado | `criativos/roteiros.md` | Tabelas de cena refeitas pelo vídeo montado, com os tempos reais das frases (`montador/tmp/anuncio-N-amandinha.json`): **A1** com uma linha por corte, incluindo o labirinto N2 (p. 75) aos 3,4 s; **A2** sem a seta entre preços, com os títulos "Uma vez só" (10,9–14,0 s) e "Faça a conta" (14,0–17,3 s) e a página subindo dentro da janela; **A3** com a p. 6 e a p. 78 lado a lado (sem `amostra-nivel1/2.jpg`) e as duas telas de tipografia separadas; **A4** com o título novo, a fala "com o quadro" e sem o "som de clique" (os vídeos não têm efeito sonoro). Resumo: vídeos de 22,1 / 21,6 / 22,9 / 22,5 s e fala gravada de 21,1 / 20,6 / 21,9 / 21,5 s. Saíram as pendências resolvidas (caminho do `folheando.mp4`, título do criativo 4) e as amostras que não aparecem em nenhum criativo; ficou só "definir UTMs" | Roteiro relido inteiro contra as folhas de contato dos 4 vídeos e o `videos/LEIA.md` |
+
+### Decisão do item A4-1: "com **o** quadro"
+
+Trecho ouvido: 16,5–18,0 s (e recortes de 16,3–18,3 s e 15,5–18,5 s), no `audio/amandinha-4.mp3` e no áudio do próprio `.mp4`.
+
+- **Leituras do faster-whisper com tempo por palavra (beam 5 e beam 1, sem contexto anterior):**
+  - large-v3: 12 de 12 leituras ouvem "com **o** quadro" (probabilidade do "o" entre 0,73 e 0,96).
+  - medium: 12 de 12 ouvem o "o" (0,72 a 0,86).
+  - Total: **24 de 24** em recorte. Na rodada 2, só o small e o large-v3 no arquivo inteiro não ouviram.
+- **Análise do sinal** (energia e periodicidade a cada 5 ms e espectrograma de 16,7 a 17,4 s; trabalho em
+  `/tmp/claude-0/-home-user/2250d25c-d581-568f-b4e4-6cb893f20944/scratchpad/r3/espectro*.png`):
+  - "pronto" termina em ~16,92 s;
+  - estouro do /k/ de "com" em ~17,00 s;
+  - vogal nasal forte de 17,04 a 17,13 s (~90 ms, cerca de −20 dB);
+  - **segmento sonoro fraco de ~60 ms (17,14–17,20 s, cerca de −40 dB)**;
+  - fechamento e estouro do /k/ de "quadro" em 17,21–17,25 s.
+  - Para comparar, o "com" de "com labirinto" (9,04–9,20 s, mesmo áudio) tem ~160 ms de vogal forte contínua. Aqui o
+    trecho sonoro entre os dois /k/ também tem ~160 ms, mas em duas partes, e a segunda é fraca.
+- **Leitura da análise:**
+  - Não aparece uma vogal "o" plena e separada (60–120 ms com a força de uma vogal).
+  - O segmento de ~60 ms entre a vogal nasal e o /k/ é compatível com o "o" átono fundido ao "com" ([kõũ], o
+    "co'o" do português falado). Também seria compatível com o fim nasal do "com". O sinal sozinho não decide.
+- **Decisão:** legenda e roteiro passam a **"com o quadro de conquistas."**
+  - Todas as leituras de modelo ouvem o "o", e o sinal tem a duração mínima de um "o" fundido.
+  - Quem assiste tende a ouvir "com o", como o whisper. A legenda "com o" não fica errada nem se a voz tiver dito "com"
+    fundido, porque o "o" átono fundido é a pronúncia normal de "com o".
+  - Mesmo critério do "imprime e entrega" do A2: a legenda segue o áudio, sem regravar.
+  - O texto enviado ao ElevenLabs foi "com quadro" (`roteiros.md` antigo).
+  - Se o dono ouvir 17,0–17,3 s e preferir "com quadro", basta voltar o texto no `montador.py` e remontar só o A4.
+
+### Arquivos regenerados (rodada 2)
+
+| Arquivo | sha256 |
+|---|---|
+| `criativos/videos/anuncio-2-amandinha.mp4` (21,63 s) | `f03be16d7f65185030708dfb6ff91d27c7aef87bf259609059d2b789ea0b97c5` |
+| `criativos/videos/anuncio-3-amandinha.mp4` (22,90 s) | `b5c8282993621f23f64b54c3c1cc4e746ee33a3b2778268123e400f94f77eadc` |
+| `criativos/videos/anuncio-4-amandinha.mp4` (22,50 s) | `f15b9f2958411505293ba440a2f0c2cbbeb71dacb94886f82a31ff3540e9c950` |
+| `criativos/videos/quadro-anuncio-2.jpg` (3,2 s, `-q:v 3`) | `6d92d52b5043…` |
+| `criativos/videos/quadro-anuncio-4.jpg` (11,1 s, `-q:v 3`) | `2be7a930fbfb…` |
+
+- `qc.py` rodou nos 3 vídeos: 1080×1920, 30 fps, h264 + aac, pico −1,5 dB, durações iguais às de antes.
+- Sem mudança:
+  - `anuncio-1-amandinha.mp4` (`998a9b40…`) e `quadro-anuncio-1.jpg`;
+  - `quadro-anuncio-3.jpg`: o quadro de 1,4 s do vídeo novo é idêntico pixel a pixel ao anterior;
+  - as 2 imagens estáticas.
+- Os quadros 2 e 4 mostram a mesma cena de antes. Foram refeitos porque o .mp4 mudou.
+
+### Como foi olhado (rodada 2)
+
+- **Folhas de contato a 2 qps** dos vídeos 2, 3 e 4 inteiros (44 + 47 + 46 quadros), depois da montagem final.
+- **Entradas em alta frequência:**
+  - A2 de 0,0 a 1,2 s (13 quadros, a cada 0,1 s);
+  - A3 de 4,20 a 4,80 s (10 quadros, a cada 1/15 s).
+- **Quadros grandes (1080×1920):** A2 0,0 s (miniatura), A4 12,5 s (título novo) e A4 17,5 s (legenda "com o quadro de conquistas.").
+- **Os 2 quadros de referência novos.**
+- **Medição por pixel da área segura** em todos os quadros a 2 qps dos 4 vídeos (item C-1).
+
+**Fica para a rodada 3:**
+- revisar os vídeos 2, 3 e 4 e o `roteiros.md`;
+- o A1 e o A5 não mudaram (pela R12, da 4ª rodada em diante só o que mudou).

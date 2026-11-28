@@ -14,6 +14,9 @@ e no gabarito (p. 128) agora para com a página inteira dentro do quadro (opçã
 e mesma duração: legenda cortada pelo tempo real de cada palavra (faster-whisper, `montador/palavras.py`), blocos
 marcados à mão sem partir "4 a 6 anos"/"30 dias"; zoom do plano, do gabarito e da memória dentro de uma janela que
 termina acima da legenda; fecho com "Garantia de 7 dias" e legenda clara, longe do botão. `quadro-anuncio-1..4.jpg` refeitos.
+**Anúncios 2, 3 e 4 remontados de novo em 2026-11-28 (rodada 2 dos criativos, seção "Rodada 2" do `correcoes.md`)**, mesmo áudio e
+mesma duração: a página que sobe no A2 (p. 6) e no A3 (p. 75) entra dentro da janela acima da legenda; título do A4 em 2 linhas
+("Sem saber ensinar" / "nem montar rotina"); legenda do A4 "com o quadro de conquistas." (a voz diz "com o"). `quadro-anuncio-2.jpg` e `-4.jpg` refeitos.
 Formato: 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz, áudio normalizado (−16 LUFS, pico ≤ −1,4 dB).
 Sem música (não temos trilha licenciada). Legenda queimada em blocos de até 7 palavras (marcados com "|" no
 montador), cada bloco entrando no tempo real da 1ª palavra. Só mídia real do produto: atividades do caderno completo (com o gabarito
@@ -30,7 +33,7 @@ animado), páginas do PDF, mockups e o vídeo do caderno folheando. Sem pessoas,
 - **Anúncio 1:** Labirinto N1 (p. 7) com o caminho do gabarito se desenhando → cortes com a resposta aparecendo: labirinto N2 (p. 75), memória (p. 11), sudoku de figuras (p. 18), código secreto (p. 78) → caderno sendo folheado → plano de 30 dias (p. 5) com zoom no Dia 1 → folhas do Dia 1 (p. 6 e 7) → cartão final.
 - **Anúncio 2:** Página "Qual é diferente?" (p. 6) subindo + carimbo PRONTO → plano (p. 5) e folhas do Dia 1 → folhas espalhadas + lápis → gabarito (p. 128) → "120 atividades · R$ 37,00" → "R$ 1,23 por dia no plano de 30 dias" → caderno folheando → cartão final.
 - **Anúncio 3:** Tipografia em fundo escuro: "App educativo" com "educativo" riscado → "= tela"; "Vídeo de desenho também." → labirinto N2 (p. 75) subindo → cortes com resposta: labirinto, sudoku 6x6 (p. 69), sequência (p. 8), 7 erros (p. 68) → dois níveis lado a lado (p. 6 e p. 78) → cartão final.
-- **Anúncio 4:** "10 min de tela" em fundo escuro → corte para "O que vem depois?" (p. 8) → padrões com a resposta → memória (p. 11, zoom do quadro de cima para a página toda) → labirinto (p. 13) e sudoku (p. 18) → ligue os pontos (p. 15) se ligando → caderno folheando → plano (p. 5), quadro de conquistas (p. 142), certificado (p. 143) → cartão final.
+- **Anúncio 4:** "10 min de tela" em fundo escuro → corte para "O que vem depois?" (p. 8) → padrões com a resposta → memória (p. 11, zoom do quadro de cima para a página toda) → labirinto (p. 13) e sudoku (p. 18) → ligue os pontos (p. 15) se ligando → caderno folheando → plano (p. 5), quadro de conquistas (p. 142), certificados (p. 143) → cartão final.
 
 Fecho de todos: capa do caderno + "Dez Minutinhos · 120 atividades para imprimir · 4 a 10 anos ·
 R$ 37,00 · Garantia de 7 dias · Toque em Saiba mais", fundo laranja; a legenda do fecho é clara e fica bem abaixo do botão.
