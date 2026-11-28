@@ -1,7 +1,10 @@
 ---
 name: cadastro-e-pixel
-description: Etapa 5 — cadastra o produto e o .zip na Hotmart, cria a Página do Facebook, cria o Pixel, instala o PageView na página e cadastra ID + token da API de Conversões na Hotmart. Use depois do Portão 3.
+description: Etapa 5 — cadastra o produto e o .zip na Hotmart, cria a Página do Facebook, cria o Pixel, instala o PageView na página e cadastra ID + token da API de Conversões na Hotmart. Use depois do Portão M e do Portão 3.
 ---
+**Antes de tudo:** rode `python3 ferramentas/conferir_material.py ofertas/<pasta>`. Se não disser
+"MATERIAL APROVADO", pare e rode a skill `revisar-material` (Portão M). Leia também `aprendizados/processo.md`.
+
 Entrada: `[NOME_PIXEL]` (padrão "Pixel Oferta <Nome>"), `[NOME_CONTA]` de anúncios/BM.
 
 Hotmart, Facebook e Gerenciador de Eventos só têm interface web. Se houver navegador do dono

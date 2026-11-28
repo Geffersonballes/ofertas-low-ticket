@@ -12,6 +12,8 @@ Cada oferta vive em `ofertas/AAAA-MM-DD_<slug>/` (cópia de `ofertas/_modelo/`),
 | 3. Página | Página 100% em pt-BR, mesma estrutura e estética, mockups e GIFs do entregável, publicação na Hostinger | `copywriter-de-pagina`, `construtor-de-pagina` | `pagina-de-vendas` | `pagina/index.html` publicada |
 | 4. Entregável | Produto completo + bônus práticos em .zip; até 12 order bumps + oferta pós-compra | `criador-de-produto`, `criador-de-order-bumps` | `entregavel-e-bonus` | `produto/`, `bumps/`, .zip |
 | 3b. Revisão da página | Ciclo de até 2 rodadas: `critico-de-conversao` + `editor-de-copy` (em paralelo) → `diretor-de-arte-web` implementa → supervisor confere fotos 390/1280 px | `critico-de-conversao`, `editor-de-copy`, `diretor-de-arte-web` | `pagina-de-vendas` | `pagina/revisoes/` |
+| 4b. Revisão do material | Página por página: textos, desenhos, atividades, gabarito, impressão, contagem × promessa; correção no gerador | 4 revisores em paralelo | `revisar-material` | `revisoes/material-AAAA-MM-DD/` |
+| — | **Portão M (dono):** aprova o conteúdo do infoproduto → `APROVACAO.md` com o hash de cada PDF. `ferramentas/conferir_material.py` tem de dar "MATERIAL APROVADO" | | | |
 | — | **Portão 2:** `revisor-de-conformidade` (veto) · **Portão 3 (dono):** aprova página e produto | | | |
 | 5. Cadastro e pixel | Produto + .zip na Hotmart, Página do Facebook, Pixel novo, PageView na página, ID + token da API de Conversões na Hotmart | `gestor-de-trafego` | `cadastro-e-pixel` | `campanha.md` (parte 1) |
 | 6. Criativos | Top 5 anúncios mais antigos da referência recriados em pt-BR (cenas, narração, trilha) | `roteirista-de-criativos` | `top5-criativos` | `criativos/` |
@@ -23,7 +25,11 @@ Regras:
 
 - Nenhum portão é pulado. Reprovação volta para a etapa indicada; no máximo 2 voltas por
   etapa, depois a oferta é descartada com o motivo registrado.
-- Depois do Portão 1, as etapas 3, 4 e 6 (roteiros) podem rodar em paralelo.
+- Depois do Portão 1, as etapas 3 e 4 podem rodar em paralelo. **Criativos (6), cadastro na Hotmart (5) e
+  campanhas (7) só depois do Portão M** (decidido pelo dono em 2026-11-28): primeiro o conteúdo do
+  infoproduto é validado; só então sobe para a Hotmart e seguem anúncios e criativos.
+- Mudou um PDF depois do Portão M? `conferir_material.py` bloqueia até nova revisão e nova aprovação.
+- Antes de começar uma oferta, leia `aprendizados/processo.md` (o que já deu errado e como evitar).
 - Produto visual (cadernos, planilhas, kits): faça primeiro um **caderno-amostra** (10–15 páginas, uma de
   cada tipo) e aprove com o dono antes da página — a página e os criativos usam as páginas reais.
   O gerador fica em `ofertas/<pasta>/produto/gerador/` (código + `python3 gerar_amostra.py && node render.cjs`).

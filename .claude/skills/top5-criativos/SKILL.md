@@ -1,7 +1,10 @@
 ---
 name: top5-criativos
-description: Etapa 6 — recria em pt-BR os 5 anúncios da referência que estão ativos há mais tempo, com cenas geradas por IA, narração ElevenLabs e trilha livre de direitos. Use depois do Portão 3.
+description: Etapa 6 — recria em pt-BR os 5 anúncios da referência que estão ativos há mais tempo, com cenas geradas por IA, narração ElevenLabs e trilha livre de direitos. Use depois do Portão M e do Portão 3.
 ---
+**Antes de tudo:** rode `python3 ferramentas/conferir_material.py ofertas/<pasta>`. Se não disser
+"MATERIAL APROVADO", pare e rode a skill `revisar-material` (Portão M). Leia também `aprendizados/processo.md`.
+
 0. Leia `aprendizados/o-que-vende.md` (ganchos e formatos que já venderam para nós) e a seção
    "Inteligência de anúncios" do `dossie.md`. Se faltar, rode o `pesquisador-de-anuncios` antes.
 1. Pegue os Top 5 do `dossie.md` (ativos há mais tempo). Para cada um, anote gancho, estrutura
