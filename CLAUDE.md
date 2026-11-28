@@ -14,6 +14,10 @@ Os dois ficam ligados pelos arquivos de `aprendizados/` e `resultados/painel.md`
 `docs/08_inteligencia-de-anuncios.md`): o minerador lê o que vendeu; o operador lê a inteligência
 de anúncios do pacote.
 
+Regra nova do dono ("nova regra", "padronize", "a partir de agora") → agente `gestor-de-processos`: ele
+registra em `docs/09_processos.md`, aplica onde precisa ser cumprida (CLAUDE.md, esteira, skills, agentes) e cria
+uma trava em `ferramentas/` quando der. Ele também audita os portões, mede tempo/custo/retrabalho e propõe melhorias.
+
 Pergunte quem está usando a sessão se não estiver claro antes de executar etapas além da 2.
 
 ## Primeira vez neste repositório (Claude do minerador)
